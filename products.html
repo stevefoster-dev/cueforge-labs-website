@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | CueForge Labs - Production Tools</title>
+  <meta name="description" content="Professional tools for production designers, video engineers, and lighting programmers. CueRoll, CueMaker, CuePatch, and CueCheck.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forge-dark: #060a0d;
+      --forge-darker: #020305;
+      --forge-teal: #38c7cc;
+      --forge-cyan: #22d3ee;
+      --forge-lavender: #a78bfa;
+      --forge-amber: #f59e0b;
+      --forge-green: #10b981;
+      --text: #e5e7eb;
+      --text-muted: #6b7280;
+      --border: #27272a;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--forge-darker);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(6,10,13,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--forge-teal), var(--forge-cyan));
+      border-radius: 8px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      background: radial-gradient(ellipse at center, #080c10 0%, var(--forge-darker) 70%);
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--forge-teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Products Grid */
+    .products {
+      padding: 80px 0;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+    }
+    
+    .product-card {
+      background: var(--forge-dark);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .product-card:hover {
+      border-color: var(--forge-teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .product-card.cueroll { --accent: var(--forge-cyan); }
+    .product-card.cuemaker { --accent: var(--forge-green); }
+    .product-card.cuepatch { --accent: var(--forge-teal); }
+    .product-card.cuecheck { --accent: var(--forge-amber); }
+    
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .product-badge {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .badge-ready {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+    
+    .badge-coming {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+    }
+    
+    .product-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    
+    .product-tagline {
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    
+    .product-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    
+    .product-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    
+    .product-features li {
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .product-features li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+    }
+    
+    .product-pricing {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--forge-dark);
+    }
+    
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+    }
+    
+    /* Credits */
+    .credits {
+      padding: 60px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    
+    .credits p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    
+    .credits-logos {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .credits-logos span {
+      color: var(--text-muted);
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    
+    /* CTA */
+    .cta {
+      padding: 100px 0;
+      text-align: center;
+      background: radial-gradient(ellipse at center, #080c10 0%, var(--forge-darker) 70%);
+    }
+    
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .cta p {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 1.1rem;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    footer a {
+      color: var(--forge-teal);
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"></div>
+        <span>CueForge Labs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="products.html">Products</a></li>
+        <li><a href="index.html">About</a></li>
+        <li><a href="mailto:steve@cueforgelabs.com">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Tools That Don't Break</h1>
+      <p>Production software built by a touring LD. Tested on Taylor Swift, Cher, Madonna, and hundreds of live shows.</p>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="container">
+      <div class="products-grid">
+        
+        <!-- CueRoll -->
+        <div class="product-card cueroll">
+          <div class="product-header">
+            <div class="product-icon">📝</div>
+            <span class="product-badge badge-ready">Ready</span>
+          </div>
+          <h2>CueRoll</h2>
+          <p class="product-tagline">LTC Timecode Note-Taking</p>
+          <p class="product-description">Take notes synchronized to live timecode. Perfect for tech rehearsals, show calls, and post-show notes. Native Rust LTC decoder for rock-solid performance.</p>
+          <ul class="product-features">
+            <li>Real-time LTC decoding</li>
+            <li>Timestamped notes export</li>
+            <li>Session management</li>
+            <li>Multi-format export (CSV, JSON)</li>
+          </ul>
+          <div class="product-pricing">
+            <div class="price">$49 <span>/ one-time</span></div>
+            <a href="https://cueroll.cueforge.com" class="btn btn-primary">Learn More →</a>
+          </div>
+        </div>
+        
+        <!-- CueMaker -->
+        <div class="product-card cuemaker">
+          <div class="product-header">
+            <div class="product-icon">🎬</div>
+            <span class="product-badge badge-ready">Ready</span>
+          </div>
+          <h2>CueMaker</h2>
+          <p class="product-tagline">Timecode to grandMA3</p>
+          <p class="product-description">LTC timecode reader with live marker creation, 6-channel audio mixer, and direct grandMA3 XML export. Program timecoded shows on the road.</p>
+          <ul class="product-features">
+            <li>LTC decode + MTC output</li>
+            <li>Waveform display</li>
+            <li>Live marker creation (hit M)</li>
+            <li>grandMA3 XML export</li>
+          </ul>
+          <div class="product-pricing">
+            <div class="price">$79 <span>/ one-time</span></div>
+            <a href="https://cuemaker.cueforge.com" class="btn btn-primary">Learn More →</a>
+          </div>
+        </div>
+        
+        <!-- CuePatch -->
+        <div class="product-card cuepatch">
+          <div class="product-header">
+            <div class="product-icon">⬚</div>
+            <span class="product-badge badge-ready">Ready</span>
+          </div>
+          <h2>CuePatch</h2>
+          <p class="product-tagline">Pixel Map Builder</p>
+          <p class="product-description">Generate pixel-perfect test patterns for LED video walls. Built-in tile database for ROE, Absen, Unilumin, INFiLED. Instant PNG export.</p>
+          <ul class="product-features">
+            <li>Multi-surface support</li>
+            <li>Tile labels (A1, B2...)</li>
+            <li>Calibration patterns</li>
+            <li>One-click PNG export</li>
+          </ul>
+          <div class="product-pricing">
+            <div class="price">Free <span>/ Pro $49</span></div>
+            <a href="https://cuepatch.cueforge.com" class="btn btn-primary">Try Free →</a>
+          </div>
+        </div>
+        
+        <!-- CueCheck -->
+        <div class="product-card cuecheck">
+          <div class="product-header">
+            <div class="product-icon">✓</div>
+            <span class="product-badge badge-coming">Coming Soon</span>
+          </div>
+          <h2>CueCheck</h2>
+          <p class="product-tagline">Content Pipeline Validator</p>
+          <p class="product-description">Watch folders for incoming content, validate specs, auto-rename, and sync to servers. Slack notifications for corrections and rejections.</p>
+          <ul class="product-features">
+            <li>Watch folder monitoring</li>
+            <li>Spec validation (FFprobe)</li>
+            <li>Auto-rename to schema</li>
+            <li>FreeFileSync integration</li>
+          </ul>
+          <div class="product-pricing">
+            <div class="price">TBD</div>
+            <a href="mailto:steve@cueforgelabs.com?subject=CueCheck%20Interest" class="btn btn-secondary">Get Notified</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="credits">
+    <div class="container">
+      <p>Trusted on productions for</p>
+      <div class="credits-logos">
+        <span>Taylor Swift</span>
+        <span>Harry Styles</span>
+        <span>Cher</span>
+        <span>Madonna</span>
+        <span>Carrie Underwood</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Questions?</h2>
+      <p>Let's talk about your production workflow.</p>
+      <a href="mailto:steve@cueforgelabs.com" class="btn btn-primary" style="background: var(--forge-teal); color: var(--forge-dark);">
+        📧 steve@cueforgelabs.com
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CueForge Labs LLC • <a href="index.html">Home</a> • <a href="products.html">Products</a> • <a href="mailto:steve@cueforgelabs.com">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>
