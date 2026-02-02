@@ -106,22 +106,22 @@ vercel --prod
 
 ---
 
-## 📦 Product Files Needed
+## 📦 Product Files — READY TO UPLOAD
 
-Before listing, make sure you have:
+| Product | File | Size | Status |
+|---------|------|------|--------|
+| CueRoll | `~/clawd/repos/CueRoll/dist/CueRoll-0.1.0-arm64.dmg` | 186 MB | ✅ READY |
+| CueMaker | Python app — needs PyInstaller | — | ⚠️ Needs packaging |
+| CuePatch | `~/clawd/repos/CuePatch/release/CuePatch-0.1.0-arm64.dmg` | 91 MB | ✅ READY |
 
-| Product | File Needed | Status |
-|---------|-------------|--------|
-| CueRoll | CueRoll.dmg or .zip | ⬜ Check ~/clawd/repos/CueRoll/dist/ |
-| CueMaker | CueMaker.dmg or .zip | ⬜ Check ~/clawd/repos/CueMaker/dist/ |
-| CuePatch | CuePatch.dmg or .zip (Pro) | ⬜ Check ~/clawd/repos/CuePatch/dist/ |
-
-If builds don't exist, run:
+To rebuild if needed:
 ```bash
-cd ~/clawd/repos/CueRoll && npm run build  # or whatever build command
-cd ~/clawd/repos/CueMaker && npm run build
-cd ~/clawd/repos/CuePatch && npm run build
+cd ~/clawd/repos/CueRoll && npm run package:mac
+cd ~/clawd/repos/CuePatch && npm run package:mac
 ```
+
+**Note:** Apps are not code-signed (no Apple Developer ID). Users will see a Gatekeeper warning.
+To bypass: Right-click → Open → Open anyway. Document this in product description.
 
 ---
 
