@@ -111,7 +111,7 @@ vercel --prod
 | Product | File | Size | Status |
 |---------|------|------|--------|
 | CueRoll | `~/clawd/repos/CueRoll/dist/CueRoll-0.1.0-arm64.dmg` | 186 MB | ✅ READY |
-| CueMaker | Python app — needs PyInstaller | — | ⚠️ Needs packaging |
+| CueMaker | `~/clawd/repos/CueMaker/dist/CueMaker-0.1.0-arm64.dmg` | 218 MB | ✅ READY |
 | CuePatch | `~/clawd/repos/CuePatch/release/CuePatch-0.1.0-arm64.dmg` | 91 MB | ✅ READY |
 
 To rebuild if needed:
