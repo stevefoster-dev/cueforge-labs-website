@@ -1003,6 +1003,147 @@
       --node-color-dim: rgba(245,158,11,0.4);
     }
 
+    /* Expanded node state - when clicked */
+    .portfolio-node.node-expanded {
+      z-index: 1000 !important;
+      animation: none !important;
+      position: fixed !important;
+      left: 50% !important;
+      top: 35% !important;
+      transform: translate(-50%, -50%) !important;
+    }
+    .portfolio-node.node-expanded .portfolio-node-frame {
+      width: 280px;
+      height: 280px;
+    }
+    .portfolio-node.node-expanded .portfolio-node-frame::before {
+      opacity: 1;
+      inset: -30px;
+    }
+    .portfolio-node.node-expanded .portfolio-node-image {
+      border-width: 3px;
+      box-shadow: 
+        inset 0 0 30px rgba(0,0,0,0.8),
+        0 0 60px var(--node-color-dim),
+        0 0 120px var(--node-color-dim);
+    }
+    .portfolio-node.node-expanded .portfolio-node-label {
+      display: none;
+    }
+    
+    /* Info card that appears below expanded node */
+    .node-info-card {
+      position: fixed;
+      left: 50%;
+      top: calc(35% + 180px);
+      transform: translateX(-50%);
+      background: rgba(6, 10, 13, 0.95);
+      border: 1px solid var(--forge-teal);
+      border-radius: 12px;
+      padding: 24px 32px;
+      min-width: 320px;
+      max-width: 450px;
+      z-index: 1001;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      box-shadow: 
+        0 0 40px rgba(56,199,204,0.2),
+        0 20px 60px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
+    .node-info-card.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .node-info-card .card-artist {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .node-info-card .card-show {
+      font-size: 0.9rem;
+      color: var(--forge-teal);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .node-info-card .card-year {
+      display: inline-block;
+      background: rgba(56,199,204,0.15);
+      color: var(--forge-teal);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .node-info-card .card-role {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .node-info-card .card-credits {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 12px;
+    }
+    .node-info-card .card-credit {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .node-info-card .card-credit:last-child {
+      border-bottom: none;
+    }
+    .node-info-card .credit-role {
+      color: #6b7280;
+    }
+    .node-info-card .credit-name {
+      color: #d1d5db;
+      text-align: right;
+    }
+    .node-info-card .credit-company {
+      color: var(--forge-teal);
+      font-size: 0.65rem;
+      opacity: 0.8;
+    }
+    .node-info-card .card-hint {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6b7280;
+      margin-top: 16px;
+      font-style: italic;
+    }
+    
+    /* Dim other nodes when one is expanded */
+    #expanded-container.has-expanded .portfolio-node:not(.node-expanded) {
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    #expanded-container.has-expanded .constellation-line {
+      opacity: 0.05;
+    }
+    
+    /* Overlay for clicking to close */
+    .expanded-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .expanded-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     /* Constellation lines connecting nodes */
     #constellation-svg {
       position: absolute;
@@ -1586,6 +1727,19 @@
     </div>
   </div>
 
+  <!-- Overlay for expanded node -->
+  <div class="expanded-overlay" id="expanded-overlay" onclick="collapseExpandedNode()"></div>
+  
+  <!-- Info card for expanded node -->
+  <div class="node-info-card" id="node-info-card">
+    <div class="card-artist" id="card-artist"></div>
+    <div class="card-show" id="card-show"></div>
+    <span class="card-year" id="card-year"></span>
+    <div class="card-role" id="card-role"></div>
+    <div class="card-credits" id="card-credits"></div>
+    <div class="card-hint">Click anywhere to close</div>
+  </div>
+
   <!-- HUD -->
   <div id="hud">
     <div id="logo-badge" onclick="backToIntro()">
@@ -1974,9 +2128,13 @@
           </div>
         `;
         
+        // Store item data on the node for later retrieval
+        node._itemData = item;
+        node._category = key;
+        
         node.onclick = (e) => { 
-          e.stopPropagation(); 
-          showPortfolioPanel(item, key); 
+          e.stopPropagation();
+          toggleNodeExpanded(node, item, key);
         };
         container.appendChild(node);
       });
@@ -2030,6 +2188,9 @@
     }
 
     function backToOverview() {
+      // Collapse any expanded node first
+      collapseExpandedNode();
+      
       document.getElementById('expanded-view').classList.remove('show');
       document.getElementById('forge-view').classList.add('show');
       document.getElementById('hud').classList.add('show');
@@ -2064,6 +2225,109 @@
     }
 
     function contact() { window.location.href = 'mailto:steve@cueforgelabs.com?subject=Project%20Inquiry'; }
+
+    // --- Node Expansion System ---
+    let currentExpandedNode = null;
+    let originalNodePosition = null;
+
+    function toggleNodeExpanded(node, item, category) {
+      if (node.classList.contains('node-expanded')) {
+        collapseExpandedNode();
+      } else {
+        expandNode(node, item, category);
+      }
+    }
+
+    function expandNode(node, item, category) {
+      // Collapse any currently expanded node first
+      if (currentExpandedNode) {
+        collapseExpandedNode();
+      }
+
+      // Store reference and original position
+      currentExpandedNode = node;
+      originalNodePosition = {
+        left: node.style.left,
+        top: node.style.top,
+        position: node.style.position
+      };
+
+      // Add expanded class to node and container
+      node.classList.add('node-expanded');
+      document.getElementById('expanded-container').classList.add('has-expanded');
+
+      // Show overlay
+      document.getElementById('expanded-overlay').classList.add('show');
+
+      // Populate and show info card
+      const infoCard = document.getElementById('node-info-card');
+      
+      if (category === 'production') {
+        document.getElementById('card-artist').textContent = item.artist;
+        document.getElementById('card-show').textContent = item.show;
+        document.getElementById('card-year').textContent = item.year;
+        document.getElementById('card-role').textContent = item.role;
+        
+        const creditsHtml = item.credits.map(c => `
+          <div class="card-credit">
+            <span class="credit-role">${c.role}</span>
+            <span class="credit-name">${c.name}${c.company ? `<br><span class="credit-company">${c.company}</span>` : ''}</span>
+          </div>
+        `).join('');
+        document.getElementById('card-credits').innerHTML = creditsHtml;
+      } else if (category === 'software') {
+        document.getElementById('card-artist').textContent = item.name;
+        document.getElementById('card-show').textContent = item.type;
+        document.getElementById('card-year').textContent = '';
+        document.getElementById('card-role').textContent = item.desc;
+        document.getElementById('card-credits').innerHTML = item.tech.map(t => `<span class="tag" style="background: rgba(167,139,250,0.15); color: var(--forge-lavender); padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; margin: 2px;">${t}</span>`).join(' ');
+      } else {
+        document.getElementById('card-artist').textContent = item.name;
+        document.getElementById('card-show').textContent = item.title || item.type;
+        document.getElementById('card-year').textContent = '';
+        document.getElementById('card-role').textContent = item.bio || item.content || '';
+        document.getElementById('card-credits').innerHTML = '';
+      }
+
+      // Adjust info card color based on category
+      infoCard.style.borderColor = category === 'production' ? 'var(--forge-teal)' : 
+                                   category === 'software' ? 'var(--forge-lavender)' : 
+                                   'var(--forge-amber)';
+      
+      // Show info card with slight delay for animation
+      setTimeout(() => {
+        infoCard.classList.add('show');
+      }, 100);
+    }
+
+    function collapseExpandedNode() {
+      if (!currentExpandedNode) return;
+
+      // Remove expanded class
+      currentExpandedNode.classList.remove('node-expanded');
+      document.getElementById('expanded-container').classList.remove('has-expanded');
+
+      // Restore original position
+      if (originalNodePosition) {
+        currentExpandedNode.style.left = originalNodePosition.left;
+        currentExpandedNode.style.top = originalNodePosition.top;
+        currentExpandedNode.style.position = originalNodePosition.position || '';
+      }
+
+      // Hide overlay and info card
+      document.getElementById('expanded-overlay').classList.remove('show');
+      document.getElementById('node-info-card').classList.remove('show');
+
+      currentExpandedNode = null;
+      originalNodePosition = null;
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && currentExpandedNode) {
+        collapseExpandedNode();
+      }
+    });
 
     window.addEventListener('resize', resize);
     resize();
