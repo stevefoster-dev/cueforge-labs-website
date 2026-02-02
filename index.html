@@ -1009,33 +1009,162 @@
       animation: none !important;
       position: fixed !important;
       left: 50% !important;
-      top: 35% !important;
+      top: 32% !important;
       transform: translate(-50%, -50%) !important;
+      cursor: pointer;
     }
     .portfolio-node.node-expanded .portfolio-node-frame {
-      width: 280px;
-      height: 280px;
+      width: 320px;
+      height: 320px;
     }
     .portfolio-node.node-expanded .portfolio-node-frame::before {
-      opacity: 1;
-      inset: -30px;
+      opacity: 0;
     }
     .portfolio-node.node-expanded .portfolio-node-image {
-      border-width: 3px;
+      border-width: 4px;
       box-shadow: 
-        inset 0 0 30px rgba(0,0,0,0.8),
-        0 0 60px var(--node-color-dim),
-        0 0 120px var(--node-color-dim);
+        inset 0 0 40px rgba(0,0,0,0.9),
+        0 0 30px var(--node-color-dim);
     }
     .portfolio-node.node-expanded .portfolio-node-label {
       display: none;
+    }
+    
+    /* Nebula ring effect around expanded node */
+    .nebula-ring {
+      position: fixed;
+      left: 50%;
+      top: 32%;
+      transform: translate(-50%, -50%);
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .nebula-ring.show {
+      opacity: 1;
+    }
+    
+    /* Outer nebula glow layers */
+    .nebula-ring::before {
+      content: '';
+      position: absolute;
+      inset: -40px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--ring-color-1, rgba(56,199,204,0.3)) 30deg,
+        transparent 60deg,
+        var(--ring-color-2, rgba(34,211,238,0.4)) 120deg,
+        transparent 150deg,
+        var(--ring-color-1, rgba(56,199,204,0.35)) 210deg,
+        transparent 240deg,
+        var(--ring-color-2, rgba(34,211,238,0.3)) 300deg,
+        transparent 330deg,
+        var(--ring-color-1, rgba(56,199,204,0.25)) 360deg
+      );
+      filter: blur(20px);
+      animation: nebula-ring-rotate 12s linear infinite;
+    }
+    .nebula-ring::after {
+      content: '';
+      position: absolute;
+      inset: -25px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 180deg,
+        transparent 0deg,
+        var(--ring-color-2, rgba(34,211,238,0.5)) 45deg,
+        transparent 90deg,
+        var(--ring-color-1, rgba(56,199,204,0.6)) 180deg,
+        transparent 225deg,
+        var(--ring-color-2, rgba(34,211,238,0.5)) 315deg,
+        transparent 360deg
+      );
+      filter: blur(12px);
+      animation: nebula-ring-rotate 8s linear infinite reverse;
+    }
+    
+    /* Inner bright ring */
+    .nebula-ring-inner {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: 
+        linear-gradient(var(--forge-darker), var(--forge-darker)) padding-box,
+        conic-gradient(
+          from 0deg,
+          var(--ring-color-bright, rgba(56,199,204,0.8)) 0deg,
+          transparent 20deg,
+          var(--ring-color-bright, rgba(56,199,204,0.9)) 90deg,
+          transparent 110deg,
+          var(--ring-color-bright, rgba(56,199,204,0.7)) 180deg,
+          transparent 200deg,
+          var(--ring-color-bright, rgba(56,199,204,0.85)) 270deg,
+          transparent 290deg,
+          var(--ring-color-bright, rgba(56,199,204,0.8)) 360deg
+        ) border-box;
+      animation: nebula-ring-rotate 6s linear infinite;
+      filter: drop-shadow(0 0 8px var(--ring-color-bright));
+    }
+    
+    /* Sparkle particles around ring */
+    .nebula-ring-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--ring-color-bright, rgba(56,199,204,1));
+      box-shadow: 0 0 8px var(--ring-color-bright), 0 0 15px var(--ring-color-bright);
+      animation: particle-orbit var(--particle-dur, 5s) linear infinite;
+    }
+    
+    @keyframes nebula-ring-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes particle-orbit {
+      0% { 
+        transform: rotate(var(--particle-start, 0deg)) translateX(200px) rotate(calc(var(--particle-start, 0deg) * -1));
+        opacity: 0.3;
+      }
+      25% { opacity: 1; }
+      50% { opacity: 0.5; }
+      75% { opacity: 1; }
+      100% { 
+        transform: rotate(calc(var(--particle-start, 0deg) + 360deg)) translateX(200px) rotate(calc((var(--particle-start, 0deg) + 360deg) * -1));
+        opacity: 0.3;
+      }
+    }
+    
+    /* Category-specific ring colors */
+    .nebula-ring.production {
+      --ring-color-1: rgba(56,199,204,0.3);
+      --ring-color-2: rgba(34,211,238,0.4);
+      --ring-color-bright: rgba(56,199,204,0.9);
+    }
+    .nebula-ring.software {
+      --ring-color-1: rgba(167,139,250,0.3);
+      --ring-color-2: rgba(139,92,246,0.4);
+      --ring-color-bright: rgba(167,139,250,0.9);
+    }
+    .nebula-ring.about {
+      --ring-color-1: rgba(245,158,11,0.3);
+      --ring-color-2: rgba(251,146,60,0.4);
+      --ring-color-bright: rgba(245,158,11,0.9);
     }
     
     /* Info card that appears below expanded node */
     .node-info-card {
       position: fixed;
       left: 50%;
-      top: calc(35% + 180px);
+      top: calc(32% + 210px);
       transform: translateX(-50%);
       background: rgba(6, 10, 13, 0.95);
       border: 1px solid var(--forge-teal);
@@ -1154,27 +1283,56 @@
       z-index: 5;
     }
     .constellation-line {
-      stroke: var(--line-color, rgba(56,199,204,0.4));
-      stroke-width: 1;
-      opacity: 0.3;
+      stroke: var(--line-color, rgba(56,199,204,0.3));
+      stroke-width: 1.5;
+      opacity: 0.25;
       fill: none;
-      vector-effect: non-scaling-stroke; /* Prevents stroke from stretching */
-      /* Animated energy flow along the line */
-      stroke-dasharray: 4 8;
-      animation: line-flow var(--flow-dur, 3s) linear infinite;
-      animation-delay: var(--flow-del, 0s);
+      vector-effect: non-scaling-stroke;
+      transition: opacity 0.4s ease;
     }
     #expanded-view:hover .constellation-line {
-      opacity: 0.5;
+      opacity: 0.4;
     }
     
-    /* Subtle energy pulse flowing through the lines */
-    @keyframes line-flow {
-      0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -12; }
+    /* Energy pulse that travels along lines */
+    .constellation-line-energy {
+      stroke: var(--line-color-bright, rgba(56,199,204,0.9));
+      stroke-width: 2;
+      fill: none;
+      vector-effect: non-scaling-stroke;
+      stroke-linecap: round;
+      stroke-dasharray: var(--energy-length, 8) 1000;
+      stroke-dashoffset: var(--energy-offset, 1000);
+      animation: energy-travel var(--energy-dur, 4s) ease-in-out infinite;
+      animation-delay: var(--energy-del, 0s);
+      opacity: 0;
+      filter: drop-shadow(0 0 3px var(--line-color-bright));
+    }
+    #expanded-view:hover .constellation-line-energy {
+      opacity: 1;
     }
     
-    /* Remove the dots - just lines */
+    @keyframes energy-travel {
+      0% { stroke-dashoffset: var(--line-length, 100); opacity: 0; }
+      5% { opacity: 0.8; }
+      50% { opacity: 1; }
+      95% { opacity: 0.8; }
+      100% { stroke-dashoffset: calc(var(--line-length, 100) * -1); opacity: 0; }
+    }
+    
+    /* Dragging state for nodes */
+    .portfolio-node.dragging {
+      z-index: 100 !important;
+      cursor: grabbing !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    .portfolio-node.dragging .portfolio-node-frame::before {
+      opacity: 1;
+    }
+    .portfolio-node {
+      cursor: grab;
+    }
 
     /* Updated detail panel for portfolio */
     #detail-panel .credits {
@@ -1730,6 +1888,16 @@
   <!-- Overlay for expanded node -->
   <div class="expanded-overlay" id="expanded-overlay" onclick="collapseExpandedNode()"></div>
   
+  <!-- Nebula ring effect around expanded node -->
+  <div class="nebula-ring" id="nebula-ring">
+    <div class="nebula-ring-inner"></div>
+    <div class="nebula-ring-particle" style="--particle-start: 0deg; --particle-dur: 4s;"></div>
+    <div class="nebula-ring-particle" style="--particle-start: 72deg; --particle-dur: 5s;"></div>
+    <div class="nebula-ring-particle" style="--particle-start: 144deg; --particle-dur: 4.5s;"></div>
+    <div class="nebula-ring-particle" style="--particle-start: 216deg; --particle-dur: 5.5s;"></div>
+    <div class="nebula-ring-particle" style="--particle-start: 288deg; --particle-dur: 4.2s;"></div>
+  </div>
+  
   <!-- Info card for expanded node -->
   <div class="node-info-card" id="node-info-card">
     <div class="card-artist" id="card-artist"></div>
@@ -2013,8 +2181,8 @@
           const nodeSpacing = rowWidth / nodesInThisRow;
           let x = paddingX + nodeSpacing * (col + 0.5);
           
-          // Calculate y position as percentage of container
-          const yPx = 140 + row * rowHeightPx; // Start 140px from top (below header)
+          // Calculate y position as percentage of container - MORE SPACE at top
+          const yPx = 220 + row * rowHeightPx; // Start 220px from top (more space below header)
           let y = (yPx / totalHeight) * 100;
           
           // Add organic variance
@@ -2026,10 +2194,10 @@
         return { positions, totalHeight };
       };
 
-      // Calculate container height first
+      // Calculate container height first (more space at top)
       const nodesPerRow = 3;
       const rowCount = Math.ceil(sortedData.length / nodesPerRow);
-      const containerHeight = rowCount * 250 + 200; // 250px per row + padding
+      const containerHeight = rowCount * 250 + 320; // 250px per row + extra top padding
       container.style.height = containerHeight + 'px';
       
       const { positions } = generateFlowingPositions(sortedData.length, containerHeight);
@@ -2039,6 +2207,13 @@
       svg.id = 'constellation-svg';
       svg.setAttribute('viewBox', '0 0 100 100');
       svg.setAttribute('preserveAspectRatio', 'none');
+      
+      // Get bright line colors for energy pulses
+      const lineBrightColors = {
+        production: 'rgba(56,199,204,0.9)',
+        software: 'rgba(167,139,250,0.9)',
+        about: 'rgba(245,158,11,0.9)'
+      };
       
       // Generate constellation lines (connect nearby nodes)
       const lines = [];
@@ -2058,6 +2233,13 @@
           const lineKey = [Math.min(i, j), Math.max(i, j)].join('-');
           if (!lines.includes(lineKey)) {
             lines.push(lineKey);
+            
+            // Calculate line length for energy animation
+            const dx = positions[j].x - positions[i].x;
+            const dy = positions[j].y - positions[i].y;
+            const lineLength = Math.sqrt(dx * dx + dy * dy);
+            
+            // Base line (dim, always visible)
             const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             line.setAttribute('x1', positions[i].x);
             line.setAttribute('y1', positions[i].y);
@@ -2065,12 +2247,22 @@
             line.setAttribute('y2', positions[j].y);
             line.setAttribute('class', 'constellation-line');
             line.style.setProperty('--line-color', lineColors[key]);
-            // Slight timing variation per line
-            line.style.setProperty('--flow-dur', (2.5 + Math.random() * 2) + 's');
-            line.style.setProperty('--flow-del', (Math.random() * -3) + 's');
             svg.appendChild(line);
             
-            // Lines only - no dots
+            // Energy pulse that travels along the line
+            const energyLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            energyLine.setAttribute('x1', positions[i].x);
+            energyLine.setAttribute('y1', positions[i].y);
+            energyLine.setAttribute('x2', positions[j].x);
+            energyLine.setAttribute('y2', positions[j].y);
+            energyLine.setAttribute('class', 'constellation-line-energy');
+            energyLine.style.setProperty('--line-color-bright', lineBrightColors[key]);
+            energyLine.style.setProperty('--line-length', lineLength);
+            energyLine.style.setProperty('--energy-length', 6 + Math.random() * 8); // 6-14 length pulse
+            energyLine.style.setProperty('--energy-dur', (3 + Math.random() * 4) + 's'); // 3-7s travel time
+            energyLine.style.setProperty('--energy-del', (Math.random() * -10) + 's'); // Random start
+            svg.appendChild(energyLine);
+            
             lineIndex++;
           }
         }
@@ -2130,12 +2322,13 @@
         
         // Store item data on the node for later retrieval
         node._itemData = item;
+        node._originalLeft = pos.x;
+        node._originalTop = pos.y;
         node._category = key;
         
-        node.onclick = (e) => { 
-          e.stopPropagation();
-          toggleNodeExpanded(node, item, key);
-        };
+        // Setup drag and click handlers using the global drag system
+        setupNodeDrag(node, container, item, key);
+        
         container.appendChild(node);
       });
 
@@ -2226,6 +2419,67 @@
 
     function contact() { window.location.href = 'mailto:steve@cueforgelabs.com?subject=Project%20Inquiry'; }
 
+    // --- Node Drag System ---
+    let activeDragNode = null;
+    let dragStartX = 0, dragStartY = 0;
+    let nodeStartLeft = 0, nodeStartTop = 0;
+    let hasDragged = false;
+    let dragContainer = null;
+    
+    function setupNodeDrag(node, container, item, category) {
+      node.onmousedown = (e) => {
+        if (node.classList.contains('node-expanded')) return;
+        e.preventDefault();
+        activeDragNode = node;
+        dragContainer = container;
+        hasDragged = false;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        nodeStartLeft = parseFloat(node.style.left);
+        nodeStartTop = parseFloat(node.style.top);
+        node.classList.add('dragging');
+      };
+      
+      node.onclick = (e) => { 
+        e.stopPropagation();
+        // Only toggle expanded if we didn't just drag
+        if (!hasDragged) {
+          toggleNodeExpanded(node, item, category);
+        }
+        hasDragged = false;
+      };
+    }
+    
+    // Global mousemove for drag
+    document.addEventListener('mousemove', (e) => {
+      if (!activeDragNode || activeDragNode.classList.contains('node-expanded')) return;
+      
+      const containerRect = dragContainer.getBoundingClientRect();
+      const dx = e.clientX - dragStartX;
+      const dy = e.clientY - dragStartY;
+      
+      // Convert pixel movement to percentage of container
+      const dxPercent = (dx / containerRect.width) * 100;
+      const dyPercent = (dy / containerRect.height) * 100;
+      
+      // If moved more than 5px, consider it a drag
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+        hasDragged = true;
+      }
+      
+      activeDragNode.style.left = (nodeStartLeft + dxPercent) + '%';
+      activeDragNode.style.top = (nodeStartTop + dyPercent) + '%';
+    });
+    
+    // Global mouseup for drag
+    document.addEventListener('mouseup', () => {
+      if (activeDragNode) {
+        activeDragNode.classList.remove('dragging');
+        activeDragNode = null;
+        dragContainer = null;
+      }
+    });
+
     // --- Node Expansion System ---
     let currentExpandedNode = null;
     let originalNodePosition = null;
@@ -2258,6 +2512,10 @@
 
       // Show overlay
       document.getElementById('expanded-overlay').classList.add('show');
+      
+      // Show nebula ring with category styling
+      const nebulaRing = document.getElementById('nebula-ring');
+      nebulaRing.className = 'nebula-ring show ' + category;
 
       // Populate and show info card
       const infoCard = document.getElementById('node-info-card');
@@ -2314,8 +2572,9 @@
         currentExpandedNode.style.position = originalNodePosition.position || '';
       }
 
-      // Hide overlay and info card
+      // Hide overlay, nebula ring, and info card
       document.getElementById('expanded-overlay').classList.remove('show');
+      document.getElementById('nebula-ring').classList.remove('show');
       document.getElementById('node-info-card').classList.remove('show');
 
       currentExpandedNode = null;
