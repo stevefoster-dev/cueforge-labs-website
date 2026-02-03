@@ -306,7 +306,7 @@
     }
     .row-left .bus-junction-dot { left: -5px; }
     .row-right .bus-junction-dot { right: -5px; left: auto; }
-    .circuit-section.lit .bus-junction-dot {
+    .detail-row.row-lit .bus-junction-dot {
       border-color: var(--accent);
       box-shadow: 0 0 10px rgba(245,158,11,0.5);
       background: rgba(245,158,11,0.15);
@@ -318,11 +318,9 @@
       display: flex;
       align-items: flex-start;
       margin-bottom: 28px;
-      opacity: 0.35;
-      transition: opacity 0.5s ease;
-    }
-    .circuit-section.lit .detail-row {
-      opacity: calc(0.35 + 0.65 * var(--light-intensity));
+      --row-intensity: 0;
+      opacity: calc(0.25 + 0.75 * var(--row-intensity));
+      transition: opacity 0.4s ease;
     }
 
     /* Alternating left/right — traces reach to bus rails */
@@ -351,7 +349,7 @@
       stroke-width: 2.5; stroke-linecap: square;
       transition: all 0.5s;
     }
-    .circuit-section.lit .trace-line-path {
+    .detail-row.row-lit .trace-line-path {
       stroke: var(--trace-bright);
       filter: drop-shadow(0 0 6px var(--trace-bright-glow));
     }
@@ -367,7 +365,7 @@
     }
     .row-left .solder-dot { left: -4px; }
     .row-right .solder-dot { right: -4px; left: auto; }
-    .circuit-section.lit .solder-dot {
+    .detail-row.row-lit .solder-dot {
       border-color: var(--accent);
       box-shadow: 0 0 12px rgba(245,158,11,0.5);
       background: rgba(245,158,11,0.15);
@@ -383,7 +381,7 @@
     }
     .row-left .trace-energy { animation: energy-right 3s ease-in-out infinite; }
     .row-right .trace-energy { animation: energy-left 3s ease-in-out infinite; }
-    .circuit-section:not(.lit) .trace-energy { animation: none !important; opacity: 0 !important; }
+    .detail-row:not(.row-lit) .trace-energy { animation: none !important; opacity: 0 !important; }
     @keyframes energy-right {
       0% { left: 0; opacity: 0; }
       15% { opacity: 0.9; }
@@ -408,10 +406,10 @@
       position: relative;
       transition: all 0.5s;
     }
-    .circuit-section.lit .detail-card {
-      color: rgba(255,255,255, calc(0.5 + 0.3 * var(--light-intensity)));
-      border-color: rgba(245,158,11, calc(0.15 + 0.2 * var(--light-intensity)));
-      background: rgba(245,158,11, calc(0.02 + 0.03 * var(--light-intensity)));
+    .detail-row.row-lit .detail-card {
+      color: rgba(255,255,255, calc(0.5 + 0.3 * var(--row-intensity)));
+      border-color: rgba(245,158,11, calc(0.15 + 0.2 * var(--row-intensity)));
+      background: rgba(245,158,11, calc(0.02 + 0.03 * var(--row-intensity)));
     }
     .detail-card strong {
       color: var(--accent); font-weight: 600;
@@ -433,8 +431,8 @@
       border-bottom: 2px solid var(--trace-dim);
       border-right: 2px solid var(--trace-dim);
     }
-    .circuit-section.lit .detail-card::before,
-    .circuit-section.lit .detail-card::after {
+    .detail-row.row-lit .detail-card::before,
+    .detail-row.row-lit .detail-card::after {
       border-color: var(--accent);
       filter: drop-shadow(0 0 4px var(--trace-glow));
     }
@@ -453,7 +451,7 @@
     .card-node.br { bottom: -4px; right: -4px; }
     .card-node.tr { top: -4px; right: -4px; }
     .card-node.bl { bottom: -4px; left: -4px; }
-    .circuit-section.lit .card-node {
+    .detail-row.row-lit .card-node {
       border-color: var(--accent);
       box-shadow: 0 0 8px rgba(245,158,11,0.4);
       background: rgba(245,158,11,0.15);
@@ -853,31 +851,63 @@
       }
     });
 
-    // No extra JS needed — junctions handled via CSS on detail-row
-
-    // Scroll-based lighting
+    // Scroll-based lighting — per detail row + section photo stays bright
     const sections = document.querySelectorAll('.circuit-section');
 
     function updateLighting() {
-      const viewportCenter = window.innerHeight * 0.4;
+      const vh = window.innerHeight;
+      // "Hot zone" for detail rows: middle 60% of viewport
+      const hotTop = vh * 0.15;
+      const hotBottom = vh * 0.85;
 
       sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        // Use the node block center for proximity calc
-        const nodeBlock = section.querySelector('.node-block');
-        const nodeRect = nodeBlock.getBoundingClientRect();
-        const nodeCenter = nodeRect.top + nodeRect.height / 2;
-        const distance = Math.abs(nodeCenter - viewportCenter);
-        const maxDistance = window.innerHeight * 0.7;
-        const intensity = Math.max(0, 1 - (distance / maxDistance));
+        const sectionRect = section.getBoundingClientRect();
 
-        section.style.setProperty('--light-intensity', intensity);
+        // Section is "in view" if any part overlaps the viewport
+        const sectionInView = sectionRect.top < vh && sectionRect.bottom > 0;
 
-        if (intensity > 0.08) {
+        // Photo node: full bright while ANY part of section is in view
+        if (sectionInView) {
+          // Intensity based on how centered the section is
+          const sectionCenter = sectionRect.top + sectionRect.height / 2;
+          const distFromCenter = Math.abs(sectionCenter - vh * 0.4);
+          const maxDist = vh * 0.9;
+          const sectionIntensity = Math.max(0, 1 - (distFromCenter / maxDist));
+
+          // Keep photo at high brightness when section is anywhere in view
+          const photoIntensity = Math.max(0.6, sectionIntensity);
+          section.style.setProperty('--light-intensity', photoIntensity);
           section.classList.add('lit');
         } else {
+          section.style.setProperty('--light-intensity', 0);
           section.classList.remove('lit');
         }
+
+        // Per detail row lighting
+        const rows = section.querySelectorAll('.detail-row');
+        rows.forEach(row => {
+          const rowRect = row.getBoundingClientRect();
+          const rowCenter = rowRect.top + rowRect.height / 2;
+
+          // Row is "hot" when its center is in the hot zone
+          if (rowCenter > hotTop && rowCenter < hotBottom) {
+            // Intensity peaks in the middle of the hot zone
+            const zoneCenter = (hotTop + hotBottom) / 2;
+            const zoneHalf = (hotBottom - hotTop) / 2;
+            const dist = Math.abs(rowCenter - zoneCenter);
+            const intensity = Math.max(0, 1 - (dist / zoneHalf));
+
+            row.style.setProperty('--row-intensity', intensity);
+            if (intensity > 0.15) {
+              row.classList.add('row-lit');
+            } else {
+              row.classList.remove('row-lit');
+            }
+          } else {
+            row.style.setProperty('--row-intensity', 0);
+            row.classList.remove('row-lit');
+          }
+        });
       });
     }
 

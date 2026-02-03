@@ -1013,6 +1013,18 @@
       border-color: var(--forge-teal);
     }
 
+    #forge-title {
+      position: absolute; top: 30px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.6rem; font-weight: 300; color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+    #forge-title span {
+      color: #38c7cc; font-weight: 600;
+    }
     #hint {
       position: absolute; bottom: 20px; left: 50%;
       transform: translateX(-50%);
@@ -2512,6 +2524,7 @@
       <span>CueForge Labs</span>
     </div>
     <button id="contact-btn-hud" onclick="contact()">Contact</button>
+    <div id="forge-title">Explore The <span>Forge</span></div>
     <div id="hint">Hover regions • Click to explore</div>
   </div>
 
