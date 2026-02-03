@@ -5,7 +5,7 @@ const portfolioData = {
     {
       id: 'eras-tour-ttpd',
       artist: 'Taylor Swift',
-      show: 'The Eras Tour — TTPD Era',
+      show: 'The Eras Tour',
       year: 2024,
       role: 'Video Programmer / Screens Director',
       image: 'images/eras-ttpd.jpg',
