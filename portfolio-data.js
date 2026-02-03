@@ -8,7 +8,7 @@ const portfolioData = {
       show: 'The Eras Tour',
       year: 2024,
       role: 'Video Programmer / Screens Director',
-      image: 'images/eras-ttpd.jpg',
+      image: 'images/eras-ttpd.png',
       credits: [
         { role: 'Creative Director', name: 'Ethan Tobman' },
         { role: 'Production Designer', name: 'Baz Halpin', company: 'Silent House' },
