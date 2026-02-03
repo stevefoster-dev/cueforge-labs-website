@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CueForge Labs | Video Production & Software Development</title>
+  <script>
+    // Skip intro instantly (before paint) if already entered this session
+    if (sessionStorage.getItem('forgeEntered')) {
+      document.documentElement.classList.add('skip-intro');
+    }
+  </script>
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="CueForge Labs - Video production, software development, and live event technology. A-list credits including Taylor Swift, Harry Styles, Cher, and Madonna. Based in Connecticut.">
@@ -54,6 +60,17 @@
     #intro.hidden {
       opacity: 0; transform: scale(1.05);
       pointer-events: none;
+    }
+    /* Instant skip — no flash of intro on return visits */
+    .skip-intro #intro {
+      display: none !important;
+    }
+    .skip-intro #forge-view {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .skip-intro #hud {
+      opacity: 1 !important;
     }
 
     #circuit-canvas {
@@ -346,22 +363,81 @@
     #forge-view {
       position: fixed; inset: 0; z-index: 50;
       display: flex; align-items: center; justify-content: center;
-      background: radial-gradient(ellipse at center, #080c10 0%, #020305 70%);
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 30%, rgba(56,199,204,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(167,139,250,0.10) 0%, transparent 45%),
+        radial-gradient(ellipse 70% 60% at 85% 70%, rgba(56,199,204,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(167,139,250,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(56,199,204,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at center, #080c10 0%, #020305 70%);
       opacity: 0; pointer-events: none;
       transition: opacity 1s ease;
     }
     #forge-view.show { opacity: 1; pointer-events: auto; }
 
-    /* Circuit background - actual image */
-    #circuit-background {
+    /* Forge guardrails */
+    .forge-guardrails {
       position: absolute;
-      inset: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .forge-guardrails .rail-left, .forge-guardrails .rail-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+    }
+    .forge-guardrails .rail-left { left: 20px; }
+    .forge-guardrails .rail-right { right: 20px; }
+    .forge-guardrails svg {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      background: url('circuitry-bg.webp') center center / cover no-repeat;
-      opacity: 0.5;
+    }
+    .forge-guardrails .rail-trace {
+      fill: none;
+      stroke: rgba(56,199,204,0.4);
+      stroke-width: 3;
+      stroke-linecap: square;
+      filter: drop-shadow(0 0 8px rgba(56,199,204,0.2));
+    }
+    .forge-guardrails .rail-pulse {
+      position: absolute;
+      width: 4px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, var(--forge-cyan), var(--forge-teal), transparent);
+      border-radius: 2px;
+      box-shadow: 0 0 15px var(--forge-teal);
+      animation: forge-pulse-flow 10s ease-in-out infinite;
+    }
+    .forge-guardrails .rail-pulse.p1 { left: 30px; animation-delay: 0s; }
+    .forge-guardrails .rail-pulse.p2 { left: 60px; animation-delay: 3s; height: 30px; }
+    .forge-guardrails .rail-pulse.p3 { left: 90px; animation-delay: 6s; height: 50px; }
+    .forge-guardrails .rail-right .rail-pulse.p1 { left: auto; right: 30px; animation-delay: 1.5s; }
+    .forge-guardrails .rail-right .rail-pulse.p2 { left: auto; right: 60px; animation-delay: 4.5s; }
+    .forge-guardrails .rail-right .rail-pulse.p3 { left: auto; right: 90px; animation-delay: 7.5s; }
+    @keyframes forge-pulse-flow {
+      0% { top: -50px; opacity: 0; }
+      5% { opacity: 0.7; }
+      95% { opacity: 0.7; }
+      100% { top: 100%; opacity: 0; }
+    }
+    @media (max-width: 1100px) {
+      .forge-guardrails .rail-left { left: 0; opacity: 0.5; }
+      .forge-guardrails .rail-right { right: 0; opacity: 0.5; }
+    }
+    @media (max-width: 900px) {
+      .forge-guardrails .rail-left, .forge-guardrails .rail-right { width: 80px; opacity: 0.3; }
+    }
+    @media (max-width: 768px) {
+      .forge-guardrails { display: none; }
     }
 
     #forge-container {
@@ -386,13 +462,20 @@
     /* NEBULA REGIONS - ESO Constellation Style */
     .nebula-region {
       cursor: pointer;
-      transition: opacity 0.5s ease 0.2s, filter 0.5s ease 0.2s;
+      transition: opacity 0.8s ease 0.15s, filter 0.8s ease 0.15s;
       opacity: 0.85;
+      pointer-events: none;
     }
     .nebula-region:hover { 
       opacity: 1; 
       filter: brightness(1.2);
-      transition: opacity 0.3s ease, filter 0.3s ease; /* Faster on hover-in */
+      transition: opacity 0.4s ease, filter 0.4s ease;
+    }
+    .nebula-region .nebula-hit-area {
+      fill: transparent;
+      stroke: none;
+      pointer-events: all;
+      cursor: pointer;
     }
 
     /* Layered nebula clouds */
@@ -526,16 +609,31 @@
       fill: currentColor;
       opacity: 0.4;
       filter: drop-shadow(0 0 3px currentColor);
+      transition: opacity 0.8s ease, filter 0.8s ease;
     }
     .star-connector {
       stroke: currentColor;
       stroke-width: 1.2;
       opacity: 0.15;
       filter: drop-shadow(0 0 2px currentColor);
+      transition: opacity 0.8s ease, filter 0.8s ease;
+      pointer-events: stroke;
+    }
+    
+    /* Invisible hit area for easier line hovering */
+    .star-network {
+      pointer-events: all;
+    }
+    .star-network line {
+      cursor: pointer;
     }
 
     .nebula-software .star-node,
     .nebula-software .star-connector { color: #e9d5ff; }
+    .nebula-software .star-network {
+      isolation: isolate;
+      position: relative;
+    }
     .nebula-production .star-node,
     .nebula-production .star-connector { color: #99f6e4; }
     .nebula-about .star-node,
@@ -573,25 +671,41 @@
       opacity: 0.6;
       pointer-events: none;
     }
-    .forge-circuit circle { stroke-width: 3; }
+    .forge-circuit .hit-area {
+      fill: transparent;
+      stroke: none;
+      pointer-events: none;
+      cursor: pointer;
+    }
+    .forge-circuit circle { 
+      stroke-width: 3;
+    }
+    .forge-circuit polyline,
+    .forge-circuit line {
+      pointer-events: none;
+    }
 
     #forge-software-circuit { stroke: var(--forge-lavender); }
     #forge-software-circuit circle {
       fill: rgba(167,139,250,0.4);
       stroke: var(--forge-lavender);
     }
+    #forge-software-circuit:hover ~ .nebula-software,
+    #forge-software-circuit:hover { opacity: 1; filter: brightness(1.3); }
 
     #forge-production-circuit { stroke: var(--forge-teal); }
     #forge-production-circuit circle {
       fill: rgba(56,199,204,0.4);
       stroke: var(--forge-teal);
     }
+    #forge-production-circuit:hover { opacity: 1; filter: brightness(1.3); }
 
     #forge-about-circuit { stroke: var(--forge-amber); }
     #forge-about-circuit circle {
       fill: rgba(245,158,11,0.4);
       stroke: var(--forge-amber);
     }
+    #forge-about-circuit:hover { opacity: 1; filter: brightness(1.3); }
 
     /* Category label */
     #category-label {
@@ -693,9 +807,9 @@
       display: none; /* Hidden - using full nebula background instead */
     }
 
-    /* Anvil header container */
+    /* Anvil header container - scrolls with content */
     #expanded-header {
-      position: fixed;
+      position: absolute;
       top: 20px; left: 50%;
       transform: translateX(-50%);
       z-index: 70;
@@ -706,8 +820,8 @@
     
     #anvil-outline {
       position: relative;
-      width: 280px;
-      height: 90px;
+      width: 340px;
+      height: 210px;
     }
     
     #anvil-outline svg {
@@ -718,31 +832,31 @@
     }
     
     #anvil-outline .anvil-shape {
-      fill: rgba(2,3,5,0.85);
+      fill: rgba(2,3,5,0.92);
       stroke: var(--forge-teal);
-      stroke-width: 2;
-      filter: drop-shadow(0 0 15px rgba(56,199,204,0.4));
+      stroke-width: 14;
+      filter: drop-shadow(0 0 20px rgba(56,199,204,0.6)) drop-shadow(0 0 40px rgba(56,199,204,0.3));
       transition: stroke 0.3s ease, filter 0.3s ease;
     }
     #expanded-view.software #anvil-outline .anvil-shape {
       stroke: var(--forge-lavender);
-      filter: drop-shadow(0 0 15px rgba(167,139,250,0.4));
+      filter: drop-shadow(0 0 20px rgba(167,139,250,0.6)) drop-shadow(0 0 40px rgba(167,139,250,0.3));
     }
     #expanded-view.about #anvil-outline .anvil-shape {
       stroke: var(--forge-amber);
-      filter: drop-shadow(0 0 15px rgba(245,158,11,0.4));
+      filter: drop-shadow(0 0 20px rgba(245,158,11,0.6)) drop-shadow(0 0 40px rgba(245,158,11,0.3));
     }
 
     #expanded-title {
       position: absolute;
-      top: 50%; left: 50%;
+      top: 28%; left: 50%;
       transform: translate(-50%, -50%);
-      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       color: var(--forge-teal);
-      text-shadow: 0 0 30px currentColor;
+      text-shadow: 0 0 25px currentColor;
       white-space: nowrap;
       margin: 0;
       padding: 0;
@@ -937,8 +1051,8 @@
 
     .portfolio-node-frame {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       padding: 3px;
       background: transparent;
@@ -1043,17 +1157,18 @@
 
     /* Expanded node state - when clicked */
     .portfolio-node.node-expanded {
-      z-index: 1000 !important;
+      z-index: 1005 !important;
       animation: none !important;
       position: fixed !important;
       left: 50% !important;
-      top: 32% !important;
+      top: 30% !important;
       transform: translate(-50%, -50%) !important;
       cursor: pointer;
+      isolation: isolate;
     }
     .portfolio-node.node-expanded .portfolio-node-frame {
-      width: 320px;
-      height: 320px;
+      width: 450px;
+      height: 450px;
     }
     .portfolio-node.node-expanded .portfolio-node-frame::before {
       opacity: 0;
@@ -1061,29 +1176,34 @@
     .portfolio-node.node-expanded .portfolio-node-image {
       border-width: 4px;
       box-shadow: 
-        inset 0 0 40px rgba(0,0,0,0.9),
-        0 0 30px var(--node-color-dim);
+        inset 0 0 30px rgba(0,0,0,0.4),
+        0 0 50px var(--node-color-dim),
+        0 0 100px var(--node-color-dim);
+    }
+    .portfolio-node.node-expanded .portfolio-node-image.no-image {
+      font-size: 5rem;
     }
     .portfolio-node.node-expanded .portfolio-node-label {
       display: none;
     }
     
-    /* Nebula ring effect around expanded node */
+    /* Nebula ring effect around expanded node - render BEHIND the node */
     .nebula-ring {
       position: fixed;
       left: 50%;
-      top: 32%;
+      top: 30%;
       transform: translate(-50%, -50%);
-      width: 380px;
-      height: 380px;
+      width: 540px;
+      height: 540px;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 999;
+      z-index: 998;
       opacity: 0;
       transition: opacity 0.5s ease;
+      mix-blend-mode: screen;
     }
     .nebula-ring.show {
-      opacity: 1;
+      opacity: 0.8;
     }
     
     /* Outer nebula glow layers */
@@ -1169,14 +1289,14 @@
     
     @keyframes particle-orbit {
       0% { 
-        transform: rotate(var(--particle-start, 0deg)) translateX(200px) rotate(calc(var(--particle-start, 0deg) * -1));
+        transform: rotate(var(--particle-start, 0deg)) translateX(275px) rotate(calc(var(--particle-start, 0deg) * -1));
         opacity: 0.3;
       }
       25% { opacity: 1; }
       50% { opacity: 0.5; }
       75% { opacity: 1; }
       100% { 
-        transform: rotate(calc(var(--particle-start, 0deg) + 360deg)) translateX(200px) rotate(calc((var(--particle-start, 0deg) + 360deg) * -1));
+        transform: rotate(calc(var(--particle-start, 0deg) + 360deg)) translateX(275px) rotate(calc((var(--particle-start, 0deg) + 360deg) * -1));
         opacity: 0.3;
       }
     }
@@ -1202,67 +1322,142 @@
     .node-info-card {
       position: fixed;
       left: 50%;
-      top: calc(32% + 210px);
+      top: calc(30% + 280px);
       transform: translateX(-50%);
-      background: rgba(6, 10, 13, 0.95);
-      border: 1px solid var(--forge-teal);
-      border-radius: 12px;
-      padding: 24px 32px;
-      min-width: 320px;
-      max-width: 450px;
-      z-index: 1001;
+      background: rgba(6, 10, 13, 0.97);
+      border: 2px solid var(--forge-teal);
+      border-radius: 16px;
+      padding: 28px 36px;
+      min-width: 380px;
+      max-width: 500px;
+      z-index: 1010;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease, transform 0.4s ease;
       box-shadow: 
-        0 0 40px rgba(56,199,204,0.2),
-        0 20px 60px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
+        0 0 60px rgba(56,199,204,0.4),
+        0 0 120px rgba(56,199,204,0.2),
+        inset 0 0 60px rgba(56,199,204,0.05),
+        0 25px 80px rgba(0,0,0,0.6);
+      backdrop-filter: blur(15px);
+      overflow: hidden;
+    }
+    /* Circuit pattern overlay on modal */
+    .node-info-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('circuitry-bg.webp') center center / cover no-repeat;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: -1;
+    }
+    /* Animated glow border effect */
+    .node-info-card::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--card-glow, rgba(56,199,204,0.6)) 60deg,
+        transparent 120deg,
+        var(--card-glow, rgba(56,199,204,0.5)) 200deg,
+        transparent 260deg,
+        var(--card-glow, rgba(56,199,204,0.4)) 320deg,
+        transparent 360deg
+      );
+      filter: blur(8px);
+      animation: card-glow-rotate 8s linear infinite;
+      z-index: -2;
+      opacity: 0.7;
+    }
+    @keyframes card-glow-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     .node-info-card.show {
       opacity: 1;
       pointer-events: auto;
     }
+    /* Category-specific card glow colors */
+    #expanded-view.production .node-info-card {
+      --card-glow: rgba(56,199,204,0.6);
+    }
+    #expanded-view.software .node-info-card {
+      border-color: var(--forge-lavender);
+      --card-glow: rgba(167,139,250,0.6);
+      box-shadow: 
+        0 0 60px rgba(167,139,250,0.4),
+        0 0 120px rgba(167,139,250,0.2),
+        inset 0 0 60px rgba(167,139,250,0.05),
+        0 25px 80px rgba(0,0,0,0.6);
+    }
+    #expanded-view.about .node-info-card {
+      border-color: var(--forge-amber);
+      --card-glow: rgba(245,158,11,0.6);
+      box-shadow: 
+        0 0 60px rgba(245,158,11,0.4),
+        0 0 120px rgba(245,158,11,0.2),
+        inset 0 0 60px rgba(245,158,11,0.05),
+        0 25px 80px rgba(0,0,0,0.6);
+    }
     .node-info-card .card-artist {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #fff;
       margin-bottom: 4px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .node-info-card .card-show {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--forge-teal);
       font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 16px;
+      text-shadow: 0 0 15px currentColor;
     }
+    #expanded-view.software .node-info-card .card-show { color: var(--forge-lavender); }
+    #expanded-view.about .node-info-card .card-show { color: var(--forge-amber); }
     .node-info-card .card-year {
       display: inline-block;
-      background: rgba(56,199,204,0.15);
+      background: rgba(56,199,204,0.2);
       color: var(--forge-teal);
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 12px;
+      border: 1px solid rgba(56,199,204,0.3);
+    }
+    #expanded-view.software .node-info-card .card-year {
+      background: rgba(167,139,250,0.2);
+      color: var(--forge-lavender);
+      border-color: rgba(167,139,250,0.3);
+    }
+    #expanded-view.about .node-info-card .card-year {
+      background: rgba(245,158,11,0.2);
+      color: var(--forge-amber);
+      border-color: rgba(245,158,11,0.3);
     }
     .node-info-card .card-role {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #e5e7eb;
       margin-bottom: 16px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
     .node-info-card .card-credits {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 14px;
     }
     .node-info-card .card-credit {
       display: flex;
       justify-content: space-between;
-      font-size: 0.75rem;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.78rem;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .node-info-card .card-credit:last-child {
       border-bottom: none;
@@ -1276,14 +1471,16 @@
     }
     .node-info-card .credit-company {
       color: var(--forge-teal);
-      font-size: 0.65rem;
-      opacity: 0.8;
+      font-size: 0.68rem;
+      opacity: 0.9;
     }
+    #expanded-view.software .node-info-card .credit-company { color: var(--forge-lavender); }
+    #expanded-view.about .node-info-card .credit-company { color: var(--forge-amber); }
     .node-info-card .card-hint {
       text-align: center;
       font-size: 0.7rem;
-      color: #6b7280;
-      margin-top: 16px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 18px;
       font-style: italic;
     }
     
@@ -1300,8 +1497,8 @@
     .expanded-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
+      background: rgba(0,0,0,0.6);
+      z-index: 996;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -1311,6 +1508,15 @@
       pointer-events: auto;
     }
 
+    /* Year nebula sections */
+    .year-nebula {
+      will-change: opacity;
+      transition: opacity 0.5s ease;
+    }
+    .year-label {
+      user-select: none;
+    }
+    
     /* Constellation lines connecting nodes */
     #constellation-svg {
       position: absolute;
@@ -1322,40 +1528,15 @@
     }
     .constellation-line {
       stroke: var(--line-color, rgba(56,199,204,0.3));
-      stroke-width: 1.5;
-      opacity: 0.25;
+      stroke-width: 1;
+      opacity: 0.3;
       fill: none;
       vector-effect: non-scaling-stroke;
-      transition: opacity 0.4s ease;
-    }
-    #expanded-view:hover .constellation-line {
-      opacity: 0.4;
     }
     
-    /* Energy pulse that travels along lines */
+    /* Energy lines hidden - keeping simple */
     .constellation-line-energy {
-      stroke: var(--line-color-bright, rgba(56,199,204,0.9));
-      stroke-width: 2;
-      fill: none;
-      vector-effect: non-scaling-stroke;
-      stroke-linecap: round;
-      stroke-dasharray: var(--energy-length, 8) 1000;
-      stroke-dashoffset: var(--energy-offset, 1000);
-      animation: energy-travel var(--energy-dur, 4s) ease-in-out infinite;
-      animation-delay: var(--energy-del, 0s);
-      opacity: 0;
-      filter: drop-shadow(0 0 3px var(--line-color-bright));
-    }
-    #expanded-view:hover .constellation-line-energy {
-      opacity: 1;
-    }
-    
-    @keyframes energy-travel {
-      0% { stroke-dashoffset: var(--line-length, 100); opacity: 0; }
-      5% { opacity: 0.8; }
-      50% { opacity: 1; }
-      95% { opacity: 0.8; }
-      100% { stroke-dashoffset: calc(var(--line-length, 100) * -1); opacity: 0; }
+      display: none;
     }
     
     /* Dragging state for nodes */
@@ -1370,6 +1551,238 @@
     }
     .portfolio-node {
       cursor: grab;
+    }
+
+    /* ===== CIRCUIT ROAD TIMELINE ===== */
+    .circuit-road {
+      position: relative;
+      width: 100%;
+      padding: 20px 0;
+    }
+    
+    /* Central circuit spine */
+    .circuit-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, 
+        var(--circuit-color, rgba(56,199,204,0.6)) 0%,
+        var(--circuit-color, rgba(56,199,204,0.3)) 100%
+      );
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+    .circuit-spine::before,
+    .circuit-spine::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--circuit-color, rgba(56,199,204,0.8));
+      box-shadow: 0 0 20px var(--circuit-color, rgba(56,199,204,0.6));
+    }
+    .circuit-spine::before { top: -8px; }
+    .circuit-spine::after { bottom: -8px; }
+    
+    /* Year marker */
+    .circuit-year {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+      z-index: 10;
+    }
+    .circuit-year-badge {
+      background: var(--forge-darker);
+      border: 3px solid var(--circuit-color, var(--forge-teal));
+      border-radius: 30px;
+      padding: 12px 40px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--circuit-color, var(--forge-teal));
+      text-shadow: 0 0 20px currentColor;
+      box-shadow: 0 0 30px var(--circuit-glow, rgba(56,199,204,0.4));
+    }
+    
+    /* Single circuit node row */
+    .circuit-node-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 40px 0;
+      min-height: 220px;
+    }
+    .circuit-node-row.left {
+      flex-direction: row;
+    }
+    .circuit-node-row.right {
+      flex-direction: row-reverse;
+    }
+    
+    /* The node (image circle) */
+    .circuit-node {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid var(--circuit-color, var(--forge-teal));
+      background: var(--forge-darker);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px var(--circuit-glow, rgba(56,199,204,0.3));
+      z-index: 10;
+    }
+    .circuit-node:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 50px var(--circuit-glow, rgba(56,199,204,0.5));
+    }
+    .circuit-node img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .circuit-node .node-initial {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--circuit-color, var(--forge-teal));
+      text-shadow: 0 0 30px currentColor;
+      background: radial-gradient(circle at 30% 30%, rgba(56,199,204,0.15), transparent);
+    }
+    
+    /* Circuit trace connecting node to center spine */
+    .circuit-trace {
+      flex-grow: 1;
+      height: 4px;
+      background: var(--circuit-color, rgba(56,199,204,0.5));
+      position: relative;
+      margin: 0 -2px;
+    }
+    .circuit-trace::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--circuit-color, var(--forge-teal));
+      box-shadow: 0 0 15px var(--circuit-color, rgba(56,199,204,0.8));
+    }
+    .circuit-node-row.left .circuit-trace::before { right: -7px; }
+    .circuit-node-row.right .circuit-trace::before { left: -7px; }
+    
+    /* Metadata card */
+    .circuit-meta {
+      flex-grow: 1;
+      max-width: 400px;
+      padding: 25px 30px;
+      background: rgba(6,10,13,0.9);
+      border: 2px solid var(--circuit-color-dim, rgba(56,199,204,0.3));
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .circuit-node-row.left .circuit-meta { margin-left: 0; margin-right: 30px; }
+    .circuit-node-row.right .circuit-meta { margin-right: 0; margin-left: 30px; }
+    
+    .circuit-meta .meta-artist {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .circuit-meta .meta-show {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--circuit-color, var(--forge-teal));
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .circuit-meta .meta-role {
+      font-size: 0.95rem;
+      color: #d1d5db;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background: rgba(56,199,204,0.08);
+      border-left: 3px solid var(--circuit-color, var(--forge-teal));
+      border-radius: 0 8px 8px 0;
+    }
+    .circuit-meta .meta-credits {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 12px;
+    }
+    .circuit-meta .meta-credit {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      padding: 5px 0;
+      color: #9ca3af;
+    }
+    .circuit-meta .meta-credit .credit-name {
+      color: #e5e7eb;
+      text-align: right;
+    }
+    .circuit-meta .meta-credit .credit-company {
+      color: var(--circuit-color, var(--forge-teal));
+      font-size: 0.65rem;
+    }
+    
+    /* Category color overrides */
+    #expanded-view.production .circuit-road {
+      --circuit-color: var(--forge-teal);
+      --circuit-color-dim: rgba(56,199,204,0.3);
+      --circuit-glow: rgba(56,199,204,0.4);
+    }
+    #expanded-view.software .circuit-road {
+      --circuit-color: var(--forge-lavender);
+      --circuit-color-dim: rgba(167,139,250,0.3);
+      --circuit-glow: rgba(167,139,250,0.4);
+    }
+    #expanded-view.about .circuit-road {
+      --circuit-color: var(--forge-amber);
+      --circuit-color-dim: rgba(245,158,11,0.3);
+      --circuit-glow: rgba(245,158,11,0.4);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .circuit-node-row {
+        flex-direction: column !important;
+        padding: 30px 20px;
+      }
+      .circuit-node-row.left .circuit-meta,
+      .circuit-node-row.right .circuit-meta {
+        margin: 20px 0 0 0;
+        max-width: 100%;
+      }
+      .circuit-trace {
+        width: 4px;
+        height: 30px;
+        margin: 0;
+      }
+      .circuit-trace::before {
+        bottom: -7px;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .circuit-spine {
+        display: none;
+      }
     }
 
     /* Updated detail panel for portfolio */
@@ -1428,9 +1841,114 @@
       font-size: 0.7rem;
       color: #6b7280;
     }
+    
+    /* Subtle nebula background */
+    .nebula-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -2;
+      pointer-events: none;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 30%, rgba(56,199,204,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(167,139,250,0.10) 0%, transparent 45%),
+        radial-gradient(ellipse 70% 60% at 85% 70%, rgba(56,199,204,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(167,139,250,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(56,199,204,0.06) 0%, transparent 60%),
+        var(--forge-darker);
+    }
+    
+    /* Circuit guardrails */
+    .circuit-guardrails {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .guardrail-left, .guardrail-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+    }
+    .guardrail-left { left: 20px; }
+    .guardrail-right { right: 20px; }
+    .guardrail-left svg, .guardrail-right svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .guardrail-trace {
+      fill: none;
+      stroke: rgba(56,199,204,0.4);
+      stroke-width: 3;
+      stroke-linecap: square;
+      filter: drop-shadow(0 0 8px rgba(56,199,204,0.2));
+    }
+    .guardrail-pulse {
+      position: absolute;
+      width: 4px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, var(--forge-cyan), var(--forge-teal), transparent);
+      border-radius: 2px;
+      box-shadow: 0 0 15px var(--forge-teal);
+      animation: guardrail-pulse-flow 10s ease-in-out infinite;
+    }
+    .guardrail-pulse.p1 { left: 30px; animation-delay: 0s; }
+    .guardrail-pulse.p2 { left: 60px; animation-delay: 3s; height: 30px; }
+    .guardrail-pulse.p3 { left: 90px; animation-delay: 6s; height: 50px; }
+    .guardrail-right .guardrail-pulse.p1 { left: auto; right: 30px; animation-delay: 1.5s; }
+    .guardrail-right .guardrail-pulse.p2 { left: auto; right: 60px; animation-delay: 4.5s; }
+    .guardrail-right .guardrail-pulse.p3 { left: auto; right: 90px; animation-delay: 7.5s; }
+    @keyframes guardrail-pulse-flow {
+      0% { top: -50px; opacity: 0; }
+      5% { opacity: 0.7; }
+      95% { opacity: 0.7; }
+      100% { top: 100%; opacity: 0; }
+    }
+    @media (max-width: 1100px) {
+      .guardrail-left { left: 0; opacity: 0.5; }
+      .guardrail-right { right: 0; opacity: 0.5; }
+    }
+    @media (max-width: 900px) {
+      .guardrail-left, .guardrail-right { width: 80px; opacity: 0.3; }
+    }
+    @media (max-width: 768px) {
+      .circuit-guardrails { display: none; }
+    }
   </style>
 </head>
 <body>
+  <div class="nebula-bg"></div>
+  
+  <div class="circuit-guardrails">
+    <div class="guardrail-left">
+      <svg viewBox="0 0 120 15000" preserveAspectRatio="none">
+        <path class="guardrail-trace" d="M 60 0 V 80 H 40 V 150 H 60 V 200 H 80 V 280 H 60 V 350 H 30 V 420 H 60 V 480 H 90 V 560 H 60 V 620 H 40 V 700 H 60 V 780 H 80 V 850 H 60 V 920 H 30 V 1000 H 60 V 1080 H 90 V 1150 H 60 V 1220 H 40 V 1300 H 60 V 1380 H 80 V 1450 H 60 V 1520 H 30 V 1600 H 60 V 1680 H 90 V 1760 H 60 V 1840 H 40 V 1920 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 30 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 40 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 30 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 40 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 30 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 40 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 30 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000 H 40 V 5100 H 60 V 5200 H 80 V 5300 H 60 V 5400 H 30 V 5500 H 60 V 5600 H 90 V 5700 H 60 V 5800 H 40 V 5900 H 60 V 6000 H 80 V 6100 H 60 V 6200 H 30 V 6300 H 60 V 6400 H 90 V 6500 H 60 V 6600 H 40 V 6700 H 60 V 6800 H 80 V 6900 H 60 V 7000 H 30 V 7100 H 60 V 7200 H 90 V 7300 H 60 V 7400 H 40 V 7500 H 60 V 7600 H 80 V 7700 H 60 V 7800 H 30 V 7900 H 60 V 8000 H 90 V 8100 H 60 V 8200 H 40 V 8300 H 60 V 8400 H 80 V 8500 H 60 V 8600 H 30 V 8700 H 60 V 8800 H 90 V 8900 H 60 V 9000 H 40 V 9100 H 60 V 9200 H 80 V 9300 H 60 V 9400 H 30 V 9500 H 60 V 9600 H 90 V 9700 H 60 V 9800 H 40 V 9900 H 60 V 10000 H 80 V 10100 H 60 V 10200 H 30 V 10300 H 60 V 10400 H 90 V 10500 H 60 V 10600 H 40 V 10700 H 60 V 10800 H 80 V 10900 H 60 V 11000 H 30 V 11100 H 60 V 11200 H 90 V 11300 H 60 V 11400 H 40 V 11500 H 60 V 11600 H 80 V 11700 H 60 V 11800 H 30 V 11900 H 60 V 12000 H 90 V 12100 H 60 V 12200 H 40 V 12300 H 60 V 12400 H 80 V 12500 H 60 V 12600 H 30 V 12700 H 60 V 12800 H 90 V 12900 H 60 V 13000 H 40 V 13100 H 60 V 13200 H 80 V 13300 H 60 V 13400 H 30 V 13500 H 60 V 13600 H 90 V 13700 H 60 V 13800 H 40 V 13900 H 60 V 14000 H 80 V 14100 H 60 V 14200 H 30 V 14300 H 60 V 14400 H 90 V 14500 H 60 V 14600 H 40 V 14700 H 60 V 14800 H 80 V 14900 H 60 V 15000"/>
+        <path class="guardrail-trace" d="M 40 0 V 60 H 20 V 130 H 40 V 190 H 60 V 270 H 40 V 340 H 10 V 400 H 40 V 470 H 70 V 540 H 40 V 610 H 20 V 680 H 40 V 750 H 60 V 830 H 40 V 900 H 10 V 980 H 40 V 1050 H 70 V 1130 H 40 V 1200 H 20 V 1280 H 40 V 1350 H 60 V 1430 H 40 V 1500 H 10 V 1580 H 40 V 1650 H 70 V 1730 H 40 V 1800 H 20 V 1880 H 40 V 2000 H 60 V 2100 H 40 V 2200 H 10 V 2300 H 40 V 2400 H 70 V 2500 H 40 V 2600 H 20 V 2700 H 40 V 2800 H 60 V 2900 H 40 V 3000 H 10 V 3100 H 40 V 3200 H 70 V 3300 H 40 V 3400 H 20 V 3500 H 40 V 3600 H 60 V 3700 H 40 V 3800 H 10 V 3900 H 40 V 4000 H 70 V 4100 H 40 V 4200 H 20 V 4300 H 40 V 4400 H 60 V 4500 H 40 V 4600 H 10 V 4700 H 40 V 4800 H 70 V 4900 H 40 V 5000 H 20 V 5100 H 40 V 5200 H 60 V 5300 H 40 V 5400 H 10 V 5500 H 40 V 5600 H 70 V 5700 H 40 V 5800 H 20 V 5900 H 40 V 6000 H 60 V 6100 H 40 V 6200 H 10 V 6300 H 40 V 6400 H 70 V 6500 H 40 V 6600 H 20 V 6700 H 40 V 6800 H 60 V 6900 H 40 V 7000 H 10 V 7100 H 40 V 7200 H 70 V 7300 H 40 V 7400 H 20 V 7500 H 40 V 7600 H 60 V 7700 H 40 V 7800 H 10 V 7900 H 40 V 8000 H 70 V 8100 H 40 V 8200 H 20 V 8300 H 40 V 8400 H 60 V 8500 H 40 V 8600 H 10 V 8700 H 40 V 8800 H 70 V 8900 H 40 V 9000 H 20 V 9100 H 40 V 9200 H 60 V 9300 H 40 V 9400 H 10 V 9500 H 40 V 9600 H 70 V 9700 H 40 V 9800 H 20 V 9900 H 40 V 10000 H 60 V 10100 H 40 V 10200 H 10 V 10300 H 40 V 10400 H 70 V 10500 H 40 V 10600 H 20 V 10700 H 40 V 10800 H 60 V 10900 H 40 V 11000 H 10 V 11100 H 40 V 11200 H 70 V 11300 H 40 V 11400 H 20 V 11500 H 40 V 11600 H 60 V 11700 H 40 V 11800 H 10 V 11900 H 40 V 12000 H 70 V 12100 H 40 V 12200 H 20 V 12300 H 40 V 12400 H 60 V 12500 H 40 V 12600 H 10 V 12700 H 40 V 12800 H 70 V 12900 H 40 V 13000 H 20 V 13100 H 40 V 13200 H 60 V 13300 H 40 V 13400 H 10 V 13500 H 40 V 13600 H 70 V 13700 H 40 V 13800 H 20 V 13900 H 40 V 14000 H 60 V 14100 H 40 V 14200 H 10 V 14300 H 40 V 14400 H 70 V 14500 H 40 V 14600 H 20 V 14700 H 40 V 14800 H 60 V 14900 H 40 V 15000"/>
+      </svg>
+      <div class="guardrail-pulse p1"></div>
+      <div class="guardrail-pulse p2"></div>
+      <div class="guardrail-pulse p3"></div>
+    </div>
+    <div class="guardrail-right">
+      <svg viewBox="0 0 120 15000" preserveAspectRatio="none">
+        <path class="guardrail-trace" d="M 60 0 V 100 H 80 V 180 H 60 V 240 H 40 V 320 H 60 V 400 H 90 V 470 H 60 V 540 H 30 V 620 H 60 V 700 H 80 V 780 H 60 V 860 H 40 V 940 H 60 V 1020 H 90 V 1100 H 60 V 1180 H 30 V 1260 H 60 V 1340 H 80 V 1420 H 60 V 1500 H 40 V 1580 H 60 V 1660 H 90 V 1740 H 60 V 1820 H 30 V 1900 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 40 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 30 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 40 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 30 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 40 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 30 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 40 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000 H 30 V 5100 H 60 V 5200 H 80 V 5300 H 60 V 5400 H 40 V 5500 H 60 V 5600 H 90 V 5700 H 60 V 5800 H 30 V 5900 H 60 V 6000 H 80 V 6100 H 60 V 6200 H 40 V 6300 H 60 V 6400 H 90 V 6500 H 60 V 6600 H 30 V 6700 H 60 V 6800 H 80 V 6900 H 60 V 7000 H 40 V 7100 H 60 V 7200 H 90 V 7300 H 60 V 7400 H 30 V 7500 H 60 V 7600 H 80 V 7700 H 60 V 7800 H 40 V 7900 H 60 V 8000 H 90 V 8100 H 60 V 8200 H 30 V 8300 H 60 V 8400 H 80 V 8500 H 60 V 8600 H 40 V 8700 H 60 V 8800 H 90 V 8900 H 60 V 9000 H 30 V 9100 H 60 V 9200 H 80 V 9300 H 60 V 9400 H 40 V 9500 H 60 V 9600 H 90 V 9700 H 60 V 9800 H 30 V 9900 H 60 V 10000 H 80 V 10100 H 60 V 10200 H 40 V 10300 H 60 V 10400 H 90 V 10500 H 60 V 10600 H 30 V 10700 H 60 V 10800 H 80 V 10900 H 60 V 11000 H 40 V 11100 H 60 V 11200 H 90 V 11300 H 60 V 11400 H 30 V 11500 H 60 V 11600 H 80 V 11700 H 60 V 11800 H 40 V 11900 H 60 V 12000 H 90 V 12100 H 60 V 12200 H 30 V 12300 H 60 V 12400 H 80 V 12500 H 60 V 12600 H 40 V 12700 H 60 V 12800 H 90 V 12900 H 60 V 13000 H 30 V 13100 H 60 V 13200 H 80 V 13300 H 60 V 13400 H 40 V 13500 H 60 V 13600 H 90 V 13700 H 60 V 13800 H 30 V 13900 H 60 V 14000 H 80 V 14100 H 60 V 14200 H 40 V 14300 H 60 V 14400 H 90 V 14500 H 60 V 14600 H 30 V 14700 H 60 V 14800 H 80 V 14900 H 60 V 15000"/>
+        <path class="guardrail-trace" d="M 80 0 V 70 H 100 V 150 H 80 V 220 H 60 V 300 H 80 V 380 H 110 V 450 H 80 V 520 H 50 V 600 H 80 V 680 H 100 V 760 H 80 V 840 H 60 V 920 H 80 V 1000 H 110 V 1080 H 80 V 1160 H 50 V 1240 H 80 V 1320 H 100 V 1400 H 80 V 1480 H 60 V 1560 H 80 V 1640 H 110 V 1720 H 80 V 1800 H 50 V 1880 H 80 V 2000 H 100 V 2100 H 80 V 2200 H 60 V 2300 H 80 V 2400 H 110 V 2500 H 80 V 2600 H 50 V 2700 H 80 V 2800 H 100 V 2900 H 80 V 3000 H 60 V 3100 H 80 V 3200 H 110 V 3300 H 80 V 3400 H 50 V 3500 H 80 V 3600 H 100 V 3700 H 80 V 3800 H 60 V 3900 H 80 V 4000 H 110 V 4100 H 80 V 4200 H 50 V 4300 H 80 V 4400 H 100 V 4500 H 80 V 4600 H 60 V 4700 H 80 V 4800 H 110 V 4900 H 80 V 5000 H 50 V 5100 H 80 V 5200 H 100 V 5300 H 80 V 5400 H 60 V 5500 H 80 V 5600 H 110 V 5700 H 80 V 5800 H 50 V 5900 H 80 V 6000 H 100 V 6100 H 80 V 6200 H 60 V 6300 H 80 V 6400 H 110 V 6500 H 80 V 6600 H 50 V 6700 H 80 V 6800 H 100 V 6900 H 80 V 7000 H 60 V 7100 H 80 V 7200 H 110 V 7300 H 80 V 7400 H 50 V 7500 H 80 V 7600 H 100 V 7700 H 80 V 7800 H 60 V 7900 H 80 V 8000 H 110 V 8100 H 80 V 8200 H 50 V 8300 H 80 V 8400 H 100 V 8500 H 80 V 8600 H 60 V 8700 H 80 V 8800 H 110 V 8900 H 80 V 9000 H 50 V 9100 H 80 V 9200 H 100 V 9300 H 80 V 9400 H 60 V 9500 H 80 V 9600 H 110 V 9700 H 80 V 9800 H 50 V 9900 H 80 V 10000 H 100 V 10100 H 80 V 10200 H 60 V 10300 H 80 V 10400 H 110 V 10500 H 80 V 10600 H 50 V 10700 H 80 V 10800 H 100 V 10900 H 80 V 11000 H 60 V 11100 H 80 V 11200 H 110 V 11300 H 80 V 11400 H 50 V 11500 H 80 V 11600 H 100 V 11700 H 80 V 11800 H 60 V 11900 H 80 V 12000 H 110 V 12100 H 80 V 12200 H 50 V 12300 H 80 V 12400 H 100 V 12500 H 80 V 12600 H 60 V 12700 H 80 V 12800 H 110 V 12900 H 80 V 13000 H 50 V 13100 H 80 V 13200 H 100 V 13300 H 80 V 13400 H 60 V 13500 H 80 V 13600 H 110 V 13700 H 80 V 13800 H 50 V 13900 H 80 V 14000 H 100 V 14100 H 80 V 14200 H 60 V 14300 H 80 V 14400 H 110 V 14500 H 80 V 14600 H 50 V 14700 H 80 V 14800 H 100 V 14900 H 80 V 15000"/>
+      </svg>
+      <div class="guardrail-pulse p1"></div>
+      <div class="guardrail-pulse p2"></div>
+      <div class="guardrail-pulse p3"></div>
+    </div>
+  </div>
 
   <!-- INTRO -->
   <div id="intro">
@@ -1535,8 +2053,27 @@
 
   <!-- FORGE VIEW -->
   <div id="forge-view">
-    <!-- Circuit background using actual image -->
-    <div id="circuit-background"></div>
+    <!-- Guardrails -->
+    <div class="forge-guardrails">
+      <div class="rail-left">
+        <svg viewBox="0 0 120 3000" preserveAspectRatio="none">
+          <path class="rail-trace" d="M 60 0 V 80 H 40 V 150 H 60 V 200 H 80 V 280 H 60 V 350 H 30 V 420 H 60 V 480 H 90 V 560 H 60 V 620 H 40 V 700 H 60 V 780 H 80 V 850 H 60 V 920 H 30 V 1000 H 60 V 1080 H 90 V 1150 H 60 V 1220 H 40 V 1300 H 60 V 1380 H 80 V 1450 H 60 V 1520 H 30 V 1600 H 60 V 1680 H 90 V 1760 H 60 V 1840 H 40 V 1920 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 30 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 40 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000"/>
+          <path class="rail-trace" d="M 40 0 V 60 H 20 V 130 H 40 V 190 H 60 V 270 H 40 V 340 H 10 V 400 H 40 V 470 H 70 V 540 H 40 V 610 H 20 V 680 H 40 V 750 H 60 V 830 H 40 V 900 H 10 V 980 H 40 V 1050 H 70 V 1130 H 40 V 1200 H 20 V 1280 H 40 V 1350 H 60 V 1430 H 40 V 1500 H 10 V 1580 H 40 V 1650 H 70 V 1730 H 40 V 1800 H 20 V 1880 H 40 V 2000 H 60 V 2100 H 40 V 2200 H 10 V 2300 H 40 V 2400 H 70 V 2500 H 40 V 2600 H 20 V 2700 H 40 V 2800 H 60 V 2900 H 40 V 3000"/>
+        </svg>
+        <div class="rail-pulse p1"></div>
+        <div class="rail-pulse p2"></div>
+        <div class="rail-pulse p3"></div>
+      </div>
+      <div class="rail-right">
+        <svg viewBox="0 0 120 3000" preserveAspectRatio="none">
+          <path class="rail-trace" d="M 60 0 V 100 H 80 V 180 H 60 V 240 H 40 V 320 H 60 V 400 H 90 V 470 H 60 V 540 H 30 V 620 H 60 V 700 H 80 V 780 H 60 V 860 H 40 V 940 H 60 V 1020 H 90 V 1100 H 60 V 1180 H 30 V 1260 H 60 V 1340 H 80 V 1420 H 60 V 1500 H 40 V 1580 H 60 V 1660 H 90 V 1740 H 60 V 1820 H 30 V 1900 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 40 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 30 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000"/>
+          <path class="rail-trace" d="M 80 0 V 70 H 100 V 150 H 80 V 220 H 60 V 300 H 80 V 380 H 110 V 450 H 80 V 520 H 50 V 600 H 80 V 680 H 100 V 760 H 80 V 840 H 60 V 920 H 80 V 1000 H 110 V 1080 H 80 V 1160 H 50 V 1240 H 80 V 1320 H 100 V 1400 H 80 V 1480 H 60 V 1560 H 80 V 1640 H 110 V 1720 H 80 V 1800 H 50 V 1880 H 80 V 2000 H 100 V 2100 H 80 V 2200 H 60 V 2300 H 80 V 2400 H 110 V 2500 H 80 V 2600 H 50 V 2700 H 80 V 2800 H 100 V 2900 H 80 V 3000"/>
+        </svg>
+        <div class="rail-pulse p1"></div>
+        <div class="rail-pulse p2"></div>
+        <div class="rail-pulse p3"></div>
+      </div>
+    </div>
 
     <div id="forge-container">
       <svg id="forge-logo" viewBox="0 0 2232.6 1387.35" xmlns="http://www.w3.org/2000/svg">
@@ -1667,7 +2204,9 @@
 
         <g clip-path="url(#anvilClip)">
           <!-- SOFTWARE NEBULA - Lavender (Left arm + deep into center body) -->
-          <g class="nebula-region nebula-software" onclick="expandCategory('software')" onmouseenter="showLabel('software')" onmouseleave="hideLabel()">
+          <g class="nebula-region nebula-software" onclick="expandCategory('software')" onmouseenter="showLabel('software'); highlightCircuit('software')" onmouseleave="hideLabel(); unhighlightCircuit('software')">
+            <!-- Hit area - shifted right from visual edge -->
+            <polygon class="nebula-hit-area" points="550,80 900,80 950,350 1000,600 1000,1000 850,1250 600,1300 450,1100 350,600"/>
             <!-- Outer wispy layer - extends deep into center body -->
             <ellipse class="nebula-wisp" cx="380" cy="260" rx="450" ry="360" style="--dur:27s;--del:-4s"/>
             <ellipse class="nebula-wisp" cx="650" cy="420" rx="520" ry="450" style="--dur:31s;--del:-17s"/>
@@ -1740,7 +2279,9 @@
           </g>
 
           <!-- PRODUCTION NEBULA - Teal (Center body + top + right arm) -->
-          <g class="nebula-region nebula-production" onclick="expandCategory('production')" onmouseenter="showLabel('production')" onmouseleave="hideLabel()">
+          <g class="nebula-region nebula-production" onclick="expandCategory('production')" onmouseenter="showLabel('production'); highlightCircuit('production')" onmouseleave="hideLabel(); unhighlightCircuit('production')">
+            <!-- Hit area -->
+            <polygon class="nebula-hit-area" points="780,80 1250,80 2100,80 2100,450 1800,550 1600,550 1500,600 1500,1050 1600,1350 780,1350 1000,600"/>
             <!-- Outer wispy tendrils - spans entire top and center -->
             <ellipse class="nebula-wisp" cx="900" cy="200" rx="450" ry="280" style="--dur:26s;--del:-3s"/>
             <ellipse class="nebula-wisp" cx="1200" cy="150" rx="500" ry="250" style="--dur:31s;--del:-18s"/>
@@ -1833,7 +2374,9 @@
           </g>
 
           <!-- ABOUT NEBULA - Amber (Right/Bottom region) -->
-          <g class="nebula-region nebula-about" onclick="expandCategory('about')" onmouseenter="showLabel('about')" onmouseleave="hideLabel()">
+          <g class="nebula-region nebula-about" onclick="expandCategory('about')" onmouseenter="showLabel('about'); highlightCircuit('about')" onmouseleave="hideLabel(); unhighlightCircuit('about')">
+            <!-- Hit area -->
+            <polygon class="nebula-hit-area" points="1400,580 1650,580 1800,750 1800,1250 1650,1280 1380,1050 1380,750"/>
             <!-- Outer wispy tendrils -->
             <ellipse class="nebula-wisp" cx="1650" cy="700" rx="420" ry="450" style="--dur:28s;--del:-5s"/>
             <ellipse class="nebula-wisp" cx="1800" cy="950" rx="400" ry="400" style="--dur:32s;--del:-19s"/>
@@ -1888,11 +2431,13 @@
 
         <!-- Circuit overlays -->
         <g id="forge-software-circuit" class="forge-circuit">
+          <polygon class="hit-area" points="500,250 750,250 1000,600 1000,1000 800,1250 600,1250 500,1100"/>
           <circle cx="681.07" cy="1209.48" r="40"/>
           <polyline points="713.67 1166.52 737.8 1140.74 923.02 945.92 923.02 682.2 604.53 359.19 595.21 349.87"/>
           <circle cx="561.69" cy="308.27" r="40"/>
         </g>
         <g id="forge-production-circuit" class="forge-circuit">
+          <polygon class="hit-area" points="780,100 1100,100 1150,500 1150,1050 1200,1100 1200,500 1250,150 2050,150 2050,450 1800,550 1600,550 1500,600 1500,1000 1600,1350 780,1350"/>
           <polyline points="832.11 1312.98 832.11 1219.24 1061.94 986.02 1061.94 589.59 854.69 380.65 854.69 161.12"/>
           <circle cx="1019.54" cy="300.49" r="40"/>
           <polyline points="1194.65 1071.29 1197.47 534.82 1408.67 328.34 1853.09 328.34 1919.27 399.85"/>
@@ -1903,6 +2448,7 @@
           <line x1="1288.77" y1="189.59" x2="1943.7" y2="189.59"/>
         </g>
         <g id="forge-about-circuit" class="forge-circuit">
+          <polygon class="hit-area" points="1400,620 1600,620 1750,750 1750,1230 1630,1230 1400,950"/>
           <circle cx="1539.82" cy="678.09" r="40"/>
           <circle cx="1690.82" cy="1173.07" r="40"/>
           <polyline points="1651.32 1136.47 1458.99 944.13 1458.99 788.02 1513.81 725.25"/>
@@ -1915,31 +2461,12 @@
 
   <!-- EXPANDED VIEW -->
   <div id="expanded-view">
-    <!-- Anvil header with title -->
+    <!-- Anvil header with title - using actual logo anvil outline -->
     <div id="expanded-header">
       <div id="anvil-outline">
-        <svg viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg">
-          <!-- Simplified anvil silhouette -->
-          <path class="anvil-shape" d="
-            M 20 45
-            C 20 30, 40 20, 70 18
-            L 90 18
-            C 100 10, 120 5, 140 5
-            C 160 5, 180 10, 190 18
-            L 210 18
-            C 240 20, 260 30, 260 45
-            L 260 55
-            C 260 60, 255 65, 245 68
-            L 230 70
-            L 230 75
-            C 230 80, 220 85, 200 85
-            L 80 85
-            C 60 85, 50 80, 50 75
-            L 50 70
-            L 35 68
-            C 25 65, 20 60, 20 55
-            Z
-          "/>
+        <svg viewBox="0 0 2232.6 1387.35" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <!-- Actual anvil logo outline -->
+          <path class="anvil-shape" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1c9.65-.15,19.36-.9,29-1l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/>
         </svg>
         <h2 id="expanded-title"></h2>
       </div>
@@ -1976,7 +2503,7 @@
 
   <!-- HUD -->
   <div id="hud">
-    <div id="logo-badge" onclick="backToIntro()">
+    <div id="logo-badge" onclick="backToForge()">
       <svg viewBox="0 0 2232.6 1387.35"><path fill="#38c7cc" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
       <span>CueForge Labs</span>
     </div>
@@ -2187,169 +2714,572 @@
       hideTimeout = setTimeout(() => {
         currentCategory = null;
         document.getElementById('category-label').classList.remove('show');
-      }, 200); // Longer delay on hide - gives time to move to adjacent region
+      }, 400); // Longer delay on hide - smooth transition between sections
+    }
+    
+    function highlightNebula(category) {
+      const nebula = document.querySelector('.nebula-' + category);
+      if (nebula) {
+        nebula.style.opacity = '1';
+        nebula.style.filter = 'brightness(1.2)';
+      }
+    }
+    
+    function unhighlightNebula(category) {
+      const nebula = document.querySelector('.nebula-' + category);
+      if (nebula) {
+        nebula.style.opacity = '';
+        nebula.style.filter = '';
+      }
+    }
+    
+    function highlightCircuit(category) {
+      const circuit = document.getElementById('forge-' + category + '-circuit');
+      if (circuit) {
+        circuit.style.transition = 'opacity 0.4s ease, filter 0.4s ease';
+        circuit.style.opacity = '1';
+        circuit.style.filter = 'brightness(1.3)';
+      }
+    }
+    
+    function unhighlightCircuit(category) {
+      const circuit = document.getElementById('forge-' + category + '-circuit');
+      if (circuit) {
+        circuit.style.transition = 'opacity 0.8s ease, filter 0.8s ease';
+        circuit.style.opacity = '';
+        circuit.style.filter = '';
+      }
     }
 
+    // Global state for constellation system
+    let constellationState = {
+      nodes: [],
+      connections: [],
+      svg: null,
+      category: null
+    };
+    
+    // Physics state for air hockey effect
+    let nodeVelocities = new Map(); // nodeIdx -> {vx, vy}
+    let physicsInterval = null;
+
     function expandCategory(key) {
+      // Production section links to dedicated portfolio page
+      if (key === 'production') {
+        window.location.href = 'portfolio-circuit.html';
+        return;
+      }
+      
+      // Software section links to dedicated products page
+      if (key === 'software') {
+        window.location.href = 'software-circuit.html';
+        return;
+      }
+      
+      // About section links to dedicated about page
+      if (key === 'about') {
+        window.location.href = 'about-circuit.html';
+        return;
+      }
+      
       const expandedView = document.getElementById('expanded-view');
       const container = document.getElementById('expanded-container');
       const title = document.getElementById('expanded-title');
       const data = portfolioData[key];
 
-      // Clear existing nodes and SVG
-      container.querySelectorAll('.portfolio-node').forEach(n => n.remove());
-      container.querySelectorAll('.expanded-node').forEach(n => n.remove());
-      container.querySelectorAll('#constellation-svg').forEach(n => n.remove());
+      // Clear existing content
+      container.querySelectorAll('.portfolio-node, .expanded-node, #constellation-svg, .nebula-cloud, .year-nebula, .circuit-road').forEach(n => n.remove());
 
       expandedView.className = 'show ' + key;
       title.textContent = categories[key].name;
 
-      // Get line color based on category
-      const lineColors = {
-        production: 'rgba(56,199,204,0.4)',
-        software: 'rgba(167,139,250,0.4)',
-        about: 'rgba(245,158,11,0.4)'
-      };
+      // Reset state
+      constellationState = { nodes: [], connections: [], svg: null, category: key };
+      nodeVelocities = new Map();
+      if (physicsInterval) clearInterval(physicsInterval);
 
-      // Sort data by year (newest first) for production category
-      // Add index to maintain stable order within same year
-      let sortedData = data.map((item, idx) => ({ ...item, _idx: idx }));
-      if (key === 'production') {
-        sortedData.sort((a, b) => {
-          if (b.year !== a.year) return b.year - a.year; // Newest year first
-          return a._idx - b._idx; // Maintain original order within same year
+      // ========== CIRCUIT ROAD LAYOUT ==========
+      // Group items by year
+      const yearGroups = {};
+      data.forEach((item, idx) => {
+        const year = item.year || 'Other';
+        if (!yearGroups[year]) yearGroups[year] = [];
+        yearGroups[year].push({ ...item, _idx: idx });
+      });
+      const years = Object.keys(yearGroups).sort((a, b) => b - a); // Newest first
+
+      // Create the circuit road container
+      const road = document.createElement('div');
+      road.className = 'circuit-road';
+      
+      // Add the central spine
+      const spine = document.createElement('div');
+      spine.className = 'circuit-spine';
+      road.appendChild(spine);
+
+      let nodeIndex = 0;
+      let isLeft = true; // Alternate sides
+
+      years.forEach((year, yearIdx) => {
+        // Year marker
+        const yearMarker = document.createElement('div');
+        yearMarker.className = 'circuit-year';
+        yearMarker.innerHTML = `<div class="circuit-year-badge">${year}</div>`;
+        road.appendChild(yearMarker);
+
+        // Items for this year
+        const items = yearGroups[year];
+        items.forEach((item, itemIdx) => {
+          const row = document.createElement('div');
+          row.className = `circuit-node-row ${isLeft ? 'left' : 'right'}`;
+
+          // Create node (image circle)
+          const node = document.createElement('div');
+          node.className = 'circuit-node';
+          node._itemData = item;
+          node._category = key;
+          
+          if (key === 'production' && item.image) {
+            node.innerHTML = `<img src="${item.image}" alt="${item.artist}" onerror="this.parentElement.innerHTML='<div class=\\'node-initial\\'>${item.artist.charAt(0)}</div>'">`;
+          } else {
+            const initial = key === 'production' ? item.artist?.charAt(0) : 
+                           key === 'software' ? item.name?.charAt(0) : 
+                           item.name?.charAt(0) || '?';
+            node.innerHTML = `<div class="node-initial">${initial}</div>`;
+          }
+
+          // Click to expand
+          node.onclick = () => expandCircuitNode(node, item, key);
+
+          // Create circuit trace
+          const trace = document.createElement('div');
+          trace.className = 'circuit-trace';
+
+          // Create metadata card
+          const meta = document.createElement('div');
+          meta.className = 'circuit-meta';
+          
+          if (key === 'production') {
+            let creditsHtml = '';
+            if (item.credits && item.credits.length > 0) {
+              creditsHtml = `<div class="meta-credits">
+                ${item.credits.slice(0, 4).map(c => `
+                  <div class="meta-credit">
+                    <span class="credit-role">${c.role}</span>
+                    <span class="credit-name">${c.name}${c.company ? `<br><span class="credit-company">${c.company}</span>` : ''}</span>
+                  </div>
+                `).join('')}
+              </div>`;
+            }
+            meta.innerHTML = `
+              <div class="meta-artist">${item.artist}</div>
+              <div class="meta-show">${item.show}</div>
+              <div class="meta-role">${item.role}</div>
+              ${creditsHtml}
+            `;
+          } else if (key === 'software') {
+            meta.innerHTML = `
+              <div class="meta-artist">${item.name}</div>
+              <div class="meta-show">${item.type}</div>
+              <div class="meta-role">${item.desc || ''}</div>
+              ${item.tech ? `<div class="meta-credits" style="display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;">
+                ${item.tech.map(t => `<span style="background:rgba(167,139,250,0.15);color:var(--forge-lavender);padding:4px 10px;border-radius:4px;font-size:0.7rem;">${t}</span>`).join('')}
+              </div>` : ''}
+            `;
+          } else {
+            meta.innerHTML = `
+              <div class="meta-artist">${item.name}</div>
+              <div class="meta-show">${item.title || item.type || ''}</div>
+              <div class="meta-role">${item.bio || item.content || ''}</div>
+            `;
+          }
+
+          // Assemble row (order depends on side)
+          if (isLeft) {
+            row.appendChild(node);
+            row.appendChild(trace);
+            row.appendChild(meta);
+          } else {
+            row.appendChild(meta);
+            row.appendChild(trace);
+            row.appendChild(node);
+          }
+
+          road.appendChild(row);
+          isLeft = !isLeft; // Alternate
+          nodeIndex++;
         });
+      });
+
+      // Set container height and add road
+      container.style.height = 'auto';
+      container.appendChild(road);
+
+      // Show expanded view
+      document.getElementById('forge-view').classList.remove('show');
+      document.getElementById('hud').classList.remove('show');
+      document.getElementById('back-btn').classList.add('show');
+      hideLabel();
+    }
+
+    // Handle click on circuit node (optional expansion)
+    function expandCircuitNode(node, item, category) {
+      // For now, just highlight - could add modal later
+      const allNodes = document.querySelectorAll('.circuit-node');
+      allNodes.forEach(n => n.style.transform = '');
+      node.style.transform = 'scale(1.15)';
+      
+      // Could show the existing detail panel here if desired
+      // showPortfolioPanel(item, category);
+    }
+
+    // ========== OLD NEBULA CODE REMOVED ==========
+    // The old physics-based nebula layout has been replaced with Circuit Road
+    
+    // Kept for compatibility - these functions are referenced elsewhere
+    const lineColors = {
+      production: 'rgba(56,199,204,0.35)',
+      software: 'rgba(167,139,250,0.35)',
+      about: 'rgba(245,158,11,0.35)'
+    };
+    const lineBrightColors = {
+      production: 'rgba(56,199,204,0.9)',
+      software: 'rgba(167,139,250,0.9)',
+      about: 'rgba(245,158,11,0.9)'
+    };
+    
+    // OLD NEBULA CODE COMPLETELY REMOVED
+    // The following 370+ lines of nebula/physics code have been deleted.
+    // The new Circuit Road layout is above in expandCategory().
+    // Old code is preserved in git history.
+    
+    function _skipOldCode() { return; /* if (key === 'production') {
+        // Group by year
+        const yearGroups = {};
+        sortedData.forEach(item => {
+          if (!yearGroups[item.year]) yearGroups[item.year] = [];
+          yearGroups[item.year].push(item);
+        });
+        // Shuffle within each year group
+        Object.values(yearGroups).forEach(group => {
+          for (let i = group.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [group[i], group[j]] = [group[j], group[i]];
+          }
+        });
+        // Flatten back, newest years first
+        const years = Object.keys(yearGroups).sort((a, b) => b - a);
+        sortedData = years.flatMap(year => yearGroups[year]);
       }
 
-      // Generate flowing positions - newest at top, trailing WAY down
-      // Only 5-6 nodes visible at a time, scroll forever through history
-      const generateFlowingPositions = (count, containerHeight) => {
-        const positions = [];
+      // Group data by year for nebula sections
+      const rawYearGroups = {};
+      sortedData.forEach((item, idx) => {
+        const year = item.year || 'Other';
+        if (!rawYearGroups[year]) rawYearGroups[year] = [];
+        rawYearGroups[year].push({ ...item, _sortIdx: idx });
+      });
+      const rawYears = Object.keys(rawYearGroups).sort((a, b) => b - a); // Newest first
+      
+      // Combine years into balanced clusters (target: 4-8 nodes per cluster)
+      const targetNodesPerCluster = 6;
+      const yearGroups = {};
+      let currentClusterKey = null;
+      let currentClusterCount = 0;
+      
+      rawYears.forEach(year => {
+        const count = rawYearGroups[year].length;
         
-        // 2-3 nodes per row, very spread out
-        const nodesPerRow = 3;
-        const rowCount = Math.ceil(count / nodesPerRow);
-        
-        // Each row takes up ~250px of vertical space
-        const rowHeightPx = 250;
-        const totalHeight = rowCount * rowHeightPx;
-        
-        // Spacing in percentages of total container height
-        const paddingX = 12;
-        
-        for (let i = 0; i < count; i++) {
-          const row = Math.floor(i / nodesPerRow);
-          const col = i % nodesPerRow;
-          const nodesInThisRow = Math.min(nodesPerRow, count - row * nodesPerRow);
-          
-          // Calculate x position - spread across width with variance
-          const rowWidth = 100 - paddingX * 2;
-          const nodeSpacing = rowWidth / nodesInThisRow;
-          let x = paddingX + nodeSpacing * (col + 0.5);
-          
-          // Calculate y position as percentage of container - MORE SPACE at top
-          const yPx = 220 + row * rowHeightPx; // Start 220px from top (more space below header)
-          let y = (yPx / totalHeight) * 100;
-          
-          // Add organic variance
-          x += (Math.random() - 0.5) * nodeSpacing * 0.4;
-          y += (Math.random() - 0.5) * 2; // Small y variance
-          
-          positions.push({ x, y });
+        // Start new cluster if: no current cluster, or current is full enough
+        if (!currentClusterKey || currentClusterCount >= targetNodesPerCluster) {
+          currentClusterKey = year; // Use the first (newest) year as the key
+          yearGroups[currentClusterKey] = [];
+          currentClusterCount = 0;
         }
-        return { positions, totalHeight };
-      };
-
-      // Calculate container height first (more space at top)
+        
+        // Add this year's items to current cluster
+        yearGroups[currentClusterKey].push(...rawYearGroups[year]);
+        currentClusterCount += count;
+        
+        // Store the year range info for labels
+        if (!yearGroups[currentClusterKey]._yearRange) {
+          yearGroups[currentClusterKey]._yearRange = { start: year, end: year };
+        } else {
+          yearGroups[currentClusterKey]._yearRange.end = year;
+        }
+      });
+      
+      const years = Object.keys(yearGroups).sort((a, b) => b - a); // Newest first
+      
+      // Calculate section heights based on node count per cluster
+      // ROAD-LIKE layout - lots of vertical space, scroll down through your career
+      const headerSpace = 300; // Space for anvil header
+      const nodeHeight = 350; // Very generous height per node row
+      const minSectionHeight = 600; // Big minimum so even small clusters feel spacious
       const nodesPerRow = 3;
-      const rowCount = Math.ceil(sortedData.length / nodesPerRow);
-      const containerHeight = rowCount * 250 + 320; // 250px per row + extra top padding
+      
+      // Calculate each cluster's section height based on its node count
+      const yearSections = years.map((year, idx) => {
+        const items = yearGroups[year];
+        const nodeCount = items.length;
+        const yearRange = items._yearRange || { start: year, end: year };
+        const rows = Math.ceil(nodeCount / nodesPerRow);
+        const height = Math.max(minSectionHeight, rows * nodeHeight + 120);
+        return { year, yearRange, nodeCount, height, idx };
+      });
+      
+      // Calculate total container height
+      const totalSectionHeight = yearSections.reduce((sum, s) => sum + s.height, 0);
+      const containerHeight = headerSpace + totalSectionHeight + 150;
       container.style.height = containerHeight + 'px';
       
-      const { positions } = generateFlowingPositions(sortedData.length, containerHeight);
+      // Create year nebula sections with dynamic heights
+      container.querySelectorAll('.year-nebula').forEach(n => n.remove());
+      const nebulaColors = {
+        production: ['rgba(56,199,204,0.15)', 'rgba(34,211,238,0.10)'],
+        software: ['rgba(167,139,250,0.15)', 'rgba(139,92,246,0.10)'],
+        about: ['rgba(245,158,11,0.15)', 'rgba(251,146,60,0.10)']
+      };
+      const yearColor = {
+        production: 'rgba(56,199,204,0.12)',
+        software: 'rgba(167,139,250,0.12)',
+        about: 'rgba(245,158,11,0.12)'
+      };
+      
+      let cumulativeTop = headerSpace;
+      const yearBounds = {}; // Store bounds for positioning nodes
+      
+      yearSections.forEach((section, yearIdx) => {
+        const { year, height } = section;
+        const topPx = cumulativeTop;
+        const topPct = (topPx / containerHeight) * 100;
+        const heightPct = (height / containerHeight) * 100;
+        
+        // Store bounds for node positioning
+        yearBounds[year] = {
+          topPct,
+          heightPct,
+          leftPct: 12,
+          rightPct: 88
+        };
+        
+        const nebula = document.createElement('div');
+        nebula.className = 'year-nebula';
+        const isLeft = yearIdx % 2 === 0; // Alternate left/right
+        
+        nebula.style.cssText = `
+          position: absolute;
+          left: 3%; right: 3%;
+          top: ${topPct}%;
+          height: ${heightPct}%;
+          background: radial-gradient(ellipse at ${isLeft ? '25%' : '75%'} 50%, ${nebulaColors[key][0]} 0%, transparent 55%),
+                      radial-gradient(ellipse at 50% 50%, ${nebulaColors[key][1]} 0%, transparent 70%);
+          border-radius: 30%;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0.9;
+        `;
+        
+        // Vertical year label - characters stacked downward (column)
+        const yearLabel = document.createElement('div');
+        yearLabel.className = 'year-label';
+        
+        // Build the label text - show range if spanning multiple years
+        const { yearRange } = section;
+        let labelText;
+        if (yearRange && yearRange.start !== yearRange.end) {
+          // Show range like "2023" on top, then "-", then "2021"
+          labelText = String(yearRange.start).split('').join('<br>') + 
+                      '<br><span style="font-size:1.8rem;line-height:1.2;">—</span><br>' + 
+                      String(yearRange.end).split('').join('<br>');
+        } else {
+          // Single year
+          labelText = String(year).split('').join('<br>');
+        }
+        yearLabel.innerHTML = labelText;
+        yearLabel.style.cssText = `
+          position: absolute;
+          ${isLeft ? 'left: 18px;' : 'right: 18px;'}
+          top: 50%;
+          transform: translateY(-50%);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 2.4rem;
+          font-weight: 800;
+          color: ${yearColor[key]};
+          line-height: 0.85;
+          letter-spacing: 0;
+          pointer-events: none;
+          z-index: 0;
+          text-align: center;
+        `;
+        nebula.appendChild(yearLabel);
+        container.appendChild(nebula);
+        
+        cumulativeTop += height;
+      });
+
+      // Generate positions within year sections - nodes must stay in their year's nebula
+      const generateYearBasedPositions = () => {
+        const positions = [];
+        const minDistance = 16; // % minimum distance between nodes (must match collision minDist)
+        
+        let globalIdx = 0;
+        years.forEach((year) => {
+          const items = yearGroups[year];
+          const bounds = yearBounds[year];
+          if (!bounds) return;
+          
+          const { topPct, heightPct, leftPct, rightPct } = bounds;
+          const usableWidth = rightPct - leftPct;
+          const itemsInYear = items.length;
+          const cols = Math.min(4, Math.max(2, Math.ceil(Math.sqrt(itemsInYear))));
+          const rows = Math.ceil(itemsInYear / cols);
+          
+          items.forEach((item, itemIdx) => {
+            let attempts = 0;
+            let validPos = false;
+            let x, y;
+            
+            const col = itemIdx % cols;
+            const row = Math.floor(itemIdx / cols);
+            
+            // Calculate base position within the year's bounds
+            const colWidth = usableWidth / cols;
+            const rowHeight = (heightPct - 10) / rows; // Leave some padding
+            
+            while (!validPos && attempts < 200) {
+              if (attempts < 100) {
+                // First 100 attempts: try within grid cell with randomness
+                x = leftPct + col * colWidth + colWidth * 0.15 + Math.random() * colWidth * 0.7;
+                y = topPct + 10 + row * rowHeight + rowHeight * 0.15 + Math.random() * rowHeight * 0.6;
+              } else {
+                // Last 100 attempts: try anywhere in the nebula bounds
+                x = leftPct + 8 + Math.random() * (usableWidth - 16);
+                y = topPct + 12 + Math.random() * (heightPct - 20);
+              }
+              
+              // Ensure within bounds with good padding
+              x = Math.max(leftPct + 8, Math.min(rightPct - 8, x));
+              y = Math.max(topPct + 10, Math.min(topPct + heightPct - 12, y));
+              
+              // Check overlap with ALL existing positions
+              validPos = true;
+              for (const pos of positions) {
+                const dist = Math.sqrt((x - pos.x) ** 2 + (y - pos.y) ** 2);
+                if (dist < minDistance) {
+                  validPos = false;
+                  break;
+                }
+              }
+              attempts++;
+            }
+            
+            // Fallback: offset grid position with jitter to avoid perfect alignment
+            if (!validPos) {
+              const jitterX = (Math.random() - 0.5) * 4;
+              const jitterY = (Math.random() - 0.5) * 4;
+              x = leftPct + 8 + (col + 0.5) * (usableWidth / cols) + jitterX;
+              y = topPct + 12 + (row + 0.5) * ((heightPct - 20) / rows) + jitterY;
+              x = Math.max(leftPct + 8, Math.min(rightPct - 8, x));
+              y = Math.max(topPct + 10, Math.min(topPct + heightPct - 12, y));
+            }
+            
+            positions.push({ x, y, idx: globalIdx, year, bounds });
+            globalIdx++;
+          });
+        });
+        return positions;
+      };
+
+      const positions = generateYearBasedPositions();
+
+      // Year nebulas are created above in the year sections loop
 
       // Create SVG for constellation lines
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.id = 'constellation-svg';
       svg.setAttribute('viewBox', '0 0 100 100');
       svg.setAttribute('preserveAspectRatio', 'none');
+      constellationState.svg = svg;
       
-      // Get bright line colors for energy pulses
-      const lineBrightColors = {
-        production: 'rgba(56,199,204,0.9)',
-        software: 'rgba(167,139,250,0.9)',
-        about: 'rgba(245,158,11,0.9)'
-      };
+      // Generate organic web connections - connect nearby nodes
+      const connectionSet = new Set();
       
-      // Generate constellation lines (connect nearby nodes)
-      const lines = [];
-      let lineIndex = 0;
+      // Each node connects to 1-2 nearby nodes
       for (let i = 0; i < positions.length; i++) {
-        // Find 2-3 nearest neighbors
         const distances = positions.map((p, j) => ({
           idx: j,
           dist: Math.sqrt((p.x - positions[i].x) ** 2 + (p.y - positions[i].y) ** 2)
         })).filter(d => d.idx !== i).sort((a, b) => a.dist - b.dist);
         
-        // Connect to 1-2 nearest (not all, to avoid chaos)
-        const connectCount = Math.min(2, Math.floor(Math.random() * 2) + 1);
-        for (let c = 0; c < connectCount && c < distances.length; c++) {
-          const j = distances[c].idx;
-          // Avoid duplicate lines
-          const lineKey = [Math.min(i, j), Math.max(i, j)].join('-');
-          if (!lines.includes(lineKey)) {
-            lines.push(lineKey);
-            
-            // Calculate line length for energy animation
-            const dx = positions[j].x - positions[i].x;
-            const dy = positions[j].y - positions[i].y;
-            const lineLength = Math.sqrt(dx * dx + dy * dy);
-            
-            // Base line (dim, always visible)
-            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.setAttribute('x1', positions[i].x);
-            line.setAttribute('y1', positions[i].y);
-            line.setAttribute('x2', positions[j].x);
-            line.setAttribute('y2', positions[j].y);
-            line.setAttribute('class', 'constellation-line');
-            line.style.setProperty('--line-color', lineColors[key]);
-            svg.appendChild(line);
-            
-            // Energy pulse that travels along the line
-            const energyLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            energyLine.setAttribute('x1', positions[i].x);
-            energyLine.setAttribute('y1', positions[i].y);
-            energyLine.setAttribute('x2', positions[j].x);
-            energyLine.setAttribute('y2', positions[j].y);
-            energyLine.setAttribute('class', 'constellation-line-energy');
-            energyLine.style.setProperty('--line-color-bright', lineBrightColors[key]);
-            energyLine.style.setProperty('--line-length', lineLength);
-            energyLine.style.setProperty('--energy-length', 6 + Math.random() * 8); // 6-14 length pulse
-            energyLine.style.setProperty('--energy-dur', (3 + Math.random() * 4) + 's'); // 3-7s travel time
-            energyLine.style.setProperty('--energy-del', (Math.random() * -10) + 's'); // Random start
-            svg.appendChild(energyLine);
-            
-            lineIndex++;
-          }
+        // Connect to 1-2 of the nearest 4 nodes (randomly chosen)
+        const connectCount = 1 + Math.floor(Math.random() * 2);
+        const nearbyPool = distances.slice(0, Math.min(4, distances.length));
+        
+        for (let c = 0; c < connectCount && nearbyPool.length > 0; c++) {
+          const pickIdx = Math.floor(Math.random() * nearbyPool.length);
+          const targetIdx = nearbyPool[pickIdx].idx;
+          nearbyPool.splice(pickIdx, 1);
+          
+          const connKey = [Math.min(i, targetIdx), Math.max(i, targetIdx)].join('-');
+          connectionSet.add(connKey);
         }
       }
+      
+      // Create line elements with flowing glow effect
+      connectionSet.forEach(connKey => {
+        const [i, j] = connKey.split('-').map(Number);
+        
+        // Base line (subtle, always visible)
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', positions[i].x);
+        line.setAttribute('y1', positions[i].y);
+        line.setAttribute('x2', positions[j].x);
+        line.setAttribute('y2', positions[j].y);
+        line.setAttribute('class', 'constellation-line');
+        line.setAttribute('data-from', i);
+        line.setAttribute('data-to', j);
+        line.style.setProperty('--line-color', lineColors[key]);
+        svg.appendChild(line);
+        
+        // Glow line (animated flowing pulse)
+        const energyLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        energyLine.setAttribute('x1', positions[i].x);
+        energyLine.setAttribute('y1', positions[i].y);
+        energyLine.setAttribute('x2', positions[j].x);
+        energyLine.setAttribute('y2', positions[j].y);
+        energyLine.setAttribute('class', 'constellation-line-energy');
+        energyLine.setAttribute('data-from', i);
+        energyLine.setAttribute('data-to', j);
+        energyLine.style.setProperty('--line-color-bright', lineBrightColors[key]);
+        energyLine.style.setProperty('--energy-dur', (4 + Math.random() * 6) + 's');
+        energyLine.style.setProperty('--energy-del', (Math.random() * -10) + 's');
+        svg.appendChild(energyLine);
+        
+        constellationState.connections.push({ from: i, to: j, line, energyLine });
+      });
+      
       container.appendChild(svg);
 
-      // Create nodes for all items (sorted by year for production)
+      // Create nodes
       sortedData.forEach((item, i) => {
         const pos = positions[i];
         const node = document.createElement('div');
         node.className = `portfolio-node ${key}`;
         node.style.left = pos.x + '%';
         node.style.top = pos.y + '%';
+        node.setAttribute('data-node-idx', i);
         
-        // Micro-orbital animation - unique tiny orbit per node, max 2px movement
-        // This prevents collisions because movement is so small and unique per node
-        const orbitDur = 12 + Math.random() * 10; // 12-22s (slower for smoother feel)
-        const orbitDel = Math.random() * -20; // random start point
-        const maxMove = 2; // max 2px in any direction (smaller for dense layouts)
+        // Store position for constellation updates
+        node._posX = pos.x;
+        node._posY = pos.y;
+        node._nodeIdx = i;
+        
+        // Micro-orbital animation
+        const orbitDur = 15 + Math.random() * 12;
+        const maxMove = 3;
         node.style.setProperty('--orbit-dur', orbitDur + 's');
-        node.style.setProperty('--orbit-del', orbitDel + 's');
+        node.style.setProperty('--orbit-del', (Math.random() * -20) + 's');
         node.style.setProperty('--orbit-x1', ((Math.random() - 0.5) * maxMove * 2) + 'px');
         node.style.setProperty('--orbit-y1', ((Math.random() - 0.5) * maxMove * 2) + 'px');
         node.style.setProperty('--orbit-x2', ((Math.random() - 0.5) * maxMove * 2) + 'px');
@@ -2357,9 +3287,7 @@
         node.style.setProperty('--orbit-x3', ((Math.random() - 0.5) * maxMove * 2) + 'px');
         node.style.setProperty('--orbit-y3', ((Math.random() - 0.5) * maxMove * 2) + 'px');
 
-        // Determine label based on category type
         let primaryLabel, secondaryLabel, imageContent;
-        
         if (key === 'production') {
           primaryLabel = item.artist;
           secondaryLabel = item.show;
@@ -2386,23 +3314,41 @@
           </div>
         `;
         
-        // Store item data on the node for later retrieval
         node._itemData = item;
-        node._originalLeft = pos.x;
-        node._originalTop = pos.y;
         node._category = key;
+        node._yearBounds = pos.bounds; // Store year bounds for physics
         
-        // Setup drag and click handlers using the global drag system
         setupNodeDrag(node, container, item, key);
-        
         container.appendChild(node);
+        constellationState.nodes.push(node);
       });
 
       document.getElementById('forge-view').classList.remove('show');
       document.getElementById('hud').classList.remove('show');
       document.getElementById('back-btn').classList.add('show');
       hideLabel();
+    */ } // END OF SKIPPED OLD CODE
+    
+    // Update constellation lines when a node moves
+    function updateConstellationLines(nodeIdx, newX, newY) {
+      if (!constellationState.svg) return;
+      
+      constellationState.connections.forEach(conn => {
+        if (conn.from === nodeIdx) {
+          conn.line.setAttribute('x1', newX);
+          conn.line.setAttribute('y1', newY);
+          conn.energyLine.setAttribute('x1', newX);
+          conn.energyLine.setAttribute('y1', newY);
+        } else if (conn.to === nodeIdx) {
+          conn.line.setAttribute('x2', newX);
+          conn.line.setAttribute('y2', newY);
+          conn.energyLine.setAttribute('x2', newX);
+          conn.energyLine.setAttribute('y2', newY);
+        }
+      });
     }
+    
+    // Physics-based collision replaced the old magnetic repulsion
 
     function showPortfolioPanel(item, category) {
       const panel = document.getElementById('detail-panel');
@@ -2469,28 +3415,39 @@
     function closePanel() { document.getElementById('detail-panel').classList.remove('show'); }
 
     function enterForge() {
+      sessionStorage.setItem('forgeEntered', '1');
       document.getElementById('intro').classList.add('hidden');
       document.getElementById('forge-view').classList.add('show');
       document.getElementById('hud').classList.add('show');
     }
 
-    function backToIntro() {
-      document.getElementById('forge-view').classList.remove('show');
-      document.getElementById('expanded-view').classList.remove('show');
-      document.getElementById('hud').classList.remove('show');
+    function backToForge() {
+      // Return to forge overview (not intro animation)
+      document.getElementById('expanded-view').className = '';
       document.getElementById('back-btn').classList.remove('show');
-      document.getElementById('intro').classList.remove('hidden');
       closePanel();
+      // Make sure forge view is visible
+      document.getElementById('forge-view').classList.add('show');
+      document.getElementById('hud').classList.add('show');
+    }
+
+    // Skip intro if already entered this session
+    if (sessionStorage.getItem('forgeEntered')) {
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('forge-view').classList.add('show');
+      document.getElementById('hud').classList.add('show');
     }
 
     function contact() { window.location.href = 'mailto:steve@cueforgelabs.com?subject=Project%20Inquiry'; }
 
-    // --- Node Drag System ---
+    // --- Node Drag System with Air Hockey Physics ---
     let activeDragNode = null;
     let dragStartX = 0, dragStartY = 0;
     let nodeStartLeft = 0, nodeStartTop = 0;
     let hasDragged = false;
     let dragContainer = null;
+    let lastDragX = 0, lastDragY = 0;
+    let lastDragTime = 0;
     
     function setupNodeDrag(node, container, item, category) {
       node.onmousedown = (e) => {
@@ -2501,14 +3458,19 @@
         hasDragged = false;
         dragStartX = e.clientX;
         dragStartY = e.clientY;
+        lastDragX = e.clientX;
+        lastDragY = e.clientY;
+        lastDragTime = Date.now();
         nodeStartLeft = parseFloat(node.style.left);
         nodeStartTop = parseFloat(node.style.top);
         node.classList.add('dragging');
+        
+        // Stop any existing velocity on this node
+        nodeVelocities.delete(node._nodeIdx);
       };
       
       node.onclick = (e) => { 
         e.stopPropagation();
-        // Only toggle expanded if we didn't just drag
         if (!hasDragged) {
           toggleNodeExpanded(node, item, category);
         }
@@ -2524,20 +3486,49 @@
       const dx = e.clientX - dragStartX;
       const dy = e.clientY - dragStartY;
       
+      // Track velocity
+      const now = Date.now();
+      const dt = now - lastDragTime;
+      if (dt > 0) {
+        const vx = (e.clientX - lastDragX) / dt * 10; // Scale for effect
+        const vy = (e.clientY - lastDragY) / dt * 10;
+        activeDragNode._lastVX = vx;
+        activeDragNode._lastVY = vy;
+      }
+      lastDragX = e.clientX;
+      lastDragY = e.clientY;
+      lastDragTime = now;
+      
       // Convert pixel movement to percentage of container
       const dxPercent = (dx / containerRect.width) * 100;
       const dyPercent = (dy / containerRect.height) * 100;
       
-      // If moved more than 5px, consider it a drag
       if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
         hasDragged = true;
       }
       
-      activeDragNode.style.left = (nodeStartLeft + dxPercent) + '%';
-      activeDragNode.style.top = (nodeStartTop + dyPercent) + '%';
+      // Constrain to year bounds if available
+      const bounds = activeDragNode._yearBounds;
+      const minX = bounds ? bounds.leftPct + 3 : 6;
+      const maxX = bounds ? bounds.rightPct - 3 : 94;
+      const minY = bounds ? bounds.topPct + 3 : 4;
+      const maxY = bounds ? bounds.topPct + bounds.heightPct - 5 : 96;
+      
+      const newLeft = Math.max(minX, Math.min(maxX, nodeStartLeft + dxPercent));
+      const newTop = Math.max(minY, Math.min(maxY, nodeStartTop + dyPercent));
+      
+      activeDragNode.style.left = newLeft + '%';
+      activeDragNode.style.top = newTop + '%';
+      activeDragNode._posX = newLeft;
+      activeDragNode._posY = newTop;
+      
+      if (activeDragNode._nodeIdx !== undefined) {
+        updateConstellationLines(activeDragNode._nodeIdx, newLeft, newTop);
+        checkCollisionsAndBounce(activeDragNode);
+      }
     });
     
-    // Global mouseup for drag
+    // Global mouseup - just release, no momentum
     document.addEventListener('mouseup', () => {
       if (activeDragNode) {
         activeDragNode.classList.remove('dragging');
@@ -2545,6 +3536,202 @@
         dragContainer = null;
       }
     });
+    
+    // Physics loop for momentum and bouncing - respects year bounds
+    // Physics loop - disabled, no momentum needed
+    function startPhysicsLoop() {
+      // Intentionally empty - nodes stay where you drop them
+    }
+    
+    function _unusedPhysicsLoop() {
+      if (physicsInterval) return;
+      
+      physicsInterval = setInterval(() => {
+        let activeNodes = 0;
+        
+        constellationState.nodes.forEach((node, idx) => {
+          if (node.classList.contains('node-expanded') || node.classList.contains('dragging')) return;
+          
+          const vel = nodeVelocities.get(idx);
+          if (!vel) return;
+          
+          let x = parseFloat(node.style.left) + vel.vx;
+          let y = parseFloat(node.style.top) + vel.vy;
+          
+          const bounds = node._yearBounds;
+          const minX = bounds ? bounds.leftPct + 4 : 8;
+          const maxX = bounds ? bounds.rightPct - 4 : 92;
+          const minY = bounds ? bounds.topPct + 4 : 4;
+          const maxY = bounds ? bounds.topPct + bounds.heightPct - 6 : 96;
+          
+          if (x < minX) { x = minX; vel.vx = 0; }
+          if (x > maxX) { x = maxX; vel.vx = 0; }
+          if (y < minY) { y = minY; vel.vy = 0; }
+          if (y > maxY) { y = maxY; vel.vy = 0; }
+          
+          node.style.left = x + '%';
+          node.style.top = y + '%';
+          node._posX = x;
+          node._posY = y;
+          updateConstellationLines(idx, x, y);
+          
+          vel.vx *= 0.85;
+          vel.vy *= 0.85;
+          
+          if (Math.abs(vel.vx) < 0.05 && Math.abs(vel.vy) < 0.05) {
+            nodeVelocities.delete(idx);
+          } else {
+            activeNodes++;
+          }
+        });
+        
+        // Stop loop if no active nodes
+        if (activeNodes === 0) {
+          clearInterval(physicsInterval);
+          physicsInterval = null;
+        }
+      }, 16); // ~60fps
+    }
+    
+    // Clean collision avoidance - nodes slide smoothly away from dragged node
+    function checkCollisionsAndBounce(draggedNode) {
+      // Fixed bug: was "!movedNode._nodeIdx === undefined" which is always wrong
+      if (!draggedNode || draggedNode._nodeIdx === undefined) return;
+      
+      const minDist = 15; // Minimum distance between node centers (%)
+      const dragIdx = draggedNode._nodeIdx;
+      const dragX = parseFloat(draggedNode.style.left);
+      const dragY = parseFloat(draggedNode.style.top);
+      
+      // First pass: push nodes away from the dragged node
+      constellationState.nodes.forEach((otherNode) => {
+        const otherIdx = otherNode._nodeIdx;
+        if (otherIdx === dragIdx) return;
+        if (otherNode.classList.contains('node-expanded')) return;
+        if (otherNode.classList.contains('dragging')) return;
+        
+        const otherX = parseFloat(otherNode.style.left);
+        const otherY = parseFloat(otherNode.style.top);
+        
+        const dx = otherX - dragX;
+        const dy = otherY - dragY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        if (dist < minDist) {
+          // Calculate direction away from dragged node
+          let nx, ny;
+          if (dist < 0.5) {
+            // Nodes are stacked - pick random escape direction
+            const angle = Math.random() * Math.PI * 2;
+            nx = Math.cos(angle);
+            ny = Math.sin(angle);
+          } else {
+            nx = dx / dist;
+            ny = dy / dist;
+          }
+          
+          // Position exactly minDist away from dragged node
+          let newX = dragX + nx * minDist;
+          let newY = dragY + ny * minDist;
+          
+          // Constrain to year bounds (with padding)
+          const bounds = otherNode._yearBounds;
+          if (bounds) {
+            const padX = 6;
+            const padY = 8;
+            newX = Math.max(bounds.leftPct + padX, Math.min(bounds.rightPct - padX, newX));
+            newY = Math.max(bounds.topPct + padY, Math.min(bounds.topPct + bounds.heightPct - padY, newY));
+          } else {
+            newX = Math.max(10, Math.min(90, newX));
+            newY = Math.max(8, Math.min(92, newY));
+          }
+          
+          // Smooth transition
+          otherNode.style.transition = 'left 0.12s ease-out, top 0.12s ease-out';
+          otherNode.style.left = newX + '%';
+          otherNode.style.top = newY + '%';
+          otherNode._posX = newX;
+          otherNode._posY = newY;
+          
+          if (otherIdx !== undefined) {
+            updateConstellationLines(otherIdx, newX, newY);
+          }
+          
+          // Clear transition after animation
+          setTimeout(() => {
+            if (otherNode) otherNode.style.transition = '';
+          }, 130);
+        }
+      });
+      
+      // Second pass: resolve any secondary overlaps between non-dragged nodes
+      // This prevents pushed nodes from stacking on each other
+      setTimeout(() => {
+        resolveSecondaryOverlaps(dragIdx);
+      }, 50);
+    }
+    
+    // Resolve overlaps between non-dragged nodes (called after primary push)
+    function resolveSecondaryOverlaps(excludeIdx) {
+      const minDist = 15;
+      const nodes = constellationState.nodes.filter(n => 
+        n._nodeIdx !== excludeIdx && 
+        !n.classList.contains('node-expanded') &&
+        !n.classList.contains('dragging')
+      );
+      
+      for (let i = 0; i < nodes.length; i++) {
+        const nodeA = nodes[i];
+        const ax = parseFloat(nodeA.style.left);
+        const ay = parseFloat(nodeA.style.top);
+        
+        for (let j = i + 1; j < nodes.length; j++) {
+          const nodeB = nodes[j];
+          const bx = parseFloat(nodeB.style.left);
+          const by = parseFloat(nodeB.style.top);
+          
+          const dx = bx - ax;
+          const dy = by - ay;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < minDist && dist > 0) {
+            // Push nodeB away from nodeA (only move one to avoid oscillation)
+            let nx, ny;
+            if (dist < 0.5) {
+              const angle = Math.random() * Math.PI * 2;
+              nx = Math.cos(angle);
+              ny = Math.sin(angle);
+            } else {
+              nx = dx / dist;
+              ny = dy / dist;
+            }
+            
+            let newX = ax + nx * minDist;
+            let newY = ay + ny * minDist;
+            
+            const bounds = nodeB._yearBounds;
+            if (bounds) {
+              newX = Math.max(bounds.leftPct + 6, Math.min(bounds.rightPct - 6, newX));
+              newY = Math.max(bounds.topPct + 8, Math.min(bounds.topPct + bounds.heightPct - 8, newY));
+            }
+            
+            nodeB.style.transition = 'left 0.1s ease-out, top 0.1s ease-out';
+            nodeB.style.left = newX + '%';
+            nodeB.style.top = newY + '%';
+            nodeB._posX = newX;
+            nodeB._posY = newY;
+            
+            if (nodeB._nodeIdx !== undefined) {
+              updateConstellationLines(nodeB._nodeIdx, newX, newY);
+            }
+            
+            setTimeout(() => {
+              if (nodeB) nodeB.style.transition = '';
+            }, 110);
+          }
+        }
+      }
+    }
 
     // --- Node Expansion System ---
     let currentExpandedNode = null;

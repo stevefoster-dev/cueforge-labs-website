@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CueForge Labs | About Steve Foster</title>
+  <meta name="description" content="CueForge Labs - About Steve Foster. 15+ years touring as an LD/Programmer for Taylor Swift, Cher, Harry Styles, Madonna. Now building production software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forge-dark: #060a0d;
+      --forge-darker: #020305;
+      --forge-teal: #38c7cc;
+      --accent: #f59e0b;
+      --accent-dim: rgba(245,158,11,0.15);
+      --accent-mid: rgba(245,158,11,0.4);
+      --accent-glow: rgba(245,158,11,0.2);
+      --accent-bright: rgba(245,158,11,1);
+      --trace-dim: rgba(245,158,11,0.15);
+      --trace-color: rgba(245,158,11,0.4);
+      --trace-glow: rgba(245,158,11,0.2);
+      --trace-bright: rgba(245,158,11,1);
+      --trace-bright-glow: rgba(245,158,11,0.6);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--forge-darker);
+      color: #e5e7eb;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Nebula bg - amber */
+    .nebula-bg {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 30%, rgba(245,158,11,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(251,146,60,0.08) 0%, transparent 45%),
+        radial-gradient(ellipse 70% 60% at 85% 70%, rgba(234,88,12,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(251,146,60,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(245,158,11,0.06) 0%, transparent 60%),
+        var(--forge-darker);
+    }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, var(--forge-darker) 0%, var(--forge-darker) 50%, transparent 100%);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--accent); font-weight: 600; font-size: 1rem; text-decoration: none;
+    }
+    .logo svg { width: 28px; height: 22px; }
+    .nav-btn {
+      padding: 8px 20px; font-size: 0.75rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--accent); background: transparent;
+      border: 1px solid var(--accent-mid); border-radius: 4px;
+      cursor: pointer; transition: all 0.3s; text-decoration: none;
+    }
+    .nav-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+    /* Circuit Road */
+    .circuit-road {
+      position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .circuit-rail-left, .circuit-rail-right {
+      position: absolute; top: 0; bottom: 0; width: 120px;
+    }
+    .circuit-rail-left { left: 20px; }
+    .circuit-rail-right { right: 20px; }
+    .circuit-rail-left svg, .circuit-rail-right svg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    }
+    .road-trace {
+      fill: none; stroke: var(--trace-color); stroke-width: 3;
+      stroke-linecap: square; filter: drop-shadow(0 0 8px var(--trace-glow));
+    }
+    .road-pulse {
+      position: absolute; width: 4px; height: 40px;
+      background: linear-gradient(180deg, transparent, var(--accent), rgba(251,191,36,1), transparent);
+      border-radius: 2px; box-shadow: 0 0 15px var(--accent);
+      animation: road-pulse-flow 10s ease-in-out infinite;
+    }
+    .road-pulse.p1 { left: 30px; animation-delay: 0s; }
+    .road-pulse.p2 { left: 60px; animation-delay: 3s; height: 30px; }
+    .road-pulse.p3 { left: 90px; animation-delay: 6s; height: 50px; }
+    .circuit-rail-right .road-pulse.p1 { left: auto; right: 30px; animation-delay: 1.5s; }
+    .circuit-rail-right .road-pulse.p2 { left: auto; right: 60px; animation-delay: 4.5s; }
+    .circuit-rail-right .road-pulse.p3 { left: auto; right: 90px; animation-delay: 7.5s; }
+    @keyframes road-pulse-flow {
+      0% { top: -50px; opacity: 0; }
+      5% { opacity: 0.7; }
+      95% { opacity: 0.7; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* Content container */
+    .page-content {
+      max-width: 900px; margin: 0 auto;
+      padding: 140px 40px 80px;
+      position: relative; z-index: 10;
+    }
+
+    /* Anvil header */
+    .section-title {
+      text-align: center; margin-bottom: 60px; position: relative;
+    }
+    .anvil-header {
+      position: relative; width: 100%; height: 220px;
+      margin: 0 auto 20px; overflow: visible;
+    }
+    .anvil-header svg {
+      position: absolute; left: 50%; top: 0;
+      transform: translateX(-56%); width: 500px; height: 100%; overflow: visible;
+    }
+    .anvil-header svg path {
+      fill: none; stroke: var(--accent); stroke-width: 6;
+      filter: drop-shadow(0 0 10px var(--trace-glow)) drop-shadow(0 0 20px var(--trace-glow));
+      opacity: 0.6;
+    }
+    .anvil-header .title-content {
+      position: absolute; top: 40px; left: 0; right: 0; z-index: 2; text-align: center;
+    }
+    .section-title h1 {
+      font-size: 2rem; font-weight: 300; color: #fff; margin: 0; line-height: 1.2;
+    }
+    .section-title h1 span { color: var(--accent); font-weight: 600; }
+    .section-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-top: 10px;
+    }
+
+    /* Bio hero */
+    .bio-hero {
+      text-align: center; margin-bottom: 60px;
+      padding: 40px; position: relative;
+      border: 1px solid var(--accent-dim); border-radius: 12px;
+      background: rgba(245,158,11,0.03);
+    }
+    .bio-hero::before {
+      content: '';
+      position: absolute; inset: -1px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-mid), transparent 40%, transparent 60%, var(--accent-mid));
+      z-index: -1; opacity: 0.3;
+    }
+    .bio-name {
+      font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 6px;
+    }
+    .bio-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px;
+    }
+    .bio-text {
+      font-size: 1rem; color: #d1d5db; line-height: 1.8; max-width: 650px; margin: 0 auto;
+    }
+
+    /* Skill sections */
+    .skill-section {
+      margin-bottom: 50px; position: relative;
+      padding-left: 30px;
+    }
+    .skill-section::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: linear-gradient(180deg, var(--accent), transparent);
+      border-radius: 2px;
+      filter: drop-shadow(0 0 6px var(--accent-glow));
+    }
+    .skill-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .skill-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      background: var(--accent-dim); border: 1px solid var(--accent-mid);
+      border-radius: 8px;
+    }
+    .skill-header h2 {
+      font-size: 1.3rem; font-weight: 600; color: #fff;
+    }
+    .skill-body {
+      font-size: 0.9rem; color: #9ca3af; line-height: 1.8;
+    }
+    .skill-body p { margin-bottom: 12px; }
+
+    /* Credit tags */
+    .credit-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+    }
+    .credit-tag {
+      padding: 4px 12px; font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); background: var(--accent-dim);
+      border: 1px solid rgba(245,158,11,0.2); border-radius: 4px;
+    }
+
+    /* Tech stack */
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-top: 14px;
+    }
+    .tech-item {
+      padding: 10px 14px; font-size: 0.8rem; color: #d1d5db;
+      background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.1);
+      border-radius: 6px; display: flex; align-items: center; gap: 8px;
+    }
+    .tech-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      box-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin-top: 50px; padding-top: 40px;
+      border-top: 1px solid var(--accent-dim);
+    }
+    .timeline h2 {
+      text-align: center; font-size: 1.3rem; font-weight: 600;
+      color: #fff; margin-bottom: 30px;
+    }
+    .timeline-item {
+      display: flex; gap: 20px; padding: 16px 0;
+      border-bottom: 1px solid rgba(245,158,11,0.06);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; color: var(--accent);
+      min-width: 55px; padding-top: 2px;
+    }
+    .timeline-content h3 {
+      font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 3px;
+    }
+    .timeline-content p {
+      font-size: 0.8rem; color: #6b7280;
+    }
+
+    /* Contact section */
+    .contact-section {
+      margin-top: 60px; text-align: center;
+      padding: 50px 30px; border: 1px solid var(--accent-dim);
+      border-radius: 12px; background: rgba(245,158,11,0.03);
+    }
+    .contact-section h2 {
+      font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 10px;
+    }
+    .contact-section p {
+      color: #9ca3af; margin-bottom: 24px; font-size: 0.95rem;
+    }
+    .contact-links {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+      color: var(--forge-darker); background: var(--accent);
+      border: none; border-radius: 6px; cursor: pointer; text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 8px 30px var(--trace-bright-glow); }
+    .btn-secondary {
+      padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+      color: var(--accent); background: transparent;
+      border: 1px solid var(--accent-mid); border-radius: 6px; cursor: pointer; text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 30px; color: #4b5563; font-size: 0.75rem;
+      border-top: 1px solid rgba(245,158,11,0.06); margin-top: 40px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .header { padding: 14px 20px; }
+      .page-content { padding: 120px 20px 60px; }
+      .circuit-road { opacity: 0.4; }
+      .anvil-header { height: 160px; }
+      .anvil-header svg { width: 320px; }
+      .anvil-header .title-content { top: 25px; }
+      .section-title h1 { font-size: 1.5rem; }
+      .timeline-item { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nebula-bg"></div>
+
+  <!-- Circuit Road Guardrails -->
+  <div class="circuit-road">
+    <div class="circuit-rail-left">
+      <svg viewBox="0 0 120 5000" preserveAspectRatio="none">
+        <path class="road-trace" d="M 60 0 V 80 H 40 V 150 H 60 V 200 H 80 V 280 H 60 V 350 H 30 V 420 H 60 V 480 H 90 V 560 H 60 V 620 H 40 V 700 H 60 V 780 H 80 V 850 H 60 V 920 H 30 V 1000 H 60 V 1080 H 90 V 1150 H 60 V 1220 H 40 V 1300 H 60 V 1380 H 80 V 1450 H 60 V 1520 H 30 V 1600 H 60 V 1680 H 90 V 1760 H 60 V 1840 H 40 V 1920 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 30 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 40 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 30 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 40 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 30 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 40 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 30 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000"/>
+        <path class="road-trace" d="M 40 0 V 60 H 20 V 130 H 40 V 190 H 60 V 270 H 40 V 340 H 10 V 400 H 40 V 470 H 70 V 540 H 40 V 610 H 20 V 680 H 40 V 750 H 60 V 830 H 40 V 900 H 10 V 980 H 40 V 1050 H 70 V 1130 H 40 V 1200 H 20 V 1280 H 40 V 1350 H 60 V 1430 H 40 V 1500 H 10 V 1580 H 40 V 1650 H 70 V 1730 H 40 V 1800 H 20 V 1880 H 40 V 2000 H 60 V 2100 H 40 V 2200 H 10 V 2300 H 40 V 2400 H 70 V 2500 H 40 V 2600 H 20 V 2700 H 40 V 2800 H 60 V 2900 H 40 V 3000 H 10 V 3100 H 40 V 3200 H 70 V 3300 H 40 V 3400 H 20 V 3500 H 40 V 3600 H 60 V 3700 H 40 V 3800 H 10 V 3900 H 40 V 4000 H 70 V 4100 H 40 V 4200 H 20 V 4300 H 40 V 4400 H 60 V 4500 H 40 V 4600 H 10 V 4700 H 40 V 4800 H 70 V 4900 H 40 V 5000"/>
+      </svg>
+      <div class="road-pulse p1"></div>
+      <div class="road-pulse p2"></div>
+      <div class="road-pulse p3"></div>
+    </div>
+    <div class="circuit-rail-right">
+      <svg viewBox="0 0 120 5000" preserveAspectRatio="none">
+        <path class="road-trace" d="M 60 0 V 100 H 80 V 180 H 60 V 240 H 40 V 320 H 60 V 400 H 90 V 470 H 60 V 540 H 30 V 620 H 60 V 700 H 80 V 780 H 60 V 860 H 40 V 940 H 60 V 1020 H 90 V 1100 H 60 V 1180 H 30 V 1260 H 60 V 1340 H 80 V 1420 H 60 V 1500 H 40 V 1580 H 60 V 1660 H 90 V 1740 H 60 V 1820 H 30 V 1900 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 40 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 30 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 40 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 30 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 40 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 30 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 40 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000"/>
+        <path class="road-trace" d="M 80 0 V 70 H 100 V 150 H 80 V 220 H 60 V 300 H 80 V 380 H 110 V 450 H 80 V 520 H 50 V 600 H 80 V 680 H 100 V 760 H 80 V 840 H 60 V 920 H 80 V 1000 H 110 V 1080 H 80 V 1160 H 50 V 1240 H 80 V 1320 H 100 V 1400 H 80 V 1480 H 60 V 1560 H 80 V 1640 H 110 V 1720 H 80 V 1800 H 50 V 1880 H 80 V 2000 H 100 V 2100 H 80 V 2200 H 60 V 2300 H 80 V 2400 H 110 V 2500 H 80 V 2600 H 50 V 2700 H 80 V 2800 H 100 V 2900 H 80 V 3000 H 60 V 3100 H 80 V 3200 H 110 V 3300 H 80 V 3400 H 50 V 3500 H 80 V 3600 H 100 V 3700 H 80 V 3800 H 60 V 3900 H 80 V 4000 H 110 V 4100 H 80 V 4200 H 50 V 4300 H 80 V 4400 H 100 V 4500 H 80 V 4600 H 60 V 4700 H 80 V 4800 H 110 V 4900 H 80 V 5000"/>
+      </svg>
+      <div class="road-pulse p1"></div>
+      <div class="road-pulse p2"></div>
+      <div class="road-pulse p3"></div>
+    </div>
+  </div>
+
+  <header class="header">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 2232.6 1387.35"><path fill="currentColor" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
+      <span>CueForge Labs</span>
+    </a>
+    <a href="mailto:steve@cueforgelabs.com" class="nav-btn">Contact</a>
+  </header>
+
+  <div class="page-content">
+    <!-- Anvil header -->
+    <div class="section-title">
+      <div class="anvil-header">
+        <svg viewBox="-30 -30 2292.6 1447.35"><path d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
+        <div class="title-content">
+          <h1>About <span>Steve Foster</span></h1>
+          <div class="section-subtitle">Creative Technologist</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio hero -->
+    <div class="bio-hero">
+      <div class="bio-name">Steve Foster</div>
+      <div class="bio-title">Lighting Designer · Programmer · Software Developer</div>
+      <p class="bio-text">15+ years in live production — from arena tours with Taylor Swift and Cher to festival stages and TV broadcasts. Now building software that solves real problems for the entertainment industry and beyond. Based in Connecticut.</p>
+    </div>
+
+    <!-- Lighting -->
+    <div class="skill-section">
+      <div class="skill-header">
+        <div class="skill-icon">💡</div>
+        <h2>Lighting</h2>
+      </div>
+      <div class="skill-body">
+        <p>Lighting Director and Programmer for world tours including Taylor Swift (1989, Reputation, Eras), Cher (Here We Go Again), Harry Styles (Love On Tour), and countless festivals and corporate events.</p>
+        <p>Specializing in disguise media server programming, grandMA3 lighting control, and real-time show control integration.</p>
+      </div>
+      <div class="credit-tags">
+        <span class="credit-tag">Taylor Swift</span>
+        <span class="credit-tag">Cher</span>
+        <span class="credit-tag">Harry Styles</span>
+        <span class="credit-tag">Madonna</span>
+        <span class="credit-tag">Carrie Underwood</span>
+        <span class="credit-tag">Usher</span>
+        <span class="credit-tag">grandMA3</span>
+        <span class="credit-tag">disguise</span>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div class="skill-section">
+      <div class="skill-header">
+        <div class="skill-icon">🎬</div>
+        <h2>Video</h2>
+      </div>
+      <div class="skill-body">
+        <p>Screens Director and Video Programmer for stadium tours and arena shows. Expert in disguise, Notch, and real-time generative content.</p>
+        <p>Built custom control systems integrating video, lighting, and automation for seamless show experiences.</p>
+      </div>
+      <div class="credit-tags">
+        <span class="credit-tag">disguise</span>
+        <span class="credit-tag">Notch</span>
+        <span class="credit-tag">LED Walls</span>
+        <span class="credit-tag">Projection</span>
+        <span class="credit-tag">Real-time Content</span>
+        <span class="credit-tag">Show Control</span>
+      </div>
+    </div>
+
+    <!-- Software -->
+    <div class="skill-section">
+      <div class="skill-header">
+        <div class="skill-icon">⌨️</div>
+        <h2>Software</h2>
+      </div>
+      <div class="skill-body">
+        <p>Full-stack developer building production tools, SaaS applications, and AI-powered solutions. From CLI utilities to complex web apps — focused on solving real-world problems with clean, maintainable code.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item"><div class="tech-dot"></div>React / Next.js</div>
+        <div class="tech-item"><div class="tech-dot"></div>Node.js</div>
+        <div class="tech-item"><div class="tech-dot"></div>Electron</div>
+        <div class="tech-item"><div class="tech-dot"></div>Rust</div>
+        <div class="tech-item"><div class="tech-dot"></div>Python</div>
+        <div class="tech-item"><div class="tech-dot"></div>AI / LLM Integration</div>
+        <div class="tech-item"><div class="tech-dot"></div>grandMA3 XML</div>
+        <div class="tech-item"><div class="tech-dot"></div>disguise API</div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <h2>Career Highlights</h2>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <h3>Taylor Swift — The Eras Tour</h3>
+          <p>Screens Director · Stadium world tour</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-content">
+          <h3>Harry Styles — Love On Tour</h3>
+          <p>Lighting Programmer · Arena world tour</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2019</div>
+        <div class="timeline-content">
+          <h3>Cher — Here We Go Again Tour</h3>
+          <p>Lighting Programmer · Arena world tour</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-content">
+          <h3>Taylor Swift — Reputation Stadium Tour</h3>
+          <p>Video Programmer · Stadium world tour</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2015</div>
+        <div class="timeline-content">
+          <h3>Taylor Swift — 1989 World Tour</h3>
+          <p>Lighting Programmer · Arena/stadium world tour</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h3>CueForge Labs Founded</h3>
+          <p>Production software tools built from 15+ years on the road</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section">
+      <h2>Let's Work Together</h2>
+      <p>Available for production gigs, software consulting, and custom tool development.</p>
+      <div class="contact-links">
+        <a href="mailto:steve@cueforgelabs.com" class="btn-primary">Get in Touch →</a>
+        <a href="software-circuit.html" class="btn-secondary">View Software →</a>
+        <a href="portfolio-circuit.html" class="btn-secondary">View Portfolio →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 CueForge Labs LLC · <a href="mailto:steve@cueforgelabs.com">steve@cueforgelabs.com</a> · Connecticut</p>
+  </footer>
+</body>
+</html>
