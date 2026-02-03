@@ -1,6 +1,22 @@
 // Full portfolio data from radiancedesign.org - with all images
 const portfolioData = {
   production: [
+    // 2024
+    {
+      id: 'eras-tour-ttpd',
+      artist: 'Taylor Swift',
+      show: 'The Eras Tour — TTPD Era',
+      year: 2024,
+      role: 'Video Programmer / Screens Director',
+      image: 'images/eras-ttpd.jpg',
+      credits: [
+        { role: 'Creative Director', name: 'Ethan Tobman' },
+        { role: 'Production Designer', name: 'Baz Halpin', company: 'Silent House' },
+        { role: 'Lighting Programmer', name: 'Eric Marchwinski', company: 'Earlybird Visual' },
+        { role: 'Screens Producer', name: 'Zach Peletz', company: 'Turning Point Studios' },
+        { role: 'Video Programmer', name: 'Kirk J Miller', company: 'Earlybird Visual' }
+      ]
+    },
     // 2023
     {
       id: 'eras-tour',

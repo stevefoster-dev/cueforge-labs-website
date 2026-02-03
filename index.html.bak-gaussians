@@ -486,31 +486,40 @@
       cursor: pointer;
     }
 
-    /* Layered nebula clouds — GPU-accelerated CSS blur replaces heavy SVG feTurbulence filters */
-    .nebula-cloud-outer {
-      opacity: 0.35;
+    /* Layered nebula clouds */
+    .nebula-cloud-base {
+      opacity: 0.4;
     }
     .nebula-cloud-mid {
       opacity: 0.6;
     }
-    .nebula-cloud-inner {
-      opacity: 0.85;
+    .nebula-cloud-bright {
+      opacity: 0.8;
+    }
+    .nebula-cloud-core {
+      opacity: 0.9;
+    }
+    .nebula-wisp {
+      opacity: 0.3;
     }
 
-    /* Software — Lavender/Purple */
-    .nebula-software .nebula-cloud-outer { fill: url(#nebulaBaseSoftware); filter: blur(40px); }
-    .nebula-software .nebula-cloud-mid   { fill: url(#nebulaMidSoftware);  filter: blur(22px); }
-    .nebula-software .nebula-cloud-inner { fill: url(#nebulaBrightSoftware); filter: blur(10px); }
+    .nebula-software .nebula-cloud-base { fill: url(#nebulaBaseSoftware); filter: url(#nebulaTurbulence); }
+    .nebula-software .nebula-cloud-mid { fill: url(#nebulaMidSoftware); filter: url(#nebulaGlow); }
+    .nebula-software .nebula-cloud-bright { fill: url(#nebulaBrightSoftware); filter: url(#nebulaSharp); }
+    .nebula-software .nebula-cloud-core { fill: url(#nebulaCenterSoftware); filter: url(#nebulaCore); }
+    .nebula-software .nebula-wisp { fill: url(#nebulaWispSoftware); filter: url(#nebulaWispFilter); }
 
-    /* Production — Teal/Cyan */
-    .nebula-production .nebula-cloud-outer { fill: url(#nebulaBaseProduction); filter: blur(40px); }
-    .nebula-production .nebula-cloud-mid   { fill: url(#nebulaMidProduction);  filter: blur(22px); }
-    .nebula-production .nebula-cloud-inner { fill: url(#nebulaBrightProduction); filter: blur(10px); }
+    .nebula-production .nebula-cloud-base { fill: url(#nebulaBaseProduction); filter: url(#nebulaTurbulence); }
+    .nebula-production .nebula-cloud-mid { fill: url(#nebulaMidProduction); filter: url(#nebulaGlow); }
+    .nebula-production .nebula-cloud-bright { fill: url(#nebulaBrightProduction); filter: url(#nebulaSharp); }
+    .nebula-production .nebula-cloud-core { fill: url(#nebulaCenterProduction); filter: url(#nebulaCore); }
+    .nebula-production .nebula-wisp { fill: url(#nebulaWispProduction); filter: url(#nebulaWispFilter); }
 
-    /* About — Amber/Orange */
-    .nebula-about .nebula-cloud-outer { fill: url(#nebulaBaseAbout); filter: blur(40px); }
-    .nebula-about .nebula-cloud-mid   { fill: url(#nebulaMidAbout);  filter: blur(22px); }
-    .nebula-about .nebula-cloud-inner { fill: url(#nebulaBrightAbout); filter: blur(10px); }
+    .nebula-about .nebula-cloud-base { fill: url(#nebulaBaseAbout); filter: url(#nebulaTurbulence); }
+    .nebula-about .nebula-cloud-mid { fill: url(#nebulaMidAbout); filter: url(#nebulaGlow); }
+    .nebula-about .nebula-cloud-bright { fill: url(#nebulaBrightAbout); filter: url(#nebulaSharp); }
+    .nebula-about .nebula-cloud-core { fill: url(#nebulaCenterAbout); filter: url(#nebulaCore); }
+    .nebula-about .nebula-wisp { fill: url(#nebulaWispAbout); filter: url(#nebulaWispFilter); }
 
     /* Nebula animations - multiple variants for randomness */
     @keyframes nebula-drift-1 {
@@ -568,8 +577,25 @@
       0%, 100% { opacity: 0.88; transform: scale(1) translate(0, 0); }
       60% { opacity: 1; transform: scale(1.12) translate(-2px, -5px); }
     }
+    @keyframes nebula-wisp-1 {
+      0%, 100% { opacity: 0.25; transform: scale(1) translate(0, 0); }
+      25% { opacity: 0.4; transform: scale(1.06) translate(15px, -12px); }
+      50% { opacity: 0.32; transform: scale(0.94) translate(-10px, 18px); }
+      75% { opacity: 0.38; transform: scale(1.02) translate(-12px, -10px); }
+    }
+    @keyframes nebula-wisp-2 {
+      0%, 100% { opacity: 0.28; transform: scale(1) translate(0, 0); }
+      30% { opacity: 0.35; transform: scale(0.96) translate(-12px, 8px); }
+      60% { opacity: 0.42; transform: scale(1.04) translate(8px, -15px); }
+      85% { opacity: 0.32; transform: scale(1.01) translate(10px, 5px); }
+    }
+
     /* All nebula elements use CSS custom properties for random timing */
-    .nebula-region:hover .nebula-cloud-outer {
+    .nebula-region:hover .nebula-wisp {
+      animation: nebula-wisp-1 var(--dur, 28s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+    .nebula-region:hover .nebula-cloud-base {
       animation: nebula-drift-1 var(--dur, 22s) ease-in-out infinite;
       animation-delay: var(--del, 0s);
     }
@@ -577,8 +603,12 @@
       animation: nebula-pulse-1 var(--dur, 16s) ease-in-out infinite;
       animation-delay: var(--del, 0s);
     }
-    .nebula-region:hover .nebula-cloud-inner {
-      animation: nebula-glow-1 var(--dur, 9s) ease-in-out infinite;
+    .nebula-region:hover .nebula-cloud-bright {
+      animation: nebula-glow-1 var(--dur, 11s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+    .nebula-region:hover .nebula-cloud-core {
+      animation: nebula-core-1 var(--dur, 7s) ease-in-out infinite;
       animation-delay: var(--del, 0s);
     }
 
@@ -1025,10 +1055,12 @@
         font-size: 0.45rem;
         bottom: 10px;
       }
-      /* Kill blur on mobile for performance */
-      .nebula-cloud-outer,
+      /* Kill heavy SVG filters on mobile - they crash Safari */
+      .nebula-cloud-base,
       .nebula-cloud-mid,
-      .nebula-cloud-inner {
+      .nebula-cloud-bright,
+      .nebula-cloud-core,
+      .nebula-wisp {
         filter: none !important;
       }
       .circuit-glow-region {
@@ -1989,10 +2021,12 @@
         line-height: 1.3 !important;
       }
 
-      /* PERFORMANCE: Kill blur on mobile */
-      .nebula-cloud-outer,
+      /* PERFORMANCE: Kill heavy SVG blur filters that crash mobile */
+      .nebula-cloud-base,
       .nebula-cloud-mid,
-      .nebula-cloud-inner {
+      .nebula-cloud-bright,
+      .nebula-cloud-core,
+      .nebula-wisp {
         filter: none !important;
       }
       .circuit-glow-region {
@@ -2336,7 +2370,32 @@
             <path d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1c9.65-.15,19.36-.9,29-1l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/>
           </clipPath>
           
-          <!-- NEBULA FILTERS — replaced heavy feTurbulence chains with CSS blur() for GPU acceleration -->
+          <!-- NEBULA FILTERS - ESO Style -->
+          <filter id="nebulaTurbulence" x="-100%" y="-100%" width="300%" height="300%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" seed="1" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="45"/>
+          </filter>
+          <filter id="nebulaGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="5" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="30"/>
+          </filter>
+          <filter id="nebulaSharp" x="-60%" y="-60%" width="220%" height="220%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="10" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="18"/>
+          </filter>
+          <filter id="nebulaCore" x="-40%" y="-40%" width="180%" height="180%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="15" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="10"/>
+          </filter>
+          <filter id="nebulaWispFilter" x="-120%" y="-120%" width="340%" height="340%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="5" seed="20" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="80" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="35"/>
+          </filter>
           
           <!-- SOFTWARE NEBULA GRADIENTS - Lavender/Purple -->
           <radialGradient id="nebulaBaseSoftware" cx="40%" cy="50%" r="80%" fx="25%" fy="40%">
@@ -2434,21 +2493,42 @@
         <g clip-path="url(#anvilClip)">
           <!-- SOFTWARE NEBULA - Lavender (Left arm + deep into center body) -->
           <g class="nebula-region nebula-software" onclick="expandCategory('software')" onmouseenter="showLabel('software'); highlightCircuit('software')" onmouseleave="hideLabel(); unhighlightCircuit('software')">
-            <!-- Hit area -->
+            <!-- Hit area - shifted right from visual edge -->
             <polygon class="nebula-hit-area" points="550,80 900,80 950,350 1000,600 1000,1000 850,1250 600,1300 450,1100 350,600"/>
-            <!-- Outer diffuse layer (GPU blur) -->
-            <ellipse class="nebula-cloud-outer" cx="500" cy="300" rx="520" ry="420" style="--dur:23s;--del:-4s"/>
-            <ellipse class="nebula-cloud-outer" cx="720" cy="650" rx="560" ry="520" style="--dur:27s;--del:-14s"/>
-            <ellipse class="nebula-cloud-outer" cx="700" cy="1050" rx="500" ry="400" style="--dur:25s;--del:-9s"/>
+            <!-- Outer wispy layer - extends deep into center body -->
+            <ellipse class="nebula-wisp" cx="380" cy="260" rx="450" ry="360" style="--dur:27s;--del:-4s"/>
+            <ellipse class="nebula-wisp" cx="650" cy="420" rx="520" ry="450" style="--dur:31s;--del:-17s"/>
+            <ellipse class="nebula-wisp" cx="780" cy="650" rx="550" ry="520" style="--dur:25s;--del:-8s"/>
+            <ellipse class="nebula-wisp" cx="700" cy="900" rx="500" ry="450" style="--dur:29s;--del:-21s"/>
+            <ellipse class="nebula-wisp" cx="750" cy="1120" rx="480" ry="380" style="--dur:33s;--del:-12s"/>
+            <!-- Base diffuse layer - fills left and deep center -->
+            <ellipse class="nebula-cloud-base" cx="300" cy="190" rx="360" ry="280" style="--dur:21s;--del:-2s"/>
+            <ellipse class="nebula-cloud-base" cx="580" cy="340" rx="500" ry="400" style="--dur:25s;--del:-13s"/>
+            <ellipse class="nebula-cloud-base" cx="750" cy="520" rx="520" ry="460" style="--dur:19s;--del:-6s"/>
+            <ellipse class="nebula-cloud-base" cx="700" cy="750" rx="550" ry="500" style="--dur:27s;--del:-18s"/>
+            <ellipse class="nebula-cloud-base" cx="680" cy="1000" rx="500" ry="420" style="--dur:22s;--del:-9s"/>
+            <ellipse class="nebula-cloud-base" cx="720" cy="1180" rx="450" ry="320" style="--dur:24s;--del:-15s"/>
             <!-- Mid density layer -->
-            <ellipse class="nebula-cloud-mid" cx="450" cy="280" rx="380" ry="300" style="--dur:16s;--del:-3s"/>
-            <ellipse class="nebula-cloud-mid" cx="700" cy="550" rx="460" ry="420" style="--dur:15s;--del:-10s"/>
-            <ellipse class="nebula-cloud-mid" cx="700" cy="900" rx="440" ry="380" style="--dur:17s;--del:-7s"/>
-            <!-- Inner bright layer -->
-            <ellipse class="nebula-cloud-inner" cx="420" cy="240" rx="220" ry="170" style="--dur:10s;--del:-2s"/>
-            <ellipse class="nebula-cloud-inner" cx="650" cy="500" rx="300" ry="280" style="--dur:11s;--del:-6s"/>
-            <ellipse class="nebula-cloud-inner" cx="700" cy="850" rx="280" ry="260" style="--dur:12s;--del:-4s"/>
-            <ellipse class="nebula-cloud-inner" cx="720" cy="1100" rx="200" ry="180" style="--dur:9s;--del:-8s"/>
+            <ellipse class="nebula-cloud-mid" cx="320" cy="175" rx="260" ry="200" style="--dur:15s;--del:-3s"/>
+            <ellipse class="nebula-cloud-mid" cx="550" cy="310" rx="400" ry="340" style="--dur:18s;--del:-10s"/>
+            <ellipse class="nebula-cloud-mid" cx="720" cy="490" rx="440" ry="400" style="--dur:14s;--del:-5s"/>
+            <ellipse class="nebula-cloud-mid" cx="680" cy="720" rx="480" ry="420" style="--dur:17s;--del:-13s"/>
+            <ellipse class="nebula-cloud-mid" cx="720" cy="960" rx="420" ry="360" style="--dur:16s;--del:-7s"/>
+            <ellipse class="nebula-cloud-mid" cx="680" cy="1160" rx="380" ry="280" style="--dur:19s;--del:-16s"/>
+            <!-- Bright regions - scattered across body -->
+            <ellipse class="nebula-cloud-bright" cx="340" cy="160" rx="180" ry="140" style="--dur:10s;--del:-2s"/>
+            <ellipse class="nebula-cloud-bright" cx="520" cy="320" rx="280" ry="240" style="--dur:13s;--del:-7s"/>
+            <ellipse class="nebula-cloud-bright" cx="700" cy="480" rx="320" ry="280" style="--dur:9s;--del:-4s"/>
+            <ellipse class="nebula-cloud-bright" cx="650" cy="700" rx="340" ry="320" style="--dur:12s;--del:-9s"/>
+            <ellipse class="nebula-cloud-bright" cx="740" cy="930" rx="300" ry="260" style="--dur:11s;--del:-5s"/>
+            <ellipse class="nebula-cloud-bright" cx="700" cy="1130" rx="260" ry="220" style="--dur:14s;--del:-11s"/>
+            <!-- Core bright spots -->
+            <ellipse class="nebula-cloud-core" cx="360" cy="150" rx="100" ry="80" style="--dur:6s;--del:-1s"/>
+            <ellipse class="nebula-cloud-core" cx="500" cy="340" rx="150" ry="130" style="--dur:8s;--del:-4s"/>
+            <ellipse class="nebula-cloud-core" cx="680" cy="460" rx="170" ry="160" style="--dur:5s;--del:-2s"/>
+            <ellipse class="nebula-cloud-core" cx="630" cy="680" rx="160" ry="170" style="--dur:7s;--del:-5s"/>
+            <ellipse class="nebula-cloud-core" cx="760" cy="900" rx="140" ry="130" style="--dur:9s;--del:-3s"/>
+            <ellipse class="nebula-cloud-core" cx="720" cy="1100" rx="120" ry="110" style="--dur:6s;--del:-6s"/>
             <!-- Stars - scattered organically into center body -->
             <g class="star-network">
               <circle class="star-node" cx="185" cy="125" r="2.5" style="--twinkle-delay:0s;--twinkle-duration:2.1s;"/>
@@ -2490,25 +2570,56 @@
           <g class="nebula-region nebula-production" onclick="expandCategory('production')" onmouseenter="showLabel('production'); highlightCircuit('production')" onmouseleave="hideLabel(); unhighlightCircuit('production')">
             <!-- Hit area -->
             <polygon class="nebula-hit-area" points="780,80 1250,80 2100,80 2100,450 1800,550 1600,550 1500,600 1500,1050 1600,1350 780,1350 1000,600"/>
-            <!-- Outer diffuse layer (GPU blur) — covers top band + center + lower -->
-            <ellipse class="nebula-cloud-outer" cx="1100" cy="180" rx="550" ry="280" style="--dur:24s;--del:-3s"/>
-            <ellipse class="nebula-cloud-outer" cx="1700" cy="220" rx="500" ry="300" style="--dur:27s;--del:-15s"/>
-            <ellipse class="nebula-cloud-outer" cx="1200" cy="500" rx="500" ry="400" style="--dur:25s;--del:-8s"/>
-            <ellipse class="nebula-cloud-outer" cx="1600" cy="420" rx="450" ry="350" style="--dur:29s;--del:-19s"/>
-            <ellipse class="nebula-cloud-outer" cx="1100" cy="850" rx="450" ry="420" style="--dur:26s;--del:-11s"/>
+            <!-- Outer wispy tendrils - spans entire top and center -->
+            <ellipse class="nebula-wisp" cx="900" cy="200" rx="450" ry="280" style="--dur:26s;--del:-3s"/>
+            <ellipse class="nebula-wisp" cx="1200" cy="150" rx="500" ry="250" style="--dur:31s;--del:-18s"/>
+            <ellipse class="nebula-wisp" cx="1550" cy="180" rx="550" ry="280" style="--dur:24s;--del:-9s"/>
+            <ellipse class="nebula-wisp" cx="1850" cy="220" rx="400" ry="300" style="--dur:29s;--del:-21s"/>
+            <ellipse class="nebula-wisp" cx="1100" cy="450" rx="500" ry="400" style="--dur:27s;--del:-5s"/>
+            <ellipse class="nebula-wisp" cx="1450" cy="400" rx="450" ry="350" style="--dur:32s;--del:-14s"/>
+            <ellipse class="nebula-wisp" cx="1750" cy="380" rx="400" ry="320" style="--dur:25s;--del:-22s"/>
+            <ellipse class="nebula-wisp" cx="1000" cy="750" rx="400" ry="450" style="--dur:30s;--del:-8s"/>
+            <ellipse class="nebula-wisp" cx="1300" cy="850" rx="450" ry="400" style="--dur:28s;--del:-16s"/>
+            <ellipse class="nebula-wisp" cx="1100" cy="1100" rx="380" ry="300" style="--dur:33s;--del:-11s"/>
+            <!-- Base diffuse layer -->
+            <ellipse class="nebula-cloud-base" cx="950" cy="180" rx="400" ry="220" style="--dur:20s;--del:-2s"/>
+            <ellipse class="nebula-cloud-base" cx="1250" cy="150" rx="450" ry="200" style="--dur:24s;--del:-11s"/>
+            <ellipse class="nebula-cloud-base" cx="1600" cy="170" rx="480" ry="230" style="--dur:18s;--del:-7s"/>
+            <ellipse class="nebula-cloud-base" cx="1900" cy="250" rx="350" ry="280" style="--dur:26s;--del:-16s"/>
+            <ellipse class="nebula-cloud-base" cx="1100" cy="400" rx="420" ry="350" style="--dur:21s;--del:-4s"/>
+            <ellipse class="nebula-cloud-base" cx="1450" cy="380" rx="400" ry="320" style="--dur:23s;--del:-19s"/>
+            <ellipse class="nebula-cloud-base" cx="1750" cy="420" rx="380" ry="300" style="--dur:19s;--del:-9s"/>
+            <ellipse class="nebula-cloud-base" cx="1000" cy="650" rx="380" ry="400" style="--dur:25s;--del:-14s"/>
+            <ellipse class="nebula-cloud-base" cx="1250" cy="750" rx="400" ry="350" style="--dur:22s;--del:-6s"/>
+            <ellipse class="nebula-cloud-base" cx="1100" cy="1050" rx="350" ry="280" style="--dur:27s;--del:-17s"/>
+            <ellipse class="nebula-cloud-base" cx="1400" cy="1150" rx="320" ry="250" style="--dur:20s;--del:-12s"/>
             <!-- Mid density layer -->
-            <ellipse class="nebula-cloud-mid" cx="1150" cy="170" rx="400" ry="180" style="--dur:16s;--del:-5s"/>
-            <ellipse class="nebula-cloud-mid" cx="1650" cy="200" rx="420" ry="200" style="--dur:17s;--del:-12s"/>
-            <ellipse class="nebula-cloud-mid" cx="1250" cy="420" rx="380" ry="300" style="--dur:15s;--del:-3s"/>
-            <ellipse class="nebula-cloud-mid" cx="1700" cy="450" rx="340" ry="280" style="--dur:18s;--del:-9s"/>
-            <ellipse class="nebula-cloud-mid" cx="1150" cy="750" rx="360" ry="320" style="--dur:16s;--del:-7s"/>
-            <!-- Inner bright layer -->
-            <ellipse class="nebula-cloud-inner" cx="1300" cy="150" rx="260" ry="120" style="--dur:10s;--del:-3s"/>
-            <ellipse class="nebula-cloud-inner" cx="1700" cy="200" rx="240" ry="130" style="--dur:12s;--del:-7s"/>
-            <ellipse class="nebula-cloud-inner" cx="1200" cy="430" rx="250" ry="200" style="--dur:11s;--del:-1s"/>
-            <ellipse class="nebula-cloud-inner" cx="1580" cy="380" rx="220" ry="180" style="--dur:9s;--del:-5s"/>
-            <ellipse class="nebula-cloud-inner" cx="1150" cy="700" rx="220" ry="200" style="--dur:13s;--del:-10s"/>
-            <ellipse class="nebula-cloud-inner" cx="1150" cy="1000" rx="180" ry="160" style="--dur:10s;--del:-6s"/>
+            <ellipse class="nebula-cloud-mid" cx="1000" cy="160" rx="320" ry="160" style="--dur:14s;--del:-5s"/>
+            <ellipse class="nebula-cloud-mid" cx="1300" cy="140" rx="380" ry="150" style="--dur:18s;--del:-9s"/>
+            <ellipse class="nebula-cloud-mid" cx="1650" cy="160" rx="400" ry="180" style="--dur:15s;--del:-2s"/>
+            <ellipse class="nebula-cloud-mid" cx="1920" cy="280" rx="280" ry="240" style="--dur:17s;--del:-12s"/>
+            <ellipse class="nebula-cloud-mid" cx="1150" cy="380" rx="350" ry="280" style="--dur:13s;--del:-6s"/>
+            <ellipse class="nebula-cloud-mid" cx="1480" cy="360" rx="320" ry="260" style="--dur:19s;--del:-14s"/>
+            <ellipse class="nebula-cloud-mid" cx="1780" cy="450" rx="300" ry="250" style="--dur:16s;--del:-3s"/>
+            <ellipse class="nebula-cloud-mid" cx="1050" cy="600" rx="300" ry="320" style="--dur:14s;--del:-10s"/>
+            <ellipse class="nebula-cloud-mid" cx="1280" cy="700" rx="320" ry="280" style="--dur:18s;--del:-7s"/>
+            <ellipse class="nebula-cloud-mid" cx="1080" cy="1000" rx="280" ry="220" style="--dur:15s;--del:-15s"/>
+            <ellipse class="nebula-cloud-mid" cx="1380" cy="1100" rx="260" ry="200" style="--dur:17s;--del:-4s"/>
+            <!-- Bright regions - scattered randomly, fewer -->
+            <ellipse class="nebula-cloud-bright" cx="1285" cy="148" rx="240" ry="115" style="--dur:9s;--del:-3s"/>
+            <ellipse class="nebula-cloud-bright" cx="1695" cy="188" rx="260" ry="130" style="--dur:12s;--del:-7s"/>
+            <ellipse class="nebula-cloud-bright" cx="1892" cy="328" rx="190" ry="160" style="--dur:10s;--del:-1s"/>
+            <ellipse class="nebula-cloud-bright" cx="1178" cy="415" rx="230" ry="180" style="--dur:13s;--del:-8s"/>
+            <ellipse class="nebula-cloud-bright" cx="1568" cy="365" rx="220" ry="175" style="--dur:8s;--del:-4s"/>
+            <ellipse class="nebula-cloud-bright" cx="1118" cy="628" rx="210" ry="200" style="--dur:11s;--del:-10s"/>
+            <ellipse class="nebula-cloud-bright" cx="1145" cy="985" rx="185" ry="150" style="--dur:14s;--del:-6s"/>
+            <!-- Core bright spots - fewer, random positions -->
+            <ellipse class="nebula-cloud-core" cx="1328" cy="135" rx="130" ry="70" style="--dur:6s;--del:-2s"/>
+            <ellipse class="nebula-cloud-core" cx="1738" cy="198" rx="145" ry="80" style="--dur:8s;--del:-4s"/>
+            <ellipse class="nebula-cloud-core" cx="1215" cy="435" rx="125" ry="110" style="--dur:5s;--del:-1s"/>
+            <ellipse class="nebula-cloud-core" cx="1605" cy="385" rx="120" ry="100" style="--dur:7s;--del:-5s"/>
+            <ellipse class="nebula-cloud-core" cx="1158" cy="648" rx="115" ry="120" style="--dur:9s;--del:-3s"/>
+            <ellipse class="nebula-cloud-core" cx="1178" cy="1005" rx="100" ry="90" style="--dur:6s;--del:-6s"/>
             <!-- Stars - truly scattered like real night sky -->
             <g class="star-network">
               <circle class="star-node" cx="978" cy="108" r="2.5" style="--twinkle-delay:0.1s;--twinkle-duration:2.3s;"/>
@@ -2554,15 +2665,31 @@
           <g class="nebula-region nebula-about" onclick="expandCategory('about')" onmouseenter="showLabel('about'); highlightCircuit('about')" onmouseleave="hideLabel(); unhighlightCircuit('about')">
             <!-- Hit area -->
             <polygon class="nebula-hit-area" points="1400,580 1650,580 1800,750 1800,1250 1650,1280 1380,1050 1380,750"/>
-            <!-- Outer diffuse layer (GPU blur) -->
-            <ellipse class="nebula-cloud-outer" cx="1700" cy="800" rx="420" ry="450" style="--dur:24s;--del:-5s"/>
-            <ellipse class="nebula-cloud-outer" cx="1650" cy="1100" rx="400" ry="350" style="--dur:27s;--del:-16s"/>
+            <!-- Outer wispy tendrils -->
+            <ellipse class="nebula-wisp" cx="1650" cy="700" rx="420" ry="450" style="--dur:28s;--del:-5s"/>
+            <ellipse class="nebula-wisp" cx="1800" cy="950" rx="400" ry="400" style="--dur:32s;--del:-19s"/>
+            <ellipse class="nebula-wisp" cx="1550" cy="1100" rx="380" ry="350" style="--dur:25s;--del:-11s"/>
+            <ellipse class="nebula-wisp" cx="1900" cy="1200" rx="350" ry="280" style="--dur:30s;--del:-23s"/>
+            <!-- Base diffuse layer -->
+            <ellipse class="nebula-cloud-base" cx="1600" cy="750" rx="380" ry="400" style="--dur:21s;--del:-3s"/>
+            <ellipse class="nebula-cloud-base" cx="1750" cy="900" rx="360" ry="380" style="--dur:25s;--del:-12s"/>
+            <ellipse class="nebula-cloud-base" cx="1600" cy="1050" rx="350" ry="320" style="--dur:23s;--del:-8s"/>
+            <ellipse class="nebula-cloud-base" cx="1850" cy="1180" rx="320" ry="280" style="--dur:19s;--del:-15s"/>
             <!-- Mid density layer -->
-            <ellipse class="nebula-cloud-mid" cx="1680" cy="830" rx="300" ry="310" style="--dur:16s;--del:-4s"/>
-            <ellipse class="nebula-cloud-mid" cx="1650" cy="1050" rx="280" ry="260" style="--dur:17s;--del:-11s"/>
-            <!-- Inner bright layer -->
-            <ellipse class="nebula-cloud-inner" cx="1670" cy="850" rx="200" ry="220" style="--dur:10s;--del:-2s"/>
-            <ellipse class="nebula-cloud-inner" cx="1680" cy="1020" rx="180" ry="170" style="--dur:11s;--del:-7s"/>
+            <ellipse class="nebula-cloud-mid" cx="1620" cy="780" rx="280" ry="300" style="--dur:15s;--del:-4s"/>
+            <ellipse class="nebula-cloud-mid" cx="1720" cy="880" rx="280" ry="280" style="--dur:17s;--del:-11s"/>
+            <ellipse class="nebula-cloud-mid" cx="1580" cy="1000" rx="260" ry="250" style="--dur:14s;--del:-7s"/>
+            <ellipse class="nebula-cloud-mid" cx="1800" cy="1120" rx="260" ry="220" style="--dur:18s;--del:-13s"/>
+            <!-- Bright regions -->
+            <ellipse class="nebula-cloud-bright" cx="1650" cy="800" rx="200" ry="220" style="--dur:10s;--del:-2s"/>
+            <ellipse class="nebula-cloud-bright" cx="1700" cy="900" rx="180" ry="200" style="--dur:12s;--del:-8s"/>
+            <ellipse class="nebula-cloud-bright" cx="1600" cy="1020" rx="180" ry="170" style="--dur:9s;--del:-5s"/>
+            <ellipse class="nebula-cloud-bright" cx="1780" cy="1100" rx="170" ry="150" style="--dur:11s;--del:-10s"/>
+            <!-- Core bright spots -->
+            <ellipse class="nebula-cloud-core" cx="1670" cy="820" rx="100" ry="120" style="--dur:7s;--del:-2s"/>
+            <ellipse class="nebula-cloud-core" cx="1700" cy="920" rx="90" ry="100" style="--dur:6s;--del:-5s"/>
+            <ellipse class="nebula-cloud-core" cx="1620" cy="1030" rx="90" ry="85" style="--dur:8s;--del:-3s"/>
+            <ellipse class="nebula-cloud-core" cx="1760" cy="1090" rx="80" ry="70" style="--dur:5s;--del:-6s"/>
             <!-- Stars -->
             <g class="star-network">
               <circle class="star-node" cx="1500" cy="680" r="2.5" style="--twinkle-delay:0.2s;--twinkle-duration:2.4s;"/>
