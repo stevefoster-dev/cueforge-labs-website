@@ -1026,6 +1026,50 @@
       text-align: center;
       white-space: nowrap;
     }
+
+    /* ===== MOBILE: HUD, Title, Performance ===== */
+    @media (max-width: 900px) {
+      #logo-badge { left: 15px; }
+      #contact-btn-hud { right: 15px; }
+    }
+    @media (max-width: 600px) {
+      #logo-badge {
+        left: 10px;
+        top: 12px;
+      }
+      #logo-badge span { display: none; }
+      #contact-btn-hud {
+        right: 10px;
+        top: 12px;
+        padding: 6px 10px;
+        font-size: 0.6rem;
+      }
+      #forge-title {
+        white-space: normal;
+        font-size: clamp(1.3rem, 5.5vw, 2.2rem);
+        top: 60px;
+        width: 85%;
+        line-height: 1.3;
+      }
+      #hint {
+        font-size: 0.45rem;
+        bottom: 10px;
+      }
+      /* Kill heavy SVG filters on mobile - they crash Safari */
+      .nebula-cloud-base,
+      .nebula-cloud-mid,
+      .nebula-cloud-bright,
+      .nebula-cloud-core,
+      .nebula-wisp {
+        filter: none !important;
+      }
+      .circuit-glow-region {
+        filter: none !important;
+      }
+      /* Reduce intro canvas animation load */
+      #circuit-glows { display: none; }
+      .flare-ray { display: none; }
+    }
     #forge-title span {
       color: #38c7cc; font-weight: 600;
     }
@@ -1947,27 +1991,51 @@
 
     /* ===== MOBILE RESPONSIVE FIXES ===== */
     @media (max-width: 768px) {
-      /* HUD: Move logo and contact to corners, not 160px inset */
+      /* HUD: Pin to corners, hide logo text */
       #logo-badge {
-        left: 15px !important;
-        top: 15px !important;
+        left: 10px !important;
+        top: 10px !important;
+      }
+      #logo-badge span {
+        display: none !important;
       }
       #contact-btn-hud {
-        right: 15px !important;
-        top: 15px !important;
-        padding: 6px 12px !important;
-        font-size: 0.65rem !important;
+        right: 10px !important;
+        top: 10px !important;
+        padding: 5px 10px !important;
+        font-size: 0.6rem !important;
       }
 
-      /* Forge title: allow wrapping, scale down */
+      /* Forge title: wrap text, scale down */
       #forge-title {
         white-space: normal !important;
-        font-size: clamp(1.4rem, 6vw, 2.8rem) !important;
-        top: 100px !important;
+        font-size: clamp(1.2rem, 5vw, 2rem) !important;
+        top: 55px !important;
         width: 90% !important;
         max-width: 90vw !important;
         line-height: 1.3 !important;
-        word-break: break-word !important;
+      }
+
+      /* PERFORMANCE: Kill heavy SVG blur filters that crash mobile */
+      .nebula-cloud-base,
+      .nebula-cloud-mid,
+      .nebula-cloud-bright,
+      .nebula-cloud-core,
+      .nebula-wisp {
+        filter: none !important;
+      }
+      .circuit-glow-region {
+        filter: none !important;
+      }
+      #circuit-glows {
+        display: none !important;
+      }
+      .flare-ray {
+        display: none !important;
+      }
+      /* Reduce intro logo filter load */
+      #solid-shape {
+        filter: drop-shadow(0 0 15px rgba(56,199,204,0.4)) !important;
       }
 
       /* Back button: move to left corner */
