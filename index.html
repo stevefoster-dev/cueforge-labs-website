@@ -1074,11 +1074,16 @@
       color: #38c7cc; font-weight: 600;
     }
     #hint {
-      position: absolute; bottom: 20px; left: 50%;
+      position: absolute; bottom: 28px; left: 50%;
       transform: translateX(-50%);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55rem; color: rgba(255,255,255,0.25);
-      text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: 0.75rem; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      animation: hint-pulse 3s ease-in-out infinite;
+    }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.85; }
     }
 
     #vignette {
@@ -2792,7 +2797,7 @@
     </div>
     <button id="contact-btn-hud" onclick="contact()">Contact</button>
     <div id="forge-title">Explore The <span>Forge</span></div>
-    <div id="hint">Hover regions • Click to explore</div>
+    <div id="hint">Click a circuit to explore ↑</div>
   </div>
 
   <button id="back-btn" onclick="backToOverview()">← Back</button>
