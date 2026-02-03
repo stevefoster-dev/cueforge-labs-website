@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — CueForge Labs</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Getting started guides, system requirements, and workflow documentation for CueRoll, CueMaker, CuePatch, and CueCheck.">
+  <meta property="og:title" content="CueForge Labs — Documentation">
+  <meta property="og:description" content="Setup guides, system requirements, and workflow docs for all CueForge production tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cueforgelabs.com/docs.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forge-dark: #060a0d;
+      --forge-darker: #020305;
+      --accent: #38c7cc;
+      --accent-dim: rgba(56,199,204,0.12);
+      --accent-mid: rgba(56,199,204,0.35);
+      --accent-glow: rgba(56,199,204,0.5);
+      --lavender: #a78bfa;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --text: #e5e7eb;
+      --muted: #6b7280;
+      --dim: #9ca3af;
+      --border: rgba(56,199,204,0.1);
+      --code-bg: rgba(56,199,204,0.06);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--forge-darker);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .nebula-bg {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 30% 20%, rgba(56,199,204,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 70% 60%, rgba(167,139,250,0.04) 0%, transparent 45%),
+        var(--forge-darker);
+    }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, var(--forge-darker) 0%, var(--forge-darker) 50%, transparent 100%);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--accent); font-weight: 600; font-size: 1rem; text-decoration: none;
+    }
+    .logo svg { width: 28px; height: 22px; }
+    .nav-links { display: flex; gap: 12px; }
+    .nav-btn {
+      padding: 8px 20px; font-size: 0.75rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--accent); background: transparent;
+      border: 1px solid var(--accent-mid); border-radius: 4px;
+      cursor: pointer; transition: all 0.3s; text-decoration: none;
+    }
+    .nav-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+    /* Main content */
+    .docs-container {
+      max-width: 860px; margin: 0 auto;
+      padding: 120px 40px 80px;
+    }
+    .docs-container h1 {
+      font-size: 2.2rem; font-weight: 700; color: #fff;
+      margin-bottom: 12px;
+    }
+    .docs-container .subtitle {
+      font-size: 1rem; color: var(--dim); margin-bottom: 48px;
+    }
+
+    /* Quick nav */
+    .quick-nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 60px;
+    }
+    .quick-nav a {
+      padding: 16px; border-radius: 10px; text-decoration: none;
+      border: 1px solid var(--border); transition: all 0.3s;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .quick-nav a:hover { border-color: var(--accent-mid); }
+    .quick-nav .qn-icon { font-size: 1.2rem; }
+    .quick-nav .qn-text { font-size: 0.85rem; font-weight: 600; color: #fff; }
+    .quick-nav .qn-sub { font-size: 0.7rem; color: var(--muted); }
+
+    /* Section */
+    .doc-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 100px;
+    }
+    .doc-section h2 {
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+      margin-bottom: 8px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-section h2 .badge {
+      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; padding: 3px 10px; border-radius: 10px;
+      margin-left: 10px; vertical-align: middle;
+    }
+    .badge-lavender { color: var(--lavender); background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.3); }
+    .badge-green { color: var(--green); background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); }
+    .badge-teal { color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); }
+    .badge-amber { color: var(--amber); background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); }
+
+    .doc-section h3 {
+      font-size: 1rem; font-weight: 600; color: var(--accent);
+      margin: 24px 0 10px;
+    }
+    .doc-section p {
+      font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 14px;
+    }
+    .doc-section ul {
+      list-style: none; margin-bottom: 16px;
+    }
+    .doc-section ul li {
+      font-size: 0.85rem; color: var(--dim); padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    .doc-section ul li::before {
+      content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600;
+    }
+
+    /* Code blocks */
+    .code-block {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 20px; margin: 12px 0 16px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+      color: var(--accent); overflow-x: auto; line-height: 1.6;
+    }
+    .code-block .comment { color: var(--muted); }
+
+    /* Requirements table */
+    .req-table {
+      width: 100%; border-collapse: collapse; margin: 12px 0 20px;
+    }
+    .req-table th {
+      text-align: left; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .req-table td {
+      font-size: 0.85rem; color: var(--dim); padding: 10px 12px;
+      border-bottom: 1px solid rgba(56,199,204,0.05);
+    }
+    .req-table td:first-child { color: var(--text); font-weight: 500; }
+
+    /* Workflow diagram */
+    .workflow {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap; margin: 16px 0 20px;
+    }
+    .workflow-step {
+      padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text);
+    }
+    .workflow-arrow { color: var(--accent); font-size: 1.2rem; }
+
+    /* Tip box */
+    .tip {
+      background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+      font-size: 0.85rem; color: var(--dim);
+    }
+    .tip strong { color: var(--green); }
+
+    .warning {
+      background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+      font-size: 0.85rem; color: var(--dim);
+    }
+    .warning strong { color: var(--amber); }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 30px; color: #4b5563; font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .header { padding: 14px 20px; }
+      .docs-container { padding: 100px 20px 60px; }
+      .quick-nav { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nebula-bg"></div>
+
+  <header class="header">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 2232.6 1387.35"><path fill="currentColor" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
+      <span>CueForge Labs</span>
+    </a>
+    <div class="nav-links">
+      <a href="products.html" class="nav-btn">Products</a>
+      <a href="suite.html" class="nav-btn">Suite Deal</a>
+      <a href="index.html" class="nav-btn">Home</a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <h1>Documentation</h1>
+    <p class="subtitle">Setup guides, system requirements, and production workflows for every CueForge tool.</p>
+
+    <!-- Quick Nav -->
+    <div class="quick-nav">
+      <a href="#cueroll">
+        <div>
+          <div class="qn-icon">📝</div>
+        </div>
+        <div>
+          <div class="qn-text">CueRoll</div>
+          <div class="qn-sub">Timecode Notes</div>
+        </div>
+      </a>
+      <a href="#cuemaker">
+        <div>
+          <div class="qn-icon">🎬</div>
+        </div>
+        <div>
+          <div class="qn-text">CueMaker</div>
+          <div class="qn-sub">Timecode Markers</div>
+        </div>
+      </a>
+      <a href="#cuepatch">
+        <div>
+          <div class="qn-icon">⬚</div>
+        </div>
+        <div>
+          <div class="qn-text">CuePatch</div>
+          <div class="qn-sub">Pixel Maps</div>
+        </div>
+      </a>
+      <a href="#cuecheck">
+        <div>
+          <div class="qn-icon">✓</div>
+        </div>
+        <div>
+          <div class="qn-text">CueCheck</div>
+          <div class="qn-sub">Content Validation</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- System Requirements -->
+    <div class="doc-section" id="requirements">
+      <h2>System Requirements</h2>
+      <table class="req-table">
+        <tr>
+          <th>Requirement</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Operating System</td>
+          <td>macOS 13 (Ventura) or later</td>
+        </tr>
+        <tr>
+          <td>Processor</td>
+          <td>Apple Silicon (M1+) or Intel — Universal Binary</td>
+        </tr>
+        <tr>
+          <td>RAM</td>
+          <td>4 GB minimum (8 GB recommended for CuePatch multi-surface)</td>
+        </tr>
+        <tr>
+          <td>Audio Interface</td>
+          <td>Any CoreAudio-compatible interface with line input (for CueRoll/CueMaker LTC)</td>
+        </tr>
+        <tr>
+          <td>Network</td>
+          <td>None required — all tools work fully offline</td>
+        </tr>
+      </table>
+
+      <div class="warning">
+        <strong>⚠️ First Launch:</strong> CueForge apps aren't notarized yet (indie dev, working on it). On first launch: right-click the app → Open → click "Open" in the dialog. After that it runs normally. This is a one-time step.
+      </div>
+    </div>
+
+    <!-- Installation -->
+    <div class="doc-section" id="installation">
+      <h2>Installation</h2>
+      <p>All CueForge tools are standalone .app bundles. No installer needed.</p>
+
+      <h3>Steps</h3>
+      <ul>
+        <li>Download your .dmg file from the link in your purchase email</li>
+        <li>Open the .dmg and drag the app to your Applications folder</li>
+        <li>First launch: right-click → Open → Open (Gatekeeper bypass, one-time only)</li>
+        <li>Grant audio input permission when prompted (CueRoll/CueMaker only)</li>
+      </ul>
+
+      <div class="tip">
+        <strong>💡 Tip:</strong> Keep the .dmg in a safe place. Your purchase includes free updates — re-download links are sent via email when new versions ship.
+      </div>
+    </div>
+
+    <!-- CueRoll -->
+    <div class="doc-section" id="cueroll">
+      <h2>📝 CueRoll <span class="badge badge-lavender">$49</span></h2>
+      <p>LTC timecode note-taking for live production. CueRoll listens to LTC timecode from your audio interface and lets you drop timestamped notes with a single keypress.</p>
+
+      <h3>When to Use It</h3>
+      <ul>
+        <li>Tech rehearsals — log fix notes as they happen</li>
+        <li>Show calls — mark cue timing for review</li>
+        <li>Post-show notes — capture feedback timestamped to the running show</li>
+        <li>Multi-department handoffs — export notes for lighting, video, audio teams</li>
+      </ul>
+
+      <h3>Typical Workflow</h3>
+      <div class="workflow">
+        <span class="workflow-step">Feed LTC to audio input</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Open CueRoll</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Select audio source</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Press key → note drops</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Export list</span>
+      </div>
+
+      <h3>LTC Input Setup</h3>
+      <p>CueRoll reads LTC (Linear Timecode) from any CoreAudio input. You'll need:</p>
+      <ul>
+        <li>An audio interface with a line-level input</li>
+        <li>LTC fed from your timecode source (console, media server, playback rig)</li>
+        <li>Input level: aim for -12 to -6 dBFS (standard LTC level)</li>
+      </ul>
+
+      <div class="code-block">
+        <span class="comment"># Common LTC sources:</span><br>
+        grandMA3 → LTC Output → Audio Interface Line In<br>
+        disguise → LTC Output → Audio Interface Line In<br>
+        QLab → LTC Output → Audio Interface Line In<br>
+        Playback Pro → LTC Output → Audio Interface Line In
+      </div>
+
+      <h3>Sessions</h3>
+      <p>CueRoll organizes notes into sessions. Create a new session for each tech, dress, or show call. Sessions are saved locally and persist between launches.</p>
+
+      <h3>Export Formats</h3>
+      <ul>
+        <li><strong>CSV</strong> — Open in Excel/Google Sheets, sort and filter</li>
+        <li><strong>JSON</strong> — Integrate with other tools or scripts</li>
+        <li><strong>Plain text</strong> — Copy/paste into emails or chat</li>
+      </ul>
+
+      <div class="tip">
+        <strong>💡 Pro move:</strong> Run CueRoll on a laptop next to the console during tech. At the end of the day, export the notes list and email it to the whole production team. Everyone gets a clean, timestamped log of every note called — no more "what timecode was that fix at?"
+      </div>
+    </div>
+
+    <!-- CueMaker -->
+    <div class="doc-section" id="cuemaker">
+      <h2>🎬 CueMaker <span class="badge badge-green">$79</span></h2>
+      <p>LTC timecode reader with marker creation and grandMA3 XML export. Program timecoded shows without a console in front of you.</p>
+
+      <h3>When to Use It</h3>
+      <ul>
+        <li>Pre-programming — build marker lists before load-in</li>
+        <li>On-site — create markers in real-time during playback</li>
+        <li>Remote prep — build gMA3 timecode tracks from a hotel room</li>
+        <li>MTC bridging — sync other software via MTC output</li>
+      </ul>
+
+      <h3>Typical Workflow</h3>
+      <div class="workflow">
+        <span class="workflow-step">Feed LTC to audio input</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Open CueMaker</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Watch waveform + TC</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Press M → marker drops</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Export gMA3 XML</span>
+      </div>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li><strong>Live waveform</strong> — Visual confirmation that LTC is decoding</li>
+        <li><strong>Marker creation</strong> — Press M to drop a marker at current timecode</li>
+        <li><strong>6-channel mixer</strong> — Monitor audio alongside LTC</li>
+        <li><strong>MTC output</strong> — Feed MIDI timecode to disguise, QLab, or other software</li>
+        <li><strong>grandMA3 XML export</strong> — Drop the file into your show and markers appear</li>
+      </ul>
+
+      <h3>grandMA3 Import</h3>
+      <div class="code-block">
+        <span class="comment"># After exporting from CueMaker:</span><br>
+        1. Copy the .xml file to your gMA3 show folder<br>
+        2. In grandMA3: Menu → Import → XML → select your file<br>
+        3. Markers appear in the timecode pool<br>
+        4. Assign markers to your timecode track
+      </div>
+
+      <div class="tip">
+        <strong>💡 Pro move:</strong> Record LTC from rehearsal audio, then build your marker list at your desk with headphones. Export to gMA3 XML and load it at the next session. You show up with a pre-built timecode track.
+      </div>
+    </div>
+
+    <!-- CuePatch -->
+    <div class="doc-section" id="cuepatch">
+      <h2>⬚ CuePatch <span class="badge badge-teal">Free / Pro $49</span></h2>
+      <p>Pixel map builder for LED walls. Built-in tile databases, calibration patterns, and instant PNG export.</p>
+
+      <h3>When to Use It</h3>
+      <ul>
+        <li>LED wall checkout — generate pixel maps in 30 seconds, not 30 minutes</li>
+        <li>Pre-vis — verify wall dimensions and tile layout before load-in</li>
+        <li>Calibration — output test patterns matched to your exact tile config</li>
+        <li>Documentation — export maps for the production binder</li>
+      </ul>
+
+      <h3>Typical Workflow</h3>
+      <div class="workflow">
+        <span class="workflow-step">Select tile type</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Set wall dimensions</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Choose pattern</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Export PNG</span>
+      </div>
+
+      <h3>Built-in Tile Database</h3>
+      <table class="req-table">
+        <tr>
+          <th>Manufacturer</th>
+          <th>Example Tiles</th>
+          <th>Availability</th>
+        </tr>
+        <tr>
+          <td>ROE Visual</td>
+          <td>Black Pearl, Carbon, Diamond</td>
+          <td>Free + Pro</td>
+        </tr>
+        <tr>
+          <td>Absen</td>
+          <td>PL Series, KL Series</td>
+          <td>Pro</td>
+        </tr>
+        <tr>
+          <td>Unilumin</td>
+          <td>UpadIII, Ustorm</td>
+          <td>Pro</td>
+        </tr>
+        <tr>
+          <td>INFiLED</td>
+          <td>DB, ER Series</td>
+          <td>Pro</td>
+        </tr>
+      </table>
+
+      <h3>Free vs. Pro</h3>
+      <ul>
+        <li><strong>Free:</strong> Single surface, basic tile labels, PNG export, ROE tiles</li>
+        <li><strong>Pro ($49):</strong> Multi-surface, full tile database, calibration patterns, batch export, NotchLC support</li>
+      </ul>
+
+      <div class="tip">
+        <strong>💡 Pro move:</strong> Export pixel maps the night before checkout. Load them on a thumb drive. When you arrive on site, the maps are ready to throw up on the wall immediately while processors are still being patched.
+      </div>
+    </div>
+
+    <!-- CueCheck -->
+    <div class="doc-section" id="cuecheck">
+      <h2>✓ CueCheck <span class="badge badge-amber">Coming Soon</span></h2>
+      <p>Content validation for production deliverables. Verify media files meet spec before they hit the wall.</p>
+
+      <h3>What It Will Do</h3>
+      <ul>
+        <li>Validate resolution, codec, frame rate, and color space of video files</li>
+        <li>Check files against show spec sheets</li>
+        <li>Batch validation of entire content drops</li>
+        <li>Export validation reports for producers and content creators</li>
+      </ul>
+
+      <h3>Why It Matters</h3>
+      <p>Every video engineer knows the pain: content arrives on-site, you load it into the media server, and it's the wrong resolution, wrong codec, or wrong frame rate. CueCheck catches those problems before load-in, not during it.</p>
+
+      <div class="warning">
+        <strong>⏳ Status:</strong> Core validation engine is working. GUI and daemon mode are in development. Join the mailing list for launch notification.
+      </div>
+    </div>
+
+    <!-- Support -->
+    <div class="doc-section" id="support">
+      <h2>Support</h2>
+      <p>CueForge tools are built by a touring production professional. When you email, you're talking to the person who built it — not a support queue.</p>
+
+      <h3>Get Help</h3>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:steve@cueforgelabs.com" style="color: var(--accent);">steve@cueforgelabs.com</a></li>
+        <li><strong>Response time:</strong> Usually within 24 hours (unless I'm on a show)</li>
+        <li><strong>Include:</strong> macOS version, audio interface model, what happened vs. what you expected</li>
+      </ul>
+
+      <h3>Feature Requests</h3>
+      <p>I build what the community needs. Email your workflow and what's missing — if it makes sense, it goes on the roadmap. Many features in the current versions came from user requests.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 CueForge Labs LLC · <a href="mailto:steve@cueforgelabs.com">Contact</a> · <a href="products.html">All Products</a> · <a href="suite.html">Suite Deal</a></p>
+  </footer>
+</body>
+</html>
