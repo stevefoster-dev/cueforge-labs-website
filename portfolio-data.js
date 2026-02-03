@@ -33,6 +33,15 @@ const portfolioData = {
         { role: 'Video Programmer', name: 'Kirk J Miller', company: 'Earlybird Visual' }
       ]
     },
+    {
+      id: 'jt-fontainebleau-2023',
+      artist: 'Justin Timberlake',
+      show: 'Fontainebleau Casino Opening',
+      year: 2023,
+      role: 'Screens Director / Video Programmer',
+      image: 'images/jt-fontainebleau.png',
+      credits: []
+    },
     // 2022
     {
       id: 'harry-lot-sa-2022',
