@@ -333,13 +333,71 @@
       text-decoration: none;
     }
     
+    /* Hamburger menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      background: none;
+      border: none;
+      z-index: 110;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--forge-teal);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(2,3,5,0.97);
+      z-index: 105;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 12px 24px;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--forge-teal); }
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: #6b7280; font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         display: none;
       }
-      
+      .hamburger {
+        display: flex;
+      }
       .products-grid {
         grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+      }
+      .hero {
+        padding: 80px 16px 40px;
+      }
+      header {
+        padding: 16px 0;
       }
     }
   </style>
@@ -358,8 +416,19 @@
         <li><a href="index.html">About</a></li>
         <li><a href="mailto:steve@cueforgelabs.com">Contact</a></li>
       </ul>
+      <button class="hamburger" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
+  <div class="mobile-nav">
+    <button class="mobile-nav-close" onclick="this.parentElement.classList.remove('open')">✕</button>
+    <a href="products.html">Products</a>
+    <a href="suite.html" style="color: #10b981;">Suite Deal</a>
+    <a href="docs.html">Docs</a>
+    <a href="index.html">About</a>
+    <a href="mailto:steve@cueforgelabs.com">Contact</a>
+  </div>
 
   <section class="hero">
     <div class="container">

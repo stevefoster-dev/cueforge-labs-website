@@ -177,12 +177,24 @@
     }
     .logo svg { width: 28px; height: 22px; }
 
-    @media (max-width: 640px) {
-      .header { padding: 14px 20px; }
-      .hero { padding: 120px 20px 60px; }
-      section { padding: 40px 20px; }
+    @media (max-width: 768px) {
+      .header { padding: 14px 15px; }
+      .logo span { display: none; }
+      .nav-links { gap: 6px; }
+      .nav-btn { padding: 6px 12px; font-size: 0.65rem; }
+      .hero { padding: 120px 15px 40px; }
+      .hero h1 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+      .hero .tagline { font-size: 0.95rem; padding: 0 10px; }
+      .hero-price { font-size: 2rem; }
+      section { padding: 40px 15px; }
+      section h2 { font-size: 1.4rem; }
+      .features-grid { grid-template-columns: 1fr; }
       .cta-row { flex-direction: column; align-items: center; }
       .circuit-road { opacity: 0.4; }
+      .circuit-rail-left, .circuit-rail-right { width: 50px; }
+    }
+    @media (max-width: 400px) {
+      .nav-btn { padding: 5px 8px; font-size: 0.6rem; letter-spacing: 0.03em; }
     }
   </style>
   <script type="application/ld+json">

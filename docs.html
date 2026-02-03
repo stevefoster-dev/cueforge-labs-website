@@ -196,10 +196,18 @@
     }
     footer a { color: var(--accent); text-decoration: none; }
 
-    @media (max-width: 640px) {
-      .header { padding: 14px 20px; }
-      .docs-container { padding: 100px 20px 60px; }
-      .quick-nav { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 768px) {
+      .header { padding: 14px 15px; }
+      .logo span { display: none; }
+      .nav-links { gap: 6px; }
+      .nav-btn { padding: 6px 12px; font-size: 0.65rem; }
+      .docs-container { padding: 100px 15px 60px; }
+      .docs-container h1 { font-size: 1.6rem; }
+      .quick-nav { grid-template-columns: 1fr 1fr; gap: 10px; }
+    }
+    @media (max-width: 400px) {
+      .quick-nav { grid-template-columns: 1fr; }
+      .nav-btn { padding: 5px 8px; font-size: 0.6rem; letter-spacing: 0.03em; }
     }
   </style>
 </head>
