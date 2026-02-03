@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CueForge Suite — All Production Tools, One Price | CueForge Labs</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Get CueRoll, CueMaker, and CuePatch together. Save $28 vs buying separately. One-time purchase, no subscription. Built by a touring LD.">
+  <meta property="og:title" content="CueForge Suite — All Production Tools, One Price">
+  <meta property="og:description" content="CueRoll + CueMaker + CuePatch for $149. Save $28. No subscription. Works offline.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cueforgelabs.com/suite.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forge-dark: #060a0d;
+      --forge-darker: #020305;
+      --accent: #38c7cc;
+      --accent-dim: rgba(56,199,204,0.12);
+      --accent-mid: rgba(56,199,204,0.35);
+      --accent-glow: rgba(56,199,204,0.5);
+      --lavender: #a78bfa;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --text: #e5e7eb;
+      --muted: #6b7280;
+      --dim: #9ca3af;
+      --border: rgba(56,199,204,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--forge-darker);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .nebula-bg {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 30% 20%, rgba(56,199,204,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 70% 60%, rgba(167,139,250,0.06) 0%, transparent 45%),
+        radial-gradient(ellipse 70% 50% at 50% 80%, rgba(56,199,204,0.05) 0%, transparent 50%),
+        var(--forge-darker);
+    }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, var(--forge-darker) 0%, var(--forge-darker) 50%, transparent 100%);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--accent); font-weight: 600; font-size: 1rem; text-decoration: none;
+    }
+    .logo svg { width: 28px; height: 22px; }
+    .nav-links { display: flex; gap: 12px; }
+    .nav-btn {
+      padding: 8px 20px; font-size: 0.75rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--accent); background: transparent;
+      border: 1px solid var(--accent-mid); border-radius: 4px;
+      cursor: pointer; transition: all 0.3s; text-decoration: none;
+    }
+    .nav-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 160px 40px 60px; max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .hero-badge {
+      display: inline-block; padding: 6px 18px; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #10b981; background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3); border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700;
+      color: #fff; margin-bottom: 16px; line-height: 1.15;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline {
+      font-size: 1.15rem; color: var(--dim); max-width: 640px; margin: 0 auto 40px; line-height: 1.6;
+    }
+
+    /* Pricing Block */
+    .pricing-block {
+      max-width: 560px; margin: 0 auto 60px;
+      background: rgba(56,199,204,0.04);
+      border: 2px solid var(--accent-mid);
+      border-radius: 16px; padding: 40px;
+      position: relative; overflow: hidden;
+    }
+    .pricing-block::before {
+      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border-radius: 18px; z-index: -1;
+      background: linear-gradient(135deg, var(--accent-glow), transparent, var(--lavender));
+      opacity: 0.15;
+    }
+    .pricing-comparison {
+      display: flex; justify-content: center; gap: 8px; align-items: center;
+      margin-bottom: 16px; font-size: 0.9rem; color: var(--dim);
+    }
+    .pricing-comparison .old-price {
+      text-decoration: line-through; color: var(--muted);
+    }
+    .pricing-comparison .save {
+      color: #10b981; font-weight: 600;
+      background: rgba(16,185,129,0.12); padding: 2px 10px; border-radius: 10px;
+      font-size: 0.8rem;
+    }
+    .suite-price {
+      font-size: 3.5rem; font-weight: 800; color: #fff; margin-bottom: 4px;
+    }
+    .suite-price-note {
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 28px;
+    }
+    .btn-buy {
+      display: inline-block; padding: 16px 48px; font-size: 1rem; font-weight: 700;
+      color: var(--forge-dark); background: var(--accent);
+      border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: all 0.3s; letter-spacing: 0.02em;
+    }
+    .btn-buy:hover {
+      filter: brightness(1.15); transform: translateY(-2px);
+      box-shadow: 0 10px 40px var(--accent-glow);
+    }
+    .or-individual {
+      margin-top: 16px; font-size: 0.8rem; color: var(--muted);
+    }
+    .or-individual a { color: var(--accent); text-decoration: none; }
+    .or-individual a:hover { text-decoration: underline; }
+
+    /* What's Included */
+    section { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+    section h2 {
+      font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .suite-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .suite-card {
+      padding: 28px; border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .suite-card:hover { border-color: var(--accent-mid); }
+    .suite-card.cueroll { background: rgba(167,139,250,0.04); border-color: rgba(167,139,250,0.15); }
+    .suite-card.cueroll:hover { border-color: rgba(167,139,250,0.35); }
+    .suite-card.cuemaker { background: rgba(16,185,129,0.04); border-color: rgba(16,185,129,0.15); }
+    .suite-card.cuemaker:hover { border-color: rgba(16,185,129,0.35); }
+    .suite-card.cuepatch { background: rgba(56,199,204,0.04); border-color: rgba(56,199,204,0.15); }
+    .suite-card.cuepatch:hover { border-color: rgba(56,199,204,0.35); }
+    .card-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    }
+    .card-icon { font-size: 1.4rem; }
+    .card-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .card-solo-price { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    .suite-card p { font-size: 0.85rem; color: var(--dim); line-height: 1.6; margin-bottom: 14px; }
+    .card-features { list-style: none; }
+    .card-features li {
+      font-size: 0.8rem; color: var(--dim); padding: 4px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-features li::before { content: "✓"; font-weight: 700; }
+    .suite-card.cueroll .card-features li::before { color: var(--lavender); }
+    .suite-card.cuemaker .card-features li::before { color: var(--green); }
+    .suite-card.cuepatch .card-features li::before { color: var(--accent); }
+
+    /* Comparison */
+    .comparison {
+      max-width: 700px; margin: 0 auto;
+    }
+    .comparison-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .comparison-row:last-child { border-bottom: none; }
+    .comparison-row .label { color: var(--dim); }
+    .comparison-row .individual { color: var(--muted); text-decoration: line-through; }
+    .comparison-row .suite { color: #10b981; font-weight: 600; }
+    .comparison-row.total .label { color: #fff; font-weight: 700; font-size: 1.1rem; }
+    .comparison-row.total .individual { font-size: 1.1rem; }
+    .comparison-row.total .suite { font-size: 1.1rem; }
+
+    /* Philosophy */
+    .philosophy-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; text-align: center;
+    }
+    .philosophy-item { padding: 20px; }
+    .philosophy-item .icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .philosophy-item h4 { color: #fff; font-size: 0.9rem; margin-bottom: 6px; }
+    .philosophy-item p { color: var(--muted); font-size: 0.8rem; }
+
+    /* Credits */
+    .credits-bar {
+      text-align: center; padding: 40px; color: var(--muted); font-size: 0.8rem;
+    }
+    .credits-names { margin-top: 10px; color: var(--dim); font-size: 0.85rem; letter-spacing: 0.06em; }
+    .credits-names span { margin: 0 12px; }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      text-align: center; padding: 80px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .bottom-cta h2 { margin-bottom: 12px; }
+    .bottom-cta p { color: var(--dim); margin-bottom: 28px; font-size: 0.95rem; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 30px; color: #4b5563; font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* FAQ */
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-weight: 600; color: #fff; font-size: 0.95rem; margin-bottom: 8px; }
+    .faq-a { color: var(--dim); font-size: 0.85rem; line-height: 1.6; }
+
+    @media (max-width: 640px) {
+      .header { padding: 14px 20px; }
+      .hero { padding: 120px 20px 40px; }
+      section { padding: 40px 20px; }
+      .pricing-block { padding: 28px 20px; }
+      .suite-price { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nebula-bg"></div>
+
+  <header class="header">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 2232.6 1387.35"><path fill="currentColor" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
+      <span>CueForge Labs</span>
+    </a>
+    <div class="nav-links">
+      <a href="software-circuit.html" class="nav-btn">← All Software</a>
+      <a href="index.html" class="nav-btn">Home</a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-badge">✨ Save $28 — Bundle Deal</div>
+    <h1>The <span>CueForge Suite</span></h1>
+    <p class="tagline">Every production tool we make. One purchase. CueRoll for notes, CueMaker for timecode, CuePatch for pixel maps. Your entire show workflow, covered.</p>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing-block">
+    <div class="pricing-comparison">
+      <span class="old-price">$177 individually</span>
+      <span class="save">Save $28</span>
+    </div>
+    <div class="suite-price">$149</div>
+    <div class="suite-price-note">One-time purchase · All 3 tools · Free updates forever</div>
+    <a href="mailto:steve@cueforgelabs.com?subject=CueForge%20Suite%20Purchase%20—%20%24149&body=I%27d%20like%20to%20purchase%20the%20CueForge%20Suite%20(CueRoll%20%2B%20CueMaker%20%2B%20CuePatch).%20Please%20send%20me%20download%20links." class="btn-buy">Get the Suite — $149 →</a>
+    <div class="or-individual">
+      Or buy individually: <a href="cueroll.html">CueRoll $49</a> · <a href="cuemaker.html">CueMaker $79</a> · <a href="cuepatch.html">CuePatch $49</a>
+    </div>
+  </div>
+
+  <!-- What's Included -->
+  <section>
+    <h2>What's in the Box</h2>
+    <div class="suite-grid">
+      <div class="suite-card cueroll">
+        <div class="card-header">
+          <div class="card-icon">📝</div>
+          <div>
+            <div class="card-name">CueRoll</div>
+            <div class="card-solo-price">$49 individually</div>
+          </div>
+        </div>
+        <p>LTC timecode note-taking. Drop timestamped notes during live playback. Export clean lists for the production team.</p>
+        <ul class="card-features">
+          <li>Real-time LTC decoding (Rust)</li>
+          <li>One-key note capture</li>
+          <li>Session management</li>
+          <li>CSV / JSON / text export</li>
+        </ul>
+      </div>
+
+      <div class="suite-card cuemaker">
+        <div class="card-header">
+          <div class="card-icon">🎬</div>
+          <div>
+            <div class="card-name">CueMaker</div>
+            <div class="card-solo-price">$79 individually</div>
+          </div>
+        </div>
+        <p>LTC reader with marker creation and grandMA3 XML export. Program timecoded shows on the road without a console.</p>
+        <ul class="card-features">
+          <li>LTC decode + MTC output</li>
+          <li>Waveform visualization</li>
+          <li>Live marker creation</li>
+          <li>grandMA3 XML export</li>
+        </ul>
+      </div>
+
+      <div class="suite-card cuepatch">
+        <div class="card-header">
+          <div class="card-icon">⬚</div>
+          <div>
+            <div class="card-name">CuePatch Pro</div>
+            <div class="card-solo-price">$49 individually</div>
+          </div>
+        </div>
+        <p>Pixel map builder for LED walls. Built-in tile database, calibration patterns, instant PNG export.</p>
+        <ul class="card-features">
+          <li>Multi-surface support</li>
+          <li>ROE / Absen / Unilumin / INFiLED tiles</li>
+          <li>Calibration patterns</li>
+          <li>Batch PNG export</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Price Comparison -->
+  <section>
+    <h2>Suite vs. Individual</h2>
+    <div class="comparison">
+      <div class="comparison-row">
+        <span class="label">CueRoll</span>
+        <span class="individual">$49</span>
+        <span class="suite">Included</span>
+      </div>
+      <div class="comparison-row">
+        <span class="label">CueMaker</span>
+        <span class="individual">$79</span>
+        <span class="suite">Included</span>
+      </div>
+      <div class="comparison-row">
+        <span class="label">CuePatch Pro</span>
+        <span class="individual">$49</span>
+        <span class="suite">Included</span>
+      </div>
+      <div class="comparison-row total">
+        <span class="label">Total</span>
+        <span class="individual">$177</span>
+        <span class="suite">$149</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section>
+    <h2>How We Build Software</h2>
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <div class="icon">💰</div>
+        <h4>Buy Once, Own Forever</h4>
+        <p>No subscriptions. No recurring charges. Pay once.</p>
+      </div>
+      <div class="philosophy-item">
+        <div class="icon">📡</div>
+        <h4>Works Offline</h4>
+        <p>No cloud dependency. No login screens. Venue WiFi optional.</p>
+      </div>
+      <div class="philosophy-item">
+        <div class="icon">🔒</div>
+        <h4>No Telemetry</h4>
+        <p>Your data stays on your machine. We don't track anything.</p>
+      </div>
+      <div class="philosophy-item">
+        <div class="icon">🔄</div>
+        <h4>Free Updates</h4>
+        <p>Bug fixes and minor updates included. Major versions at 50% off.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2>Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What platforms are supported?</div>
+        <div class="faq-a">macOS (Apple Silicon + Intel). Windows versions are on the roadmap.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need an audio interface?</div>
+        <div class="faq-a">CueRoll and CueMaker need an audio interface with LTC input. Any interface that shows up in macOS audio settings works. CuePatch doesn't need one.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a free trial?</div>
+        <div class="faq-a">CuePatch has a free version with single-surface support. For CueRoll and CueMaker, email us for a demo — we'll walk you through it live.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What about code signing?</div>
+        <div class="faq-a">Apps aren't notarized yet (indie dev life). On first launch: right-click → Open → Open. After that it runs normally. We're working on notarization.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I upgrade from individual to suite?</div>
+        <div class="faq-a">Yes — email us with your original purchase info and we'll credit what you've already paid toward the suite price.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer team/site licenses?</div>
+        <div class="faq-a">Absolutely. Email us for volume pricing — we'll work something out that makes sense for your shop.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credits -->
+  <div class="credits-bar">
+    <p>Built by a touring LD. Battle-tested on productions for</p>
+    <div class="credits-names">
+      <span>Taylor Swift</span> <span>Harry Styles</span> <span>Cher</span> <span>Madonna</span> <span>Carrie Underwood</span>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-cta">
+    <h2>Your Whole Show Workflow. Covered.</h2>
+    <p>$149 one-time. Less than two day rates. Saves hours every production.</p>
+    <a href="mailto:steve@cueforgelabs.com?subject=CueForge%20Suite%20Purchase%20—%20%24149&body=I%27d%20like%20to%20purchase%20the%20CueForge%20Suite%20(CueRoll%20%2B%20CueMaker%20%2B%20CuePatch).%20Please%20send%20me%20download%20links." class="btn-buy">Get the Suite — $149 →</a>
+  </div>
+
+  <footer>
+    <p>© 2026 CueForge Labs LLC · <a href="mailto:steve@cueforgelabs.com">Contact</a> · <a href="products.html">All Products</a></p>
+  </footer>
+</body>
+</html>
