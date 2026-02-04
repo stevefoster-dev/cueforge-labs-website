@@ -53,9 +53,9 @@ Gumroad is the fastest way to sell digital products. No code changes needed.
   ```
 - **Files:** Upload CueMaker.dmg or .zip
 
-#### CuePatch — Free / Pro $129 / Team $249
+#### CuePatch — Free / Base $129 / Pro $249
 - **Title:** CuePatch — Pixel Map Builder
-- **Price:** $0 (free) / $129 (Pro) / $249 (Team)
+- **Price:** $0 (free) / $129 (Base) / $249 (Pro)
 - **Description:**
   ```
   Generate pixel-perfect test patterns for LED video walls.
@@ -65,7 +65,7 @@ Gumroad is the fastest way to sell digital products. No code changes needed.
   ✓ Basic tile labels
   ✓ PNG export
 
-  PRO VERSION ($129):
+  BASE VERSION ($129):
   ✓ Multi-surface support
   ✓ Built-in tile database (ROE, Absen, Unilumin, INFiLED)
   ✓ Calibration patterns

@@ -76,7 +76,7 @@ CuePatch generates pixel-perfect test patterns for your LED walls. Pick your til
 
 Tile labels. Crosshairs. Multi-surface color coding. Every calibration pattern you need.
 
-Free to start. Pro $129. Team $249.
+Free to start. Base $129. Pro $249.
 
 cueforgelabs.com/cuepatch
 
