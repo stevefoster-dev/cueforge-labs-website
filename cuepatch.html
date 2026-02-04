@@ -8,9 +8,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="CuePatch — Generate pixel maps for LED video walls with built-in tile database. Base $49, Pro $99 with lighting fixtures, DMX patching, and MA3/Disguise export.">
-  <meta property="og:title" content="CuePatch — Lighting Pixel Map Builder">
-  <meta property="og:description" content="Pixel maps, test patterns, and calibration grids for LED walls. Built by a touring LD.">
+  <meta name="description" content="CuePatch — The complete LED pixel map builder. 48+ tile types, 3D preview, cable management, truck pack planning, curved walls, and processor configs for Brompton, Novastar & Megapixel Helios. Desktop app for Mac & Windows. Base $49 / Pro $99.">
+  <meta property="og:title" content="CuePatch — LED Pixel Map Builder with 3D Preview, Cable Manager & Pack Planner">
+  <meta property="og:description" content="48+ LED tile types, 3D preview, cable management, truck pack planning, curved walls, and multi-processor support. Built by a touring LD.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://cueforgelabs.com/images/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -78,7 +78,7 @@
     }
     .hero h1 span { color: var(--accent); }
     .hero .tagline {
-      font-size: 1.2rem; color: #9ca3af; max-width: 600px; margin: 0 auto 40px; line-height: 1.6;
+      font-size: 1.2rem; color: #9ca3af; max-width: 650px; margin: 0 auto 40px; line-height: 1.6;
     }
     .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
@@ -95,16 +95,20 @@
       transition: all 0.3s;
     }
     .btn-secondary:hover { background: var(--accent-dim); border-color: var(--accent); }
-    section { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
-    section h2 { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 32px; text-align: center; }
+    section { max-width: 1000px; margin: 0 auto; padding: 60px 40px; }
+    section h2 { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; text-align: center; }
+    section .section-sub { font-size: 0.95rem; color: #6b7280; text-align: center; margin-bottom: 32px; }
     .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
     }
     .feature-card {
       padding: 28px; background: rgba(167,139,250,0.04);
       border: 1px solid rgba(167,139,250,0.12); border-radius: 10px; transition: all 0.3s;
     }
     .feature-card:hover { border-color: var(--accent-mid); background: rgba(167,139,250,0.08); }
+    .feature-card.highlight {
+      border-color: var(--accent-mid); background: rgba(167,139,250,0.07);
+    }
     .feature-icon { font-size: 1.5rem; margin-bottom: 12px; }
     .feature-card h3 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
     .feature-card p { font-size: 0.85rem; color: #9ca3af; line-height: 1.6; }
@@ -113,10 +117,31 @@
       color: var(--accent); background: var(--accent-dim); border-radius: 3px;
       text-transform: uppercase; letter-spacing: 0.08em; margin-left: 6px; vertical-align: middle;
     }
+    .new-badge {
+      display: inline-block; padding: 2px 8px; font-size: 0.65rem; font-weight: 600;
+      color: #34d399; background: rgba(52,211,153,0.15); border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* Hardware support bar */
+    .hardware-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+      padding: 24px; margin-top: 20px;
+      background: rgba(167,139,250,0.04); border: 1px solid rgba(167,139,250,0.1);
+      border-radius: 10px;
+    }
+    .hardware-group { text-align: center; padding: 12px 20px; }
+    .hardware-group .hw-label {
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: #6b7280; margin-bottom: 8px;
+    }
+    .hardware-group .hw-names {
+      font-size: 0.85rem; color: #d1d5db; font-weight: 500;
+    }
 
     /* Pricing tiers */
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px; margin-top: 20px;
     }
     .pricing-card {
@@ -142,10 +167,16 @@
       list-style: none; text-align: left; margin-bottom: 24px;
     }
     .pricing-card ul li {
-      padding: 6px 0; font-size: 0.85rem; color: #d1d5db;
+      padding: 5px 0; font-size: 0.82rem; color: #d1d5db;
       display: flex; gap: 8px; align-items: flex-start;
     }
     .pricing-card ul li::before { content: '✓'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+    .pricing-card ul .section-label {
+      padding: 10px 0 4px; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: #6b7280; display: block;
+    }
+    .pricing-card ul .section-label::before { content: ''; }
     .pricing-card a[class^="btn"] {
       display: block; width: 100%; text-align: center;
     }
@@ -233,6 +264,7 @@
       .cta-row { flex-direction: column; align-items: center; }
       .circuit-road { opacity: 0.4; }
       .circuit-rail-left, .circuit-rail-right { width: 50px; }
+      .hardware-bar { flex-direction: column; gap: 8px; }
     }
     @media (max-width: 400px) {
       .nav-btn { padding: 5px 8px; font-size: 0.6rem; letter-spacing: 0.03em; }
@@ -244,24 +276,24 @@
     "@type": "SoftwareApplication",
     "name": "CuePatch",
     "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "macOS",
+    "operatingSystem": "macOS, Windows",
     "offers": [
       {
         "@type": "Offer",
-        "name": "CuePatch Free",
-        "price": "0",
+        "name": "CuePatch Base",
+        "price": "49.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
         "name": "CuePatch Pro",
-        "price": "49.00",
+        "price": "99.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       }
     ],
-    "description": "Pixel map builder for LED walls. Built-in tile databases for ROE, Absen, Unilumin, and INFiLED. Generate test patterns and calibration images instantly.",
+    "description": "Complete LED pixel map builder with 48+ tile types, 3D preview, cable management, truck pack planning, curved wall support, and multi-processor output configs for Brompton, Novastar, and Megapixel Helios. Desktop app for Mac and Windows.",
     "author": {
       "@type": "Organization",
       "name": "CueForge Labs",
@@ -309,31 +341,56 @@
   </header>
 
   <div class="hero">
-    <div class="hero-badge">macOS · No Subscription · LED + Lighting</div>
-    <h1><span>CuePatch</span> — Pixel Map Builder</h1>
-    <p class="tagline">Generate pixel-perfect test patterns for LED video walls. Built-in tile database for ROE, Absen, Unilumin, and INFiLED. Pro tier adds lighting fixtures, auto DMX patching, and Disguise/MA3 export.</p>
+    <div class="hero-badge">Desktop App — Mac & Windows · No Subscription · 48+ LED Tiles</div>
+    <h1><span>CuePatch</span> — The Complete LED Pixel Map Builder</h1>
+    <p class="tagline">Build pixel maps, preview in 3D, manage cables, plan truck packs, and configure processor outputs — all in one app. 48+ tile types from ROE, Absen, Unilumin, INFiLED, Gloshine & CHAUVET. Supports Brompton, Novastar & Megapixel Helios processors.</p>
     <div class="cta-row">
       <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Base%20Purchase%20—%20%2449&body=I%27d%20like%20to%20purchase%20CuePatch%20Base.%20Please%20send%20me%20a%20download%20link." class="btn-primary">Buy Base — $49 →</a>
       <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Pro%20Purchase%20—%20%2499&body=I%27d%20like%20to%20purchase%20CuePatch%20Pro.%20Please%20send%20me%20a%20download%20link." class="btn-secondary">Buy Pro — $99 →</a>
     </div>
   </div>
 
+  <!-- Hardware Support -->
+  <section style="padding-top: 0;">
+    <div class="hardware-bar">
+      <div class="hardware-group">
+        <div class="hw-label">LED Panels</div>
+        <div class="hw-names">ROE · Absen · Unilumin · INFiLED · Gloshine · CHAUVET</div>
+      </div>
+      <div class="hardware-group">
+        <div class="hw-label">Processors</div>
+        <div class="hw-names">Brompton · Novastar · Megapixel Helios</div>
+      </div>
+      <div class="hardware-group">
+        <div class="hw-label">Export Targets</div>
+        <div class="hw-names">disguise · PNG · JPG · WebP · OBJ · CSV</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
   <section>
     <h2>Choose Your Tier</h2>
+    <p class="section-sub">One-time purchase. No subscription. No cloud dependency.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Base</h3>
         <div class="price">$49</div>
         <div class="price-note">One-time · No subscription</div>
         <ul>
-          <li>LED wall pixel map generation</li>
-          <li>Built-in tile database (ROE, Absen, Unilumin, INFiLED)</li>
+          <li class="section-label">Pixel Mapping</li>
+          <li>48+ LED tile types (ROE, Absen, Unilumin, INFiLED, Gloshine, CHAUVET)</li>
           <li>Custom tile support</li>
-          <li>Multi-surface layouts</li>
+          <li>Multi-surface layouts with independent dimensions</li>
           <li>Tile labels (A1, A2, B1, B2…)</li>
-          <li>Calibration patterns (white, black, grayscale, SMPTE)</li>
-          <li>Center circle + crosshairs for alignment</li>
-          <li>Instant PNG export, any resolution</li>
+          <li class="section-label">Visualization</li>
+          <li>Real-time 3D preview (Three.js)</li>
+          <li>Alignment patterns (crosshairs, grids, SMPTE)</li>
+          <li>Stats panel — resolution, pixel count, power draw, weight</li>
+          <li class="section-label">Export</li>
+          <li>PNG export</li>
+          <li class="section-label">Projects</li>
+          <li>Up to 3 projects</li>
         </ul>
         <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Base%20Purchase%20—%20%2449&body=I%27d%20like%20to%20purchase%20CuePatch%20Base.%20Please%20send%20me%20a%20download%20link." class="btn-primary">Buy Base — $49 →</a>
       </div>
@@ -342,13 +399,25 @@
         <div class="price">$99</div>
         <div class="price-note">One-time · Everything in Base, plus:</div>
         <ul>
-          <li>Everything in Base</li>
-          <li>Lighting fixture pixel maps</li>
-          <li>Auto DMX patching</li>
-          <li>Disguise CSV export</li>
-          <li>grandMA3 XML fixture export</li>
-          <li>Color-coded surface groups</li>
-          <li>Advanced calibration patterns</li>
+          <li class="section-label">Everything in Base, plus:</li>
+          <li>Cable Manager — home runs, spares, pull sheet export</li>
+          <li>Cart/Truck Pack Planner — visual loading + paperwork</li>
+          <li>Multi-Output processor configs (Brompton, Novastar, Helios)</li>
+          <li>Screen Splitting across multiple outputs</li>
+          <li>Curved Wall Mode with overlap detection</li>
+          <li>Wall Builder — physical dimensions dialog</li>
+          <li class="section-label">Advanced Visualization</li>
+          <li>3D Placement Presets</li>
+          <li>Image overlay support (upload, crop, resize)</li>
+          <li>Enhanced screen labels — weight, offset, resolution badges</li>
+          <li>Expanded color swatches (16 colors + picker)</li>
+          <li class="section-label">Export & Integration</li>
+          <li>Unlimited exports (PNG, JPG, WebP)</li>
+          <li>OBJ mesh export for 3D workflows</li>
+          <li>disguise CSV export</li>
+          <li>Per-screen processor/wiring settings</li>
+          <li class="section-label">Workflow</li>
+          <li>Unlimited projects</li>
           <li>Priority support</li>
         </ul>
         <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Pro%20Purchase%20—%20%2499&body=I%27d%20like%20to%20purchase%20CuePatch%20Pro.%20Please%20send%20me%20a%20download%20link." class="btn-primary">Buy Pro — $99 →</a>
@@ -356,71 +425,135 @@
     </div>
   </section>
 
+  <!-- Features -->
   <section>
     <h2>All Features</h2>
+    <p class="section-sub">More than a pixel map generator — it's your complete LED prep toolkit.</p>
     <div class="features-grid">
-      <div class="feature-card">
+
+      <div class="feature-card highlight">
         <div class="feature-icon">📺</div>
-        <h3>LED Tile Database</h3>
-        <p>Pre-loaded specs for ROE, Absen, Unilumin, INFiLED, and more. Select a tile, define your grid, generate. No manual math.</p>
+        <h3>48+ LED Tile Database</h3>
+        <p>Pre-loaded specs for ROE, Absen, Unilumin, INFiLED, Gloshine, and CHAUVET. Select a tile, define your grid, generate. No manual math.</p>
       </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">🧊</div>
+        <h3>3D Preview <span class="new-badge">New</span></h3>
+        <p>See your LED wall layouts rendered in real-time 3D with Three.js. Validate placement, dimensions, and sight lines before you get to site.</p>
+      </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">🔌</div>
+        <h3>Cable Manager <span class="pro-badge">Pro</span></h3>
+        <p>Full cable management — define home runs, spares, and cable types. Export pull sheets for your crew. No more spreadsheets.</p>
+      </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">🚛</div>
+        <h3>Truck Pack Planner <span class="pro-badge">Pro</span></h3>
+        <p>Visual cart and truck loading with drag-and-drop. Generate pack paperwork and manifests. Know exactly what fits before load-in.</p>
+      </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">🌀</div>
+        <h3>Curved Wall Mode <span class="pro-badge">Pro</span></h3>
+        <p>Build curved LED walls with automatic overlap detection. Wall Builder dialog for physical dimensions. Handle concave and convex layouts.</p>
+      </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">🖥️</div>
+        <h3>Multi-Output Processor Configs <span class="pro-badge">Pro</span></h3>
+        <p>Configure outputs for Brompton, Novastar, and Megapixel Helios processors. Split screens across multiple outputs with per-screen wiring settings.</p>
+      </div>
+
       <div class="feature-card">
         <div class="feature-icon">🔲</div>
         <h3>Multi-Surface Support</h3>
         <p>Define multiple LED surfaces with independent dimensions and offsets. Handle complex stage layouts in a single project.</p>
       </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Stats Panel</h3>
+        <p>Real-time calculations for total resolution, pixel count, power draw, and weight. Know your specs before you order.</p>
+      </div>
+
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
         <h3>Alignment Patterns</h3>
-        <p>Center circles, crosshairs, and grid overlays for precise panel alignment. See problems before the content goes up.</p>
+        <p>Center circles, crosshairs, grid overlays, and SMPTE bars for precise panel alignment. See problems before content goes up.</p>
       </div>
+
       <div class="feature-card">
         <div class="feature-icon">🏷️</div>
-        <h3>Tile Labeling</h3>
-        <p>Automatic tile labels (A1, A2, B1, B2…) with color-coded alternating tiles. Know which panel is which at a glance.</p>
+        <h3>Enhanced Labels <span class="pro-badge">Pro</span></h3>
+        <p>Auto tile labels with weight control, master offset, and resolution badges. Color-coded alternating tiles. Know which panel is which at a glance.</p>
       </div>
+
       <div class="feature-card">
-        <div class="feature-icon">💡</div>
-        <h3>Lighting Fixtures <span class="pro-badge">Pro</span></h3>
-        <p>Generate pixel maps for LED fixtures — battens, panels, moving lights. Not just video walls anymore.</p>
+        <div class="feature-icon">🖼️</div>
+        <h3>Image Overlay <span class="pro-badge">Pro</span></h3>
+        <p>Upload reference images as overlays — crop, resize, and position with handles. Preview your content on the actual wall layout.</p>
       </div>
+
       <div class="feature-card">
         <div class="feature-icon">📤</div>
-        <h3>MA3 & Disguise Export <span class="pro-badge">Pro</span></h3>
-        <p>Export directly to grandMA3 XML and Disguise CSV formats. Skip the manual data entry entirely.</p>
+        <h3>Export Everything <span class="pro-badge">Pro</span></h3>
+        <p>Unlimited exports in PNG, JPG, and WebP. OBJ mesh export for 3D workflows. disguise CSV export for media server integration.</p>
       </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Color Swatches <span class="pro-badge">Pro</span></h3>
+        <p>16 preset colors plus a full color picker. Color-code your surfaces, groups, and zones for instant visual clarity.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3>3D Placement Presets <span class="pro-badge">Pro</span></h3>
+        <p>Quickly position walls with 3D presets — ground, fascia, header, side fills, and custom angles. Skip the manual positioning.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3>Desktop App — Mac & Windows</h3>
+        <p>Native desktop app built with Tauri. Runs offline, no browser required. Your data stays on your machine.</p>
+      </div>
+
     </div>
   </section>
 
+  <!-- Who It's For -->
   <section>
     <h2>Who It's For</h2>
     <ul class="use-cases">
       <li>
-        <div class="use-case-icon">📺</div>
-        <div class="use-case-text">
-          <strong>Video Engineers</strong>
-          <span>Generate test patterns for LED walls in minutes. Verify panel mapping before content loads.</span>
-        </div>
-      </li>
-      <li>
-        <div class="use-case-icon">💡</div>
-        <div class="use-case-text">
-          <strong>Lighting Programmers</strong>
-          <span>Pro tier handles lighting fixture pixel mapping with auto DMX patching and MA3 export.</span>
-        </div>
-      </li>
-      <li>
         <div class="use-case-icon">🎬</div>
         <div class="use-case-text">
-          <strong>Media Server Operators</strong>
-          <span>Verify pixel map alignment between disguise and physical LED layout. Export Disguise CSV directly.</span>
+          <strong>Video Directors</strong>
+          <span>Design LED layouts, preview in 3D, and generate pixel maps before you get to the venue. Share specs with your crew instantly.</span>
         </div>
       </li>
       <li>
-        <div class="use-case-icon">📋</div>
+        <div class="use-case-icon">🔧</div>
+        <div class="use-case-text">
+          <strong>LED Technicians</strong>
+          <span>Cable management, tile labeling, processor configs, and pull sheets. Everything you need for a clean install — in one app.</span>
+        </div>
+      </li>
+      <li>
+        <div class="use-case-icon">🏢</div>
         <div class="use-case-text">
           <strong>Rental Houses</strong>
-          <span>Standardize test pattern generation across your fleet. Custom tile database for your inventory.</span>
+          <span>Standardize pixel map generation, truck pack planning, and cable prep across your fleet. Custom tile database for your inventory.</span>
+        </div>
+      </li>
+      <li>
+        <div class="use-case-icon">🎪</div>
+        <div class="use-case-text">
+          <strong>Production Companies</strong>
+          <span>From pre-production to load-in — design walls, split processor outputs, plan truck packs, and export to disguise. One workflow, start to finish.</span>
         </div>
       </li>
     </ul>
@@ -455,7 +588,7 @@
 
   <div class="bottom-cta">
     <h2>Ready to Stop Building Pixel Maps in Photoshop?</h2>
-    <p>Base $49 for LED walls. Pro $99 adds lighting fixtures, DMX patching, and MA3/Disguise export.</p>
+    <p>Base $49 for pixel mapping, 3D preview, and stats. Pro $99 adds cable management, truck pack planning, curved walls, multi-processor output, and unlimited exports.</p>
     <div class="cta-row">
       <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Pro%20Purchase%20—%20%2499&body=I%27d%20like%20to%20purchase%20CuePatch%20Pro.%20Please%20send%20me%20a%20download%20link." class="btn-primary">Buy Pro — $99 →</a>
       <a href="software-circuit.html" class="btn-secondary">← Back to All Software</a>
