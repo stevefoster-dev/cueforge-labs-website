@@ -76,7 +76,7 @@ CuePatch generates pixel-perfect test patterns for your LED walls. Pick your til
 
 Tile labels. Crosshairs. Multi-surface color coding. Every calibration pattern you need.
 
-Starts at $49.
+Free to start. Pro $129. Team $249.
 
 cueforgelabs.com/cuepatch
 
@@ -110,7 +110,7 @@ cueforgelabs.com/cuecheck
 **Image idea:** All 4 app logos/icons together or the suite page
 
 **Caption:**
-The CueForge Suite — CueRoll + CueMaker + CuePatch for $149.
+The CueForge Suite — CueRoll + CueMaker + CuePatch Pro for $199.
 
 That's $28 less than buying them separately, and less than most of us spend on coffee during a festival weekend.
 

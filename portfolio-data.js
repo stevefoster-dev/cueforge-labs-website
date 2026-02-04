@@ -667,7 +667,7 @@ const portfolioData = {
       name: 'CuePatch',
       type: 'LED Tool',
       image: null,
-      desc: 'Visual pixel mapping builder for LED installations. Drag-and-drop interface to create complex fixture layouts.',
+      desc: 'Complete LED pixel map builder with 48+ tile types, multi-output screen splitting, cable management, 3D preview, Disguise/MA3 exports. Free / Pro $129 / Team $249.',
       tech: ['React', 'Canvas API', 'WebGL']
     },
     {
