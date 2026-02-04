@@ -797,22 +797,22 @@
             ${tracePaths}
           </svg>
           
-          <div class="data-node" style="top: 3%; ${isLeft ? 'left' : 'right'}: 20%;">
+          <div class="data-node" style="top: 1%; ${isLeft ? 'left' : 'right'}: 20%;">
             <div class="solder-point"></div>
             <div class="data-value artist">${item.name}</div>
           </div>
           
-          <div class="data-node" style="top: 25%; ${isLeft ? 'left' : 'right'}: 28%;">
+          <div class="data-node" style="top: 18%; ${isLeft ? 'left' : 'right'}: 28%;">
             <div class="solder-point"></div>
             <div class="data-value show">${item.tagline}</div>
           </div>
           
-          <div class="data-node" style="top: 40%; ${isLeft ? 'left' : 'right'}: 36%;">
+          <div class="data-node" style="top: 33%; ${isLeft ? 'left' : 'right'}: 36%;">
             <div class="solder-point"></div>
             <div class="data-value description-value">${item.description}</div>
           </div>
           
-          <div class="data-node" style="top: 73%; ${isLeft ? 'left' : 'right'}: 45%;">
+          <div class="data-node" style="top: 78%; ${isLeft ? 'left' : 'right'}: 45%;">
             <div class="solder-point"></div>
             <div class="data-value price-value">${item.price}</div>
           </div>
@@ -839,20 +839,20 @@
         const r2 = 50 + Math.random() * 20;
         const r3 = 40 + Math.random() * 20;
         return `
-          <path class="trace-path" d="M 0 52 H ${r1} V 32 H 160"/>
-          <path class="trace-path" d="M 0 105 H ${r2} L ${r2+15} 91 H 220"/>
-          <path class="trace-path" d="M 0 157 H ${r3} V 140 H ${r3+60} L ${r3+75} 152 H 300"/>
-          <path class="trace-path" d="M -20 245 H ${r1+20} V 225 H ${r1+80} L ${r1+100} 240 H 400"/>
+          <path class="trace-path" d="M 0 42 H ${r1} V 22 H 160"/>
+          <path class="trace-path" d="M 0 85 H ${r2} L ${r2+15} 71 H 220"/>
+          <path class="trace-path" d="M 0 137 H ${r3} V 120 H ${r3+60} L ${r3+75} 132 H 300"/>
+          <path class="trace-path" d="M -20 255 H ${r1+20} V 235 H ${r1+80} L ${r1+100} 250 H 400"/>
         `;
       } else {
         const r1 = 30 + Math.random() * 20;
         const r2 = 50 + Math.random() * 20;
         const r3 = 40 + Math.random() * 20;
         return `
-          <path class="trace-path" d="M 800 52 H ${800-r1} V 32 H 640"/>
-          <path class="trace-path" d="M 800 105 H ${800-r2} L ${800-r2-15} 91 H 580"/>
-          <path class="trace-path" d="M 800 157 H ${800-r3} V 140 H ${800-r3-60} L ${800-r3-75} 152 H 500"/>
-          <path class="trace-path" d="M 820 245 H ${800-r1-20} V 225 H ${800-r1-80} L ${800-r1-100} 240 H 400"/>
+          <path class="trace-path" d="M 800 42 H ${800-r1} V 22 H 640"/>
+          <path class="trace-path" d="M 800 85 H ${800-r2} L ${800-r2-15} 71 H 580"/>
+          <path class="trace-path" d="M 800 137 H ${800-r3} V 120 H ${800-r3-60} L ${800-r3-75} 132 H 500"/>
+          <path class="trace-path" d="M 820 255 H ${800-r1-20} V 235 H ${800-r1-80} L ${800-r1-100} 250 H 400"/>
         `;
       }
     }
