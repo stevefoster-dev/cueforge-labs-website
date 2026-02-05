@@ -26,7 +26,7 @@ CUEPATCH_BASE_URL=""
 # CuePatch Pro - $249 one-time (5 machines, commercial)
 CUEPATCH_PRO_URL=""
 
-# CueForge Suite - $149 one-time (all tools bundle)
+# CueForge Suite - $199 one-time (all tools bundle, save $58)
 SUITE_URL=""
 
 # ============================================================
@@ -70,7 +70,7 @@ if [[ $valid -eq 0 ]]; then
   echo "   • CueMaker: \$79 one-time"
   echo "   • CuePatch Base: \$129 one-time (mention: 2 machine license)"
   echo "   • CuePatch Pro: \$249 one-time (mention: 5 machine license, commercial)"
-  echo "   • CueForge Suite: \$149 one-time (all tools)"
+  echo "   • CueForge Suite: \$199 one-time (all tools, save \$58)"
   echo "4. Copy each payment link URL"
   echo "5. Paste them into this script"
   echo "6. Run ./scripts/wire-checkout.sh again"
@@ -86,13 +86,14 @@ echo "Wiring $valid checkout URLs into pages..."
 # CuePatch page - Base and Pro buttons
 if [[ -n "$CUEPATCH_BASE_URL" ]]; then
   echo "  → Wiring CuePatch Base..."
-  # Replace anchor links pointing to #buy-base
-  sed -i '' "s|href=\"#buy-base\"|href=\"$CUEPATCH_BASE_URL\" target=\"_blank\"|g" cuepatch.html
+  # Replace mailto: buy links for CuePatch Base
+  sed -i '' "s|href=\"mailto:steve@cueforgelabs.com?subject=CuePatch%20Base[^\"]*\"|href=\"$CUEPATCH_BASE_URL\" target=\"_blank\"|g" cuepatch.html
 fi
 
 if [[ -n "$CUEPATCH_PRO_URL" ]]; then
   echo "  → Wiring CuePatch Pro..."
-  sed -i '' "s|href=\"#buy-pro\"|href=\"$CUEPATCH_PRO_URL\" target=\"_blank\"|g" cuepatch.html
+  # Replace mailto: buy links for CuePatch Pro
+  sed -i '' "s|href=\"mailto:steve@cueforgelabs.com?subject=CuePatch%20Pro[^\"]*\"|href=\"$CUEPATCH_PRO_URL\" target=\"_blank\"|g" cuepatch.html
 fi
 
 # CueRoll page
