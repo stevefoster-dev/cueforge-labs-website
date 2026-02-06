@@ -28,7 +28,7 @@ const portfolioData = {
       show: 'Summer Festival Tour',
       year: 2025,
       role: 'Video Programmer / Screens Director',
-      image: '',
+      image: 'images/lainey-wilson-summer-2025.jpg',
       credits: [
         { company: 'Silent Partners Studios' }
       ]
