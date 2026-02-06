@@ -3,15 +3,24 @@ const portfolioData = {
   production: [
     // 2025
     {
-      id: 'gnx-tour-2025',
-      artist: 'Kendrick Lamar & SZA',
-      show: 'The GNX Tour',
+      id: 'patd-wwwy-2025',
+      artist: 'Panic! at the Disco',
+      show: 'When We Were Young Festival',
       year: 2025,
-      role: 'Content Systems Manager',
+      role: 'Video Programmer / Screens Director',
       image: '',
       credits: [
-        { role: 'Production Designer', name: 'Cory Fitzgerald', company: 'Silent House' }
+        { company: 'Silent House' }
       ]
+    },
+    {
+      id: 'lainey-wilson-whirlwind-2025',
+      artist: 'Lainey Wilson',
+      show: 'Whirlwind Tour',
+      year: 2025,
+      role: 'Video Programmer',
+      image: '',
+      credits: []
     },
     {
       id: 'lainey-wilson-summer-2025',
@@ -25,23 +34,14 @@ const portfolioData = {
       ]
     },
     {
-      id: 'lainey-wilson-whirlwind-2025',
-      artist: 'Lainey Wilson',
-      show: 'Whirlwind Tour',
+      id: 'gnx-tour-2025',
+      artist: 'Kendrick Lamar & SZA',
+      show: 'The GNX Tour',
       year: 2025,
-      role: 'Video Programmer',
-      image: '',
-      credits: []
-    },
-    {
-      id: 'patd-wwwy-2025',
-      artist: 'Panic! at the Disco',
-      show: 'When We Were Young Festival',
-      year: 2025,
-      role: 'Video Programmer / Screens Director',
+      role: 'Content Systems Manager',
       image: '',
       credits: [
-        { company: 'Silent House' }
+        { role: 'Production Designer', name: 'Cory Fitzgerald', company: 'Silent House' }
       ]
     },
     // 2024
