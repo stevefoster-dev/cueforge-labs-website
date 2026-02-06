@@ -1,6 +1,49 @@
 // Full portfolio data from radiancedesign.org - with all images
 const portfolioData = {
   production: [
+    // 2025
+    {
+      id: 'gnx-tour-2025',
+      artist: 'Kendrick Lamar & SZA',
+      show: 'The GNX Tour',
+      year: 2025,
+      role: 'Content Systems Manager',
+      image: '',
+      credits: [
+        { role: 'Production Designer', name: 'Cory Fitzgerald', company: 'Silent House' }
+      ]
+    },
+    {
+      id: 'lainey-wilson-summer-2025',
+      artist: 'Lainey Wilson',
+      show: 'Summer Festival Tour',
+      year: 2025,
+      role: 'Video Programmer / Screens Director',
+      image: '',
+      credits: [
+        { company: 'Silent Partners Studios' }
+      ]
+    },
+    {
+      id: 'lainey-wilson-whirlwind-2025',
+      artist: 'Lainey Wilson',
+      show: 'Whirlwind Tour',
+      year: 2025,
+      role: 'Video Programmer',
+      image: '',
+      credits: []
+    },
+    {
+      id: 'patd-wwwy-2025',
+      artist: 'Panic! at the Disco',
+      show: 'When We Were Young Festival',
+      year: 2025,
+      role: 'Video Programmer / Screens Director',
+      image: '',
+      credits: [
+        { company: 'Silent House' }
+      ]
+    },
     // 2024
     {
       id: 'eras-tour-ttpd',
