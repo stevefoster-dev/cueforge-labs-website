@@ -19,7 +19,7 @@ const portfolioData = {
       show: 'Whirlwind Tour',
       year: 2025,
       role: 'Video Programmer',
-      image: '',
+      image: 'images/lainey-wilson-whirlwind-2025.jpg',
       credits: []
     },
     {
