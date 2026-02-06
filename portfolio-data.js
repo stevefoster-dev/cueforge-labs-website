@@ -8,7 +8,7 @@ const portfolioData = {
       show: 'When We Were Young Festival',
       year: 2025,
       role: 'Video Programmer / Screens Director',
-      image: '',
+      image: 'images/patd-wwwy-2025.jpg',
       credits: [
         { company: 'Silent House' }
       ]
