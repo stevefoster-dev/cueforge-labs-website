@@ -125,8 +125,8 @@ const portfolioData = {
     // 2020
     {
       id: 'the-cube',
-      artist: 'TBS Original',
-      show: 'The Cube (Hosted by Dwyane Wade)',
+      artist: 'The Cube ft. Dwyane Wade',
+      show: 'TBS Original Series',
       year: 2020,
       role: 'Video Programmer',
       image: 'https://images.squarespace-cdn.com/content/v1/5b3f06feb40b9d2ec951e09d/c1a7414b-9f59-434e-a85d-6c0c72173eda/6227ced29b964d3c96cd4666_The-Cube_2020_TBS_2.jpg',
