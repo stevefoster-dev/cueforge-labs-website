@@ -39,7 +39,7 @@ const portfolioData = {
       show: 'The GNX Tour',
       year: 2025,
       role: 'Content Systems Manager',
-      image: '',
+      image: 'images/gnx-tour-2025.jpg',
       credits: [
         { role: 'Production Designer', name: 'Cory Fitzgerald', company: 'Silent House' }
       ]
