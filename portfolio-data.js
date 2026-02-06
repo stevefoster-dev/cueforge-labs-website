@@ -20,7 +20,10 @@ const portfolioData = {
       year: 2025,
       role: 'Video Programmer',
       image: 'images/lainey-wilson-whirlwind-2025.jpg',
-      credits: []
+      credits: [
+        { company: 'Silent House' },
+        { company: 'Silent Partners Studios' }
+      ]
     },
     {
       id: 'lainey-wilson-summer-2025',
@@ -30,6 +33,7 @@ const portfolioData = {
       role: 'Video Programmer / Screens Director',
       image: 'images/lainey-wilson-summer-2025.jpg',
       credits: [
+        { company: 'Silent House' },
         { company: 'Silent Partners Studios' }
       ]
     },
