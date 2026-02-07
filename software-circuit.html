@@ -285,6 +285,9 @@
     .node-body img.scale-up {
       transform: scale(1.4);
     }
+    .node-body img.cover-fit {
+      object-fit: cover;
+    }
     .node-body img.move-up {
       transform: translateY(-10%);
     }
@@ -803,7 +806,7 @@
       entry.addEventListener('click', () => { window.location.href = item.url; });
       
       let imgClass = '';
-      if (item.name === 'CuePack') imgClass = '';
+      if (item.name === 'CuePack') imgClass = 'cover-fit';
       if (item.name === 'CueCapture') imgClass = 'move-up';
       entry.innerHTML = `
         <div class="circuit-node">
