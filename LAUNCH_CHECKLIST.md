@@ -15,9 +15,9 @@ Gumroad is the fastest way to sell digital products. No code changes needed.
 
 ### Step 2: Create Products (15 min each)
 
-#### CueRoll — $49
+#### CueRoll — $79
 - **Title:** CueRoll — LTC Timecode Note-Taking
-- **Price:** $49 (one-time)
+- **Price:** $79 (one-time)
 - **Description:**
   ```
   Take notes synchronized to live timecode. Perfect for tech rehearsals, show calls, and post-show notes.
