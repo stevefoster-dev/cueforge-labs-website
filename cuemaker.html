@@ -185,6 +185,75 @@
     section h2 { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; text-align: center; }
     .section-sub { font-size: 0.95rem; color: var(--text-sub); text-align: center; margin-bottom: 32px; }
 
+    section::before,
+    section::after {
+      display: none;
+    }
+
+    .rail-frame {
+      position: relative;
+      overflow: hidden;
+      padding-top: 86px;
+    }
+    .rail-frame::before,
+    .rail-frame::after {
+      content: '';
+      position: absolute;
+      top: 26px;
+      bottom: 26px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(167,139,250,0.08) 0%, rgba(167,139,250,0.7) 45%, rgba(167,139,250,0.25) 70%, rgba(167,139,250,0.05) 100%);
+      background-size: 100% 160px;
+      background-repeat: repeat-y;
+      box-shadow: 0 0 12px rgba(167,139,250,0.6);
+      opacity: 0.95;
+      animation: rail-pulse 8s linear infinite;
+    }
+    .rail-frame::before { left: 24px; animation-delay: -1s; }
+    .rail-frame::after { right: 24px; animation-delay: -5s; }
+
+    .top-node {
+      position: absolute;
+      top: 26px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--trace-bright-glow), 0 0 36px rgba(167,139,250,0.55);
+      z-index: 2;
+    }
+    .top-node::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1px solid rgba(167,139,250,0.45);
+      box-shadow: 0 0 24px rgba(167,139,250,0.35);
+      animation: node-glow 2.6s ease-in-out infinite;
+    }
+    .top-node::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(167,139,250,0.18);
+    }
+
+    .rail-frame.section-screenshot { padding-top: 70px; }
+    .rail-frame.section-tight { padding-top: 72px; }
+
+    @keyframes rail-pulse {
+      0% { background-position: 0 -160px; opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { background-position: 0 160px; opacity: 0.4; }
+    }
+    @keyframes node-glow {
+      0%, 100% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
     .section-screenshot { max-width: 980px; padding: 36px 40px 44px; }
     .section-tight { padding-top: 32px; }
     .section-center { text-align: center; max-width: 760px; }
@@ -420,12 +489,21 @@
       .hardware-bar { flex-direction: column; gap: 8px; }
       .circuit-road { opacity: 0.35; }
       .circuit-rail-left, .circuit-rail-right { width: 60px; }
+
+      .rail-frame { padding-top: 74px; }
+      .rail-frame::before, .rail-frame::after { top: 22px; bottom: 22px; width: 1px; opacity: 0.7; }
+      .rail-frame::before { left: 14px; }
+      .rail-frame::after { right: 14px; }
+      .top-node { top: 22px; width: 12px; height: 12px; }
     }
     @media (max-width: 520px) {
       .hero h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
       .tagline { font-size: 1rem; }
       .nav-btn { padding: 5px 8px; font-size: 0.6rem; letter-spacing: 0.03em; }
       .section-screenshot { padding: 30px 18px 38px; }
+
+      .rail-frame { padding-top: 66px; }
+      .top-node { width: 10px; height: 10px; }
     }
   </style>
   <script type="application/ld+json">
@@ -502,7 +580,8 @@
   </div>
 
   <!-- Product Screenshot -->
-  <section class="section-screenshot">
+  <section class="rail-frame section-screenshot">
+    <div class="top-node" aria-hidden="true"></div>
     <div class="screenshot-frame">
       <picture>
         <source srcset="images/mockups/cuemaker-mockup.webp" type="image/webp">
@@ -512,7 +591,8 @@
     <p class="screenshot-caption">CueMaker with live timecode, waveform markers, and grandMA3 export</p>
   </section>
 
-  <section>
+  <section class="rail-frame">
+    <div class="top-node" aria-hidden="true"></div>
     <h2>From Playback to Programming</h2>
     <div class="features-grid">
       <div class="feature-card">
@@ -548,7 +628,8 @@
     </div>
   </section>
 
-  <section>
+  <section class="rail-frame">
+    <div class="top-node" aria-hidden="true"></div>
     <h2>Who It's For</h2>
     <ul class="use-cases">
       <li>
@@ -582,7 +663,8 @@
     </ul>
   </section>
 
-  <section>
+  <section class="rail-frame">
+    <div class="top-node" aria-hidden="true"></div>
     <h2>No Subscriptions. No Cloud. Your Tools.</h2>
     <div class="philosophy-grid">
       <div class="philosophy-item">
@@ -610,7 +692,8 @@
 
 
   <!-- Credibility Section -->
-  <section class="section-center section-tight">
+  <section class="rail-frame section-center section-tight">
+    <div class="top-node" aria-hidden="true"></div>
     <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:16px;">Built from the Road</p>
     <p style="font-size:1rem;color:#9ca3af;line-height:1.7;margin-bottom:20px;">CueMaker was born on tour — built by a lighting programmer who needed to bridge timecode and grandMA3 without juggling spreadsheets between rehearsals.</p>
     <p style="font-size:0.85rem;color:#6b7280;line-height:1.8;">Built by a touring LD with 15+ years on major world tours, stadium shows, and residencies</p>
