@@ -273,17 +273,21 @@
       border: 1px solid rgba(167,139,250,0.18);
     }
 
-    .center-spine {
+    .bottom-node::after {
+      content: '';
       position: absolute;
-      top: 30px;
-      bottom: 30px;
       left: 50%;
+      top: 50%;
       width: 2px;
+      height: 94px;
       transform: translateX(-50%);
-      background: linear-gradient(180deg, rgba(167,139,250,0.2) 0%, rgba(167,139,250,0.8) 30%, rgba(167,139,250,0.45) 60%, rgba(167,139,250,0.2) 100%);
+      background: linear-gradient(180deg, rgba(167,139,250,0.75) 0%, rgba(167,139,250,0.2) 100%);
       box-shadow: 0 0 10px rgba(167,139,250,0.45);
+      pointer-events: none;
       z-index: 1;
-      opacity: 0.85;
+    }
+    .rail-frame:last-of-type .bottom-node::after {
+      display: none;
     }
 
     .rail-frame.section-screenshot { padding-top: 74px; }
@@ -550,7 +554,6 @@
       .top-node, .bottom-node { width: 12px; height: 12px; }
       .top-node { top: 22px; }
       .bottom-node { bottom: 22px; }
-      .center-spine { top: 26px; bottom: 26px; width: 1px; }
     }
     @media (max-width: 520px) {
       .hero h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
@@ -560,7 +563,6 @@
 
       .rail-frame { padding-top: 66px; padding-bottom: 54px; }
       .top-node, .bottom-node { width: 10px; height: 10px; }
-      .center-spine { top: 24px; bottom: 24px; }
     }
   </style>
   <script type="application/ld+json">
@@ -639,7 +641,6 @@
   <!-- Product Screenshot -->
   <section class="rail-frame section-screenshot">
     <div class="top-node" aria-hidden="true"></div>
-    <div class="center-spine" aria-hidden="true"></div>
     <div class="bottom-node" aria-hidden="true"></div>
     <div class="screenshot-frame">
       <picture>
@@ -652,7 +653,6 @@
 
   <section class="rail-frame">
     <div class="top-node" aria-hidden="true"></div>
-    <div class="center-spine" aria-hidden="true"></div>
     <div class="bottom-node" aria-hidden="true"></div>
     <h2>Built for the Road</h2>
     <div class="features-grid">
@@ -691,7 +691,6 @@
 
   <section class="rail-frame">
     <div class="top-node" aria-hidden="true"></div>
-    <div class="center-spine" aria-hidden="true"></div>
     <div class="bottom-node" aria-hidden="true"></div>
     <h2>Who It's For</h2>
     <ul class="use-cases">
@@ -728,7 +727,6 @@
 
   <section class="rail-frame">
     <div class="top-node" aria-hidden="true"></div>
-    <div class="center-spine" aria-hidden="true"></div>
     <div class="bottom-node" aria-hidden="true"></div>
     <h2>No Subscriptions. No Cloud. Your Tools.</h2>
     <div class="philosophy-grid">
@@ -759,7 +757,6 @@
   <!-- Credibility Section -->
   <section class="rail-frame section-center section-tight">
     <div class="top-node" aria-hidden="true"></div>
-    <div class="center-spine" aria-hidden="true"></div>
     <div class="bottom-node" aria-hidden="true"></div>
     <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:16px;">Built from the Road</p>
     <p style="font-size:1rem;color:#9ca3af;line-height:1.7;margin-bottom:20px;">CueRoll was built by a touring lighting programmer and video engineer with 15+ years on the biggest stages — not by someone who watched a YouTube tutorial about live events.</p>
