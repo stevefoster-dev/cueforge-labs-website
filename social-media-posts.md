@@ -3,6 +3,43 @@
 
 ---
 
+### TONIGHT CASH PUSH (copy/paste)
+
+**SMS (short):**
+Tonight only: CueForge tools are ready to ship — CueRoll $79, CueMaker $79, CuePatch Base $129 / Pro $249, CueCheck Solo $149 / Team $399, or the Suite bundle for $199. Reply "INVOICE" and I’ll send checkout now.
+
+**Instagram:**
+If you’ve been waiting to clean up your production workflow, tonight’s the night.
+
+• CueRoll — $79
+• CueMaker — $79
+• CuePatch Base — $129
+• CuePatch Pro — $249
+• CueCheck Solo — $149
+• CueCheck Team (3-seat) — $399
+• CueForge Suite Bundle — $199
+
+Built by a touring LD, sold as one-time licenses, and ready to ship now. DM me "invoice" and I’ll send your checkout link.
+
+**Facebook / LinkedIn:**
+Quick launch push for CueForge Labs tonight:
+- CueRoll ($79) — LTC-synced rehearsal notes
+- CueMaker ($79) — marker workflow + grandMA3 XML export
+- CuePatch Base ($129) / Pro ($249) — LED pixel map and test pattern workflow
+- CueCheck Solo ($149) / Team ($399) — content validation + naming pipeline
+- CueForge Suite Bundle ($199)
+
+Everything is one-time purchase and invoice-first right now. If you want in, reply or message me and I’ll send checkout immediately.
+
+**Email blast snippet:**
+Subject: CueForge tools are live tonight (invoice checkout)
+
+Hey — quick heads up: I’m doing a direct checkout push on my CueForge tools tonight.
+CueRoll $79, CueMaker $79, CuePatch Base $129 / Pro $249, CueCheck Solo $149 / Team $399, and the CueForge Suite Bundle at $199.
+If you want a license tonight, reply with the tool name + billing email and I’ll send your invoice checkout link right away.
+
+---
+
 ### POST 1: Brand Announcement (Lead with the suite)
 
 **Image idea:** Screenshot of the CueForge Labs website landing page (the glowing anvil)
@@ -38,7 +75,7 @@ CueRoll decodes LTC from your audio input, auto-detects what song you're in, and
 
 Export to CSV, Notion, or plain text when you're done.
 
-$49. One time. Less than a day rate.
+$79. One time. Less than a day rate.
 
 cueforgelabs.com/cueroll
 
@@ -158,3 +195,8 @@ cueforgelabs.com
 - Facebook: Longer captions perform fine, share to relevant production groups
 - Tag relevant people/companies if appropriate
 - Stories: BTS of building the apps, screen recordings of the tools in action
+
+---
+
+## Checkout path note
+Current checkout flow is invoice-first from each product page CTA. Buyers click the CTA, send purchase intent, and receive invoice checkout + delivery instructions directly.
