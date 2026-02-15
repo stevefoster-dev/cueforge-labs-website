@@ -33,7 +33,7 @@ if [[ $missing -eq 1 ]]; then
   echo ""
   echo "Steps:"
   echo "1. Go to https://gumroad.com and create an account"
-  echo "2. Create products: CueRoll ($49), CueMaker ($79), CuePatch Base ($49), CuePatch Pro ($99)"
+  echo "2. Create products: CueRoll ($79), CueMaker ($79), CuePatch Base ($129), CuePatch Pro ($249)"
   echo "3. Upload the DMGs for each product"
   echo "4. Copy each product URL and paste it above"
   echo "5. Run this script again"

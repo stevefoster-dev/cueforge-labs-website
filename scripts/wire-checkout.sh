@@ -14,7 +14,7 @@ cd "$(dirname "$0")/.."
 # 🔧 CONFIGURE THESE — Paste your Stripe Payment Link URLs
 # ============================================================
 
-# CueRoll - $49 one-time
+# CueRoll - $79 one-time
 CUEROLL_URL=""
 
 # CueMaker - $79 one-time  
@@ -26,7 +26,7 @@ CUEPATCH_BASE_URL=""
 # CuePatch Pro - $249 one-time (5 machines, commercial)
 CUEPATCH_PRO_URL=""
 
-# CueForge Suite - $199 one-time (all tools bundle, save $58)
+# CueForge Suite - $199 one-time (all tools bundle, save $88)
 SUITE_URL=""
 
 # ============================================================
