@@ -83,7 +83,7 @@ const portfolioData = {
     {
       id: 'jt-fontainebleau-2023',
       artist: 'Justin Timberlake',
-      show: 'Fontainebleau Casino Opening',
+      show: 'Fontainebleau Casino Opening — Silent House',
       year: 2023,
       role: 'Screens Director / Video Programmer',
       image: 'images/jt-fontainebleau.png',
