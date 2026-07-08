@@ -740,9 +740,9 @@
         name: 'CuePack',
         image: 'images/products/cuepack.png',
         tagline: 'Tour Pack Planning & Freight',
-        description: 'Plan truck packs, air freight, and sea shipments with 3D visualization. Gear inventory and load-out planning.',
-        price: 'Coming Soon',
-        url: 'cuepack.html'
+        description: 'Plan truck packs, air freight, and sea shipments with 3D visualization. Pricing scales by account membership, active productions, truck scale add-ons, support/onboarding, and standby/archive mode.',
+        price: 'Membership + Production Packs',
+        url: 'cuepack.html#pricing'
       },
       {
         name: 'CueCheck',
@@ -938,6 +938,7 @@
     
     // Scroll-based lighting with crossfade
     const entries = document.querySelectorAll('.circuit-entry');
+    let roadLit = false;
     
     function updateLighting() {
       const viewportCenter = window.innerHeight / 2;
@@ -968,7 +969,6 @@
     window.addEventListener('scroll', updateLighting, { passive: true });
     updateLighting(); // Initial call
 
-    let roadLit = false;
     function updateRoadLighting() {
       if (!roadLit) {
         roadLit = true;
