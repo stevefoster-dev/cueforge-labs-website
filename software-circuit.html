@@ -742,6 +742,7 @@
         tagline: 'Tour Pack Planning & Freight',
         description: 'Plan truck packs, air freight, and sea shipments with 3D visualization. Pricing scales by account membership, active productions, truck scale add-ons, support/onboarding, and standby/archive mode.',
         price: 'Membership + Production Packs',
+        priceTop: '90%',
         url: 'cuepack.html#pricing'
       },
       {
@@ -881,7 +882,7 @@
             <div class="data-value description-value">${item.description}</div>
           </div>
           
-          <div class="data-node" style="top: 78%; ${isLeft ? 'left' : 'right'}: 45%;">
+          <div class="data-node" style="top: ${item.priceTop || '78%'}; ${isLeft ? 'left' : 'right'}: 45%;">
             <div class="solder-point"></div>
             <div class="data-value price-value">${item.price}</div>
           </div>
