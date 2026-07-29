@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="CueNotch product mark">
+  <title>CueNotch</title>
+  <rect width="240" height="240" rx="18" fill="#060a0d"/>
+  <!-- circuit frame -->
+  <g fill="none" stroke="#a78bfa" stroke-width="3" opacity="0.42">
+    <path d="M30 52V34h18"/>
+    <path d="M192 34h18v18"/>
+    <path d="M210 188v18h-18"/>
+    <path d="M48 206H30v-18"/>
+  </g>
+  <!-- notched block: the source file -->
+  <path d="M66 78h64l22 22v62H66z" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linejoin="miter"/>
+  <path d="M130 78v22h22" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linejoin="miter"/>
+  <!-- DMX channel ladder: the generated documentation -->
+  <g stroke="#38c7cc" stroke-width="6" stroke-linecap="butt">
+    <path d="M82 120h30" opacity="0.95"/>
+    <path d="M82 136h52" opacity="0.75"/>
+    <path d="M82 152h40" opacity="0.55"/>
+  </g>
+  <!-- output trace to the crew -->
+  <g fill="none" stroke="#a78bfa" stroke-width="4">
+    <path d="M152 140h26v26h-26"/>
+  </g>
+  <circle cx="178" cy="140" r="6" fill="#a78bfa"/>
+</svg>

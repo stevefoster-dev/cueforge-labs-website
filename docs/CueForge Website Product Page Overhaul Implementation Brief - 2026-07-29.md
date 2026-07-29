@@ -8,20 +8,13 @@ This is a **local website candidate only**. Do not push, open a PR, merge, deplo
 
 ## Governing sources — read in full before implementation
 
-1. Art direction:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/CueForge/CueForge Individual Product Pages Reimagination Art Direction Brief - 2026-07-29.md`
-2. Product/pricing/screenshot audit:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/CueForge/CueForge Website Product Page Pricing and Screenshot Migration Audit - 2026-07-29.md`
-3. Portfolio decision:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/CueForge/CueForge Software Circuit Portfolio Curation Decision - 2026-07-28.md`
-4. Canonical CueForge commercial registry:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/CueForge/CueForge Master Sales Models and Pricing Source of Truth - 2026-07-28.md`
-5. Approved operational pricing mirror:
-   `/Users/stevefoster/clawd/PRICING.md`
-6. Business Solutions architecture:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/Business Solutions/Business Solutions Unified Suite Reference Architecture - 2026-07-27.md`
-7. Business Solutions commercial plan:
-   `/Users/stevefoster/Documents/Vesper Vault/10 Projects/Business Solutions/Business Solutions Sales Reframing Pricing and Packaging Plan - 2026-07-27.md`
+1. Art direction: `CueForge Individual Product Pages Reimagination Art Direction Brief - 2026-07-29.md` (internal project authority)
+2. Product/pricing/screenshot audit: `CueForge Website Product Page Pricing and Screenshot Migration Audit - 2026-07-29.md` (internal project authority)
+3. Portfolio decision: `CueForge Software Circuit Portfolio Curation Decision - 2026-07-28.md` (internal project authority)
+4. Canonical CueForge commercial registry: `CueForge Master Sales Models and Pricing Source of Truth - 2026-07-28.md` (internal project authority)
+5. Approved operational pricing mirror: `PRICING.md` (internal workspace authority)
+6. Business Solutions architecture: `Business Solutions Unified Suite Reference Architecture - 2026-07-27.md` (internal project authority)
+7. Business Solutions commercial plan: `Business Solutions Sales Reframing Pricing and Packaging Plan - 2026-07-27.md` (internal project authority)
 8. Repo instructions:
    `AGENTS.md`
 
@@ -94,20 +87,20 @@ Every indexed Production Tool page must show at least one real, current, public-
 ### Copy accepted evidence
 
 - CueMaker:
-  - `/Users/stevefoster/clawd/worktrees/CueMaker-final-closeout-20260727/_ship/verification/CueMaker Phase 3 Packaged Loaded Song Editor - 1440x900 - 2026-07-23.png`
-  - `/Users/stevefoster/clawd/worktrees/CueMaker-final-closeout-20260727/_ship/verification/CueMaker Multi-Source P1 Two Connected Roots - 1440x900 - 2026-07-28.png`
-  - `/Users/stevefoster/clawd/worktrees/CueMaker-final-closeout-20260727/_ship/verification/CueMaker Phase 10 Offline MA3 Export Ready - 1440x900 - 2026-07-25.png`
+  - accepted packaged-song-editor verification capture, 1440×900, 2026-07-23
+  - accepted two-connected-roots verification capture, 1440×900, 2026-07-28
+  - accepted offline-MA3-export-ready verification capture, 1440×900, 2026-07-25
 - CueScale:
-  - `/Users/stevefoster/clawd/worktrees/CueScale-production-20260727/_ship/evidence/CueScale Phase 1 Visual QA — 2026-07-27/CueScale Export Ready Top 960x680 — 2026-07-27.png`
+  - accepted export-ready visual-QA capture, 960×680, 2026-07-27
   - one secondary accepted CueScale state if it adds buyer value.
 
 ### Fresh sanitized captures required
 
-- CuePack from `/Users/stevefoster/clawd/repos/CuePack` at committed baseline `ee74544` using fictional/local data only.
-- CueRoll from `/Users/stevefoster/clawd/worktrees/CueRoll-github-origin-main-audit-20260728` at `d087a34` using generic setlist/notes and no real Notion/audio/show data.
-- CueSwitcher from `/Users/stevefoster/.hermes/profiles/vesper/worktrees/cueswitcher-promo-capture-20260725` at `d981da0` using generic show data and without implying unsupported hardware proof.
+- CuePack from exact committed baseline `ee74544` using fictional/local data only.
+- CueRoll from exact audited baseline `d087a34` using generic setlist/notes and no real Notion/audio/show data.
+- CueSwitcher from exact audited baseline `d981da0` using generic show data and without implying unsupported hardware proof.
 - CueCheck from a clean disposable worktree at committed baseline `2660ff6`, using built-in generic mock/sample data; never show real rack hostnames, IPs, artist/show names, or machine inventory.
-- CueNotch from `/Users/stevefoster/.hermes/profiles/vesper/worktrees/cuenotch-production-readiness-audit-2026-07-28` at `079fd12`, using a temporary HOME/dev profile and synthetic block/show data. Show a populated Live Sheet and/or generated output. No IPs, audit filenames, customer/show data, unsupported status claims, or circuit decoration crossing operational data.
+- CueNotch from exact audited baseline `079fd12`, using a temporary HOME/dev profile and synthetic block/show data. Show a populated Live Sheet and/or generated output. No IPs, audit filenames, customer/show data, unsupported status claims, or circuit decoration crossing operational data.
 
 Do not alter product repos to make marketing screenshots. Use disposable runtime state, browser/CDP injection, existing fixture modes, or existing accepted evidence. If a safe current screenshot cannot be captured without product-source edits or real/private data, stop and report that exact product as blocked rather than presenting generated UI as real.
 

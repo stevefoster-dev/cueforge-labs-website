@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" data-accent="lavender">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CueNotch | Notch Block Documentation and Fixture Output — CueForge Labs</title>
+  <meta name="description" content="CueNotch turns Notch block files into reviewable DMX and FX documentation and console-ready fixture and profile outputs for the crew handoff. Private validation.">
+  <meta property="og:title" content="CueNotch — Notch block documentation and fixture output">
+  <meta property="og:description" content="Turn Notch block files into reviewable DMX/FX documentation and console-ready fixture and profile outputs for the crew handoff.">
+  <meta property="og:image" content="images/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/product-dossier.css">
+</head>
+<body>
+  <a class="skip-link" href="#overview">Skip to content</a>
+
+  <header class="dossier-header">
+    <a href="index.html" class="logo" aria-label="CueForge Labs home">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <span>CueForge Labs</span>
+    </a>
+    <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueNotch">Contact</a>
+  </header>
+
+  <nav class="dossier-subnav" aria-label="CueNotch sections">
+    <div class="subnav-inner">
+      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
+      <span class="subnav-product">CueNotch</span>
+      <div class="subnav-links">
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#availability">Availability</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================================================ HERO -->
+    <section class="hero" id="overview">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-mark">
+              <img src="images/products/cuenotch.svg" alt="" aria-hidden="true">
+              <div>
+                <p class="hero-eyebrow">Production Tool</p>
+                <h1>CueNotch</h1>
+              </div>
+            </div>
+
+            <p class="hero-job">Turn Notch block files into reviewable DMX and FX documentation and console-ready fixture and profile outputs for the crew handoff.</p>
+
+            <p class="status-chip">Private Validation &mdash; Not Publicly Released</p>
+
+            <ul class="chipset">
+              <li class="chip">Desktop application</li>
+              <li class="chip is-path">Notch block files in</li>
+              <li class="chip">Operator documentation out</li>
+              <li class="chip is-eco">MA fixture &amp; profile outputs</li>
+            </ul>
+
+            <div class="cta-row">
+              <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueNotch%20compatibility%20validation">Contact Us</a>
+              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
+            </div>
+          </div>
+
+          <figure class="evidence">
+            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueNotch interface</figcaption>
+            <div class="evidence-stage">
+              <img src="images/app-screenshots/cuenotch/live-sheet-dmx-map.webp" width="1440" height="900" alt="CueNotch Live Sheet showing a synthetic three-layer Notch block mapped across 24 exported DMX parameters." decoding="async">
+            </div>
+            <p class="evidence-caption">
+              <b>Live Sheet DMX map.</b> Exact audited CueNotch runtime with a synthetic three-layer block and 24 exported parameters. The sharing server is stopped and no customer, show or network data is visible.
+            </p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== WORKFLOW -->
+    <section class="band energize" id="workflow">
+      <div class="shell">
+        <p class="band-label">The safe loop</p>
+        <h2 class="band-title">Load the block, read the personality, <strong>hand the crew a document</strong></h2>
+        <p class="band-intro">The problem CueNotch addresses is a handoff problem: the person who built the Notch content knows what channel 63 does on layer two, and nobody else does until somebody retypes it into a spreadsheet.</p>
+
+        <ol class="workflow-strip">
+          <li class="stage">
+            <p class="stage-index">01</p>
+            <h3>Load</h3>
+            <p>Open a Notch block file and extract its layers and exposed parameters.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">02</p>
+            <h3>Map</h3>
+            <p>Resolve each parameter to its DMX channel, reading the file first and falling back to the personality template.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">03</p>
+            <h3>Review</h3>
+            <p>Check the per-layer differences, annotate parameters, and compare against the previous version.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">04</p>
+            <h3>Generate</h3>
+            <p>Produce the operator documentation and the fixture and profile outputs for the console.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">05</p>
+            <h3>Hand off</h3>
+            <p>Share the generated document with the crew who have to run the show.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================================================== CAPABILITIES -->
+    <section class="band energize" id="capabilities">
+      <div class="shell">
+        <p class="band-label">Capabilities</p>
+        <h2 class="band-title">Built for the <strong>Notch-to-crew handoff</strong></h2>
+
+        <div class="chapters">
+          <article class="chapter">
+            <p class="chapter-job">Read the block honestly</p>
+            <h3>Layer-aware parameter extraction</h3>
+            <p>The same effect slot can mean different things on different layers, and that difference is exactly what the crew needs written down.</p>
+            <ul>
+              <li>Parameters extracted per layer and classified as effect, effect-colour or global</li>
+              <li>DMX channel read from the block file first, with a personality template filling gaps</li>
+              <li>Effect ranges and region labels enriched from the block's node graph</li>
+              <li>Authored parameters with no DMX channel hidden by default, with a toggle to show them</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Give the crew a reference</p>
+            <h3>Operator documentation</h3>
+            <p>The output is a document people can actually work from, not a raw parameter dump.</p>
+            <ul>
+              <li>Operator cheat sheet covering DMX channels, ranges and defaults</li>
+              <li>Backend view describing layer setup and signal flow</li>
+              <li>Node-graph view of the effect grid and group distribution</li>
+              <li>Self-contained documents that open on a laptop or a phone without extra software</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Keep versions straight</p>
+            <h3>Diffs, annotations and shows</h3>
+            <p>Content changes between rehearsals; the documentation has to say what moved.</p>
+            <ul>
+              <li>Parameter diff between block versions showing added, removed and changed entries</li>
+              <li>Version snapshots retained per block</li>
+              <li>Per-parameter notes and crew feedback captured against the document</li>
+              <li>Multi-block show aggregation for a whole production</li>
+              <li>Directory watching so a re-export can be picked up without reloading by hand</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Feed the console</p>
+            <h3>Fixture and profile outputs</h3>
+            <p>Once the personality is understood, it should not have to be retyped into the lighting console.</p>
+            <ul>
+              <li>MA fixture and profile output generation</li>
+              <li>Routing and screen-mapping definitions maintained alongside the block</li>
+              <li>Export as CSV, JSON, HTML and PDF</li>
+              <li>Spreadsheet push for teams still working from a shared sheet</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= FIELD FIT -->
+    <section class="band energize" id="field-fit">
+      <div class="shell">
+        <p class="band-label">Field fit</p>
+        <h2 class="band-title">Who it is for &mdash; and <strong>what it does not claim</strong></h2>
+
+        <div class="split">
+          <div class="panel">
+            <h3><span class="marker" aria-hidden="true"></span>Built for</h3>
+            <ul>
+              <li>Notch programmers who currently maintain the personality sheet by hand</li>
+              <li>Media-server operators who need to know what each channel does</li>
+              <li>Lighting programmers importing the fixture into the console</li>
+              <li>Production crews who need one current reference rather than four stale ones</li>
+            </ul>
+          </div>
+          <div class="panel is-boundary">
+            <h3><span class="marker" aria-hidden="true"></span>Stated limits</h3>
+            <ul>
+              <li>Block-file compatibility is still being validated; universal compatibility is not claimed</li>
+              <li>The local documentation view has no access control and is not intended for untrusted networks</li>
+              <li>It is not certified for unattended show operation</li>
+              <li>There is no public download and no signed customer distribution</li>
+              <li>It documents and generates; it does not drive DMX or control a show</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== AVAILABILITY -->
+    <section class="band energize" id="availability">
+      <div class="shell">
+        <p class="band-label">Availability</p>
+        <h2 class="band-title">Portfolio recognition, <strong>not a release</strong></h2>
+
+        <div class="availability">
+          <p class="availability-status">Private Validation &mdash; Not Publicly Released</p>
+          <h3>CueNotch appears here because the work is real, not because it is for sale.</h3>
+          <p>CueNotch is undergoing private compatibility and buyer validation. There is no public download, no purchase path, and no published price. Nothing on this page should be read as a release date or an availability commitment.</p>
+          <p>If you run Notch content on a show and maintain the personality reference by hand, that is exactly the workflow being validated &mdash; and it is worth a conversation.</p>
+          <div class="cta-row">
+            <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueNotch%20compatibility%20validation">Contact Us</a>
+          </div>
+        </div>
+
+        <dl class="spec-grid">
+          <div class="spec">
+            <dt>Platform</dt>
+            <dd>Desktop application, with a command-line path over the same engine.</dd>
+          </div>
+          <div class="spec">
+            <dt>Input</dt>
+            <dd>Notch block files. Compatibility beyond the blocks tested so far is unproven.</dd>
+          </div>
+          <div class="spec">
+            <dt>Output</dt>
+            <dd>Operator documentation, DMX and personality references, MA fixture and profile outputs, CSV, JSON, HTML and PDF.</dd>
+          </div>
+          <div class="spec">
+            <dt>Release state</dt>
+            <dd>Private validation. Distribution, signing, licensing and support terms are undecided.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ========================================================= RELATED -->
+    <section class="band energize" id="related">
+      <div class="shell">
+        <p class="band-label">Related instruments</p>
+        <h2 class="band-title">Around the <strong>same content</strong></h2>
+        <div class="related-grid">
+          <a class="related-card" href="cueswitcher.html">
+            <p class="rel-link">Connected &rarr;</p>
+            <p class="rel-name">CueSwitcher</p>
+            <p>The director's plan for the same show &mdash; camera plot, shot sheet, timeline and switcher macros.</p>
+          </a>
+          <a class="related-card" href="cuecheck.html">
+            <p class="rel-link">Upstream &rarr;</p>
+            <p class="rel-name">CueCheck</p>
+            <p>Validates the media reaching the servers that run the content CueNotch documents.</p>
+          </a>
+          <a class="related-card" href="cuemaker.html">
+            <p class="rel-link">Adjacent &rarr;</p>
+            <p class="rel-name">CueMaker</p>
+            <p>Beat-aligned grandMA3 timecode authoring for the lighting side of the same production.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dossier-footer">
+    <div class="footer-inner">
+      <p class="footer-note">&copy; 2026 CueForge Labs LLC &middot; Built from real live-production workflows.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="software-circuit.html">Software Circuit</a>
+        <a href="index.html">Home</a>
+        <a href="mailto:steve@cueforgelabs.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/product-dossier.js" defer></script>
+</body>
+</html>

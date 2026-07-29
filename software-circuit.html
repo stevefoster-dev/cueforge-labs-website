@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="CueForge Labs production software tools: CuePatch, CuePack, CueRoll, CueMaker, CueScale, CueSwitcher, and CueCheck — built from real live-production workflows.">
+  <meta name="description" content="CueForge Labs production software tools: CuePatch, CuePack, CueRoll, CueMaker, CueScale, CueSwitcher, CueCheck, and CueNotch — built from real live-production workflows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -469,22 +469,23 @@
       background: rgba(167,139,250,0.08);
       border-color: rgba(167,139,250,0.3);
     }
-    .data-value.price-value {
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
+    .data-value.status-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.62rem, 0.95vw, 0.8rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: var(--forge-lavender);
-      background: rgba(167,139,250,0.15);
-      border: 2px solid rgba(167,139,250,0.4);
-      padding: clamp(8px, 1vw, 12px) clamp(16px, 2vw, 24px);
-      border-radius: 6px;
-      text-shadow: 0 0 20px rgba(167,139,250,0.5);
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.38);
+      padding: clamp(7px, 0.9vw, 10px) clamp(12px, 1.6vw, 18px);
+      border-radius: 4px;
     }
-    .circuit-entry.lit .data-value.price-value {
+    .circuit-entry.lit .data-value.status-value {
       color: #fff;
-      background: rgba(167,139,250,0.25);
+      background: rgba(167,139,250,0.22);
       border-color: var(--forge-lavender);
-      box-shadow: 0 0 30px rgba(167,139,250,0.4);
+      box-shadow: 0 0 22px rgba(167,139,250,0.28);
     }
     
     /* Energy pulses */
@@ -800,6 +801,18 @@
       .circuit-entry.lit .data-value.artist { text-shadow: 0 0 20px var(--trace-glow); }
       .data-value.show { font-size: 0.85rem !important; color: var(--forge-teal); margin-top: -2px; }
       .data-value.year { font-size: 0.65rem !important; order: -1; color: var(--forge-cyan); margin-bottom: 3px; letter-spacing: 0.1em; }
+      .data-value.status-value {
+        width: auto !important;
+        margin-top: 8px;
+        font-size: 0.62rem !important;
+        letter-spacing: 0.1em;
+        background: rgba(167,139,250,0.12) !important;
+        border: 1px solid rgba(167,139,250,0.38) !important;
+        padding: 8px 14px !important;
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+      }
       
       .entry-connector { position: relative; left: auto !important; right: auto !important; bottom: auto; transform: none; width: 4px; height: 40px; margin: 15px auto; background: var(--trace-dim); border-radius: 2px; }
       .circuit-entry.lit .entry-connector { background: var(--trace-color); box-shadow: 0 0 10px var(--trace-glow); }
@@ -833,7 +846,7 @@
   <div class="nebula-bg"></div>
   
   <header class="header">
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="CueForge Labs home">
       <svg viewBox="0 0 2232.6 1387.35"><path fill="currentColor" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
       <span>CueForge Labs</span>
     </a>
@@ -862,7 +875,7 @@
     </div>
   </div>
 
-  <div class="portfolio-container">
+  <main class="portfolio-container">
     <div class="section-title">
       <div class="anvil-header">
         <svg viewBox="-30 -30 2292.6 1447.35"><path d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
@@ -882,14 +895,14 @@
         <p>CueForge production tools stay focused. These ventures serve different buyers and operate on their own product paths.</p>
       </div>
       <div class="venture-grid">
-        <a class="venture-card business" href="mailto:steve@cueforgelabs.com?subject=Business%20Solutions%20Inquiry">
+        <a class="venture-card business" href="business-solutions.html">
           <div class="venture-image"><img src="images/products/business-solutions.png" alt="Business Solutions"></div>
           <div>
             <div class="venture-kicker">Separate Business Line</div>
             <h3>Business Solutions</h3>
-            <p>Managed systems that turn missed calls, customer follow-up, invoices, and work packets into clear owner action.</p>
-            <div class="venture-products">Front Desk AI · InvoicePack</div>
-            <span class="venture-cta">Discuss a fit →</span>
+            <p>One workspace that carries a customer from first contact through follow-up, quote, work and invoice — with modules activated one at a time.</p>
+            <div class="venture-products">Front Desk AI · Client Hub · Quote Tracker · InvoicePack</div>
+            <span class="venture-cta">See the modules →</span>
           </div>
         </a>
         <a class="venture-card independent" href="https://www.pocketcounsel.com/" target="_blank" rel="noopener noreferrer">
@@ -904,7 +917,7 @@
         </a>
       </div>
     </section>
-  </div>
+  </main>
 
   <script>
     // Software products data
@@ -912,59 +925,66 @@
       {
         name: 'CuePatch',
         image: 'images/products/cuepatch.png',
-        tagline: 'LED Pixel Map Builder + Production Planner',
-        description: '48+ tile types, 3D preview, cable management, truck pack planning, curved walls, and multi-processor support. The complete LED wall pre-production tool.',
-        price: 'Coming Soon',
+        tagline: 'LED Pixel Map + Processor Planning',
+        description: 'Build the pixel map, processor outputs, cabling and pack data for an LED wall before a single panel leaves the shop.',
+        status: 'Private Validation',
         url: 'cuepatch.html'
       },
       {
         name: 'CuePack',
         image: 'images/products/cuepack.png',
-        tagline: 'Tour Pack Planning & Freight',
-        description: 'Plan truck packs, air freight, and sea shipments with 3D visualization. Pricing scales by account membership, active productions, truck scale add-ons, support/onboarding, and standby/archive mode.',
-        price: 'Membership + Production Packs',
-        priceTop: '90%',
-        url: 'cuepack.html#pricing'
+        tagline: 'Production Logistics, Packs & Freight',
+        description: 'Carry a production’s gear from inventory to cases to trucks, aircraft and containers — and keep the history the next show needs.',
+        status: 'In Development',
+        url: 'cuepack.html'
       },
       {
         name: 'CueRoll',
         image: 'images/products/cueroll.png',
-        tagline: 'LTC Timecode Note-Taking',
-        description: 'Take notes synchronized to live timecode. Perfect for tech rehearsals and show calls.',
-        price: 'Coming Soon',
+        tagline: 'Rehearsal Notes on Exact Timecode',
+        description: 'Capture a note against the exact song and timecode it belongs to, keep it locally, and hand a clean list to the department.',
+        status: '$199/year Individual',
         url: 'cueroll.html'
       },
       {
         name: 'CueMaker',
         image: 'images/products/cuemaker.png',
-        tagline: 'Timecode to grandMA3',
-        description: 'LTC reader with live markers, 6-channel mixer, and direct grandMA3 XML export.',
-        price: 'Coming Soon',
+        tagline: 'Beat-Aligned grandMA3 Authoring',
+        description: 'Analyse tracks locally, author cues on the beat, drive MTC, and export version-aware grandMA3 timecode after review.',
+        status: 'Private Validation',
         url: 'cuemaker.html'
       },
       {
         name: 'CueScale',
         image: 'images/products/cuescale.png',
-        tagline: 'grandMA3 Timecode Rescaler',
-        description: 'Rescale grandMA3 timecode pools between source and target tempos while preserving the original time format and exporting a new pool.',
-        price: 'In Development',
-        url: 'mailto:steve@cueforgelabs.com?subject=CueScale'
+        tagline: 'grandMA3 Timecode Pool Rescaler',
+        description: 'Rescale a grandMA3 timecode pool from a source BPM to a target BPM and export it as a new importable pool.',
+        status: 'In Development',
+        url: 'cuescale.html'
       },
       {
         name: 'CueSwitcher',
         image: 'images/products/cueswitcher.png',
-        tagline: 'Video Director Cockpit',
-        description: 'Build and run switching plans, shot timelines, source layouts, countdowns, and show-control cues from one director-focused workspace.',
-        price: 'In Development',
-        url: 'mailto:steve@cueforgelabs.com?subject=CueSwitcher'
+        tagline: 'Camera Plans, Shot Sheets & Macros',
+        description: 'Plan the cut before the show — cameras, shot sheet, setlist and timeline — then follow it with real per-camera countdowns.',
+        status: 'In Development',
+        url: 'cueswitcher.html'
       },
       {
         name: 'CueCheck',
         image: 'images/products/cuecheck.png',
-        tagline: 'Content Pipeline Validator',
-        description: 'Watch folders, validate specs, resolve delivery conflicts, and move approved content through a production pipeline.',
-        price: 'Coming Soon',
+        tagline: 'Content Validation & Delivery Proof',
+        description: 'Prove the correct version of every file reached every playback machine that needs it, before the show finds out for you.',
+        status: 'In Development',
         url: 'cuecheck.html'
+      },
+      {
+        name: 'CueNotch',
+        image: 'images/products/cuenotch.svg',
+        tagline: 'Notch Block Documentation & Fixtures',
+        description: 'Turn Notch block files into reviewable DMX/FX documentation and console-ready fixture and profile outputs for the crew handoff.',
+        status: 'Private Validation',
+        url: 'cuenotch.html'
       }
     ];
 
@@ -998,6 +1018,7 @@
       
       let imgClass = '';
       if (item.name === 'CuePack') imgClass = 'cover-fit move-up';
+      if (item.name === 'CueNotch') imgClass = 'cover-fit';
       entry.innerHTML = `
         <div class="circuit-node">
           <div class="node-ring"></div>
@@ -1039,9 +1060,9 @@
             <div class="data-value description-value">${item.description}</div>
           </div>
           
-          <div class="data-node" style="top: ${item.priceTop || '78%'}; ${isLeft ? 'left' : 'right'}: 45%;">
+          <div class="data-node" style="top: 78%; ${isLeft ? 'left' : 'right'}: 45%;">
             <div class="solder-point"></div>
-            <div class="data-value price-value">${item.price}</div>
+            <div class="data-value status-value">${item.status}</div>
           </div>
         </div>
         

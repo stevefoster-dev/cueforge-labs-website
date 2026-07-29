@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-accent="lavender">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CueSwitcher | Camera Plans, Shot Sheets and Switcher Macros — CueForge Labs</title>
+  <meta name="description" content="CueSwitcher plans cameras, shot sheets, setlists, timelines and countdowns, and builds switcher macros for supported systems — one director-focused workspace.">
+  <meta property="og:title" content="CueSwitcher — camera plans, shot sheets and switcher macros">
+  <meta property="og:description" content="Plan the cut before the show, then follow it with a timeline and per-camera countdowns.">
+  <meta property="og:image" content="images/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/product-dossier.css">
+</head>
+<body>
+  <a class="skip-link" href="#overview">Skip to content</a>
+
+  <header class="dossier-header">
+    <a href="index.html" class="logo" aria-label="CueForge Labs home">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <span>CueForge Labs</span>
+    </a>
+    <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueSwitcher">Contact</a>
+  </header>
+
+  <nav class="dossier-subnav" aria-label="CueSwitcher sections">
+    <div class="subnav-inner">
+      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
+      <span class="subnav-product">CueSwitcher</span>
+      <div class="subnav-links">
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#availability">Availability</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================================================ HERO -->
+    <section class="hero" id="overview">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-mark">
+              <img src="images/products/cueswitcher.png" alt="" aria-hidden="true">
+              <div>
+                <p class="hero-eyebrow">Production Tool</p>
+                <h1>CueSwitcher</h1>
+              </div>
+            </div>
+
+            <p class="hero-job">Plan the cut before the show &mdash; cameras, shot sheet, setlist and timeline &mdash; then follow it with real countdowns instead of a paper running order and a memory.</p>
+
+            <p class="status-chip">In Development &middot; Private Validation</p>
+
+            <ul class="chipset">
+              <li class="chip">macOS &amp; Windows desktop</li>
+              <li class="chip is-path">Timecode chase from LTC or MTC</li>
+              <li class="chip">Camera plot &middot; shot sheet &middot; timeline</li>
+              <li class="chip is-eco">Supported switcher adapters</li>
+            </ul>
+
+            <div class="cta-row">
+              <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueSwitcher">Contact Us</a>
+              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
+            </div>
+          </div>
+
+          <figure class="evidence">
+            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueSwitcher interface</figcaption>
+            <div class="evidence-stage">
+              <img src="images/app-screenshots/cueswitcher/pip-layout-designer.webp" width="1440" height="900" alt="CueSwitcher PIP layout designer showing a synthetic four-camera composition while switcher hardware is explicitly disconnected." decoding="async">
+            </div>
+            <p class="evidence-caption">
+              <b>PIP layout designer.</b> Current CueSwitcher runtime with a synthetic four-camera layout. The adapter is visibly disconnected, so the frame demonstrates planning without implying verified live hardware control.
+            </p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== WORKFLOW -->
+    <section class="band energize" id="workflow">
+      <div class="shell">
+        <p class="band-label">The safe loop</p>
+        <h2 class="band-title">Plan the show, rehearse the cut, <strong>follow it live</strong></h2>
+        <p class="band-intro">The shot sheet is the source of truth. The timeline projects it onto real time, and the show-mode view follows that timeline &mdash; hand-authored work is never overwritten by a projection.</p>
+
+        <ol class="workflow-strip">
+          <li class="stage">
+            <p class="stage-index">01</p>
+            <h3>Plot the cameras</h3>
+            <p>Place the camera positions the show actually has, and name them the way the crew does.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">02</p>
+            <h3>Build the shot sheet</h3>
+            <p>Work song by song and section by section, assigning framings per camera.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">03</p>
+            <h3>Anchor to time</h3>
+            <p>Attach audio, capture the printed timecode, and let sections land at real positions.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">04</p>
+            <h3>Rehearse</h3>
+            <p>Scrub the timeline, run the transport, and check the cut against the music.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">05</p>
+            <h3>Run show mode</h3>
+            <p>Chase timecode and give every operator a countdown to their next shot.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================================================== CAPABILITIES -->
+    <section class="band energize" id="capabilities">
+      <div class="shell">
+        <p class="band-label">Capabilities</p>
+        <h2 class="band-title">A director's workspace, <strong>not a control surface replacement</strong></h2>
+
+        <div class="chapters">
+          <article class="chapter">
+            <p class="chapter-job">Plan the coverage</p>
+            <h3>Camera plot and shot sheet</h3>
+            <p>The plan is built from the show's real camera positions, so the shot sheet columns mean something to the operators reading them.</p>
+            <ul>
+              <li>Camera plot that defines the positions used everywhere else</li>
+              <li>Section-level shot sheet with per-camera framings</li>
+              <li>Per-cell framing overrides on top of a section default</li>
+              <li>Copy and paste sections with their shots and framings intact</li>
+              <li>Undo on shot-sheet edits</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Put it on a clock</p>
+            <h3>Setlist, timeline and countdowns</h3>
+            <p>Songs get absolute positions from the timecode printed on their audio, so a countdown is a real number rather than an even division of a typed duration.</p>
+            <ul>
+              <li>Setlist that appends rather than overwriting existing songs</li>
+              <li>Offline scan of embedded timecode at assignment time, without playing the track</li>
+              <li>Per-file timecode anchors, with a manual picker when alternates conflict</li>
+              <li>Timeline with drag-to-move, edge-drag resize and a cue inspector</li>
+              <li>Per-camera countdowns driven by actual cue positions</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Follow the show</p>
+            <h3>Timecode chase and show mode</h3>
+            <p>Show mode is the cue-follow cockpit; chase is an input to it, never a lock on the operator.</p>
+            <ul>
+              <li>Timecode chase from an audio device, a file or MIDI</li>
+              <li>Chase state shared across open views so every badge agrees</li>
+              <li>Manual seeks are never blocked by chase status</li>
+              <li>Scrub, play from a clicked position, and snap only where it helps</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Drive what is supported</p>
+            <h3>Macros, adapters and handoff</h3>
+            <p>The macro runtime is switcher-agnostic; each supported system has its own adapter, and nothing is claimed for hardware that has not been proven.</p>
+            <ul>
+              <li>Neutral macro model exported per switcher type</li>
+              <li>Adapters for ATEM, Ross, vMix and OBS</li>
+              <li>Cue-driven macro firing when the playhead crosses a cue</li>
+              <li>Show-control messaging for common media-server and playback systems</li>
+              <li>Portable show export and import, plus an operator shot-sheet PDF</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= FIELD FIT -->
+    <section class="band energize" id="field-fit">
+      <div class="shell">
+        <p class="band-label">Field fit</p>
+        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+
+        <div class="split">
+          <div class="panel">
+            <h3><span class="marker" aria-hidden="true"></span>Built for</h3>
+            <ul>
+              <li>Directors planning and rehearsing a cut for a music or corporate show</li>
+              <li>Camera operators who need a countdown to their next framing</li>
+              <li>Technical directors preparing macros and layouts before doors</li>
+              <li>Video departments that want the plan and the run in one document</li>
+            </ul>
+          </div>
+          <div class="panel is-boundary">
+            <h3><span class="marker" aria-hidden="true"></span>Outside its authority</h3>
+            <ul>
+              <li>Switcher support is limited to the adapters listed above; other systems are not claimed</li>
+              <li>Camera-control adapters for further manufacturers are not available</li>
+              <li>It does not replace the physical switcher, the TD, or the director's judgement</li>
+              <li>Desktop builds are unsigned and are not a customer distribution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== AVAILABILITY -->
+    <section class="band energize" id="availability">
+      <div class="shell">
+        <p class="band-label">Availability</p>
+        <h2 class="band-title">In development, <strong>no published price</strong></h2>
+
+        <div class="availability">
+          <p class="availability-status">In Development &mdash; Private Validation</p>
+          <h3>CueSwitcher is not on public sale.</h3>
+          <p>CueSwitcher is being validated privately against real shows. Its commercial model is unresolved &mdash; whether the application itself is a one-time purchase or an annual licence, and whether additional protocol adapters are priced separately, has not been decided. No amount is quoted.</p>
+          <p>Signing and notarisation for macOS and Windows remain open, so there is no public installer today.</p>
+          <div class="cta-row">
+            <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueSwitcher">Contact Us</a>
+          </div>
+        </div>
+
+        <dl class="spec-grid">
+          <div class="spec">
+            <dt>Platform</dt>
+            <dd>Desktop application for macOS and Windows.</dd>
+          </div>
+          <div class="spec">
+            <dt>Timecode input</dt>
+            <dd>Chase from an audio device, an audio file's embedded timecode, or MIDI.</dd>
+          </div>
+          <div class="spec">
+            <dt>Switcher adapters</dt>
+            <dd>ATEM, Ross, vMix and OBS. Further hardware adapters are not currently available.</dd>
+          </div>
+          <div class="spec">
+            <dt>Release state</dt>
+            <dd>In development. Code signing, notarisation and distribution are still external gates.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ========================================================= RELATED -->
+    <section class="band energize" id="related">
+      <div class="shell">
+        <p class="band-label">Related instruments</p>
+        <h2 class="band-title">Around the <strong>video department</strong></h2>
+        <div class="related-grid">
+          <a class="related-card" href="cuenotch.html">
+            <p class="rel-link">Connected &rarr;</p>
+            <p class="rel-name">CueNotch</p>
+            <p>Notch block documentation and fixture profiles for the content the same show is running.</p>
+          </a>
+          <a class="related-card" href="cuecheck.html">
+            <p class="rel-link">Upstream &rarr;</p>
+            <p class="rel-name">CueCheck</p>
+            <p>Before a cut can use content, CueCheck proves the right version reached every playback destination.</p>
+          </a>
+          <a class="related-card" href="cueroll.html">
+            <p class="rel-link">Adjacent &rarr;</p>
+            <p class="rel-name">CueRoll</p>
+            <p>Rehearsal notes on exact timecode, so the video department's fixes land against the right song.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dossier-footer">
+    <div class="footer-inner">
+      <p class="footer-note">&copy; 2026 CueForge Labs LLC &middot; Built from real live-production workflows.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="software-circuit.html">Software Circuit</a>
+        <a href="index.html">Home</a>
+        <a href="mailto:steve@cueforgelabs.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/product-dossier.js" defer></script>
+</body>
+</html>

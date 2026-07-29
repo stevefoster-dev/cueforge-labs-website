@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-accent="teal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CueScale | grandMA3 Timecode Pool Rescaling — CueForge Labs</title>
+  <meta name="description" content="CueScale rescales a grandMA3 timecode pool from a source BPM to a target BPM and exports a new importable pool. Local files only.">
+  <meta property="og:title" content="CueScale — grandMA3 timecode pool rescaling">
+  <meta property="og:description" content="The tempo changed. Rescale the timecode pool instead of rebuilding it.">
+  <meta property="og:image" content="images/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/product-dossier.css">
+</head>
+<body>
+  <a class="skip-link" href="#overview">Skip to content</a>
+
+  <header class="dossier-header">
+    <a href="index.html" class="logo" aria-label="CueForge Labs home">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <span>CueForge Labs</span>
+    </a>
+    <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueScale">Contact</a>
+  </header>
+
+  <nav class="dossier-subnav" aria-label="CueScale sections">
+    <div class="subnav-inner">
+      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
+      <span class="subnav-product">CueScale</span>
+      <div class="subnav-links">
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#availability">Availability</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================================================ HERO -->
+    <section class="hero" id="overview">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-mark">
+              <img src="images/products/cuescale.png" alt="" aria-hidden="true">
+              <div>
+                <p class="hero-eyebrow">Production Tool</p>
+                <h1>CueScale</h1>
+              </div>
+            </div>
+
+            <p class="hero-job">The tempo changed. Rescale the grandMA3 timecode pool to the new BPM and import it as a new pool &mdash; instead of rebuilding a song from scratch at midnight.</p>
+
+            <p class="status-chip">Private Validation &middot; In Development</p>
+
+            <ul class="chipset">
+              <li class="chip">macOS &amp; Windows desktop</li>
+              <li class="chip is-path">grandMA3 timecode pool XML</li>
+              <li class="chip">Files processed locally</li>
+              <li class="chip is-eco">Exports a new pool, never overwrites</li>
+            </ul>
+
+            <div class="cta-row">
+              <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueScale">Contact Us</a>
+              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
+            </div>
+          </div>
+
+          <figure class="evidence">
+            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueScale interface</figcaption>
+            <div class="evidence-stage">
+              <img src="images/app-screenshots/cuescale/cuescale-export-ready.webp" width="960" height="652" alt="CueScale export-ready screen showing a reviewed tempo transformation for a synthetic grandMA3 timecode pool." decoding="async">
+            </div>
+            <p class="evidence-caption">
+              <b>Export-ready review.</b> Accepted CueScale visual-QA capture using synthetic grandMA3 XML fixtures. The original pool remains untouched while the reviewed result is prepared as a new export.
+            </p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== WORKFLOW -->
+    <section class="band energize" id="workflow">
+      <div class="shell">
+        <p class="band-label">The safe loop</p>
+        <h2 class="band-title">Load, set the tempos, compare, <strong>export as a new pool</strong></h2>
+        <p class="band-intro">CueScale is deliberately small. It does one transformation, shows you what it will do first, and writes a new object so your original pool is untouched.</p>
+
+        <ol class="workflow-strip">
+          <li class="stage">
+            <p class="stage-index">01</p>
+            <h3>Load</h3>
+            <p>Drop a grandMA3 timecode pool export onto the window, or open it from disk.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">02</p>
+            <h3>Set tempos</h3>
+            <p>Enter the source BPM and the target BPM the show has moved to.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">03</p>
+            <h3>Compare</h3>
+            <p>Review original and projected timelines side by side in an MA3-style view.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">04</p>
+            <h3>Export as new</h3>
+            <p>Write a new pool with its own identifier and a tempo-suffixed name.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================================================== CAPABILITIES -->
+    <section class="band energize" id="capabilities">
+      <div class="shell">
+        <p class="band-label">Capabilities</p>
+        <h2 class="band-title">One job, <strong>done exactly</strong></h2>
+
+        <div class="chapters">
+          <article class="chapter">
+            <p class="chapter-job">Predictable maths</p>
+            <h3>Anchored rescaling</h3>
+            <p>The transformation is defined precisely so the result is reviewable rather than mysterious.</p>
+            <ul>
+              <li>The anchor is the earliest command event in the pool</li>
+              <li>Events before the anchor pass through unchanged</li>
+              <li>Later events scale by the ratio of source tempo to target tempo</li>
+              <li>Rescaling to the same tempo is required to leave the file byte-identical</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">See it before you commit</p>
+            <h3>Side-by-side review</h3>
+            <p>The projected result is shown against the original in a familiar MA3-style layout before anything is written.</p>
+            <ul>
+              <li>Original and rescaled timelines displayed together</li>
+              <li>Preview is display data &mdash; the export file is generated at export time</li>
+              <li>Keyboard export shortcut for a repeated pass across several songs</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Do not damage the show</p>
+            <h3>Safe import behaviour</h3>
+            <p>The output is built so grandMA3 treats it as an addition rather than a replacement.</p>
+            <ul>
+              <li>Every export gets a newly generated identifier</li>
+              <li>The pool name carries the target tempo so versions stay distinguishable</li>
+              <li>MA3 imports it as a new pool rather than overwriting the original</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Keep the show private</p>
+            <h3>Local-only processing</h3>
+            <p>Show files are production-sensitive; CueScale treats them that way by construction.</p>
+            <ul>
+              <li>Show files are processed on the machine and are never uploaded by CueScale</li>
+              <li>The desktop shell refuses navigation to anything outside an explicit allowlist</li>
+              <li>Export runs through a privileged check in the application's main process</li>
+              <li>If required licensing trust is missing, the application stays visibly locked rather than silently degraded</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= FIELD FIT -->
+    <section class="band energize" id="field-fit">
+      <div class="shell">
+        <p class="band-label">Field fit</p>
+        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+
+        <div class="split">
+          <div class="panel">
+            <h3><span class="marker" aria-hidden="true"></span>Built for</h3>
+            <ul>
+              <li>Lighting programmers whose track tempo moved between rehearsals</li>
+              <li>Designers reusing a programmed song at a different tempo</li>
+              <li>Programmers carrying a timecoded show between versions of an arrangement</li>
+            </ul>
+          </div>
+          <div class="panel is-boundary">
+            <h3><span class="marker" aria-hidden="true"></span>Outside its authority</h3>
+            <ul>
+              <li>It is a focused utility, not a show-programming platform</li>
+              <li>It does not analyse audio or detect tempo &mdash; you supply both numbers</li>
+              <li>It does not connect to a console or write into a live showfile</li>
+              <li>Authoring a timecode show from tracks is CueMaker's job</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== AVAILABILITY -->
+    <section class="band energize" id="availability">
+      <div class="shell">
+        <p class="band-label">Availability</p>
+        <h2 class="band-title">In development, <strong>no published price</strong></h2>
+
+        <div class="availability">
+          <p class="availability-status">Private Validation &mdash; In Development</p>
+          <h3>CueScale is not on public sale.</h3>
+          <p>CueScale is a deliberately small utility in private validation. How it will be distributed &mdash; and what it will cost &mdash; has not been decided, so no amount is quoted here. Local builds and packaging evidence are not a customer release.</p>
+          <p>If a tempo change has cost you a rebuild, the useful next step is to tell us the workflow you would want covered.</p>
+          <div class="cta-row">
+            <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueScale">Contact Us</a>
+          </div>
+        </div>
+
+        <dl class="spec-grid">
+          <div class="spec">
+            <dt>Platform</dt>
+            <dd>Desktop application for macOS and Windows.</dd>
+          </div>
+          <div class="spec">
+            <dt>Input</dt>
+            <dd>grandMA3 timecode pool XML exported from the console.</dd>
+          </div>
+          <div class="spec">
+            <dt>Output</dt>
+            <dd>A new importable timecode pool with its own identifier and tempo-suffixed name.</dd>
+          </div>
+          <div class="spec">
+            <dt>Release state</dt>
+            <dd>In development. Signing, notarisation and customer distribution remain external release gates.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ========================================================= RELATED -->
+    <section class="band energize" id="related">
+      <div class="shell">
+        <p class="band-label">Related instruments</p>
+        <h2 class="band-title">The rest of the <strong>timecode workflow</strong></h2>
+        <div class="related-grid">
+          <a class="related-card" href="cuemaker.html">
+            <p class="rel-link">Upstream &rarr;</p>
+            <p class="rel-name">CueMaker</p>
+            <p>CueMaker authors the beat-aligned timecode show; CueScale adapts it when the tempo moves.</p>
+          </a>
+          <a class="related-card" href="cueroll.html">
+            <p class="rel-link">Adjacent &rarr;</p>
+            <p class="rel-name">CueRoll</p>
+            <p>Rehearsal notes captured against exact song and timecode, so you know which song actually changed.</p>
+          </a>
+          <a class="related-card" href="cuenotch.html">
+            <p class="rel-link">Adjacent &rarr;</p>
+            <p class="rel-name">CueNotch</p>
+            <p>Notch block documentation and MA fixture profiles for the same production's content.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dossier-footer">
+    <div class="footer-inner">
+      <p class="footer-note">&copy; 2026 CueForge Labs LLC &middot; Built from real live-production workflows.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="software-circuit.html">Software Circuit</a>
+        <a href="index.html">Home</a>
+        <a href="mailto:steve@cueforgelabs.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/product-dossier.js" defer></script>
+</body>
+</html>

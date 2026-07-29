@@ -1,935 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="teal">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CuePatch | Pixel Map Builder — CueForge Labs</title>
+  <title>CuePatch | LED Pixel Map and Processor Planning — CueForge Labs</title>
+  <meta name="description" content="CuePatch builds LED pixel maps, processor output mapping, cabling and pack data before the wall ships. In private validation with CueForge Labs.">
+  <meta property="og:title" content="CuePatch — LED pixel map and processor planning">
+  <meta property="og:description" content="Build the pixel map, processor outputs, cabling and pack data for an LED wall before a single panel leaves the shop.">
+  <meta property="og:image" content="images/og-image.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="CuePatch — The complete LED pixel map builder. 48+ tile types, 3D preview, cable management, truck pack planning, curved walls, and processor configs for Brompton, Novastar & Megapixel Helios. Desktop app for Mac & Windows. Part of the CueForge Production Suite.">
-  <meta property="og:title" content="CuePatch — LED Pixel Map Builder with 3D Preview, Cable Manager & Pack Planner">
-  <meta property="og:description" content="48+ LED tile types, 3D preview, cable management, truck pack planning, curved walls, and multi-processor support. Built by a touring LD.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://cueforgelabs.com/images/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --forge-dark: #060a0d;
-      --forge-darker: #020305;
-      --accent: #a78bfa;
-      --accent-soft: #c4b5fd;
-      --accent-dim: rgba(167,139,250,0.15);
-      --accent-mid: rgba(167,139,250,0.4);
-      --accent-glow: rgba(167,139,250,0.24);
-      --accent-bright: rgba(167,139,250,1);
-      --trace-dim: rgba(167,139,250,0.12);
-      --trace-color: rgba(167,139,250,0.4);
-      --trace-glow: rgba(167,139,250,0.2);
-      --trace-bright: rgba(167,139,250,1);
-      --trace-bright-glow: rgba(167,139,250,0.6);
-      --panel-bg: rgba(7,10,12,0.7);
-      --panel-border: rgba(167,139,250,0.2);
-      --panel-border-strong: rgba(167,139,250,0.45);
-      --text-muted: #9ca3af;
-      --text-sub: #6b7280;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--forge-darker);
-      color: #e5e7eb;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .nebula-bg {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% 30%, rgba(167,139,250,0.14) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(196,181,253,0.12) 0%, transparent 45%),
-        radial-gradient(ellipse 70% 60% at 85% 70%, rgba(167,139,250,0.10) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 50% at 12% 78%, rgba(196,181,253,0.08) 0%, transparent 40%),
-        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(167,139,250,0.08) 0%, transparent 60%),
-        var(--forge-darker);
-    }
-    .nebula-bg::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(90deg, rgba(167,139,250,0.08) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(167,139,250,0.06) 1px, transparent 1px);
-      background-size: 180px 180px;
-      opacity: 0.45;
-    }
-    .nebula-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(circle, rgba(167,139,250,0.35) 0 1px, transparent 1.6px);
-      background-size: 200px 200px;
-      background-position: 40px 70px;
-      opacity: 0.4;
-    }
-
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 18px 140px;
-      display: flex; justify-content: space-between; align-items: center;
-      background: linear-gradient(to bottom, rgba(2,3,5,0.95) 0%, rgba(2,3,5,0.9) 55%, rgba(2,3,5,0.2) 100%);
-      border-bottom: 1px solid rgba(167,139,250,0.12);
-      backdrop-filter: blur(8px);
-    }
-    .logo {
-      display: flex; align-items: center; gap: 10px;
-      color: var(--accent); font-weight: 600; font-size: 1rem; text-decoration: none;
-    }
-    .logo svg { width: 28px; height: 22px; }
-    .nav-links { display: flex; gap: 12px; }
-    .nav-btn {
-      padding: 8px 20px; font-size: 0.75rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--accent); background: rgba(6,10,12,0.35);
-      border: 1px solid rgba(167,139,250,0.35); border-radius: 4px;
-      cursor: pointer; transition: all 0.3s; text-decoration: none;
-    }
-    .nav-btn:hover { background: rgba(167,139,250,0.12); border-color: var(--accent); box-shadow: 0 0 18px var(--trace-glow); }
-
-    .hero {
-      padding: 150px 46px 80px; max-width: 1020px; margin: 0 auto 40px; text-align: center;
-      position: relative; z-index: 1;
-      background:
-        linear-gradient(180deg, rgba(10,12,14,0.84) 0%, rgba(5,7,9,0.84) 100%) padding-box,
-        linear-gradient(90deg, var(--accent-mid) 0 70px, transparent 70px calc(100% - 70px), var(--accent-mid) calc(100% - 70px)) top/100% 2px no-repeat,
-        linear-gradient(90deg, var(--accent-mid) 0 70px, transparent 70px calc(100% - 70px), var(--accent-mid) calc(100% - 70px)) bottom/100% 2px no-repeat,
-        linear-gradient(180deg, var(--accent-mid) 0 70px, transparent 70px calc(100% - 70px), var(--accent-mid) calc(100% - 70px)) left/2px 100% no-repeat,
-        linear-gradient(180deg, var(--accent-mid) 0 70px, transparent 70px calc(100% - 70px), var(--accent-mid) calc(100% - 70px)) right/2px 100% no-repeat,
-        linear-gradient(90deg, rgba(167,139,250,0.85) 0 26px, transparent 26px) top left/72px 2px no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.85) 0 26px, transparent 26px) top left/2px 72px no-repeat,
-        linear-gradient(90deg, transparent calc(100% - 26px), rgba(167,139,250,0.85) calc(100% - 26px) 100%) top right/72px 2px no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.85) 0 26px, transparent 26px) top right/2px 72px no-repeat,
-        linear-gradient(90deg, rgba(167,139,250,0.85) 0 26px, transparent 26px) bottom left/72px 2px no-repeat,
-        linear-gradient(180deg, transparent calc(100% - 26px), rgba(167,139,250,0.85) calc(100% - 26px) 100%) bottom left/2px 72px no-repeat,
-        linear-gradient(90deg, transparent calc(100% - 26px), rgba(167,139,250,0.85) calc(100% - 26px) 100%) bottom right/72px 2px no-repeat,
-        linear-gradient(180deg, transparent calc(100% - 26px), rgba(167,139,250,0.85) calc(100% - 26px) 100%) bottom right/2px 72px no-repeat;
-      border: 1px solid var(--panel-border); border-radius: 20px;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.5), inset 0 0 30px rgba(167,139,250,0.08);
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: -30% 40% 30% -20%;
-      background: radial-gradient(circle, rgba(167,139,250,0.2), transparent 60%);
-      opacity: 0.6;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; top: 28px; left: 28px; width: 12px; height: 12px;
-      border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 18px var(--trace-bright-glow);
-    }
-    .hero > * { position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-block; padding: 6px 18px; font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--accent); background: rgba(167,139,250,0.12);
-      border: 1px solid rgba(167,139,250,0.35); border-radius: 999px; margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700;
-      color: #fff; margin-bottom: 16px; line-height: 1.15;
-    }
-    .hero h1 span { color: var(--accent); }
-    .tagline {
-      font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 36px; line-height: 1.6;
-    }
-    .hero-price {
-      font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 6px;
-    }
-    .hero-price-note {
-      font-size: 0.85rem; color: var(--text-sub); margin-bottom: 30px;
-    }
-    .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      padding: 14px 34px; font-size: 0.9rem; font-weight: 600;
-      color: #0b0d0f; background: linear-gradient(135deg, #a78bfa, #c4b5fd);
-      border: none; border-radius: 6px; cursor: pointer; text-decoration: none;
-      transition: all 0.3s; letter-spacing: 0.02em;
-      box-shadow: 0 10px 28px rgba(167,139,250,0.25);
-    }
-    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 12px 34px rgba(167,139,250,0.4); }
-    .btn-secondary {
-      padding: 14px 34px; font-size: 0.9rem; font-weight: 600;
-      color: var(--accent); background: rgba(7,10,12,0.6);
-      border: 1px solid rgba(167,139,250,0.35); border-radius: 6px; cursor: pointer; text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-secondary:hover { background: rgba(167,139,250,0.12); border-color: var(--accent); }
-    .btn-outline {
-      padding: 12px 28px; font-size: 0.85rem; font-weight: 600;
-      color: var(--accent); background: transparent;
-      border: 1px solid rgba(167,139,250,0.35); border-radius: 999px; text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-outline:hover { background: rgba(167,139,250,0.12); border-color: var(--accent); }
-
-    section {
-      max-width: 1100px; margin: 0 auto 42px; padding: 64px 54px;
-      position: relative;
-      background:
-        linear-gradient(180deg, rgba(8,10,12,0.82) 0%, rgba(4,6,8,0.82) 100%) padding-box,
-        linear-gradient(90deg, var(--accent-mid) 0 52px, transparent 52px calc(100% - 52px), var(--accent-mid) calc(100% - 52px)) top/100% 2px no-repeat,
-        linear-gradient(90deg, var(--accent-mid) 0 52px, transparent 52px calc(100% - 52px), var(--accent-mid) calc(100% - 52px)) bottom/100% 2px no-repeat,
-        linear-gradient(180deg, var(--accent-mid) 0 52px, transparent 52px calc(100% - 52px), var(--accent-mid) calc(100% - 52px)) left/2px 100% no-repeat,
-        linear-gradient(180deg, var(--accent-mid) 0 52px, transparent 52px calc(100% - 52px), var(--accent-mid) calc(100% - 52px)) right/2px 100% no-repeat,
-        linear-gradient(90deg, rgba(167,139,250,0.8) 0 22px, transparent 22px) top left/60px 2px no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.8) 0 22px, transparent 22px) top left/2px 60px no-repeat,
-        linear-gradient(90deg, transparent calc(100% - 22px), rgba(167,139,250,0.8) calc(100% - 22px) 100%) top right/60px 2px no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.8) 0 22px, transparent 22px) top right/2px 60px no-repeat,
-        linear-gradient(90deg, rgba(167,139,250,0.8) 0 22px, transparent 22px) bottom left/60px 2px no-repeat,
-        linear-gradient(180deg, transparent calc(100% - 22px), rgba(167,139,250,0.8) calc(100% - 22px) 100%) bottom left/2px 60px no-repeat,
-        linear-gradient(90deg, transparent calc(100% - 22px), rgba(167,139,250,0.8) calc(100% - 22px) 100%) bottom right/60px 2px no-repeat,
-        linear-gradient(180deg, transparent calc(100% - 22px), rgba(167,139,250,0.8) calc(100% - 22px) 100%) bottom right/2px 60px no-repeat;
-      border: 1px solid var(--panel-border); border-radius: 16px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 0 26px rgba(167,139,250,0.05);
-    }
-    section::before {
-      content: '';
-      position: absolute; left: -36px; top: 60px; width: 26px; height: 2px;
-      background: rgba(167,139,250,0.45); box-shadow: 0 0 10px var(--trace-glow);
-    }
-    section::after {
-      content: '';
-      position: absolute; left: -46px; top: 54px; width: 12px; height: 12px;
-      border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--trace-bright-glow);
-    }
-    section h2 { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; text-align: center; }
-    .section-sub { font-size: 0.95rem; color: var(--text-sub); text-align: center; margin-bottom: 32px; }
-
-    section::before,
-    section::after {
-      display: none;
-    }
-
-    .rail-frame {
-      position: relative;
-      overflow: visible;
-      padding-top: 86px;
-      padding-bottom: 74px;
-    }
-    .rail-frame::before,
-    .rail-frame::after {
-      content: '';
-      position: absolute;
-      top: 26px;
-      bottom: 26px;
-      width: 2px;
-      background: linear-gradient(180deg, rgba(167,139,250,0.08) 0%, rgba(167,139,250,0.8) 45%, rgba(167,139,250,0.25) 70%, rgba(167,139,250,0.05) 100%);
-      background-size: 100% 160px;
-      background-repeat: repeat-y;
-      box-shadow: 0 0 12px rgba(167,139,250,0.6);
-      opacity: 0.95;
-      animation: rail-pulse 8s linear infinite;
-    }
-    .rail-frame::before { left: 24px; animation-delay: -1s; }
-    .rail-frame::after { right: 24px; animation-delay: -5s; }
-
-    .top-node,
-    .bottom-node {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px var(--trace-bright-glow), 0 0 36px rgba(167,139,250,0.55);
-      z-index: 3;
-    }
-    .top-node { top: 26px; }
-    .bottom-node { bottom: 26px; transform: translate(-50%, 50%); }
-
-    .top-node::before,
-    .bottom-node::before {
-      content: '';
-      position: absolute;
-      inset: -10px;
-      border-radius: 50%;
-      border: 1px solid rgba(167,139,250,0.45);
-      box-shadow: 0 0 24px rgba(167,139,250,0.35);
-      animation: node-glow 2.6s ease-in-out infinite;
-    }
-    .top-node::after,
-    .bottom-node::after {
-      content: '';
-      position: absolute;
-      inset: -20px;
-      border-radius: 50%;
-      border: 1px solid rgba(167,139,250,0.18);
-    }
-
-
-    .rail-frame:not(:last-of-type)::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: -56px;
-      width: 2px;
-      height: 56px;
-      transform: translateX(-50%);
-      background: linear-gradient(180deg, rgba(167,139,250,0.78) 0%, rgba(167,139,250,0.18) 100%);
-      box-shadow: 0 0 10px rgba(167,139,250,0.45);
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .rail-frame.section-screenshot { padding-top: 74px; }
-    .rail-frame.section-tight { padding-top: 76px; }
-
-    @keyframes rail-pulse {
-      0% { background-position: 0 -160px; opacity: 0.45; }
-      50% { opacity: 1; }
-      100% { background-position: 0 160px; opacity: 0.45; }
-    }
-    @keyframes node-glow {
-      0%, 100% { transform: scale(0.9); opacity: 0.65; }
-      50% { transform: scale(1.12); opacity: 1; }
-    }
-      50% { transform: scale(1.12); opacity: 1; }
-    }
-
-    .section-screenshot { max-width: 980px; padding: 36px 40px 44px; }
-    .section-tight { padding-top: 32px; }
-    .section-center { text-align: center; max-width: 760px; }
-    .section-center h2 { text-align: center; }
-
-    .screenshot-frame {
-      position: relative; border-radius: 14px; overflow: hidden;
-      border: 1px solid rgba(167,139,250,0.3);
-      background:
-        linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)) padding-box,
-        linear-gradient(90deg, rgba(167,139,250,0.7) 0 38px, transparent 38px calc(100% - 38px), rgba(167,139,250,0.7) calc(100% - 38px)) top/100% 2px no-repeat,
-        linear-gradient(90deg, rgba(167,139,250,0.7) 0 38px, transparent 38px calc(100% - 38px), rgba(167,139,250,0.7) calc(100% - 38px)) bottom/100% 2px no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.7) 0 38px, transparent 38px calc(100% - 38px), rgba(167,139,250,0.7) calc(100% - 38px)) left/2px 100% no-repeat,
-        linear-gradient(180deg, rgba(167,139,250,0.7) 0 38px, transparent 38px calc(100% - 38px), rgba(167,139,250,0.7) calc(100% - 38px)) right/2px 100% no-repeat;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 40px rgba(167,139,250,0.15);
-    }
-    .screenshot-caption {
-      text-align: center; color: var(--text-sub); font-size: 0.82rem; margin-top: 14px;
-    }
-
-    .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;
-    }
-    .feature-card {
-      padding: 30px; background: var(--panel-bg);
-      border: 1px solid rgba(167,139,250,0.18); border-radius: 12px;
-      transition: all 0.3s; position: relative;
-    }
-    .feature-card::before {
-      content: '';
-      position: absolute; top: 22px; left: 22px; width: 8px; height: 8px;
-      border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 14px var(--trace-bright-glow);
-    }
-    .feature-card::after {
-      content: '';
-      position: absolute; top: 26px; left: 32px; width: 40px; height: 1px;
-      background: rgba(167,139,250,0.5);
-    }
-    .feature-card:hover { border-color: var(--panel-border-strong); background: rgba(167,139,250,0.06); }
-    .feature-card.highlight { border-color: var(--panel-border-strong); background: rgba(167,139,250,0.08); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 14px; }
-    .feature-card h3 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-    .pro-badge {
-      display: inline-block; padding: 2px 8px; font-size: 0.65rem; font-weight: 700;
-      color: var(--accent); background: rgba(167,139,250,0.12); border-radius: 3px;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-left: 6px; vertical-align: middle;
-    }
-    .new-badge {
-      display: inline-block; padding: 2px 8px; font-size: 0.65rem; font-weight: 700;
-      color: #fcd34d; background: rgba(167,139,250,0.2); border-radius: 3px;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-left: 6px; vertical-align: middle;
-    }
-
-    .hardware-bar {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
-      padding: 24px; margin-top: 20px;
-      background: var(--panel-bg); border: 1px solid rgba(167,139,250,0.16);
-      border-radius: 12px;
-    }
-    .hardware-group { text-align: center; padding: 12px 20px; }
-    .hw-label {
-      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--text-sub); margin-bottom: 8px;
-    }
-    .hw-names {
-      font-size: 0.85rem; color: #d1d5db; font-weight: 500;
-    }
-
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px; margin-top: 20px;
-    }
-    .pricing-card {
-      padding: 34px; background: var(--panel-bg);
-      border: 1px solid rgba(167,139,250,0.2); border-radius: 14px;
-      text-align: center; transition: all 0.3s; position: relative;
-    }
-    .pricing-card::before {
-      content: '';
-      position: absolute; top: 22px; left: 22px; width: 8px; height: 8px;
-      border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--trace-bright-glow);
-    }
-    .pricing-card::after {
-      content: '';
-      position: absolute; top: 26px; left: 32px; width: 40px; height: 1px;
-      background: rgba(167,139,250,0.5);
-    }
-    .pricing-card:hover { border-color: var(--panel-border-strong); }
-    .pricing-card.featured {
-      border-color: var(--accent); background: rgba(167,139,250,0.1);
-      box-shadow: 0 0 30px rgba(167,139,250,0.2);
-    }
-    .pricing-card.featured::before { box-shadow: 0 0 18px var(--trace-bright-glow); }
-    .pricing-card.featured::after { background: rgba(167,139,250,0.8); }
-    .pricing-card.featured::marker { display: none; }
-    .pricing-card h3 { font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
-    .price { font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .price-note { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 20px; }
-    .price-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
-    .price-amount { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .price-period { font-size: 0.75rem; color: var(--text-sub); margin-bottom: 16px; }
-    .price-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-    .pricing-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
-    .pricing-card ul li {
-      padding: 5px 0; font-size: 0.82rem; color: #d1d5db;
-      display: flex; gap: 8px; align-items: flex-start;
-    }
-    .pricing-card ul li::before { content: '✓'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
-    .section-label {
-      padding: 10px 0 4px; font-size: 0.7rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--text-sub); display: block;
-    }
-    .section-label::before { content: ''; }
-    .pricing-card a[class^="btn"] { display: block; width: 100%; text-align: center; }
-
-    .use-cases { list-style: none; display: grid; gap: 16px; }
-    .use-cases li {
-      padding: 20px 22px; border: 1px solid rgba(167,139,250,0.16);
-      background: var(--panel-bg); border-radius: 12px;
-      display: flex; gap: 14px; align-items: flex-start;
-      position: relative;
-    }
-    .use-cases li::before {
-      content: '';
-      position: absolute; top: 20px; right: 20px; width: 36px; height: 1px;
-      background: rgba(167,139,250,0.4);
-    }
-    .use-case-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-    .use-case-text strong { display: block; color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
-    .use-case-text span { color: var(--text-muted); font-size: 0.85rem; }
-
-    .philosophy-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;
-    }
-    .philosophy-item {
-      padding: 20px; border: 1px solid rgba(167,139,250,0.16);
-      border-radius: 12px; background: var(--panel-bg);
-    }
-    .philosophy-item .check { color: var(--accent); font-size: 1.3rem; margin-bottom: 8px; }
-    .philosophy-item h4 { color: #fff; font-size: 0.9rem; margin-bottom: 6px; }
-    .philosophy-item p { color: var(--text-sub); font-size: 0.8rem; }
-
-    .credits-bar { text-align: center; padding: 40px; color: var(--text-sub); font-size: 0.8rem; }
-    .credits-names { margin-top: 10px; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 0.06em; }
-    .credits-names span { margin: 0 12px; }
-
-    .bottom-cta {
-      text-align: center; padding: 80px 40px;
-      border-top: 1px solid rgba(167,139,250,0.12);
-    }
-    .bottom-cta h2 { margin-bottom: 16px; }
-    .bottom-cta p { color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; }
-
-    footer {
-      text-align: center; padding: 30px; color: #4b5563; font-size: 0.75rem;
-      border-top: 1px solid rgba(167,139,250,0.08);
-    }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    .circuit-road {
-      position: fixed; top: 0; bottom: 0; left: 0; right: 0;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .circuit-rail-left, .circuit-rail-right {
-      position: absolute; top: 0; bottom: 0; width: 120px;
-    }
-    .circuit-rail-left { left: 20px; }
-    .circuit-rail-right { right: 20px; }
-    .circuit-rail-left svg, .circuit-rail-right svg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    }
-    .road-trace {
-      fill: none; stroke: rgba(167,139,250,0.4); stroke-width: 3;
-      stroke-linecap: square; filter: drop-shadow(0 0 8px var(--trace-glow));
-    }
-    .road-pulse {
-      position: absolute; width: 4px; height: 40px;
-      background: linear-gradient(180deg, transparent, var(--accent), var(--accent-soft), transparent);
-      border-radius: 2px; box-shadow: 0 0 15px var(--accent);
-      animation: road-pulse-flow 10s ease-in-out infinite;
-    }
-    .road-pulse.p1 { left: 30px; animation-delay: 0s; }
-    .road-pulse.p2 { left: 60px; animation-delay: 3s; height: 30px; }
-    .road-pulse.p3 { left: 90px; animation-delay: 6s; height: 50px; }
-    .circuit-rail-right .road-pulse.p1 { left: auto; right: 30px; animation-delay: 1.5s; }
-    .circuit-rail-right .road-pulse.p2 { left: auto; right: 60px; animation-delay: 4.5s; }
-    .circuit-rail-right .road-pulse.p3 { left: auto; right: 90px; animation-delay: 7.5s; }
-    @keyframes road-pulse-flow {
-      0% { top: -50px; opacity: 0; }
-      5% { opacity: 0.7; }
-      95% { opacity: 0.7; }
-      100% { top: 100%; opacity: 0; }
-    }
-
-    .rec-indicator { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-    .rec-dot {
-      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 12px var(--trace-bright-glow);
-      animation: rec-pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes rec-pulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.3); opacity: 1; }
-    }
-
-    .arch-section { padding: 0 0 40px; }
-    .arch-diagram {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 1.7;
-      background: rgba(3,5,6,0.8); border: 1px solid rgba(167,139,250,0.2);
-      border-radius: 10px; padding: 22px; color: #d1d5db; white-space: pre-wrap;
-      box-shadow: inset 0 0 24px rgba(167,139,250,0.05);
-    }
-
-    .code-block {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7;
-      background: rgba(3,5,6,0.85); border: 1px solid rgba(167,139,250,0.2);
-      border-radius: 12px; padding: 24px; color: #d1d5db; overflow-x: auto;
-      box-shadow: inset 0 0 24px rgba(167,139,250,0.05);
-    }
-    .comment { color: rgba(167,139,250,0.55); }
-    .highlight { color: var(--accent-soft); }
-
-    .hero-logo { width: min(240px, 70%); height: auto; margin: 0 auto 18px; display: block; color: var(--accent); }
-
-    @media (max-width: 900px) {
-      .header { padding: 14px 20px; }
-      .logo span { display: none; }
-      .nav-links { gap: 6px; }
-      .nav-btn { padding: 6px 12px; font-size: 0.65rem; }
-      .hero { padding: 120px 20px 60px; }
-      section { padding: 46px 20px; margin: 0 14px 36px; }
-      section::before, section::after { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .cta-row { flex-direction: column; align-items: center; }
-      .hardware-bar { flex-direction: column; gap: 8px; }
-      .circuit-road { opacity: 0.35; }
-      .circuit-rail-left, .circuit-rail-right { width: 60px; }
-
-      .rail-frame { padding-top: 74px; padding-bottom: 62px; }
-      .rail-frame::before, .rail-frame::after { top: 22px; bottom: 22px; width: 1px; opacity: 0.7; }
-      .rail-frame::before { left: 14px; }
-      .rail-frame::after { right: 14px; }
-      .top-node, .bottom-node { width: 12px; height: 12px; }
-      .top-node { top: 22px; }
-      .bottom-node { bottom: 22px; }
-      .rail-frame:not(:last-of-type)::after { height: 44px; bottom: -44px; width: 1px; }
-    }
-    @media (max-width: 520px) {
-      .hero h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-      .tagline { font-size: 1rem; }
-      .nav-btn { padding: 5px 8px; font-size: 0.6rem; letter-spacing: 0.03em; }
-      .section-screenshot { padding: 30px 18px 38px; }
-
-      .rail-frame { padding-top: 66px; padding-bottom: 54px; }
-      .top-node, .bottom-node { width: 10px; height: 10px; }
-      .rail-frame:not(:last-of-type)::after { height: 34px; bottom: -34px; }
-    }
-  </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "CuePatch",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "macOS, Windows",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "CuePatch", 
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      {
-        "@type": "Offer",
-        "name": "CuePatch Base",
-        "price": "199.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      {
-        "@type": "Offer",
-        "name": "CuePatch Pro",
-        "price": "499.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      }
-    ],
-    "description": "Complete LED pixel map builder with 48+ tile types, 3D preview, cable management, truck pack planning, curved wall support, and multi-processor output configs for Brompton, Novastar, and Megapixel Helios. Desktop app for Mac and Windows.",
-    "author": {
-      "@type": "Organization",
-      "name": "CueForge Labs",
-      "url": "https://cueforgelabs.com"
-    },
-    "url": "https://cueforgelabs.com/cuepatch.html"
-  }
-  </script>
+  <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <div class="nebula-bg"></div>
+  <a class="skip-link" href="#overview">Skip to content</a>
 
-  <!-- Circuit Road Guardrails -->
-  <div class="circuit-road">
-    <div class="circuit-rail-left">
-      <svg viewBox="0 0 120 5000" preserveAspectRatio="none">
-        <path class="road-trace" d="M 60 0 V 80 H 40 V 150 H 60 V 200 H 80 V 280 H 60 V 350 H 30 V 420 H 60 V 480 H 90 V 560 H 60 V 620 H 40 V 700 H 60 V 780 H 80 V 850 H 60 V 920 H 30 V 1000 H 60 V 1080 H 90 V 1150 H 60 V 1220 H 40 V 1300 H 60 V 1380 H 80 V 1450 H 60 V 1520 H 30 V 1600 H 60 V 1680 H 90 V 1760 H 60 V 1840 H 40 V 1920 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 30 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 40 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 30 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 40 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 30 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 40 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 30 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000"/>
-        <path class="road-trace" d="M 40 0 V 60 H 20 V 130 H 40 V 190 H 60 V 270 H 40 V 340 H 10 V 400 H 40 V 470 H 70 V 540 H 40 V 610 H 20 V 680 H 40 V 750 H 60 V 830 H 40 V 900 H 10 V 980 H 40 V 1050 H 70 V 1130 H 40 V 1200 H 20 V 1280 H 40 V 1350 H 60 V 1430 H 40 V 1500 H 10 V 1580 H 40 V 1650 H 70 V 1730 H 40 V 1800 H 20 V 1880 H 40 V 2000 H 60 V 2100 H 40 V 2200 H 10 V 2300 H 40 V 2400 H 70 V 2500 H 40 V 2600 H 20 V 2700 H 40 V 2800 H 60 V 2900 H 40 V 3000 H 10 V 3100 H 40 V 3200 H 70 V 3300 H 40 V 3400 H 20 V 3500 H 40 V 3600 H 60 V 3700 H 40 V 3800 H 10 V 3900 H 40 V 4000 H 70 V 4100 H 40 V 4200 H 20 V 4300 H 40 V 4400 H 60 V 4500 H 40 V 4600 H 10 V 4700 H 40 V 4800 H 70 V 4900 H 40 V 5000"/>
-      </svg>
-      <div class="road-pulse p1"></div>
-      <div class="road-pulse p2"></div>
-      <div class="road-pulse p3"></div>
-    </div>
-    <div class="circuit-rail-right">
-      <svg viewBox="0 0 120 5000" preserveAspectRatio="none">
-        <path class="road-trace" d="M 60 0 V 100 H 80 V 180 H 60 V 240 H 40 V 320 H 60 V 400 H 90 V 470 H 60 V 540 H 30 V 620 H 60 V 700 H 80 V 780 H 60 V 860 H 40 V 940 H 60 V 1020 H 90 V 1100 H 60 V 1180 H 30 V 1260 H 60 V 1340 H 80 V 1420 H 60 V 1500 H 40 V 1580 H 60 V 1660 H 90 V 1740 H 60 V 1820 H 30 V 1900 H 60 V 2000 H 80 V 2100 H 60 V 2200 H 40 V 2300 H 60 V 2400 H 90 V 2500 H 60 V 2600 H 30 V 2700 H 60 V 2800 H 80 V 2900 H 60 V 3000 H 40 V 3100 H 60 V 3200 H 90 V 3300 H 60 V 3400 H 30 V 3500 H 60 V 3600 H 80 V 3700 H 60 V 3800 H 40 V 3900 H 60 V 4000 H 90 V 4100 H 60 V 4200 H 30 V 4300 H 60 V 4400 H 80 V 4500 H 60 V 4600 H 40 V 4700 H 60 V 4800 H 90 V 4900 H 60 V 5000"/>
-        <path class="road-trace" d="M 80 0 V 70 H 100 V 150 H 80 V 220 H 60 V 300 H 80 V 380 H 110 V 450 H 80 V 520 H 50 V 600 H 80 V 680 H 100 V 760 H 80 V 840 H 60 V 920 H 80 V 1000 H 110 V 1080 H 80 V 1160 H 50 V 1240 H 80 V 1320 H 100 V 1400 H 80 V 1480 H 60 V 1560 H 80 V 1640 H 110 V 1720 H 80 V 1800 H 50 V 1880 H 80 V 2000 H 100 V 2100 H 80 V 2200 H 60 V 2300 H 80 V 2400 H 110 V 2500 H 80 V 2600 H 50 V 2700 H 80 V 2800 H 100 V 2900 H 80 V 3000 H 60 V 3100 H 80 V 3200 H 110 V 3300 H 80 V 3400 H 50 V 3500 H 80 V 3600 H 100 V 3700 H 80 V 3800 H 60 V 3900 H 80 V 4000 H 110 V 4100 H 80 V 4200 H 50 V 4300 H 80 V 4400 H 100 V 4500 H 80 V 4600 H 60 V 4700 H 80 V 4800 H 110 V 4900 H 80 V 5000"/>
-      </svg>
-      <div class="road-pulse p1"></div>
-      <div class="road-pulse p2"></div>
-      <div class="road-pulse p3"></div>
-    </div>
-  </div>
-
-  <header class="header">
-    <a href="index.html" class="logo">
-      <svg viewBox="0 0 2232.6 1387.35"><path fill="currentColor" d="M979.6,1.31h94c12.01-.03,24.01,0,36,0h93l55-1c18.36.03,36.63.15,55,0l36,1h205l176,1h257c1,0,2,0,3,0h77c5.65.01,11.35-.01,17,0h117c.67,0,1.33,0,2,0h38c1,0,2,0,3,0,22.67-.48,45.34-.48,68,0,51.71,2.7,83.32,34.31,94.86,83.64l2.14,29.36v122c-1.78,44.97-29.38,61.11-62.81,82.66-74.81,48.24-151.56,88.78-224.52,141.51-60.26,43.54-246.69,195.25-262.95,263.05-5.71,23.79-4.31,115.24-2.8,143.28.31,5.75.71,18.4,3.06,23.02,81.62,71.05,170.55,133.82,252.03,204.97,6.8,5.94,33.01,27.89,34.57,34.43-3.16,56.05,5.22,118.39,1.47,173.62-3.35,49.24-46.56,85.08-95.05,84.45h-335c-24.75-10.54-38.33-40.84-56.97-61.53-52.01-57.69-124.68-104.71-202.37-117.63l-87.01-83.76-82.49,80.58c-107.56,24.07-191.44,93.6-256.47,179.53-53,4.83-107.31-.69-160.7,2.8h-179c-1.98-.09-4.02.13-6,0-38.46-2.45-72.58-21.02-85.48-59.02-8.12-23.93-8.32-128.71-5.57-157.52.33-3.47.79-6.84,1.72-10.19,32.92-26.46,84.78-101.48,125.28-110.81,11.72-2.7,35.48-.49,44.03-3.97,3.09-1.26,36.43-29.3,42.07-33.93,30.65-25.21,59.5-53.03,89.24-79.24,10.27-9.05,35.94-25.33,42.16-37.36s7.06-128.7,5.61-148.49c-4.05-55.04-41.29-47.46-82.68-58.32-212.72-55.78-419.72-213.19-572.76-367.19C83.76,291.61,4.32,214.52.57,175.84c-6.95-71.81,50.6-66.79,102.53-68.6,108.32-3.77,218.43-1.78,326.99-2.01,137.51-.29,275.44,2.09,412.83,2.12,12.71-13.89,25-28.6,38.21-41.97,9.86-9.98,55.52-58.79,62.57-62.47,8.55-4.46,25.72-1.5,35.9-1.6Z"/></svg>
+  <header class="dossier-header">
+    <a href="index.html" class="logo" aria-label="CueForge Labs home">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
       <span>CueForge Labs</span>
     </a>
-    <div class="nav-links">
-      <a href="software-circuit.html" class="nav-btn">← All Software</a>
-      <a href="docs.html" class="nav-btn">Docs</a>
-      <a href="index.html" class="nav-btn">Home</a>
-    </div>
+    <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CuePatch">Contact</a>
   </header>
 
-  <div class="hero">
-    <div class="hero-badge">Desktop App — Mac & Windows · No Subscription · 48+ LED Tiles</div>
-    <h1><span>CuePatch</span> — The Complete LED Pixel Map Builder</h1>
-    <p class="tagline">Build pixel maps, preview in 3D, manage cables, plan truck packs, and configure processor outputs — all in one app. 48+ tile types from ROE, Absen, Unilumin, INFiLED, Gloshine & CHAUVET. Supports Brompton, Novastar & Megapixel Helios processors.</p>
-    <div class="cta-row">
-      <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Beta%20Interest" class="btn-primary" target="_blank">Join the Beta →</a>
-      <a href="#features" class="btn-secondary">See Features ↓</a>
-    </div>
-  </div>
-
-  <!-- Product Screenshot -->
-  <section class="rail-frame section-screenshot">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <div class="screenshot-frame">
-      <img src="images/mockups/cuepatch-screenshot.jpg" alt="CuePatch application screenshot showing LED pixel map builder with multi-screen video wall layout, tile labels, and output configuration" style="width:100%;display:block;" loading="lazy">
-    </div>
-    <p class="screenshot-caption">CuePatch building a multi-screen pixel map for an LED video wall</p>
-  </section>
-
-  <!-- Hardware Support -->
-  <section class="rail-frame section-tight">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <div class="hardware-bar">
-      <div class="hardware-group">
-        <div class="hw-label">LED Panels</div>
-        <div class="hw-names">ROE · Absen · Unilumin · INFiLED · Gloshine · CHAUVET</div>
-      </div>
-      <div class="hardware-group">
-        <div class="hw-label">Processors</div>
-        <div class="hw-names">Brompton · Novastar · Megapixel Helios</div>
-      </div>
-      <div class="hardware-group">
-        <div class="hw-label">Export Targets</div>
-        <div class="hw-names">disguise · PNG · JPG · WebP · OBJ · CSV</div>
+  <nav class="dossier-subnav" aria-label="CuePatch sections">
+    <div class="subnav-inner">
+      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
+      <span class="subnav-product">CuePatch</span>
+      <div class="subnav-links">
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#availability">Availability</a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- Pricing -->
-  <section class="rail-frame">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <h2>One License Per Machine</h2>
-    <p class="section-sub">Same software, same features — the only difference is license scope. Add CuePatch to your show build.</p>
-    <p style="text-align: center; color: var(--accent); font-size: 0.85rem; margin-bottom: 32px; font-style: italic;">🎤 "Everyone's going to want this." — Video crew chief, major touring productions</p>
-    <div class="pricing-grid" style="grid-template-columns: repeat(3, 1fr);">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <div class="price">Custom</div>
-        <div class="price-note">Tell us your use case and we’ll recommend the right license</div>
-        <ul>
-          <li class="section-label">Includes</li>
-          <li>Workflow fit call</li>
-          <li>License recommendation</li>
-          <li>Deployment guidance</li>
-          <li>Direct purchase support</li>
-        </ul>
-        <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Beta%20Interest" class="btn-secondary" target="_blank">Questions?</a>
-      </div>
-      <div class="pricing-card featured">
-        <h3>Base</h3>
-        <div class="price">Coming Soon</div>
-        <div class="price-note">Part of the CueForge Production Suite</div>
-        <ul>
-          <li class="section-label">All Features</li>
-          <li>Unlimited screens & outputs</li>
-          <li>Screen splitting across outputs</li>
-          <li>All 48+ LED tiles & processors</li>
-          <li>Cable Manager — home runs, spares, pull sheet export</li>
-          <li>Cart/Truck Pack Planner</li>
-          <li>Multi-Output processor configs (Brompton, Novastar, Helios)</li>
-          <li>Curved Wall Mode with overlap detection</li>
-          <li class="section-label">Visualization</li>
-          <li>3D Preview with placement presets</li>
-          <li>Image overlay support</li>
-          <li>Enhanced screen labels & color swatches</li>
-          <li class="section-label">Export & Integration</li>
-          <li>All exports (Disguise CSV, MA3 XML, OBJ, PNG, JPG, WebP, PDF)</li>
-          <li>Per-screen processor/wiring settings</li>
-          <li>Stats & BOM reports</li>
-          <li class="section-label">Platform</li>
-          <li>Desktop app (Mac + Windows)</li>
-          <li>Unlimited projects</li>
-          <li>2 machine activations</li>
-        </ul>
-        <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Beta%20Interest" class="btn-primary">Join the Beta →</a>
-      </div>
-      <div class="pricing-card">
-        <h3>Pro</h3>
-        <div class="price">Coming Soon</div>
-        <div class="price-note">Part of the CueForge Production Suite</div>
-        <ul>
-          <li class="section-label">Everything in Base, plus:</li>
-          <li>5 machine activations</li>
-          <li>Content Comp Generator (AE ExtendScript export)</li>
-          <li>Work comp builder with drag-to-layout</li>
-          <li>Flow mapping & transition paths</li>
-          <li>Spec sheet PDF export</li>
-          <li>Commercial use for production companies</li>
-          <li>Rental houses & vendor shops</li>
-          <li>Line item on the show build</li>
-        </ul>
-        <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Beta%20Interest" class="btn-primary">Join the Beta →</a>
-      </div>
-    </div>
-  </section>
+  <main>
+    <!-- ============================================================ HERO -->
+    <section class="hero" id="overview">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-mark">
+              <img src="images/products/cuepatch.png" alt="" aria-hidden="true">
+              <div>
+                <p class="hero-eyebrow">Production Tool</p>
+                <h1>CuePatch</h1>
+              </div>
+            </div>
 
-  <!-- Features -->
-  <section class="rail-frame">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <h2>All Features</h2>
-    <p class="section-sub">More than a pixel map generator — it's your complete LED prep toolkit.</p>
-    <div class="features-grid">
+            <p class="hero-job">Build the pixel map, processor outputs, cabling and pack data for an LED wall before a single panel leaves the shop.</p>
 
-      <div class="feature-card highlight">
-        <div class="feature-icon">📺</div>
-        <h3>48+ LED Tile Database</h3>
-        <p>Pre-loaded specs for ROE, Absen, Unilumin, INFiLED, Gloshine, and CHAUVET. Select a tile, define your grid, generate. No manual math.</p>
-      </div>
+            <p class="status-chip">Private Validation &middot; Beta Interest</p>
 
-      <div class="feature-card highlight">
-        <div class="feature-icon">🧊</div>
-        <h3>3D Preview <span class="new-badge">New</span></h3>
-        <p>See your LED wall layouts rendered in real-time 3D with Three.js. Validate placement, dimensions, and sight lines before you get to site.</p>
-      </div>
+            <ul class="chipset">
+              <li class="chip">macOS &amp; Windows desktop</li>
+              <li class="chip">Local project files</li>
+              <li class="chip is-path">Brompton &middot; Novastar &middot; Megapixel Helios</li>
+              <li class="chip is-eco">disguise &middot; grandMA3 &middot; MVR export</li>
+            </ul>
 
-      <div class="feature-card highlight">
-        <div class="feature-icon">🔌</div>
-        <h3>Cable Manager <span class="pro-badge">Base</span></h3>
-        <p>Full cable management — define home runs, spares, and cable types. Export pull sheets for your crew. No more spreadsheets.</p>
-      </div>
+            <div class="cta-row">
+              <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CuePatch%20validation%20interest">Contact Us</a>
+              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
+            </div>
+          </div>
 
-      <div class="feature-card highlight">
-        <div class="feature-icon">🚛</div>
-        <h3>Truck Pack Planner <span class="pro-badge">Base</span></h3>
-        <p>Visual cart and truck loading with drag-and-drop. Generate pack paperwork and manifests. Know exactly what fits before load-in.</p>
-      </div>
-
-      <div class="feature-card highlight">
-        <div class="feature-icon">🌀</div>
-        <h3>Curved Wall Mode <span class="pro-badge">Base</span></h3>
-        <p>Build curved LED walls with automatic overlap detection. Wall Builder dialog for physical dimensions. Handle concave and convex layouts.</p>
-      </div>
-
-      <div class="feature-card highlight">
-        <div class="feature-icon">🖥️</div>
-        <h3>Multi-Output Processor Configs <span class="pro-badge">Base</span></h3>
-        <p>Configure outputs for Brompton, Novastar, and Megapixel Helios processors. Split screens across multiple outputs with per-screen wiring settings.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔲</div>
-        <h3>Multi-Surface Support</h3>
-        <p>Define multiple LED surfaces with independent dimensions and offsets. Handle complex stage layouts in a single project.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Stats Panel</h3>
-        <p>Real-time calculations for total resolution, pixel count, power draw, and weight. Know your specs before you order.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3>Alignment Patterns</h3>
-        <p>Center circles, crosshairs, grid overlays, and SMPTE bars for precise panel alignment. See problems before content goes up.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏷️</div>
-        <h3>Enhanced Labels <span class="pro-badge">Base</span></h3>
-        <p>Auto tile labels with weight control, master offset, and resolution badges. Color-coded alternating tiles. Know which panel is which at a glance.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3>Image Overlay <span class="pro-badge">Base</span></h3>
-        <p>Upload reference images as overlays — crop, resize, and position with handles. Preview your content on the actual wall layout.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📤</div>
-        <h3>Export Everything <span class="pro-badge">Base</span></h3>
-        <p>Unlimited exports in PNG, JPG, and WebP. OBJ mesh export for 3D workflows. disguise CSV export for media server integration.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3>Color Swatches <span class="pro-badge">Base</span></h3>
-        <p>16 preset colors plus a full color picker. Color-code your surfaces, groups, and zones for instant visual clarity.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📐</div>
-        <h3>3D Placement Presets <span class="pro-badge">Base</span></h3>
-        <p>Quickly position walls with 3D presets — ground, fascia, header, side fills, and custom angles. Skip the manual positioning.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💻</div>
-        <h3>Desktop App — Mac & Windows</h3>
-        <p>Native desktop app built with Tauri. Runs offline, no browser required. Your data stays on your machine.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Who It's For -->
-  <section class="rail-frame">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <h2>Who It's For</h2>
-    <ul class="use-cases">
-      <li>
-        <div class="use-case-icon">🎬</div>
-        <div class="use-case-text">
-          <strong>Video Directors</strong>
-          <span>Design LED layouts, preview in 3D, and generate pixel maps before you get to the venue. Share specs with your crew instantly.</span>
+          <figure class="evidence">
+            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CuePatch interface &mdash; Builder</figcaption>
+            <div class="evidence-stage">
+              <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="CuePatch Builder showing three LED screens laid out on one 3840 by 2160 output, with the outputs list, screen configuration, tile grid and surface colour controls." decoding="async">
+            </div>
+            <p class="evidence-caption">
+              <b>Builder &mdash; three screens on one 3840&times;2160 output.</b> Real capture of CuePatch running an unsaved local project on ROE Visual Carbon CB5 tiles. No customer, venue or show data.
+            </p>
+          </figure>
         </div>
-      </li>
-      <li>
-        <div class="use-case-icon">🔧</div>
-        <div class="use-case-text">
-          <strong>LED Technicians</strong>
-          <span>Cable management, tile labeling, processor configs, and pull sheets. Everything you need for a clean install — in one app.</span>
-        </div>
-      </li>
-      <li>
-        <div class="use-case-icon">🏢</div>
-        <div class="use-case-text">
-          <strong>Rental Houses</strong>
-          <span>Standardize pixel map generation, truck pack planning, and cable prep across your fleet. Custom tile database for your inventory.</span>
-        </div>
-      </li>
-      <li>
-        <div class="use-case-icon">🎪</div>
-        <div class="use-case-text">
-          <strong>Production Companies</strong>
-          <span>From pre-production to load-in — design walls, split processor outputs, plan truck packs, and export to disguise. One workflow, start to finish.</span>
-        </div>
-      </li>
-    </ul>
-  </section>
+      </div>
+    </section>
 
-  <section class="rail-frame">
-    <div class="top-node" aria-hidden="true"></div>
-    <div class="bottom-node" aria-hidden="true"></div>
-    <h2>No Subscriptions. No Cloud. Your Tools.</h2>
-    <div class="philosophy-grid">
-      <div class="philosophy-item">
-        <div class="check">✅</div>
-        <h4>Works Offline</h4>
-        <p>No internet required during shows</p>
+    <!-- ======================================================== WORKFLOW -->
+    <section class="band energize" id="workflow">
+      <div class="shell">
+        <p class="band-label">The safe loop</p>
+        <h2 class="band-title">Define outputs, build the wall, <strong>export the show pack</strong></h2>
+        <p class="band-intro">CuePatch keeps the processor truth and the physical truth in one document, so the map handed to the video engineer matches the cases that go on the truck.</p>
+
+        <ol class="workflow-strip">
+          <li class="stage">
+            <p class="stage-index">01</p>
+            <h3>Define outputs</h3>
+            <p>Set processor output resolution and add only the outputs the design actually needs.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">02</p>
+            <h3>Build screens</h3>
+            <p>Place real tiles from the panel database, size the grid, and align multiple surfaces on one canvas.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">03</p>
+            <h3>Map and slice</h3>
+            <p>Assign screens to processor outputs and split surfaces across outputs with visual slice tools.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">04</p>
+            <h3>Cable and pack</h3>
+            <p>Work out data runs and signal flow, then turn panel count into road-case and truck figures.</p>
+          </li>
+          <li class="stage">
+            <p class="stage-index">05</p>
+            <h3>Export</h3>
+            <p>Emit the images, mesh, media-server and lighting files the rest of the departments need.</p>
+          </li>
+        </ol>
       </div>
-      <div class="philosophy-item">
-        <div class="check">✅</div>
-        <h4>Buy Once, Own Forever</h4>
-        <p>No recurring fees, no subscription</p>
+    </section>
+
+    <!-- ==================================================== CAPABILITIES -->
+    <section class="band energize" id="capabilities">
+      <div class="shell">
+        <p class="band-label">Capabilities</p>
+        <h2 class="band-title">What it does <strong>on a real show build</strong></h2>
+
+        <div class="chapters">
+          <article class="chapter">
+            <p class="chapter-job">Get the wall right</p>
+            <h3>Panel-accurate surfaces</h3>
+            <p>Build from real product specs instead of nominal rectangles, so pixel pitch, panel count and physical size stay honest from the first sketch.</p>
+            <ul>
+              <li>48+ LED tile types covering ROE Visual, Absen, Unilumin, INFiLED, Gloshine and CHAUVET</li>
+              <li>Multiple screens positioned and aligned on a single canvas</li>
+              <li>Curved wall builder with configurable radius and panel count</li>
+              <li>Half-tile grid increments where the product supports them</li>
+              <li>Reference image overlays for design alignment</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Answer the engineer</p>
+            <h3>Processor outputs and slicing</h3>
+            <p>Map surfaces onto processor outputs and see the split before anyone patches a fibre.</p>
+            <ul>
+              <li>Multi-output mapping with visual screen slicing</li>
+              <li>Cable manager for data runs and signal flow</li>
+              <li>Built around Brompton, Novastar and Megapixel Helios processor workflows</li>
+              <li>Per-screen names, resolution readouts and master offsets</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Answer the production manager</p>
+            <h3>Weight, power and pack</h3>
+            <p>The same document carries the numbers that decide rigging, power distribution and freight.</p>
+            <ul>
+              <li>Live stats for resolution, pixel count, power draw and weight</li>
+              <li>Viewing-distance calculation that updates as the grid changes</li>
+              <li>Pack planner for road-case counts and truck layout</li>
+              <li>3D preview with arena, stadium, festival, theatre, club and corporate presets</li>
+            </ul>
+          </article>
+
+          <article class="chapter">
+            <p class="chapter-job">Hand it off</p>
+            <h3>Export into the departments</h3>
+            <p>Every downstream department gets a file of its own rather than a screenshot of yours.</p>
+            <ul>
+              <li>Images at exact pixel resolution &mdash; PNG, JPG, WebP</li>
+              <li>OBJ mesh for 3D workflows</li>
+              <li>disguise CSV and 3D position data</li>
+              <li>grandMA3 XML and MVR for lighting</li>
+              <li>Slice summaries and pack-planner reports</li>
+            </ul>
+          </article>
+        </div>
       </div>
-      <div class="philosophy-item">
-        <div class="check">✅</div>
-        <h4>No Account Required</h4>
-        <p>Install and go, zero onboarding</p>
+    </section>
+
+    <!-- ======================================================= FIELD FIT -->
+    <section class="band energize" id="field-fit">
+      <div class="shell">
+        <p class="band-label">Field fit</p>
+        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+
+        <div class="split">
+          <div class="panel">
+            <h3><span class="marker" aria-hidden="true"></span>Built for</h3>
+            <ul>
+              <li>Video designers and screens producers scoping a wall during pre-production</li>
+              <li>Video engineers who need the processor map settled before load-in</li>
+              <li>Production managers pricing panel count, power, weight and trucking</li>
+              <li>Shops preparing a repeatable pack for a recurring design</li>
+            </ul>
+          </div>
+          <div class="panel is-boundary">
+            <h3><span class="marker" aria-hidden="true"></span>Outside its authority</h3>
+            <ul>
+              <li>It does not drive processors, send content, or control anything live</li>
+              <li>It does not replace a site survey, rigging plot or structural engineering</li>
+              <li>It does not validate delivered media &mdash; that is CueCheck's job</li>
+              <li>It plans LED surfaces; whole-production logistics live in CuePack</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="philosophy-item">
-        <div class="check">✅</div>
-        <h4>No Telemetry</h4>
-        <p>Your data stays on your machine</p>
+    </section>
+
+    <!-- ==================================================== AVAILABILITY -->
+    <section class="band energize" id="availability">
+      <div class="shell">
+        <p class="band-label">Availability</p>
+        <h2 class="band-title">Commercial truth, <strong>stated plainly</strong></h2>
+
+        <div class="availability">
+          <p class="availability-status">Private Validation &mdash; Beta Interest</p>
+          <h3>CuePatch is not on public sale.</h3>
+          <p>The application is in private validation with working professionals. There is no public download, no self-service activation, and no published price. Tier structures that previously appeared on this page are retired and are not CueForge's commercial position.</p>
+          <p>The intended shape is one complete professional edition licensed to one active computer, with a humane self-service transfer when a machine dies. Exact price and terms remain an open commercial decision and will not be quoted until they are settled.</p>
+          <div class="cta-row">
+            <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CuePatch%20validation%20interest">Contact Us</a>
+          </div>
+        </div>
+
+        <dl class="spec-grid">
+          <div class="spec">
+            <dt>Platform</dt>
+            <dd>Desktop application for macOS and Windows.</dd>
+          </div>
+          <div class="spec">
+            <dt>Data boundary</dt>
+            <dd>Projects are local files with autosave and recovery. No cloud account is required to build a map.</dd>
+          </div>
+          <div class="spec">
+            <dt>Interchange</dt>
+            <dd>PNG / JPG / WebP, OBJ, disguise CSV and 3D positions, grandMA3 XML, MVR, slice and pack reports.</dd>
+          </div>
+          <div class="spec">
+            <dt>Release state</dt>
+            <dd>Private validation. Distribution, activation and support terms are not published.</dd>
+          </div>
+        </dl>
       </div>
+    </section>
+
+    <!-- ========================================================= RELATED -->
+    <section class="band energize" id="related">
+      <div class="shell">
+        <p class="band-label">Related instruments</p>
+        <h2 class="band-title">What CuePatch <strong>hands off to</strong></h2>
+        <div class="related-grid">
+          <a class="related-card" href="cuepack.html">
+            <p class="rel-link">Next &rarr;</p>
+            <p class="rel-name">CuePack</p>
+            <p>CuePatch sizes the wall and its cases; CuePack carries that gear through packs, trucks, freight and the rest of the production.</p>
+          </a>
+          <a class="related-card" href="cuecheck.html">
+            <p class="rel-link">Downstream &rarr;</p>
+            <p class="rel-name">CueCheck</p>
+            <p>Once the map fixes the output resolution, CueCheck validates that delivered content matches it and reaches every playback destination.</p>
+          </a>
+          <a class="related-card" href="cueswitcher.html">
+            <p class="rel-link">Adjacent &rarr;</p>
+            <p class="rel-name">CueSwitcher</p>
+            <p>The same show from the director's chair &mdash; camera plans, shot sheets, timelines and switcher macros.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dossier-footer">
+    <div class="footer-inner">
+      <p class="footer-note">&copy; 2026 CueForge Labs LLC &middot; Built from real live-production workflows.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="software-circuit.html">Software Circuit</a>
+        <a href="index.html">Home</a>
+        <a href="mailto:steve@cueforgelabs.com">Contact</a>
+      </nav>
     </div>
-  </section>
-
-
-
-  <div class="bottom-cta">
-    <h2>Add CuePatch to Your Show Build</h2>
-    <p>Part of the CueForge Production Suite. Pricing coming soon.</p>
-    <div class="cta-row">
-      <a href="mailto:steve@cueforgelabs.com?subject=CuePatch%20Beta%20Interest" class="btn-primary">Join the Beta →</a>
-      <a href="software-circuit.html" class="btn-secondary">← Back to All Software</a>
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2026 CueForge Labs LLC · <a href="mailto:steve@cueforgelabs.com">Contact</a> · <a href="products.html">All Products</a> · <a href="suite.html">Suite Deal</a> · <a href="docs.html">Docs</a></p>
   </footer>
+
+  <script src="js/product-dossier.js" defer></script>
 </body>
 </html>
