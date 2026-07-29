@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="CueForge Labs - Production software tools. CuePatch, CuePack, CueCheck, CueRoll, CueMaker, CueCapture, CueMapper, CueGrid, CueHealth, CueVault, and CueRider. Built by a touring LD.">
+  <meta name="description" content="CueForge Labs production software tools: CuePatch, CuePack, CueRoll, CueMaker, CueScale, CueSwitcher, and CueCheck — built from real live-production workflows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -559,6 +559,149 @@
     /* Hide mobile decorations on desktop */
     .corner-node, .h-trace, .v-trace, .card-pulse { display: none; }
 
+    /* Separate business lines — intentionally outside the production-tool circuit */
+    .venture-branches {
+      position: relative;
+      margin: 40px auto 0;
+      padding: 90px 0 20px;
+      border-top: 1px solid rgba(56,199,204,0.16);
+    }
+    .venture-branches::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      width: min(320px, 70%);
+      height: 3px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, var(--forge-teal), transparent);
+      box-shadow: 0 0 18px rgba(56,199,204,0.35);
+    }
+    .venture-heading {
+      max-width: 720px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+    .venture-heading .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--forge-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .venture-heading h2 {
+      margin-top: 12px;
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: #fff;
+    }
+    .venture-heading h2 span { color: var(--forge-teal); font-weight: 600; }
+    .venture-heading p {
+      margin-top: 14px;
+      color: rgba(255,255,255,0.54);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .venture-card {
+      --branch-accent: var(--forge-teal);
+      position: relative;
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      min-height: 250px;
+      padding: 28px;
+      color: inherit;
+      text-decoration: none;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--branch-accent) 8%, transparent), transparent 42%), rgba(6,10,13,0.86);
+      border: 1px solid color-mix(in srgb, var(--branch-accent) 28%, transparent);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .venture-card::before,
+    .venture-card::after {
+      content: '';
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      pointer-events: none;
+    }
+    .venture-card::before {
+      top: 10px;
+      left: 10px;
+      border-top: 2px solid var(--branch-accent);
+      border-left: 2px solid var(--branch-accent);
+    }
+    .venture-card::after {
+      right: 10px;
+      bottom: 10px;
+      border-right: 2px solid var(--branch-accent);
+      border-bottom: 2px solid var(--branch-accent);
+    }
+    .venture-card:hover,
+    .venture-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--branch-accent) 72%, transparent);
+      box-shadow: 0 18px 48px color-mix(in srgb, var(--branch-accent) 16%, transparent);
+      outline: none;
+    }
+    .venture-card.business { --branch-accent: var(--forge-amber); }
+    .venture-card.independent { --branch-accent: var(--forge-lavender); }
+    .venture-image {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid color-mix(in srgb, var(--branch-accent) 55%, transparent);
+      background: var(--forge-dark);
+      box-shadow: 0 0 28px color-mix(in srgb, var(--branch-accent) 18%, transparent);
+    }
+    .venture-image img { width: 100%; height: 100%; object-fit: cover; }
+    .venture-card.independent .venture-image img { object-fit: contain; transform: scale(0.78); }
+    .venture-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--branch-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .venture-card h3 {
+      margin-top: 8px;
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    .venture-card p {
+      margin-top: 10px;
+      color: rgba(255,255,255,0.58);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .venture-products {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.72);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .venture-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: 16px;
+      color: var(--branch-accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
     /* Responsive - Tablet */
     @media (max-width: 1100px) {
       .portfolio-container { padding: 120px 30px 80px; }
@@ -578,6 +721,7 @@
       .portfolio-container { padding: 100px 15px 60px; }
       .section-title { margin-bottom: 60px; }
       .section-title h1 { font-size: 1.8rem; }
+      .anvil-header svg { width: 340px; }
       
       .circuit-entry {
         flex-direction: column !important;
@@ -665,16 +809,23 @@
       @keyframes mobile-pulse-down { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 28px; opacity: 0; } }
       
       .circuit-road { opacity: 0.4; }
-      .circuit-rail-left, .circuit-rail-right { width: 60px; }
-      .circuit-rail-left { left: -10px; }
-      .circuit-rail-right { right: -10px; }
+      .circuit-rail-left, .circuit-rail-right { width: 50px; }
+      .circuit-rail-left { left: 0; }
+      .circuit-rail-right { right: 0; }
       .road-trace { stroke-width: 2; }
+      .venture-branches { margin-top: 70px; padding-top: 70px; }
+      .venture-grid { grid-template-columns: 1fr; max-width: 520px; }
+      .venture-card { grid-template-columns: 104px minmax(0, 1fr); min-height: 220px; padding: 24px; }
+      .venture-image { width: 104px; height: 104px; }
     }
     @media (max-width: 400px) {
       .circuit-node { width: 170px; height: 170px; }
       .node-body.no-image { font-size: 4rem; }
       .data-value.artist { font-size: 1.1rem !important; }
       .circuit-traces { max-width: 280px; padding: 20px 20px; }
+      .venture-card { grid-template-columns: 1fr; text-align: center; }
+      .venture-image { margin: 0 auto; }
+      .venture-cta { justify-content: center; }
     }
   </style>
 </head>
@@ -723,6 +874,36 @@
     </div>
 
     <div id="portfolio-entries"></div>
+
+    <section class="venture-branches" aria-labelledby="venture-heading">
+      <div class="venture-heading">
+        <div class="eyebrow">Beyond Live Production</div>
+        <h2 id="venture-heading">Separate <span>Business Lines</span></h2>
+        <p>CueForge production tools stay focused. These ventures serve different buyers and operate on their own product paths.</p>
+      </div>
+      <div class="venture-grid">
+        <a class="venture-card business" href="mailto:steve@cueforgelabs.com?subject=Business%20Solutions%20Inquiry">
+          <div class="venture-image"><img src="images/products/business-solutions.png" alt="Business Solutions"></div>
+          <div>
+            <div class="venture-kicker">Separate Business Line</div>
+            <h3>Business Solutions</h3>
+            <p>Managed systems that turn missed calls, customer follow-up, invoices, and work packets into clear owner action.</p>
+            <div class="venture-products">Front Desk AI · InvoicePack</div>
+            <span class="venture-cta">Discuss a fit →</span>
+          </div>
+        </a>
+        <a class="venture-card independent" href="https://www.pocketcounsel.com/" target="_blank" rel="noopener noreferrer">
+          <div class="venture-image"><img src="images/products/pocketcounsel.png" alt="PocketCounsel"></div>
+          <div>
+            <div class="venture-kicker">Independent Venture</div>
+            <h3>PocketCounsel</h3>
+            <p>AI-assisted legal workflow technology for high-conflict family-law matters, developed as a separate product and business.</p>
+            <div class="venture-products">Legal workflow · Evidence preparation</div>
+            <span class="venture-cta">Visit PocketCounsel ↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
 
   <script>
@@ -746,14 +927,6 @@
         url: 'cuepack.html#pricing'
       },
       {
-        name: 'CueCheck',
-        image: 'images/products/cuecheck.png',
-        tagline: 'Content Pipeline Validator',
-        description: 'Watch folders, validate specs, auto-rename, and sync to servers with notifications.',
-        price: 'Coming Soon',
-        url: 'cuecheck.html'
-      },
-      {
         name: 'CueRoll',
         image: 'images/products/cueroll.png',
         tagline: 'LTC Timecode Note-Taking',
@@ -770,52 +943,28 @@
         url: 'cuemaker.html'
       },
       {
-        name: 'CueCapture',
-        image: 'images/products/cuecapture.png',
-        tagline: 'Multi-Input Video Capture',
-        description: 'Record up to 4 live video inputs with synchronized timecode overlay and setlist tracking.',
-        price: 'Coming Soon',
-        url: 'cuecapture.html'
+        name: 'CueScale',
+        image: 'images/products/cuescale.png',
+        tagline: 'grandMA3 Timecode Rescaler',
+        description: 'Rescale grandMA3 timecode pools between source and target tempos while preserving the original time format and exporting a new pool.',
+        price: 'In Development',
+        url: 'mailto:steve@cueforgelabs.com?subject=CueScale'
       },
       {
-        name: 'CueMapper',
-        image: 'images/products/cuemapper.png',
-        tagline: 'Projection Mapping Toolkit',
-        description: 'Professional structured light scanning and content warping. One-time license with 2 machine activations.',
-        price: 'Coming Soon',
-        url: 'cuemapper.html'
+        name: 'CueSwitcher',
+        image: 'images/products/cueswitcher.png',
+        tagline: 'Video Director Cockpit',
+        description: 'Build and run switching plans, shot timelines, source layouts, countdowns, and show-control cues from one director-focused workspace.',
+        price: 'In Development',
+        url: 'mailto:steve@cueforgelabs.com?subject=CueSwitcher'
       },
       {
-        name: 'CueGrid',
-        image: 'images/products/cuegrid.png',
-        tagline: 'grandMA3 Layout Builder',
-        description: 'Import your patch, build fixture pixel templates visually, place and align on a 2D canvas with real alignment tools, export to MA3 Lua.',
+        name: 'CueCheck',
+        image: 'images/products/cuecheck.png',
+        tagline: 'Content Pipeline Validator',
+        description: 'Watch folders, validate specs, resolve delivery conflicts, and move approved content through a production pipeline.',
         price: 'Coming Soon',
-        url: 'cuegrid.html'
-      },
-      {
-        name: 'CueHealth',
-        image: 'images/products/cuehealth.png',
-        tagline: 'LED Inventory Intelligence',
-        description: 'Lifecycle health tracking and firmware fleet management for LED panel inventory.',
-        price: 'Coming Soon',
-        url: 'cuehealth.html'
-      },
-      {
-        name: 'CueVault',
-        image: 'images/products/cuevault.png',
-        tagline: 'Processor Config Version Control',
-        description: 'Version control and visual diff for Brompton, Novastar, and Megapixel processor configs. Tag to shows, venues, clients.',
-        price: 'Coming Soon',
-        url: 'cuevault.html'
-      },
-      {
-        name: 'CueRider',
-        image: 'images/products/cuerider.png',
-        tagline: 'Tech Rider Generator',
-        description: 'Paste your fixture list, get instant power/weight/DMX calculations and a professional PDF tech rider.',
-        price: 'Coming Soon',
-        url: 'cuerider.html'
+        url: 'cuecheck.html'
       }
     ];
 
@@ -837,10 +986,18 @@
       entry.dataset.index = index;
       entry.style.cursor = 'pointer';
       entry.addEventListener('click', () => { window.location.href = item.url; });
+      entry.setAttribute('role', 'link');
+      entry.setAttribute('tabindex', '0');
+      entry.setAttribute('aria-label', `${item.name}: ${item.tagline}`);
+      entry.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          window.location.href = item.url;
+        }
+      });
       
       let imgClass = '';
       if (item.name === 'CuePack') imgClass = 'cover-fit move-up';
-      if (item.name === 'CueCapture') imgClass = 'move-up';
       entry.innerHTML = `
         <div class="circuit-node">
           <div class="node-ring"></div>
