@@ -65,7 +65,7 @@ REELS = {
         (CPK + 'multimodal-pack-planner.webp',
          'e50eb5784be57ac9722a747b4a30bae0ce3c5a1e8d8dd76d44aef0ccd944143a'),
         (CPK + 'truck-pack-3d-populated.webp',
-         'c96936bd356ea6cf08254f424ddf45e380530c9911231c43f1066f84d2a9f3de'),
+         'ac68be24ff4f65ceb55cb5006f438ff210b1dea6b8c95236a7d48fa21c891351'),
         (CPK + 'pa-operations.webp',
          '0fd952137d9f7c964b61a692218b237f97c1e1caabb451c052061138b61970a4'),
         (CPK + 'crew-day-interface.webp',
