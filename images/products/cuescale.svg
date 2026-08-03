@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="CueScale">
+  <title>CueScale</title>
+  <desc>The Single Spine: one unchanged grey timeline with compressed amber and expanded cyan event positions projected above and below it.</desc>
+  <!--
+    Master mark. 256-unit grid, hand-authored, transparent ground.
+    This grid IS the app-icon grid divided by four: brand/cuescale-appicon.svg
+    is this same geometry wrapped in scale(4) on a 1024 canvas.
+
+    Geometry (see brand/README.md):
+      grey spine   x 56.5..173, stroke 7, round cap         -> left bound x 53
+      lane centres compressed y 59, unchanged y 128, expanded y 197
+      event radius 6                       -> top/bottom bounds y 53..203
+      compressed events x  80 100 120 140  (20 spacing)
+      unchanged  events x  80 111 142 173  (31 spacing)
+      expanded   events x  80 119 158 197  (39 spacing) -> right bound x 203
+
+    Content bounding box is therefore exactly x/y 53..203 — a 150x150 square
+    centred on the 256 grid, 53 clear on every side. Scaled x4 into the app
+    icon that is x/y 212..812 inside a 100..924 body: 112 clear all round.
+
+    The grey spine replaces the old white hub and heavy coloured front split.
+    Its left round cap preserves the original x=53 visual bound exactly.
+
+    Neutral hairline connectors project each unchanged event to its compressed
+    amber and expanded cyan positions. The first column is vertical (the
+    anchored event, which does not move); later columns slant as intervals
+    contract or expand. Coloured state rails are intentionally absent.
+  -->
+  <g id="projections" fill="none" stroke="#7D8994" stroke-width="2.5" stroke-opacity="0.72">
+    <g>
+      <path d="M80 59V128"/>
+      <path d="M100 59L111 128"/>
+      <path d="M120 59L142 128"/>
+      <path d="M140 59L173 128"/>
+    </g>
+    <g>
+      <path d="M80 128V197"/>
+      <path d="M111 128L119 197"/>
+      <path d="M142 128L158 197"/>
+      <path d="M173 128L197 197"/>
+    </g>
+  </g>
+  <g id="timeline" fill="none" stroke="#9AA7B2" stroke-width="7" stroke-linecap="round">
+    <path d="M56.5 128H173"/>
+  </g>
+  <g id="events">
+    <g fill="#F5A524">
+      <circle cx="80" cy="59" r="6"/>
+      <circle cx="100" cy="59" r="6"/>
+      <circle cx="120" cy="59" r="6"/>
+      <circle cx="140" cy="59" r="6"/>
+    </g>
+    <g fill="#9AA7B2">
+      <circle cx="80" cy="128" r="6"/>
+      <circle cx="111" cy="128" r="6"/>
+      <circle cx="142" cy="128" r="6"/>
+      <circle cx="173" cy="128" r="6"/>
+    </g>
+    <g fill="#38C7CC">
+      <circle cx="80" cy="197" r="6"/>
+      <circle cx="119" cy="197" r="6"/>
+      <circle cx="158" cy="197" r="6"/>
+      <circle cx="197" cy="197" r="6"/>
+    </g>
+  </g>
+</svg>

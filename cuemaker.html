@@ -14,50 +14,56 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueMaker">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CueMaker sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CueMaker</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CueMaker chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CueMaker</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">Three moves</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Interface</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">05</span><span class="deck-label">Availability</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cuemaker.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cuemaker.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CueMaker</h1>
               </div>
             </div>
 
-            <p class="hero-job">Build a beat-accurate grandMA3 timecode show from the tracks themselves &mdash; on a laptop, away from the console, and without trusting anything you have not reviewed.</p>
+            <p class="opening-promise">Build a beat-accurate grandMA3 timecode show from the tracks themselves &mdash; on a laptop, away from the console, and without trusting anything you have not reviewed.</p>
 
-            <p class="status-chip">Private Validation &middot; Not Publicly Released</p>
+            <p class="status-chip is-private">Private Validation &middot; Not Publicly Released</p>
 
             <ul class="chipset">
               <li class="chip">macOS desktop</li>
@@ -68,122 +74,158 @@
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueMaker%20validation%20interest">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueMaker interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cuemaker/cuemaker-song-editor.webp" width="1440" height="900" alt="CueMaker packaged song editor showing a loaded generic test track with waveform, tempo and cue-authoring controls." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueMaker &mdash; Song Editor</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuemaker/cuemaker-song-editor.webp" width="1440" height="900" alt="The CueMaker song editor: a timecode transport across the top, a track at 128 BPM on an eighth-note grid, a waveform with a beat grid beneath it, kick, snare and effect sweep lanes, a step sequence grid, and output routing and beat stamper panels on the right." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Packaged song editor.</b> Accepted CueMaker verification capture with a generic local test track. No customer, show or private filesystem identity is visible.
+            <p class="plate-note">
+              <b>Song editor &mdash; a generic Aurora test track at 128&nbsp;BPM.</b> Accepted CueMaker verification capture. No customer, show or private filesystem identity is visible. This page shows three separate accepted captures of the current application.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================ 02 — THREE MOVES -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Analyse, author, <strong>review before apply</strong></h2>
-        <p class="band-intro">CueMaker never quietly rewrites your show. Analysis produces suggestions, suggestions are reviewed by a human, and only the accepted result becomes an export.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">Three moves through the application</p>
+            <h2 class="movement-title">Connect the audio, author on the beat, <em>hand the console a bundle</em></h2>
+            <p class="movement-lede">Each scene below is its own accepted capture of the current CueMaker build, in the order a programmer actually meets them.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Connect sources</h3>
-            <p>Point CueMaker at the folders holding the show's audio and keep them connected across sessions.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Analyse locally</h3>
-            <p>Tracks are analysed on your machine for tempo and structure. Nothing is uploaded.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Author</h3>
-            <p>Place and adjust markers against the waveform and the beat grid.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Review</h3>
-            <p>Suggested structure and sequences are presented as proposals you accept, edit or reject.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Export as new</h3>
-            <p>Emit grandMA3 timecode and macro files for import, versioned so nothing is overwritten in place.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Move one &mdash; connect the sources</p>
+              <h3>Roots that survive being unplugged</h3>
+              <p>A real setlist lives across drives and folders, and half of them will be missing when you open the laptop on a bus. CueMaker keeps source roots as named connections with an explicit state, so an offline drive is visible rather than a silent failure.</p>
+              <ul class="scene-points">
+                <li>Several connected source roots so a setlist can span drives and folders</li>
+                <li>Per-root file counts and last-scan times, with a manual rescan</li>
+                <li>Offline source states surfaced explicitly instead of failing silently</li>
+                <li>Frame rate and starting timecode configured once for the whole project</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> Analysis runs locally. Tracks are never uploaded to author a show.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">Build a timecode show <strong>away from the console</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Work from the music</p>
-            <h3>Local track analysis</h3>
-            <p>The tempo grid and song structure come from the audio itself, so cues land on the beat rather than on a guess.</p>
-            <ul>
-              <li>Analysis runs locally &mdash; tracks are never uploaded to author a show</li>
-              <li>Beat-aligned marker placement against the waveform</li>
-              <li>Structure and drum-sequence suggestions offered for review, never auto-applied</li>
-              <li>Multiple connected source roots so a setlist can span drives and folders</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Accepted capture &mdash; Settings / Configuration</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuemaker/cuemaker-connected-roots.webp" width="1440" height="900" alt="The CueMaker configuration screen showing a Notion integration block, two connected local audio source folders named Stage Audio A and Stage Audio B each reporting two files and a last scan time, a thirty frames per second timecode setting and a starting timecode of 01:00:00:00." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Two local folders connected as named roots, four files scanned, timecode set at 30&nbsp;fps from 01:00:00:00. Generic source labels; no private path, customer or show identity.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Hold a whole show</p>
-            <h3>Setlist and project durability</h3>
-            <p>A real setlist is long and the laptop will be closed mid-edit. The project has to survive that.</p>
-            <ul>
-              <li>Multi-song setlist projects with per-song editors</li>
-              <li>Projects saved and resumed after restart</li>
-              <li>Recovery path when a project file is damaged</li>
-              <li>Offline source states surfaced explicitly instead of failing silently</li>
-            </ul>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Move two &mdash; author against the music</p>
+              <h3>The grid comes from the track, not from a guess</h3>
+              <p>Tempo and structure are analysed on your machine, and markers snap to that grid. Suggested structure and drum sequences arrive as proposals in the editor &mdash; you accept, edit or reject them before they become anything.</p>
+              <ul class="scene-points">
+                <li>Beat-aligned marker placement against the waveform</li>
+                <li>Downbeat and offset controls in milliseconds for stubborn tracks</li>
+                <li>Separate lanes per element, with a step grid for repeated hits</li>
+                <li>Structure and drum-sequence suggestions offered for review, never auto-applied</li>
+                <li>Local transport with looping and seek for programming passes</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueMaker does not program looks. It produces timing, sequences and cue triggers.</p>
+            </div>
+
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Accepted capture &mdash; Song Editor</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuemaker/cuemaker-song-editor.webp" width="1440" height="900" alt="The CueMaker song editor with a 128 BPM eighth-note grid, a waveform overview, separate kick, snare and effect sweep lanes carrying markers, and a 101-step sequence grid below showing the same hits laid out by bar." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">A generic Aurora test song on a 128&nbsp;BPM eighth-note grid, with per-element lanes and a 101-step sequence view of the same material.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Drive the rig</p>
-            <h3>MTC output and playback</h3>
-            <p>Run the timeline from the laptop while programming, before the real show clock exists.</p>
-            <ul>
-              <li>MIDI Timecode output to grandMA3 onPC and other MTC destinations</li>
-              <li>Local transport with looping and seek for programming passes</li>
-              <li>Virtual MTC output available without extra hardware on macOS</li>
-            </ul>
-          </article>
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Move three &mdash; land it in the console</p>
+              <h3>A bundle the console imports cleanly</h3>
+              <p>Export targets a declared grandMA3 data version and reports what it is about to write before you commit: songs, sequences, cues and timecode pools, counted. Everything arrives as new objects, so nothing in the existing showfile is overwritten in place.</p>
+              <ul class="scene-points">
+                <li>grandMA3 timecode XML carrying the authored marker events</li>
+                <li>Companion macro that creates the sequences the timecode expects</li>
+                <li>Explicit data-version selection with a structural validation pass</li>
+                <li>Export works offline &mdash; no network is required to produce show files</li>
+                <li>Import instructions issued alongside the export</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueMaker does not write into a live showfile. You import the export deliberately, and console-side cue-fire behaviour remains the programmer's responsibility to verify.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Land it in the console</p>
-            <h3>Version-aware grandMA3 export</h3>
-            <p>Export produces files the console will import cleanly, and produces them as new objects.</p>
-            <ul>
-              <li>grandMA3 timecode XML carrying the authored marker events</li>
-              <li>Companion macro that creates the sequences the timecode expects</li>
-              <li>Export works offline &mdash; no network is required to produce show files</li>
-              <li>Import instructions issued alongside the export</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Accepted capture &mdash; Export</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuemaker/cuemaker-ma3-export-ready.webp" width="1440" height="900" alt="The CueMaker export screen with a full bundle selected for grandMA3 version 1.9, a validated CueMaker profile against the supported data revision, an export full bundle action, and counts reading forty songs, forty sequences, three hundred and twenty cues and forty timecode pools." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">A 40-song project ready to emit 40 sequences, 320 cues and 40 timecode pools against a validated grandMA3 version 1.9 profile and supported data revision. Generic setlist; no private path, customer or show identity.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Analyse, author, <em>review before apply</em></h2>
+            <p class="movement-lede">CueMaker never quietly rewrites your show. Analysis produces suggestions, suggestions are reviewed by a human, and only the accepted result becomes an export.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Connect sources</h3>
+              <p>Point CueMaker at the folders holding the show's audio and keep them connected across sessions and restarts.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Analyse locally</h3>
+              <p>Tracks are analysed on your machine for tempo and structure. Nothing is uploaded.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Author</h3>
+              <p>Place and adjust markers against the waveform and the beat grid, lane by lane.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Review</h3>
+              <p>Suggested structure and sequences are presented as proposals you accept, edit or reject.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Export as new</h3>
+              <p>Emit grandMA3 timecode and macro files for import, versioned so nothing is overwritten in place.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -208,14 +250,59 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- =================================================== 04 — INTERFACE -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">Signed, built, <strong>and deliberately unreleased</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Interface detail bench</p>
+            <h2 class="movement-title">Two panels that do <em>the repetitive work</em></h2>
+            <p class="movement-lede">Both benches below are regions of the accepted Song Editor capture. Use <b>Full frame</b> on either one to see where the panel sits in the editor.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">Private Validation &mdash; Not Publicly Released</p>
+        <div class="bench">
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 4 / 3; --dw-zoom: 3.4; --dw-x: -35.3%; --dw-y: -30.2%;">
+              <img src="images/app-screenshots/cuemaker/cuemaker-song-editor.webp" width="1440" height="900" alt="The CueMaker beat stamper panel with a sequence selector, beat-subdivision choices including one and three, two and four, all quarter notes and all eighth notes, a bar range from one to sixteen out of thirteen, range presets, and a stamp twenty-six hits action." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">A</span> Beat stamper</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Repeated hits are described, not clicked one at a time</b> &mdash; pick the subdivision and the bar range, and the count of what will be stamped is shown before you commit.</figcaption>
+          </figure>
+
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 4 / 3; --dw-zoom: 3.4; --dw-x: -35.3%; --dw-y: 12.6%;">
+              <img src="images/app-screenshots/cuemaker/cuemaker-song-editor.webp" width="1440" height="900" alt="The CueMaker output routing panel showing a system default output, audio assigned to channels one and two, timecode assigned to channel three, and a note that a multi-channel output device is required for this routing." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">B</span> Audio and timecode routing</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Programme audio and timecode leave on separate declared channels</b>, and the panel states the multi-channel device requirement instead of failing quietly at the rig.</figcaption>
+          </figure>
+        </div>
+
+        <p class="bench-note">These two are crops of the Song Editor capture. The three plates in chapter&nbsp;02 are separate accepted captures of the current build.</p>
+      </div>
+    </section>
+
+    <!-- ================================================= 05 — AVAILABILITY -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">Built, <em>and deliberately unreleased</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">Private Validation &mdash; Not Publicly Released</p>
           <h3>No public download and no published price.</h3>
           <p>CueMaker has completed its local production programme, but customer distribution is a separate decision that has not been taken. There is no public installer, no self-service activation, and no store page.</p>
           <p>The intended commercial shape is one price for one full-featured licence &mdash; no artificial tiers and no feature-gated editions. The amount has not been set, so no figure is quoted. Historic references to earlier amounts are not CueForge's commercial position.</p>
@@ -246,10 +333,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">The rest of the <strong>timecode workflow</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">The rest of the <em>timecode workflow</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuescale.html">
             <p class="rel-link">Next &rarr;</p>

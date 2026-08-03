@@ -14,50 +14,55 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueNotch">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CueNotch sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CueNotch</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CueNotch chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CueNotch</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">The handoff</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">04</span><span class="deck-label">Status</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cuenotch.svg" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cuenotch.svg" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CueNotch</h1>
               </div>
             </div>
 
-            <p class="hero-job">Turn Notch block files into reviewable DMX and FX documentation and console-ready fixture and profile outputs for the crew handoff.</p>
+            <p class="opening-promise">Turn Notch block files into reviewable DMX and FX documentation and console-ready fixture and profile outputs for the crew handoff.</p>
 
-            <p class="status-chip">Private Validation &mdash; Not Publicly Released</p>
+            <p class="status-chip is-private">Private Validation &mdash; Not Publicly Released</p>
 
             <ul class="chipset">
               <li class="chip">Desktop application</li>
@@ -68,124 +73,145 @@
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueNotch%20compatibility%20validation">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueNotch interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cuenotch/live-sheet-dmx-map.webp" width="1440" height="900" alt="CueNotch Live Sheet showing a synthetic three-layer Notch block mapped across 24 exported DMX parameters." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueNotch &mdash; Director Sheet / Shared Routing Brief</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuenotch/director-sheet-quad-routing.webp" width="1440" height="900" alt="The CueNotch director sheet for song one of a synthetic three-song validation show, headed Private Validation and Not Publicly Released: a quad-pack mode tag with the song's framing and mapping named beside it, a quad source card drawing the two-by-two routing as inputs one to four in four colours, a quad overlay card showing the 1920 by 1080 screen panels laid over each quadrant of that source, and a physical arrangement row redrawing screen left, screen centre and screen right at true aspect with their input and resolution labels." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Live Sheet DMX map.</b> Exact audited CueNotch runtime with a synthetic three-layer block and 24 exported parameters. The sharing server is stopped and no customer, show or network data is visible.
+            <p class="plate-note">
+              <b>Director Sheet &mdash; the shared routing brief for the director and vision team.</b> One song, four inputs and three physical screens are written down instead of remembered. The exact audited CueNotch runtime generated this sheet from a synthetic block file on a localhost-only session. The page header carries its own boundary: <b>Private Validation &mdash; Not Publicly Released</b>. No customer, artist, venue, network or audit identity is involved, and a live local document server is not public availability.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================ 02 — THE HANDOFF -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Load the block, read the personality, <strong>hand the crew a document</strong></h2>
-        <p class="band-intro">The problem CueNotch addresses is a handoff problem: the person who built the Notch content knows what channel 63 does on layer two, and nobody else does until somebody retypes it into a spreadsheet.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">The handoff problem</p>
+            <h2 class="movement-title">One person knows what channel 63 does. <em>Everyone else is guessing.</em></h2>
+            <p class="movement-lede">The person who built the Notch content knows what each exposed parameter means on each layer. Until CueNotch, the only way anyone else found out was retyping it into a spreadsheet &mdash; and the desk operator and the video director needed different halves of it. Underneath every one of those sheets is the same thing: a channel map that had to be read out of the block first.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Load</h3>
-            <p>Open a Notch block file and extract its layers and exposed parameters.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Map</h3>
-            <p>Resolve each parameter to its DMX channel, reading the file first and falling back to the personality template.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Review</h3>
-            <p>Check the per-layer differences, annotate parameters, and compare against the previous version.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Generate</h3>
-            <p>Produce the operator documentation and the fixture and profile outputs for the console.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Hand off</h3>
-            <p>Share the generated document with the crew who have to run the show.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; give the desk operator the channels</p>
+              <h3>Every FX slot named, layer by layer</h3>
+              <p>The operator sheet lists the per-song FX parameters the way the desk needs them: slot, DMX channel, console channel, range, default and what the slot actually does. These are the parameters that change song to song, and the sheet says so at the top rather than leaving the operator to find out during the set.</p>
+              <ul class="scene-points">
+                <li>FX slots resolved to both their DMX channel and the console channel</li>
+                <li>Range and default printed beside every parameter</li>
+                <li>Layer filter, because the same slot number means different things per layer</li>
+                <li>Per-parameter flagging, so a wrong entry is marked where it was found</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueNotch documents and generates. It does not drive DMX or control a show.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">Built for the <strong>Notch-to-crew handoff</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Read the block honestly</p>
-            <h3>Layer-aware parameter extraction</h3>
-            <p>The same effect slot can mean different things on different layers, and that difference is exactly what the crew needs written down.</p>
-            <ul>
-              <li>Parameters extracted per layer and classified as effect, effect-colour or global</li>
-              <li>DMX channel read from the block file first, with a personality template filling gaps</li>
-              <li>Effect ranges and region labels enriched from the block's node graph</li>
-              <li>Authored parameters with no DMX channel hidden by default, with a toggle to show them</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueNotch &mdash; Operator Sheet / Desk Reference</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuenotch/operator-sheet-fx-detail.webp" width="1440" height="900" alt="The CueNotch operator sheet showing per-song FX detail for layer one: a note that these parameters change per song and that the FX slots are assigned by the Notch programmer per layer, a layer filter, and a table of FX slots one to nine giving each slot's DMX channel, console channel, zero to 255 range, default of zero and its function such as dimmer look, colour look, position look or video layer, each row carrying a flag control." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note"><b>Operator Sheet &mdash; the desk reference.</b> Generated from the block, with slot, DMX channel, console channel, range, default and function on one line &mdash; the table that otherwise gets retyped by hand before every show. The parameters shown are synthetic slots from the validation block.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Give the crew a reference</p>
-            <h3>Operator documentation</h3>
-            <p>The output is a document people can actually work from, not a raw parameter dump.</p>
-            <ul>
-              <li>Operator cheat sheet covering DMX channels, ranges and defaults</li>
-              <li>Backend view describing layer setup and signal flow</li>
-              <li>Node-graph view of the effect grid and group distribution</li>
-              <li>Self-contained documents that open on a laptop or a phone without extra software</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; put every reader on the same block</p>
+              <h3>One block in, a document for each person who needs one</h3>
+              <p>The director sheet above and the operator sheet beside it are two outputs of a single extraction, and the hub is where that set is published. The crew documents and the programmer documents are generated together from the same block, so nobody is reading a version that stopped being true two exports ago.</p>
+              <ul class="scene-points">
+                <li>Crew documents &mdash; operator sheet, layer snapshot, change dashboard, set list and director sheet</li>
+                <li>Programmer documents &mdash; layer setup and wiring notes, and the block's node graph</li>
+                <li>Block summary reporting layers, total parameters, exported parameters and FX parameters</li>
+                <li>Generated timestamp printed on the hub, so a stale document is visible as stale</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> Block-file compatibility is still being validated. Universal compatibility is not claimed, and the local documentation view has no access control.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Keep versions straight</p>
-            <h3>Diffs, annotations and shows</h3>
-            <p>Content changes between rehearsals; the documentation has to say what moved.</p>
-            <ul>
-              <li>Parameter diff between block versions showing added, removed and changed entries</li>
-              <li>Version snapshots retained per block</li>
-              <li>Per-parameter notes and crew feedback captured against the document</li>
-              <li>Multi-block show aggregation for a whole production</li>
-              <li>Directory watching so a re-export can be picked up without reloading by hand</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Feed the console</p>
-            <h3>Fixture and profile outputs</h3>
-            <p>Once the personality is understood, it should not have to be retyped into the lighting console.</p>
-            <ul>
-              <li>MA fixture and profile output generation</li>
-              <li>Routing and screen-mapping definitions maintained alongside the block</li>
-              <li>Export as CSV, JSON, HTML and PDF</li>
-              <li>Spreadsheet push for teams still working from a shared sheet</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueNotch &mdash; Live Docs / Role-Sheet Index</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuenotch/crew-docs-hub.webp" width="1440" height="900" alt="The CueNotch Live Docs hub, headed with the block name and the time the documentation was generated: a crew row of cards for the operator sheet, layer snapshot, dashboard, set list and director sheet, each describing what that document is for, a programmer row of cards for backend developer notes and the node graph, and a block summary reporting three layers, ninety-three total parameters, ninety-three exported and thirty FX parameters." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note"><b>Live Docs &mdash; the role-sheet index.</b> Three layers, 93 parameters, 93 exported, 30 of them FX &mdash; counted from the block rather than asserted. The generated timestamp is on the page, because the failure this replaces is a crew working from a document that is quietly out of date.</p>
+            </figure>
           </article>
         </div>
+
+        <figure class="plate is-wide">
+          <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueNotch &mdash; Live Sheet DMX Map / Programmer Source Map</figcaption>
+          <div class="plate-stage">
+            <img src="images/app-screenshots/cuenotch/live-sheet-dmx-map.webp" width="1440" height="900" alt="The CueNotch Live Sheet for a synthetic validation block reporting three layers, twenty-four parameters and twenty-four exported: a DMX usage channel map covering channels zero to ninety-five as a grid of named tiles for opacity, scale, position, FX slots, colour, blend, brightness, contrast, frame, background, invert, strobe and input parameters, a filter row with block, unused and all views and a hide-unexported toggle reading twenty-four of one hundred and twenty-eight, and a parameter table listing each name against its DMX channel, console channel, zero to 255 range, default and eight-bit depth, beside a left rail showing the block file, its layer and parameter counts, a stopped live server with start and stop controls, and export controls for CSV, MA3, PDF, HTML and layer PDF." loading="lazy" decoding="async">
+          </div>
+          <p class="plate-note">
+            <b>Live Sheet DMX Map &mdash; the programmer source map behind the role-specific sheets.</b> Unexported channels are held back rather than padded out. Twenty-four of 128 channels are in use in this synthetic block, and the sheet says so instead of presenting a full universe. Every row carries its DMX channel, console channel, range, default and bit depth, and the export row is where the MA fixture and profile outputs come from. The <b>live server is stopped</b> in this capture &mdash; nothing was being served to any network. <b>Private Validation &mdash; Not Publicly Released.</b>
+          </p>
+        </figure>
+
+        <p class="bench-note">All four images on this page are separate captures of the exact audited CueNotch runtime on a localhost-only machine. The director sheet, operator sheet and documentation hub are one session reading a synthetic three-layer validation block of 93 parameters; the Live Sheet above is a separate session reading a smaller synthetic 24-parameter block, which is why its counts differ. The documentation server served that machine and nothing else, and is shown stopped in the Live Sheet; the local documentation view has no access control and is not intended for untrusted networks. A local document server running is not public availability &mdash; CueNotch remains in private validation and is not publicly released.</p>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>what it does not claim</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Load the block, read the personality, <em>hand the crew a document</em></h2>
+            <p class="movement-lede">Nothing is published to the room until a human has reviewed what the extraction produced.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Load</h3>
+              <p>Open a Notch block file and extract its layers and exposed parameters.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Map</h3>
+              <p>Resolve each parameter to its DMX channel, reading the file first and falling back to the personality template.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Review</h3>
+              <p>Check the per-layer differences, annotate parameters, and compare against the previous version.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Generate</h3>
+              <p>Produce the operator documentation and the fixture and profile outputs for the console.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Hand off</h3>
+              <p>Share the generated document with the crew who have to run the show.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -211,14 +237,19 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- ====================================================== 04 — STATUS -->
+    <section class="movement energize" id="readiness">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">Portfolio recognition, <strong>not a release</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Status</p>
+            <h2 class="movement-title">Portfolio recognition, <em>not a release</em></h2>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">Private Validation &mdash; Not Publicly Released</p>
+        <div class="readiness-panel">
+          <p class="readiness-status">Private Validation &mdash; Not Publicly Released</p>
           <h3>CueNotch appears here because the work is real, not because it is for sale.</h3>
           <p>CueNotch is undergoing private compatibility and buyer validation. There is no public download, no purchase path, and no published price. Nothing on this page should be read as a release date or an availability commitment.</p>
           <p>If you run Notch content on a show and maintain the personality reference by hand, that is exactly the workflow being validated &mdash; and it is worth a conversation.</p>
@@ -249,10 +280,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">Around the <strong>same content</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">Around the <em>same content</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cueswitcher.html">
             <p class="rel-link">Connected &rarr;</p>

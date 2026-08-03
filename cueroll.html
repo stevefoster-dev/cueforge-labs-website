@@ -14,48 +14,54 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueRoll">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CueRoll sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CueRoll</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CueRoll chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CueRoll</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">In the tech</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Interface</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">05</span><span class="deck-label">Pricing</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cueroll.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cueroll.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CueRoll</h1>
               </div>
             </div>
 
-            <p class="hero-job">Capture a rehearsal note against the exact song and timecode it belongs to, keep it on your own machine, and hand a clean list to the department that has to fix it.</p>
+            <p class="opening-promise">Capture a rehearsal note against the exact song and timecode it belongs to, keep it on your own machine, and hand a clean list to the department that has to fix it.</p>
 
             <p class="status-chip">Private Validation &middot; Coming Release</p>
 
@@ -68,124 +74,135 @@
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueRoll">Contact Us</a>
-              <a class="cta is-quiet" href="#availability">See pricing</a>
+              <a class="cta is-quiet" href="#readiness">See pricing</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueRoll interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="CueRoll rehearsal-note desk showing a synthetic seven-song setlist, LTC timecode and generic department notes." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueRoll &mdash; rehearsal note desk</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="The CueRoll note desk: a large running timecode display over the current song and its timecode range, a timeline and transport underneath, department note fields along the bottom, and a notes column on the right holding four department-tagged notes." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Rehearsal notes.</b> Current CueRoll runtime with a synthetic setlist, synthetic LTC input and generic department notes. No real show, artist, audio path or Notion workspace.
+            <p class="plate-note">
+              <b>Song 1 of 7, timecode running at 01:00:12:08.</b> Current CueRoll runtime with a synthetic setlist, synthetic LTC input and generic department notes. No real show, artist, audio path or Notion workspace. Every detail on this page is a region of this same frame.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================= 02 — IN THE TECH -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Lock timecode, take the note, <strong>review before anything leaves</strong></h2>
-        <p class="band-intro">Notes are captured locally first and published deliberately. Nothing is pushed to a shared destination because you typed it fast in the dark.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">In the tech</p>
+            <h2 class="movement-title">The room is dark, both hands are busy, <em>and the note still lands on the right beat</em></h2>
+            <p class="movement-lede">CueRoll assumes you have no spare hand to hunt for a timestamp. It reads the clock the show is already running, resolves it to the song everyone else is naming, and stamps the note for you.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Chase timecode</h3>
-            <p>Decode LTC from the audio input the show is already feeding you.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Capture</h3>
-            <p>Hit the department key, type, and submit &mdash; the song and timecode are stamped for you.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Collect from the room</h3>
-            <p>Crew on the local network add their own notes from a phone or laptop.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Review</h3>
-            <p>Work the drafts, tidy the wording, and decide what is worth publishing.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Publish</h3>
-            <p>Send the approved set to the shared Notion database the production already uses.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; never guess the time again</p>
+              <h3>Exact timecode, resolved to the exact song</h3>
+              <p>A native decoder reads Linear Timecode from the audio interface, and the setlist turns that number into the song title, the act, and the range it sits inside. The number on screen is the number the department will search for tomorrow.</p>
+              <ul class="scene-points">
+                <li>LTC decoded from any audio input, including virtual soundcards</li>
+                <li>Configurable timecode input channel for multichannel interfaces</li>
+                <li>Automatic song detection from the setlist's timecode ranges</li>
+                <li>Mismatch warning when incoming timecode drifts from the expected range</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueRoll does not generate timecode. It reads the show's existing clock and never drives consoles, media servers or playback.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">Designed for the <strong>middle of a tech</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Never guess the time again</p>
-            <h3>Exact timecode, exact song</h3>
-            <p>A native decoder reads Linear Timecode from the audio interface, and the setlist turns that number into the song everyone else is talking about.</p>
-            <ul>
-              <li>LTC decoded from any audio input, including virtual soundcards</li>
-              <li>Configurable timecode input channel for multichannel interfaces</li>
-              <li>Automatic song detection from the setlist's timecode ranges</li>
-              <li>Mismatch warning when the incoming timecode drifts from the expected range</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; clock and song</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 1.9; --dw-x: 13.3%; --dw-y: 17.8%;">
+                <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="The CueRoll timecode display reading 01:00:12:08 above the song title Opening Sequence, marked song one of seven in act one, with its range of 01:00:00:00 to 01:03:42:00 and a timeline ruler beneath." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; the running clock, the resolved song, its position in the set and the exact range it occupies.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Keep up with the room</p>
-            <h3>Keyboard-first capture</h3>
-            <p>The interface assumes both hands are busy and the room is dark.</p>
-            <ul>
-              <li>Separate note rows per department &mdash; lighting, video, cameras, audio, general</li>
-              <li>Single-key focus for each department and tab cycling between them</li>
-              <li>Enter submits; the timecode is captured at the moment of the note</li>
-              <li>Per-song note view so a song can be reviewed as a unit</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; keep up with the room</p>
+              <h3>One row per department, one key to reach it</h3>
+              <p>Each department gets its own field, and each field has a single-key shortcut. Press the letter, type, press Enter &mdash; the song and timecode are attached at the moment of the note, not at the moment you got round to filing it.</p>
+              <ul class="scene-points">
+                <li>Separate note rows for lighting, video, cameras, audio and general</li>
+                <li>Single-key focus per department and tab cycling between them</li>
+                <li>Enter submits; timecode is captured at the instant of the note</li>
+                <li>Follow-TC and manual modes for when the clock is not running</li>
+                <li>Per-song note view so a song can be reviewed as a unit</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> Live Link is a local-network tool for the room you are in, not a hosted collaboration service.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Include the whole crew</p>
-            <h3>Live Link on the local network</h3>
-            <p>Other people in the room can contribute without being handed the operator's laptop.</p>
-            <ul>
-              <li>Local-network sharing that is off by default and started deliberately</li>
-              <li>Phone and laptop clients for crew note entry with department selection</li>
-              <li>Contributions attributed by name</li>
-              <li>Local network only &mdash; there is no public internet exposure of a session</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Get notes where work happens</p>
-            <h3>Local storage and Notion sync</h3>
-            <p>The show's record lives on the machine running the show. Sharing is a separate, reviewed step.</p>
-            <ul>
-              <li>Notes, setlist and track history saved as plain JSON in a folder you choose</li>
-              <li>Works with no internet connection; sync happens when you have one</li>
-              <li>Notion sync into a shared Song Notes database with per-note attribution</li>
-              <li>Drafts tab so unpublished notes are visibly distinct from published ones</li>
-              <li>Approved notes can be surfaced against the grandMA3 workflow</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; capture rows</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 1.55; --dw-x: 17.7%; --dw-y: -17.7%;">
+                <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="The CueRoll capture area with Give Notes and Song Notes tabs, a Follow TC and Manual toggle, and five labelled note fields for lighting, video, cameras, audio and general, above a hint reading press department letter to focus, tab to cycle, enter to save." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; five department rows, their single-key shortcuts, and the keyboard contract spelled out along the bottom edge.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Lock timecode, take the note, <em>review before anything leaves</em></h2>
+            <p class="movement-lede">Notes are captured locally first and published deliberately. Nothing is pushed to a shared destination because you typed it fast in the dark.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Chase timecode</h3>
+              <p>Decode LTC from the audio input the show is already feeding you, on the channel you select.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Capture</h3>
+              <p>Hit the department key, type, and submit &mdash; the song and timecode are stamped for you.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Collect from the room</h3>
+              <p>Crew on the local network add their own notes from a phone or laptop, attributed by name.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Review</h3>
+              <p>Work the drafts, tidy the wording, and decide what is actually worth publishing to the department.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Publish</h3>
+              <p>Send the approved set to the shared Notion database the production already uses.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -210,14 +227,59 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- =================================================== 04 — INTERFACE -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">Approved price, <strong>release still gated</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Interface detail bench</p>
+            <h2 class="movement-title">Where the note goes <em>the moment you press Enter</em></h2>
+            <p class="movement-lede">Both benches below are regions of the same accepted runtime capture shown at the top of this page. Use <b>Full frame</b> on either one to see where the region sits in the window.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">Private Validation &mdash; Coming Release</p>
+        <div class="bench">
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 4 / 3; --dw-zoom: 3; --dw-x: -33.3%; --dw-y: 10%;">
+              <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="Three CueRoll notes in the review column, each headed Opening Sequence and stamped with its own timecode and a department tag for lighting, video and cameras, attributed to the same author." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">A</span> Every note carries its own clock</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Song, timecode, department and author are attached to each note</b>, so a list handed to a department is searchable without anyone reconstructing when it happened.</figcaption>
+          </figure>
+
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 16 / 5; --dw-zoom: 3; --dw-x: -33.3%; --dw-y: 39.2%;">
+              <img src="images/app-screenshots/cueroll/cueroll-rehearsal-notes.webp" width="1440" height="900" alt="The top of the CueRoll review column showing a timecode-detected indicator with a sync control, above tabs for Notes, Drafts and Setlist." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">B</span> Drafts stay separate from published</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Notes, Drafts and Setlist are distinct surfaces</b>, and the timecode-detected indicator tells you whether the stamp on the next note can be trusted.</figcaption>
+          </figure>
+        </div>
+
+        <p class="bench-note">These are crops of one real runtime capture, not separate sessions. The setlist, the LTC source and the notes are synthetic.</p>
+      </div>
+    </section>
+
+    <!-- ===================================================== 05 — PRICING -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">Approved price, <em>release still gated</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">Private Validation &mdash; Coming Release</p>
           <h3>CueRoll Individual</h3>
 
           <table class="price-table">
@@ -263,10 +325,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">The rest of the <strong>timecode workflow</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">The rest of the <em>timecode workflow</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuemaker.html">
             <p class="rel-link">Next &rarr;</p>

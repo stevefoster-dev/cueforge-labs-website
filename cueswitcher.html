@@ -14,48 +14,54 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueSwitcher">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CueSwitcher sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CueSwitcher</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CueSwitcher chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CueSwitcher</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">Reference</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Shot plan</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">05</span><span class="deck-label">Availability</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cueswitcher.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cueswitcher.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CueSwitcher</h1>
               </div>
             </div>
 
-            <p class="hero-job">Plan the cut before the show &mdash; cameras, shot sheet, setlist and timeline &mdash; then follow it with real countdowns instead of a paper running order and a memory.</p>
+            <p class="opening-promise">Plan the cut before the show &mdash; cameras, shot sheet, setlist and timeline &mdash; then follow it with real countdowns instead of a paper running order and a memory.</p>
 
             <p class="status-chip">In Development &middot; Private Validation</p>
 
@@ -68,126 +74,133 @@
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueSwitcher">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueSwitcher interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cueswitcher/pip-layout-designer.webp" width="1440" height="900" alt="CueSwitcher PIP layout designer showing a synthetic four-camera composition while switcher hardware is explicitly disconnected." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueSwitcher &mdash; Show Timeline</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cueswitcher/recorded-cue-timeline.webp" width="1440" height="900" alt="The CueSwitcher Show Timeline for a three-song show: a transport parked at one hour with a follow toggle, countdown toggle and an idle source control, song tabs for songs one to three, a red song band spanning the ruler, section blocks for intro, verse, chorus and outro each marked three shots, a row of recorded cue markers along the song, a left tool rail, a no-ATEM chip and a status bar reading not connected." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>PIP layout designer.</b> Current CueSwitcher runtime with a synthetic four-camera layout. The adapter is visibly disconnected, so the frame demonstrates planning without implying verified live hardware control.
+            <p class="plate-note">
+              <b>One whole song reviewed end to end &mdash; intro, verse, chorus and outro, three shots each, with every recorded cue on the ruler.</b> The current CueSwitcher runtime against a synthetic three-song show. The transport is parked and idle with no timecode source set, and the corner chip and status bar both report the switcher disconnected &mdash; this is the review surface, not proof of live hardware control.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================== 02 — REFERENCE -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Plan the show, rehearse the cut, <strong>follow it live</strong></h2>
-        <p class="band-intro">The shot sheet is the source of truth. The timeline projects it onto real time, and the show-mode view follows that timeline &mdash; hand-authored work is never overwritten by a projection.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">Answering it in the room</p>
+            <h2 class="movement-title">The reference the video department <em>otherwise carries in its head</em></h2>
+            <p class="movement-lede">The same application that holds the plan also answers the questions that stop a load-in: what cable survives this run, and what lens covers that shot from where the camera is actually standing.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Plot the cameras</h3>
-            <p>Place the camera positions the show actually has, and name them the way the crew does.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Build the shot sheet</h3>
-            <p>Work song by song and section by section, assigning framings per camera.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Anchor to time</h3>
-            <p>Attach audio, capture the printed timecode, and let sections land at real positions.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Rehearse</h3>
-            <p>Scrub the timeline, run the transport, and check the cut against the music.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Run show mode</h3>
-            <p>Chase timecode and give every operator a countdown to their next shot.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; get the run right the first time</p>
+              <h3>Cable formats, distances and what they need at the far end</h3>
+              <p>A signal path reference for broadcast video infrastructure, held next to the show rather than in a bookmark. Ask what will carry a run of a given length, and read the formats against their standard, bandwidth, maximum distance, connector and the situation each one is actually for.</p>
+              <ul class="scene-points">
+                <li>Quick lookup by run distance in metres or feet</li>
+                <li>SD, HD, 3G, 6G and 12G SDI with their standards, bandwidths and distance limits</li>
+                <li>HDMI 1.4, 2.0 and 2.1 with the short runs they are honestly good for</li>
+                <li>Fibre, LC duplex, ST&nbsp;2110 and NDI with their converter and network requirements</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> This is reference data shipped with the application. It does not measure, test or certify an installed cable run.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">A director's workspace, <strong>not a control surface replacement</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Plan the coverage</p>
-            <h3>Camera plot and shot sheet</h3>
-            <p>The plan is built from the show's real camera positions, so the shot sheet columns mean something to the operators reading them.</p>
-            <ul>
-              <li>Camera plot that defines the positions used everywhere else</li>
-              <li>Section-level shot sheet with per-camera framings</li>
-              <li>Per-cell framing overrides on top of a section default</li>
-              <li>Copy and paste sections with their shots and framings intact</li>
-              <li>Undo on shot-sheet edits</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueSwitcher &mdash; Signal Path Reference</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cueswitcher/signal-path-reference.webp" width="1440" height="900" alt="The CueSwitcher Signal Path Reference: a quick-lookup field asking for a run distance in metres, and a cable format table listing SD-SDI, HD-SDI, 3G-SDI, 6G-SDI, 12G-SDI, HDMI 1.4, 2.0 and 2.1, SMPTE fibre, LC duplex, ST 2110 and NDI with their standard, bandwidth, maximum distance, connector, use case and notes, above a status bar reading not connected." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Reference, not measurement. <b>Every row states its own limit</b> &mdash; 12G-SDI at 70&nbsp;m on high-grade coax, HDMI 2.1 honest about five metres, fibre where the distance genuinely needs it.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Put it on a clock</p>
-            <h3>Setlist, timeline and countdowns</h3>
-            <p>Songs get absolute positions from the timecode printed on their audio, so a countdown is a real number rather than an even division of a typed duration.</p>
-            <ul>
-              <li>Setlist that appends rather than overwriting existing songs</li>
-              <li>Offline scan of embedded timecode at assignment time, without playing the track</li>
-              <li>Per-file timecode anchors, with a manual picker when alternates conflict</li>
-              <li>Timeline with drag-to-move, edge-drag resize and a cue inspector</li>
-              <li>Per-camera countdowns driven by actual cue positions</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; know the shot is reachable</p>
+              <h3>Field of view worked out before the camera is placed</h3>
+              <p>Give it a focal length, a sensor and a subject distance, and it returns the horizontal and vertical field of view and the width and height that will actually be covered &mdash; then lists the lenses that reach that framing, with their zoom range, aperture and weight.</p>
+              <ul class="scene-points">
+                <li>Coverage width and height returned in both metres and feet</li>
+                <li>Sensor selection including 2/3-inch B4 broadcast</li>
+                <li>Scale diagram of the calculated cone at the entered distance</li>
+                <li>Ranked lens matches with framing range, zoom factor, aperture and weight</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> Switcher support is limited to the adapters listed below; other systems are not claimed, and camera-control adapters for further manufacturers are not available.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Follow the show</p>
-            <h3>Timecode chase and show mode</h3>
-            <p>Show mode is the cue-follow cockpit; chase is an input to it, never a lock on the operator.</p>
-            <ul>
-              <li>Timecode chase from an audio device, a file or MIDI</li>
-              <li>Chase state shared across open views so every badge agrees</li>
-              <li>Manual seeks are never blocked by chase status</li>
-              <li>Scrub, play from a clicked position, and snap only where it helps</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Drive what is supported</p>
-            <h3>Macros, adapters and handoff</h3>
-            <p>The macro runtime is switcher-agnostic; each supported system has its own adapter, and nothing is claimed for hardware that has not been proven.</p>
-            <ul>
-              <li>Neutral macro model exported per switcher type</li>
-              <li>Adapters for ATEM, Ross, vMix and OBS</li>
-              <li>Cue-driven macro firing when the playhead crosses a cue</li>
-              <li>Show-control messaging for common media-server and playback systems</li>
-              <li>Portable show export and import, plus an operator shot-sheet PDF</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueSwitcher &mdash; Lens Calculator</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cueswitcher/lens-calculator.webp" width="1440" height="900" alt="The CueSwitcher Lens Calculator: focal length, sensor size and subject distance inputs set to fifty millimetres on a two-thirds-inch broadcast sensor at ten metres, result tiles giving an eleven degree horizontal and six point two degree vertical field of view with coverage of one point nine metres wide by one point one metres high, a scale diagram of the lens cone, and a ranked list of recommended broadcast zoom lenses with their focal ranges, framing range at ten metres, aperture and weight." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">The maths done where the plan lives. <b>50&nbsp;mm on a 2/3-inch B4 at 10&nbsp;m covers 1.9&nbsp;m &mdash; a shade under two people.</b> The lens list is shipped reference data, ranked against the framing that was asked for.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Plan the show, rehearse the cut, <em>follow it live</em></h2>
+            <p class="movement-lede">The shot sheet is the source of truth. The timeline projects it onto real time, and the show-mode view follows that timeline &mdash; hand-authored work is never overwritten by a projection.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Plot the cameras</h3>
+              <p>Place the camera positions the show actually has, and name them the way the crew does.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Build the shot sheet</h3>
+              <p>Work song by song and section by section, assigning framings per camera with per-cell overrides.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Anchor to time</h3>
+              <p>Attach audio, capture the printed timecode offline, and let sections land at real positions.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Rehearse</h3>
+              <p>Scrub the timeline, run the transport, and check the cut against the music before doors.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Run show mode</h3>
+              <p>Chase timecode and give every operator a countdown to their next shot.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -212,14 +225,53 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- ================================================= 04 — SHOT PLAN -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">In development, <strong>no published price</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Shot language to camera placement</p>
+            <h2 class="movement-title">A called shot becomes <em>a camera in a room</em></h2>
+            <p class="movement-lede">Shot Types gives the crew one framing vocabulary. Camera Plot turns that vocabulary into placed cameras, operators, lenses, stage geometry and a preflight-ready plan.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">In Development &mdash; Private Validation</p>
+        <div class="bench">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueSwitcher &mdash; Shot Types / Shared Vocabulary</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cueswitcher/shot-types-reference.webp" width="1440" height="900" alt="CueSwitcher's Shot Types reference with seven illustrated cards for extreme close-up, close-up, medium close-up, medium shot, medium wide shot, wide shot and extreme wide shot, each explaining where the subject is cropped and when the framing is used." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>Seven shot sizes, each drawn and explained.</b> MCU, MS and EWS stop being labels each operator interprets differently; the cards state the crop and the production use.</p>
+          </figure>
+
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueSwitcher &mdash; Camera Plot Builder</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cueswitcher/camera-plot-builder.webp" width="1440" height="900" alt="CueSwitcher's populated Camera Plot Builder for a synthetic production study: an arena end-stage canvas with video wall, stage, PA, thrust, barricade, B-stage and FOH elements; six placed cameras for long lens, pit, jib, steadicam and handheld positions; assigned operators, lenses and framing badges; a Ready preflight indicator; builder controls, element palette, camera list and the selected camera editor, while ATEM remains not connected." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>Six cameras placed around a real stage plan, each with an operator, lens and primary framing.</b> The preflight chip reads Ready because the plan is complete; the hardware state still reads <b>No ATEM / NOT CONNECTED</b>. This is planning evidence, not proof of a live switcher or camera-control session.</p>
+          </figure>
+        </div>
+
+        <p class="bench-note">Every image on this page is a distinct capture of a real CueSwitcher surface. The show, songs, cues, operators and camera plan are synthetic. Signal, lens and shot-type pages are shipped reference data; the Camera Plot fixture uses the product's normal local persistence path. No switcher, camera or timecode hardware was attached.</p>
+      </div>
+    </section>
+
+    <!-- ================================================= 05 — AVAILABILITY -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">In development, <em>no published price</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">In Development &mdash; Private Validation</p>
           <h3>CueSwitcher is not on public sale.</h3>
           <p>CueSwitcher is being validated privately against real shows. Its commercial model is unresolved &mdash; whether the application itself is a one-time purchase or an annual licence, and whether additional protocol adapters are priced separately, has not been decided. No amount is quoted.</p>
           <p>Signing and notarisation for macOS and Windows remain open, so there is no public installer today.</p>
@@ -250,10 +302,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">Around the <strong>video department</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">Around the <em>video department</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuenotch.html">
             <p class="rel-link">Connected &rarr;</p>

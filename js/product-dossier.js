@@ -1,29 +1,33 @@
 /* ==========================================================================
-   CueForge Labs — Forge Instrument Dossier behaviour
-   Progressive enhancement only. Every product route is fully readable and
-   navigable with this file absent or blocked.
+   CueForge Labs — Forge Field Manual behaviour
+   Progressive enhancement only. Every route is fully readable, navigable and
+   evidence-complete with this file absent or blocked.
    ========================================================================== */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
-    : { matches: false, addEventListener: null };
+    : { matches: false };
 
   function prefersReduced() {
     return !!reduceMotion.matches;
   }
 
-  /* ---------------------------------------------------- subnav scroll-spy */
+  function slice(list) {
+    return Array.prototype.slice.call(list);
+  }
 
-  function initSubnav() {
-    var nav = document.querySelector('.subnav-links');
-    if (!nav) return;
+  /* ----------------------------------------------- chapter deck scroll-spy */
 
-    var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-    if (!links.length) return;
+  function initDeck() {
+    var deck = document.querySelector('.deck-list');
+    if (!deck) return;
 
-    var targets = links
+    var chapters = slice(deck.querySelectorAll('a[href^="#"]'));
+    if (!chapters.length) return;
+
+    var targets = chapters
       .map(function (link) {
         var id = link.getAttribute('href').slice(1);
         var el = id ? document.getElementById(id) : null;
@@ -33,7 +37,11 @@
 
     if (!targets.length) return;
 
+    var currentEntry = null;
+
     function setCurrent(entry) {
+      if (entry === currentEntry) return;
+      currentEntry = entry;
       targets.forEach(function (t) {
         if (t === entry) {
           t.link.setAttribute('aria-current', 'true');
@@ -41,18 +49,37 @@
           t.link.removeAttribute('aria-current');
         }
       });
+      keepVisible(entry);
+    }
+
+    // Keep the active chapter reachable inside the horizontally scrolling deck.
+    function keepVisible(entry) {
+      if (!entry) return;
+      var control = entry.link;
+      var deckBox = deck.getBoundingClientRect();
+      var box = control.getBoundingClientRect();
+      if (box.left >= deckBox.left && box.right <= deckBox.right) return;
+      var delta = box.left - deckBox.left - (deckBox.width - box.width) / 2;
+      if (typeof deck.scrollBy === 'function') {
+        deck.scrollBy({
+          left: delta,
+          behavior: prefersReduced() ? 'auto' : 'smooth'
+        });
+      } else {
+        deck.scrollLeft += delta;
+      }
     }
 
     function syncFromScroll() {
-      var subnav = document.querySelector('.dossier-subnav');
-      var offset = (subnav ? subnav.getBoundingClientRect().height : 56) + 24;
+      var bar = document.querySelector('.deck');
+      var offset = (bar ? bar.getBoundingClientRect().height : 72) + 28;
       var active = targets[0];
       for (var i = 0; i < targets.length; i++) {
         if (targets[i].el.getBoundingClientRect().top - offset <= 0) {
           active = targets[i];
         }
       }
-      // At the very bottom the last chapter wins even if it is short.
+      // At the very bottom the final chapter wins even if it is short.
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
         active = targets[targets.length - 1];
       }
@@ -72,23 +99,12 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     syncFromScroll();
-
-    // Keep the active chip visible inside the horizontally scrolling row.
-    nav.addEventListener('click', function (event) {
-      var link = event.target.closest ? event.target.closest('a[href^="#"]') : null;
-      if (!link) return;
-      setCurrent(
-        targets.filter(function (t) {
-          return t.link === link;
-        })[0]
-      );
-    });
   }
 
-  /* ------------------------------------------------- section energizing */
+  /* -------------------------------------------------- section energizing */
 
   function initEnergize() {
-    var sections = Array.prototype.slice.call(document.querySelectorAll('.energize'));
+    var sections = slice(document.querySelectorAll('.energize'));
     if (!sections.length) return;
 
     if (!('IntersectionObserver' in window)) {
@@ -107,7 +123,7 @@
           }
         });
       },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.1 }
     );
 
     sections.forEach(function (s) {
@@ -115,129 +131,44 @@
     });
   }
 
-  /* ------------------------------------------------------------- gallery */
+  /* -------------------------------------------------------- detail lenses */
 
-  function initGallery(root) {
-    var stageImg = root.querySelector('[data-gallery-image]');
-    var captionEl = root.querySelector('[data-gallery-caption]');
-    var stateEl = root.querySelector('[data-gallery-state]');
-    var thumbs = Array.prototype.slice.call(root.querySelectorAll('.gallery-thumb'));
-    var prevBtn = root.querySelector('[data-gallery-prev]');
-    var nextBtn = root.querySelector('[data-gallery-next]');
+  /* Each lens shows a CSS-cropped region of an accepted screenshot. The
+     toggle swaps between that detail and the whole accepted frame. No pixel
+     is redrawn and no additional product state is implied; the button is
+     revealed only when this script runs, so the crop stays honest without JS. */
+  function initLenses() {
+    slice(document.querySelectorAll('[data-lens-toggle]')).forEach(function (btn) {
+      var lens = btn.closest ? btn.closest('.lens') : null;
+      var frame = lens ? lens.querySelector('[data-lens]') : null;
+      if (!frame) return;
 
-    if (!stageImg || thumbs.length < 1) return;
+      var detailLabel = btn.getAttribute('data-label-detail') || 'Full frame';
+      var fullLabel = btn.getAttribute('data-label-full') || 'Show detail';
 
-    var index = Math.max(
-      0,
-      thumbs.findIndex(function (t) {
-        return t.getAttribute('aria-selected') === 'true';
-      })
-    );
+      btn.hidden = false;
+      btn.textContent = detailLabel;
+      btn.setAttribute('aria-pressed', 'false');
 
-    function show(next) {
-      if (!thumbs.length) return;
-      index = (next + thumbs.length) % thumbs.length;
-      var thumb = thumbs[index];
-
-      stageImg.setAttribute('src', thumb.getAttribute('data-full') || '');
-      stageImg.setAttribute('alt', thumb.getAttribute('data-alt') || '');
-      if (captionEl) captionEl.textContent = thumb.getAttribute('data-caption') || '';
-      if (stateEl) stateEl.textContent = thumb.getAttribute('data-state') || '';
-
-      thumbs.forEach(function (t, i) {
-        t.setAttribute('aria-selected', i === index ? 'true' : 'false');
-        t.setAttribute('tabindex', i === index ? '0' : '-1');
-      });
-    }
-
-    thumbs.forEach(function (thumb, i) {
-      thumb.addEventListener('click', function () {
-        show(i);
+      btn.addEventListener('click', function () {
+        var showingFull = frame.classList.toggle('is-full');
+        btn.setAttribute('aria-pressed', showingFull ? 'true' : 'false');
+        btn.textContent = showingFull ? fullLabel : detailLabel;
       });
     });
-
-    root.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        show(index + 1);
-        thumbs[index].focus();
-      } else if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        show(index - 1);
-        thumbs[index].focus();
-      } else if (event.key === 'Home') {
-        event.preventDefault();
-        show(0);
-        thumbs[index].focus();
-      } else if (event.key === 'End') {
-        event.preventDefault();
-        show(thumbs.length - 1);
-        thumbs[index].focus();
-      }
-    });
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        show(index - 1);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        show(index + 1);
-      });
-    }
-
-    // Touch: horizontal swipe on the stage. Tapping thumbnails always works,
-    // so this is an addition rather than a drag-only requirement.
-    var startX = null;
-    var startY = null;
-    var stage = root.querySelector('.gallery-stage') || stageImg;
-
-    stage.addEventListener(
-      'touchstart',
-      function (event) {
-        if (event.touches.length !== 1) return;
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
-      },
-      { passive: true }
-    );
-
-    stage.addEventListener(
-      'touchend',
-      function (event) {
-        if (startX === null) return;
-        var touch = event.changedTouches[0];
-        var dx = touch.clientX - startX;
-        var dy = touch.clientY - startY;
-        startX = null;
-        startY = null;
-        if (Math.abs(dx) < 42 || Math.abs(dx) < Math.abs(dy)) return;
-        show(dx < 0 ? index + 1 : index - 1);
-      },
-      { passive: true }
-    );
-
-    show(index);
-  }
-
-  function initGalleries() {
-    Array.prototype.slice
-      .call(document.querySelectorAll('[data-gallery]'))
-      .forEach(initGallery);
   }
 
   /* ----------------------------------------------------------------- boot */
 
   function boot() {
-    initSubnav();
-    initGalleries();
-    if (!prefersReduced()) {
-      initEnergize();
-    } else {
-      Array.prototype.slice.call(document.querySelectorAll('.energize')).forEach(function (s) {
+    initDeck();
+    initLenses();
+    if (prefersReduced()) {
+      slice(document.querySelectorAll('.energize')).forEach(function (s) {
         s.classList.add('is-live');
       });
+    } else {
+      initEnergize();
     }
   }
 

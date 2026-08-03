@@ -14,48 +14,54 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CueCheck">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CueCheck sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CueCheck</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CueCheck chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CueCheck</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">The rules</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Interface</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">05</span><span class="deck-label">Availability</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cuecheck.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cuecheck.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CueCheck</h1>
               </div>
             </div>
 
-            <p class="hero-job">Prove that the correct version of every piece of content reached every playback machine that needs it &mdash; before the show finds out for you.</p>
+            <p class="opening-promise">Prove that the correct version of every piece of content reached every playback machine that needs it &mdash; before the show finds out for you.</p>
 
             <p class="status-chip">In Development</p>
 
@@ -68,125 +74,133 @@
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CueCheck">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CueCheck interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="CueCheck Organization Rules showing naming previews, DMX slot ownership and simulated delivery paths in a read-only acceptance environment." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CueCheck &mdash; Show Rules / Organization</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="The CueCheck Organization Rules screen: a naming-rules panel with file prefix and versioning-mode controls, a live preview of the resulting path, a simulate-a-delivery box, and a slot map showing reserved delivery ranges." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Organization rules.</b> Current CueCheck dashboard connected to its real API and a throwaway acceptance database. The capture is read-only and contains no production paths, hostnames or media inventory.
+            <p class="plate-note">
+              <b>Organization rules &mdash; naming, versioning and slot ownership in one place.</b> Current CueCheck dashboard connected to its real service and a throwaway acceptance database. Read-only state; no production path, rack hostname, network address, machine inventory, artist or show name. Every detail on this page is a region of this same frame.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================== 02 — THE RULES -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Validate first, deliver second, <strong>swap only when complete</strong></h2>
-        <p class="band-intro">Content that fails the spec never reaches a playback machine, and a destination is only updated once the whole target set is ready &mdash; so a half-finished delivery cannot become a half-finished show.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">The rules, before the panic</p>
+            <h2 class="movement-title">Decide how content is named <em>while nobody is shouting</em></h2>
+            <p class="movement-lede">Naming, versioning and slot ownership are settled as project rules, and the application shows you the exact result of those rules before a single file arrives.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Watch</h3>
-            <p>Monitor the delivery folder the content team is already using.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Validate</h3>
-            <p>Probe each file against the spec profile for its destination.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Name and stage</h3>
-            <p>Apply the show's naming convention and hold the file in a controlled staging area.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Deliver</h3>
-            <p>Push to the required destinations over the local network and record what landed.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Swap and report</h3>
-            <p>Complete the target set, swap atomically, and tell the room what changed.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; keep names honest</p>
+              <h3>One convention, stated once, applied to everything</h3>
+              <p>A project sets its file prefix and its versioning mode, and every delivery in that project inherits them. Consistent naming is what makes the rest of the pipeline &mdash; and the console &mdash; predictable.</p>
+              <ul class="scene-points">
+                <li>Automatic renaming to the show's convention with prefix enforcement</li>
+                <li>Sequential or date-based versioning, chosen per project</li>
+                <li>Deliverable identifiers that drive routing and visibility</li>
+                <li>Slot ranges, show order and reservations so a slot can be claimed before content arrives</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueCheck validates and delivers. It does not transcode content into spec on your behalf.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">The part of content delivery <strong>nobody wants to own</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Catch it early</p>
-            <h3>Spec validation</h3>
-            <p>Every destination gets its own profile, and every arriving file is measured against it instead of against somebody's memory.</p>
-            <ul>
-              <li>Probe-driven checks on resolution, codec, frame rate, colour and file size</li>
-              <li>Per-destination spec profiles with inheritance</li>
-              <li>Broad production codec coverage &mdash; NotchLC, HAP/HAPQ, DXV3, ProRes, DNxHD/HR, broadcast formats and image sequences</li>
-              <li>Loudness measurement where the profile requires it</li>
-              <li>Rejected and needs-review files are separated rather than silently dropped</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; naming rules</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 1.75; --dw-x: 17.4%; --dw-y: 5.3%;">
+                <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="The CueCheck naming rules panel with a file prefix field, a sequential versioning option showing examples such as v01 and v02, a date-time versioning alternative, and save and cancel actions." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; the project's file prefix and versioning mode, with the format of each option written next to it.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Keep names honest</p>
-            <h3>Naming and organisation</h3>
-            <p>Consistent naming is what makes the rest of the pipeline &mdash; and the console &mdash; predictable.</p>
-            <ul>
-              <li>Automatic renaming to the show's convention with prefix enforcement</li>
-              <li>Deliverable identifiers that drive routing and visibility</li>
-              <li>Sequential or date-based versioning</li>
-              <li>Slot ranges, show order and reservations so a slot can be claimed before content arrives</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; catch it early</p>
+              <h3>Simulate the delivery before anything moves</h3>
+              <p>Paste a filename a vendor is about to send and the preview shows exactly where it would land under the current rules. Nothing is copied, renamed or moved to answer the question.</p>
+              <ul class="scene-points">
+                <li>Live preview of the at-rest path produced by the current rules</li>
+                <li>Simulation from an arbitrary pasted filename, with no files moved</li>
+                <li>Probe-driven checks on resolution, codec, frame rate, colour and file size</li>
+                <li>Rejected and needs-review files are separated rather than silently dropped</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CueCheck is a production-network tool, not a public content-distribution service, and it does not play back or drive a show.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Get it onto the machines</p>
-            <h3>Safe local and LAN delivery</h3>
-            <p>Delivery is explicit, bounded and reversible rather than a background copy nobody is watching.</p>
-            <ul>
-              <li>Explicit target sets &mdash; a delivery is complete only when every required destination has it</li>
-              <li>Atomic swap so a destination is never left holding a partial file</li>
-              <li>Redundancy-aware pushes, with divergence surfaced when a pair breaks mid-push</li>
-              <li>Scheduled and on-demand sync runs</li>
-              <li>Credentials held in the operating system's keychain, never in plain configuration</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Tell the room</p>
-            <h3>Operator visibility</h3>
-            <p>Anyone on the production network can see the state of content without interrupting the operator.</p>
-            <ul>
-              <li>Dashboard showing synced, queued, processing and rejected files in real time</li>
-              <li>Rejection reasons stated in plain language</li>
-              <li>Per-destination mapping and storage inspection</li>
-              <li>Chat and webhook notifications for passes, rejections and corrections</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; live preview and simulation</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 1.75; --dw-x: -16.3%; --dw-y: 2.2%;">
+                <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="The CueCheck live preview showing the folder and filename a delivery would take at rest under the current rules, beside a simulate-a-delivery box holding a pasted vendor filename and a simulate action, with a note that the preview moves no files." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; the resolved at-rest path, and a simulation that states plainly that <b>no files are moved</b>.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Validate first, deliver second, <em>swap only when complete</em></h2>
+            <p class="movement-lede">Content that fails the spec never reaches a playback machine, and a destination is only updated once the whole target set is ready &mdash; so a half-finished delivery cannot become a half-finished show.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Watch</h3>
+              <p>Monitor the delivery folder the content team is already using, without changing how they work.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Validate</h3>
+              <p>Probe each file against the spec profile for its destination, and state the reason in plain language when it fails.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Name and stage</h3>
+              <p>Apply the show's naming convention and hold the file in a controlled staging area.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Deliver</h3>
+              <p>Push to the required destinations over the local network and record what actually landed.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Swap and report</h3>
+              <p>Complete the target set, swap atomically, and tell the room what changed.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -211,14 +225,59 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- =================================================== 04 — INTERFACE -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">In development, <strong>not yet quoteable</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Interface detail bench</p>
+            <h2 class="movement-title">Ownership and posture, <em>both visible</em></h2>
+            <p class="movement-lede">Both benches below are regions of the same accepted dashboard capture shown at the top of this page. Use <b>Full frame</b> on either one to see where the region sits in the window.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">In Development</p>
+        <div class="bench">
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 16 / 5; --dw-zoom: 2.44; --dw-x: 15%; --dw-y: -30%;">
+              <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="The CueCheck slot map explaining that each mapping reserves a range for its variations, with a numbered slot ruler and a reserved block labelled for a main wall mapping." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">A</span> Slots are owned before content exists</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>A mapping reserves its own range</b>, so a destination's slot can be claimed while the content is still being made rather than fought over on the day.</figcaption>
+          </figure>
+
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 16 / 3; --dw-zoom: 2.44; --dw-x: -29.5%; --dw-y: 43.8%;">
+              <img src="images/app-screenshots/cuecheck/organization-rules.webp" width="1440" height="900" alt="The top-right corner of the CueCheck dashboard showing a service-up indicator beside a read-only mode chip." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">B</span> Service state and write posture</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>The dashboard reports whether the service is up and whether it may write.</b> This capture was taken in read-only mode, which is why nothing here could have altered a delivery.</figcaption>
+          </figure>
+        </div>
+
+        <p class="bench-note">These are crops of one real dashboard capture against a throwaway acceptance database, not separate sessions.</p>
+      </div>
+    </section>
+
+    <!-- ================================================= 05 — AVAILABILITY -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">In development, <em>not yet quoteable</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">In Development</p>
           <h3>CueCheck is not on sale and has no published price.</h3>
           <p>The product is in active development. Its commercial package &mdash; the shape of a founder-guided production pilot, a perpetual operator licence, optional annual updates and short-term rental &mdash; is a proposal under review, not an approved offer, so no amount appears on this page.</p>
           <p>Earlier tier structures published on this site are retired. There is no public pilot programme to sign up for today.</p>
@@ -249,10 +308,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">Where CueCheck <strong>sits in the chain</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">Where CueCheck <em>sits in the chain</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuepatch.html">
             <p class="rel-link">Upstream &rarr;</p>

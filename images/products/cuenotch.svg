@@ -1,25 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="CueNotch product mark">
-  <title>CueNotch</title>
-  <rect width="240" height="240" rx="18" fill="#060a0d"/>
-  <!-- circuit frame -->
-  <g fill="none" stroke="#a78bfa" stroke-width="3" opacity="0.42">
-    <path d="M30 52V34h18"/>
-    <path d="M192 34h18v18"/>
-    <path d="M210 188v18h-18"/>
-    <path d="M48 206H30v-18"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="container" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0D1730"/>
+      <stop offset="0.55" stop-color="#080E1F"/>
+      <stop offset="1" stop-color="#050A16"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#31465B"/>
+      <stop offset="0.4" stop-color="#1A2B3E"/>
+      <stop offset="0.72" stop-color="#243A4E"/>
+      <stop offset="1" stop-color="#0F1D2D"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E7FBFF"/>
+      <stop offset="0.25" stop-color="#8DDCEA"/>
+      <stop offset="0.6" stop-color="#2D7B99"/>
+      <stop offset="1" stop-color="#C2F4FA"/>
+    </linearGradient>
+    <radialGradient id="node" cx="45%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#E6FFFF"/>
+      <stop offset="0.35" stop-color="#58EFFA"/>
+      <stop offset="1" stop-color="#00A8CE"/>
+    </radialGradient>
+    <radialGradient id="status" cx="42%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#F1FFF8"/>
+      <stop offset="0.35" stop-color="#62FFC1"/>
+      <stop offset="1" stop-color="#00B778"/>
+    </radialGradient>
+    <filter id="containerGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="13" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="signalGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softShadow" x="-25%" y="-25%" width="160%" height="170%">
+      <feDropShadow dx="12" dy="18" stdDeviation="18" flood-color="#000815" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+
+  <!-- Transparent exterior; selected near-black CueForge container -->
+  <rect x="54" y="54" width="916" height="916" rx="218" fill="#072232" opacity="0.85" filter="url(#containerGlow)"/>
+  <rect x="64" y="64" width="896" height="896" rx="208" fill="url(#container)" stroke="#61E7F4" stroke-width="11"/>
+  <rect x="82" y="82" width="860" height="860" rx="192" fill="none" stroke="#163A52" stroke-width="3"/>
+
+  <!-- Locked Signal Notch silhouette: broad Cue-family C with a literal machined edge cut -->
+  <g filter="url(#softShadow)">
+    <path d="M344 250 H700 L758 308 V384 L674 420 H572 L508 484 V556 L574 620 H680 L758 654 V724 L702 780 H344 L280 716 V310 Z"
+          fill="#03121E" stroke="#062D42" stroke-width="20" transform="translate(10 15)"/>
+    <path d="M344 250 H700 L758 308 V384 L674 420 H572 L508 484 V556 L574 620 H680 L758 654 V724 L702 780 H344 L280 716 V310 Z"
+          fill="url(#steel)" stroke="url(#edge)" stroke-width="10" stroke-linejoin="round"/>
+    <!-- controlled machining facets -->
+    <path d="M344 250 H700 L758 308" fill="none" stroke="#F1FDFF" stroke-opacity="0.32" stroke-width="5"/>
+    <path d="M280 310 L344 250" fill="none" stroke="#A9ECF5" stroke-opacity="0.35" stroke-width="5"/>
+    <path d="M344 780 H702 L758 724" fill="none" stroke="#0C3D55" stroke-opacity="0.8" stroke-width="8"/>
   </g>
-  <!-- notched block: the source file -->
-  <path d="M66 78h64l22 22v62H66z" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linejoin="miter"/>
-  <path d="M130 78v22h22" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linejoin="miter"/>
-  <!-- DMX channel ladder: the generated documentation -->
-  <g stroke="#38c7cc" stroke-width="6" stroke-linecap="butt">
-    <path d="M82 120h30" opacity="0.95"/>
-    <path d="M82 136h52" opacity="0.75"/>
-    <path d="M82 152h40" opacity="0.55"/>
+
+  <!-- Three exposed ordered channels: block truth becomes crew/DMX output -->
+  <g fill="none" stroke="#38E8F5" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#signalGlow)">
+    <path d="M509 500 H592 L646 446 H720"/>
+    <path d="M509 548 H624 L660 512 H720"/>
+    <path d="M509 592 H602 L642 622 H720"/>
   </g>
-  <!-- output trace to the crew -->
-  <g fill="none" stroke="#a78bfa" stroke-width="4">
-    <path d="M152 140h26v26h-26"/>
+  <g fill="none" stroke="#C8FCFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M509 500 H592 L646 446 H720"/>
+    <path d="M509 548 H624 L660 512 H720"/>
+    <path d="M509 592 H602 L642 622 H720"/>
   </g>
-  <circle cx="178" cy="140" r="6" fill="#a78bfa"/>
+  <g filter="url(#signalGlow)">
+    <circle cx="754" cy="446" r="29" fill="url(#node)" stroke="#C9FDFF" stroke-width="7"/>
+    <circle cx="754" cy="512" r="29" fill="url(#node)" stroke="#C9FDFF" stroke-width="7"/>
+    <circle cx="754" cy="622" r="29" fill="url(#node)" stroke="#C9FDFF" stroke-width="7"/>
+  </g>
+
+  <!-- Restrained validation light retained from selected concept -->
+  <circle cx="376" cy="706" r="22" fill="#071A22" stroke="#2E5F6B" stroke-width="5"/>
+  <circle cx="376" cy="706" r="13" fill="url(#status)" filter="url(#signalGlow)"/>
 </svg>

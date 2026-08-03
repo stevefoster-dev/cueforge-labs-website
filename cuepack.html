@@ -14,209 +14,268 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CuePack">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CuePack sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CuePack</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CuePack chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CuePack</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Schedule</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">Decide</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Flow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Move</span></a></li>
+        <li><a class="deck-chapter" href="#field"><span class="deck-num">05</span><span class="deck-label">Field</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">06</span><span class="deck-label">Availability</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ==================================================== 01 — SCHEDULE -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cuepack.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cuepack.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CuePack</h1>
               </div>
             </div>
 
-            <p class="hero-job">Carry a production's gear from inventory to cases to trucks, aircraft and containers &mdash; and keep the operational history that makes the next show faster.</p>
+            <p class="opening-promise">Turn an incoming schedule into matched venues, decided quote lines, pack-ready cases, a reviewed freight plan and the calls each role needs on show day.</p>
 
             <p class="status-chip">In Development &middot; Private Workflow Validation</p>
 
             <ul class="chipset">
-              <li class="chip">Browser workspace</li>
-              <li class="chip is-path">Truck &middot; air &middot; sea &middot; combined</li>
-              <li class="chip">3D packed-container preview</li>
-              <li class="chip is-eco">Multi-user production accounts</li>
+              <li class="chip">Schedule &amp; venue intelligence</li>
+              <li class="chip is-path">Quotes &rarr; gear &rarr; cases &rarr; movement</li>
+              <li class="chip">Truck &middot; air &middot; sea planning</li>
+              <li class="chip is-eco">Production &amp; crew role views</li>
             </ul>
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CuePack%20workflow%20validation">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CuePack interface</figcaption>
-            <div class="evidence-stage">
-              <img src="images/app-screenshots/cuepack/build-workspace.webp" width="1440" height="900" alt="CuePack Build workspace showing a synthetic item pool, a video control rack, cable trunk and lighting cart in a package-planning workflow." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Schedule Import / Venue Match</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuepack/schedule-venue-match.webp" width="1440" height="900" alt="CuePack's Schedule Import Wizard at the Venue Match step: eight imported dates are listed, five automatically matched to existing venues and three marked as new venues for review, with the four-step Upload, Map Columns, Venue Match, Review and Import rail visible above." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Build workspace.</b> Current CuePack components running an isolated synthetic production with generic lighting, video and audio inventory. No authenticated service or production records.
-            </p>
+            <p class="plate-note"><b>Five stops matched automatically; three stay reviewable before import.</b> Venue and city signals narrow the likely records, but the production manager can correct every decision. A changed schedule is compared against what is already stored rather than blindly duplicated.</p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ====================================================== 02 — DECIDE -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Gear becomes cases, cases become <strong>a load that actually fits</strong></h2>
-        <p class="band-intro">CuePack models the three real layers of a production &mdash; what you own, what it travels in, and what carries it &mdash; so a pack plan can be checked before the truck is booked rather than after it is full.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">Decide what travels</p>
+            <h2 class="movement-title">The budget decision becomes <em>a buildable gear system</em></h2>
+            <p class="movement-lede">Vendor lines, production budgets and case-ready gear live in the same operating record. CuePack can expose the trade-off and prepare the next step; the winner and the final package remain human decisions.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Inventory</h3>
-            <p>Record the gear a production is actually taking, item by item.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Case up</h3>
-            <p>Assign gear into road cases, racks and carts with real dimensions and weight limits.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Plan the pack</h3>
-            <p>Place cases into trucks, ULDs or containers and watch weight and volume as you go.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Check and secure</h3>
-            <p>Review the packed load in 3D, resolve axle-weight and securing questions.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Publish and reuse</h3>
-            <p>Issue the manifest, then keep the plan as the starting point for the next leg.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; compare the package against the plan</p>
+              <h3>Three lighting categories, two vendors, one visible budget impact</h3>
+              <p>The comparison view puts coverage, weekly totals and the production budget in one decision surface. Each vendor can win individual lines, but no quote is silently accepted and no undecided package turns itself into inventory.</p>
+              <ul class="scene-points">
+                <li>Both vendors cover all three compared categories</li>
+                <li>Per-line best values and weekly totals remain visible together</li>
+                <li>Budget impact reports the remaining planning basis for each option</li>
+                <li>Select Winner controls keep commercial responsibility with the production</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> These are rounded internal-production fixture amounts, not CuePack pricing, an approved purchase order or a financial forecast.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">Built around how productions <strong>actually move</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Know what you have</p>
-            <h3>Gear, cases and continuity</h3>
-            <p>The three-tier model &mdash; gear, cases, pack &mdash; keeps the warehouse truth and the tour truth in the same place instead of in one person's head.</p>
-            <ul>
-              <li>Gear inventory tracked at item level, including serial numbers</li>
-              <li>Case library with real dimensions, weight limits and utilisation</li>
-              <li>Built-in road-case reference data for common case makes</li>
-              <li>Project templates so a recurring design does not start from zero</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Quote Comparison / Budget Impact</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuepack/quote-budget-decision.webp" width="1440" height="900" alt="CuePack's Lighting Package vendor comparison with Bluecrest Staging Supply at 56,700 dollars per week and Ironvale Production Rentals at 61,200 dollars per week, three of three compared items, Select Winner controls, item-by-item totals, weekly totals and a 120,000 dollar Budget Impact section showing 63,300 and 58,800 dollars remaining." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note"><b>The money and the consequence are visible before anyone chooses.</b> Bluecrest leaves 63,300 dollars of the fixture planning basis; Ironvale leaves 58,800. The green cells identify lower quoted lines, not an automatic purchasing decision.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Make it fit</p>
-            <h3>Pack planning in every mode</h3>
-            <p>One planner covers the transport modes a real production mixes on the same leg.</p>
-            <ul>
-              <li>Drag-and-drop case placement into trucks and trailers</li>
-              <li>Air freight against ULD containers and pallet types</li>
-              <li>Sea containers with weight-versus-volume trade-offs</li>
-              <li>Combined multi-mode movements for international routing</li>
-              <li>Real-time 3D preview of the packed container</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; turn decided items into physical units</p>
+              <h3>Gear records become cases, racks and trunks with real limits</h3>
+              <p>Once a winner is resolved, CuePack's explicit Push to Pack path can create canonical gear records without duplicating an item already materialised. The build workspace then assigns that gear into dimensioned containers and keeps unresolved items in plain sight.</p>
+              <ul class="scene-points">
+                <li>Owned and vendor-supplied gear can share the same package workspace</li>
+                <li>Case type, dimensions, weight, rack units and fill remain editable</li>
+                <li>Unassigned items stay flagged until a real container is chosen</li>
+                <li>Case manifests create physical pack-ready units for movement planning</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> The build frame is a separate exact-runtime fixture from the quote frame. It demonstrates the next product surface, not a claim that the pictured quote was purchased.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Stay legal and safe</p>
-            <h3>Weight, axles and securing</h3>
-            <p>The numbers that get a load stopped at a scale are calculated while the plan is still editable.</p>
-            <ul>
-              <li>Axle weight distribution for road compliance</li>
-              <li>Load bar and strap requirement calculations</li>
-              <li>Weight and volume totals per container and per movement</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Run the department</p>
-            <h3>Documents and shared access</h3>
-            <p>A production is a group activity, so the plan has to survive being handed around.</p>
-            <ul>
-              <li>Manifests and pack documentation generated from the live plan</li>
-              <li>Multi-user collaboration across a production account</li>
-              <li>Venue and movement logistics captured alongside the pack</li>
-              <li>Operational history retained between legs and between shows</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Build Workspace</figcaption>
+              <div class="plate-stage">
+                <img src="images/app-screenshots/cuepack/build-workspace.webp" width="1440" height="900" alt="CuePack's Build workspace with a source item pool on the left and a package workspace on the right: lighting and video gear show quantities, departments, weights and needs-dimensions-or-case warnings, while video racks, cable trunks and lighting road cases show rack units, item counts, weights and fill percentages." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note"><b>Unresolved gear stays unresolved on screen.</b> The source pool explains which items still need dimensions or a case; the package side shows actual containers, item counts, weight and fill instead of treating a quote line as a road case.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ======================================================== 03 — FLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">One production record</p>
+            <h2 class="movement-title">From the first date <em>to the first call</em></h2>
+            <p class="movement-lede">CuePack is the operating spine between planning, physical logistics and the day itself. Each stage narrows the same production record instead of beginning another spreadsheet.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step"><p class="rail-n">01</p><div><h3>Import</h3><p>Bring in the schedule and map its date, city and venue columns.</p></div></li>
+          <li class="rail-step"><p class="rail-n">02</p><div><h3>Match</h3><p>Resolve each stop against the venue database and review every new place.</p></div></li>
+          <li class="rail-step"><p class="rail-n">03</p><div><h3>Decide</h3><p>Compare vendor lines against the production budget and choose deliberately.</p></div></li>
+          <li class="rail-step"><p class="rail-n">04</p><div><h3>Build</h3><p>Materialise decided gear, case it, group it and keep exceptions visible.</p></div></li>
+          <li class="rail-step"><p class="rail-n">05</p><div><h3>Move</h3><p>Choose truck, air or sea and review the editable pack before release.</p></div></li>
+          <li class="rail-step"><p class="rail-n">06</p><div><h3>Run</h3><p>Publish the calls and show each role only the operating view it needs.</p></div></li>
+        </ol>
 
         <div class="split">
           <div class="panel">
             <h3><span class="marker" aria-hidden="true"></span>Built for</h3>
             <ul>
-              <li>Production managers planning trucking, freight and load-out order</li>
-              <li>Rental houses turning shop inventory into a repeatable tour pack</li>
-              <li>Crew chiefs who need one authoritative case list per department</li>
-              <li>Touring operations that repeat a design across legs and territories</li>
+              <li>Production managers carrying a tour from advance through show day</li>
+              <li>Rental and shop teams turning decided gear into repeatable case packs</li>
+              <li>Logistics leads comparing truck, air and sea movement</li>
+              <li>PA and crew teams working from role-bounded calls and venue facts</li>
             </ul>
           </div>
           <div class="panel is-boundary">
             <h3><span class="marker" aria-hidden="true"></span>Outside its authority</h3>
             <ul>
+              <li>It does not purchase a vendor package or approve a budget automatically</li>
               <li>It is not a freight broker, carrier booking system or customs filing service</li>
-              <li>It does not replace a rigging plot, weight certificate or legal load inspection</li>
-              <li>It is not an accounting system; settlement stays with the production's finance tools</li>
-              <li>LED surface design belongs in CuePatch, not here</li>
+              <li>It does not replace a weight certificate, axle check or legal load inspection</li>
+              <li>LED surface design belongs in CuePatch; settlement stays with finance tools</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- ======================================================== 04 — MOVE -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">The commercial model is decided. <strong>The numbers are not.</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Choose the movement</p>
+            <h2 class="movement-title">One case system, <em>three ways across the map</em></h2>
+            <p class="movement-lede">Truck, air and sea are real Pack Planner modes, not marketing cards. The container changes; the cases, groups, dimensions and human review stay attached to the same production.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">In Development &mdash; Private Workflow Validation</p>
+        <div class="bench">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Multimodal Pack Planner</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuepack/multimodal-pack-planner.webp" width="1440" height="900" alt="CuePack's Pack Planner showing Truck, Air and Sea movement modes, By Department grouping, stack and manual placement controls, a 16-case package, one selected 53-foot semi trailer and cards reporting one truck, 16 cases, 13 percent volume and 62 percent weight." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>Truck, Air and Sea change the movement model without discarding the case plan.</b> This fixture has 16 cases assigned to containers; the selected 53-foot trailer shows the weight and volume consequences while grouping, stacking and manual placement remain editable.</p>
+          </figure>
+
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Group-aware 3D Pack</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuepack/truck-pack-3d-populated.webp" width="1440" height="900" alt="CuePack's populated 3D Pack View showing coloured cases by department inside a 53-foot trailer, with 3D, side and top view modes, labels, wireframe, measurement, centre-of-gravity and pack-sheet controls, plus truck, department and load-securing filters." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>The suggested layout stays a draft.</b> Cases can be regrouped, manually placed and reviewed in top, side and 3D views; dimensions, load bars, straps, weight and volume remain crew decisions rather than a certification claim.</p>
+          </figure>
+        </div>
+
+        <p class="bench-note">The two movement images are separate public-safe exact-runtime fixtures. They demonstrate distinct Pack Planner surfaces, not two crops of one screenshot and not one continuous production. Neither frame is a weight certificate, an axle check, a carrier booking or a customs filing.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================= 05 — FIELD -->
+    <section class="movement energize" id="field">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Run the day</p>
+            <h2 class="movement-title">The same call, <em>two operating views</em></h2>
+            <p class="movement-lede">Production sees the exceptions that need intervention. Crew sees the call, venue facts and status action required of them. Role-based views are part of the same system, not a second app.</p>
+          </div>
+        </header>
+
+        <div class="bench">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; PA Operations</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuepack/pa-operations.webp" width="1440" height="900" alt="CuePack's PA Operations dashboard for today's Harbor Center show: a do-next queue, crew presence reporting three of six here and one overdue, an 08:00 call, one crew member running late with a 25-minute ETA, one on the way with a 10-minute ETA, one not checked in with call passed, and operating lanes for crew, transport, per diem and documents." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>The PA board is exception-first.</b> Three people are already collapsed into the here count; the surface keeps the late, on-the-way and overdue calls open with a correction action, while the do-next queue holds the unresolved advances and labour calls.</p>
+          </figure>
+
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePack &mdash; Crew Day Interface</figcaption>
+            <div class="plate-stage">
+              <img src="images/app-screenshots/cuepack/crew-day-interface.webp" width="1440" height="900" alt="CuePack's crew-facing day interface with the current show date, Harbor Center in Port Alden, an 08:00 call, a Here status and Change status action, a day-sheet PDF action, load-in at 08:00, soundcheck at 16:30, doors at 19:00, show at 20:00, curfew at 23:00, load-out at 23:30 and an All Departments Production Call at 08:00." loading="lazy" decoding="async">
+            </div>
+            <p class="plate-note"><b>Crew gets the facts and the one action it owns.</b> Call time, venue, load-in, soundcheck, doors, show, curfew and load-out are visible together; the status control reports <b>Here</b> without exposing the production-management dashboard or another crew member's record.</p>
+          </figure>
+        </div>
+
+        <p class="bench-note">Both field frames were exercised through CuePack's current role paths against one synthetic show-day fixture. No artist, customer, real venue, crew identity, email, host, network address or production service appears in the delivered pixels.</p>
+      </div>
+    </section>
+
+    <!-- ================================================ 06 — AVAILABILITY -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">06</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">The commercial model is decided. <em>The numbers are not.</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">In Development &mdash; Private Workflow Validation</p>
           <h3>How CuePack will be sold</h3>
           <p>Productions are seasonal, so CuePack is not sold as a flat per-seat subscription. The approved commercial architecture has four parts, and the exact amounts for each are still being set. No price is quoted until they are.</p>
           <ul class="model-list">
@@ -232,31 +291,24 @@
         </div>
 
         <dl class="spec-grid">
-          <div class="spec">
-            <dt>Platform</dt>
-            <dd>Browser-based workspace. No installer required for the core planning workflow.</dd>
-          </div>
-          <div class="spec">
-            <dt>Account model</dt>
-            <dd>One production account with multiple collaborators; access is scoped by role.</dd>
-          </div>
-          <div class="spec">
-            <dt>Data</dt>
-            <dd>Gear, cases, packs, documents and history are held in the production's own workspace.</dd>
-          </div>
-          <div class="spec">
-            <dt>Release state</dt>
-            <dd>In development, validated privately against real production workflows. Public listing does not imply general availability.</dd>
-          </div>
+          <div class="spec"><dt>Platform</dt><dd>Browser-based workspace. No installer required for the core planning workflow.</dd></div>
+          <div class="spec"><dt>Account model</dt><dd>One production account with multiple collaborators; access is scoped by role.</dd></div>
+          <div class="spec"><dt>Data</dt><dd>Schedules, venues, quotes, gear, cases, packs, calls, documents and history stay in the production workspace.</dd></div>
+          <div class="spec"><dt>Release state</dt><dd>In development, validated privately against real production workflows. Public listing does not imply general availability.</dd></div>
         </dl>
       </div>
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">What feeds <strong>and follows CuePack</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">What feeds <em>and follows CuePack</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuepatch.html">
             <p class="rel-link">Upstream &rarr;</p>

@@ -14,48 +14,54 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/product-dossier.css">
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
+  <a class="skip-link" href="#opening">Skip to content</a>
 
   <header class="dossier-header">
     <a href="index.html" class="logo" aria-label="CueForge Labs home">
-      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="28" height="22">
+      <img src="images/cueforge-anvil.svg" alt="" aria-hidden="true" width="30" height="24">
       <span>CueForge Labs</span>
     </a>
     <a class="header-contact" href="mailto:steve@cueforgelabs.com?subject=CuePatch">Contact</a>
   </header>
 
-  <nav class="dossier-subnav" aria-label="CuePatch sections">
-    <div class="subnav-inner">
-      <a class="subnav-return" href="software-circuit.html"><span class="arrow" aria-hidden="true">&larr;</span> Software Circuit</a>
-      <span class="subnav-product">CuePatch</span>
-      <div class="subnav-links">
-        <a href="#overview">Overview</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#availability">Availability</a>
+  <nav class="deck" aria-label="CuePatch chapters">
+    <div class="deck-inner">
+      <div class="deck-id">
+        <a class="deck-return" href="software-circuit.html">
+          <span class="deck-return-arrow" aria-hidden="true">&larr;</span>
+          <span>Circuit</span>
+        </a>
+        <p class="deck-product">CuePatch</p>
       </div>
+      <ul class="deck-list">
+        <li><a class="deck-chapter" href="#opening"><span class="deck-num">01</span><span class="deck-label">Instrument</span></a></li>
+        <li><a class="deck-chapter" href="#scenes"><span class="deck-num">02</span><span class="deck-label">In the build</span></a></li>
+        <li><a class="deck-chapter" href="#workflow"><span class="deck-num">03</span><span class="deck-label">Workflow</span></a></li>
+        <li><a class="deck-chapter" href="#details"><span class="deck-num">04</span><span class="deck-label">Interface</span></a></li>
+        <li><a class="deck-chapter" href="#readiness"><span class="deck-num">05</span><span class="deck-label">Availability</span></a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ============================================================ HERO -->
-    <section class="hero" id="overview">
+    <!-- ================================================ 01 — INSTRUMENT -->
+    <section class="opening" id="opening">
       <div class="shell">
-        <div class="hero-grid">
+        <div class="opening-grid">
           <div>
-            <div class="hero-mark">
-              <img src="images/products/cuepatch.png" alt="" aria-hidden="true">
+            <div class="opening-mark">
+              <img src="images/products/cuepatch.png" alt="" aria-hidden="true" width="66" height="66">
               <div>
-                <p class="hero-eyebrow">Production Tool</p>
+                <p class="opening-eyebrow">Production Tool</p>
                 <h1>CuePatch</h1>
               </div>
             </div>
 
-            <p class="hero-job">Build the pixel map, processor outputs, cabling and pack data for an LED wall before a single panel leaves the shop.</p>
+            <p class="opening-promise">Build the pixel map, processor outputs, cabling and pack data for an LED wall before a single panel leaves the shop.</p>
 
             <p class="status-chip">Private Validation &middot; Beta Interest</p>
 
@@ -63,130 +69,139 @@
               <li class="chip">macOS &amp; Windows desktop</li>
               <li class="chip">Local project files</li>
               <li class="chip is-path">Brompton &middot; Novastar &middot; Megapixel Helios</li>
-              <li class="chip is-eco">disguise &middot; grandMA3 &middot; MVR export</li>
+              <li class="chip is-eco">disguise &middot; grandMA3 &middot; MVR</li>
             </ul>
 
             <div class="cta-row">
               <a class="cta" href="mailto:steve@cueforgelabs.com?subject=CuePatch%20validation%20interest">Contact Us</a>
-              <a class="cta is-quiet" href="software-circuit.html">Back to the Circuit</a>
             </div>
           </div>
 
-          <figure class="evidence">
-            <figcaption class="evidence-bar"><span class="dot" aria-hidden="true"></span> Current CuePatch interface &mdash; Builder</figcaption>
-            <div class="evidence-stage">
-              <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="CuePatch Builder showing three LED screens laid out on one 3840 by 2160 output, with the outputs list, screen configuration, tile grid and surface colour controls." decoding="async">
+          <figure class="plate">
+            <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> CuePatch &mdash; Builder</figcaption>
+            <div class="plate-stage">
+              <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="The CuePatch Builder window: an outputs and screens rail on the left, three coloured LED surfaces laid out across one 3840 by 2160 output in the centre, and surface colour, screen name and position controls on the right." decoding="async">
             </div>
-            <p class="evidence-caption">
-              <b>Builder &mdash; three screens on one 3840&times;2160 output.</b> Real capture of CuePatch running an unsaved local project on ROE Visual Carbon CB5 tiles. No customer, venue or show data.
+            <p class="plate-note">
+              <b>Three screens on one 3840&times;2160 output.</b> The accepted CuePatch capture, running an unsaved local project on ROE Visual Carbon CB5 tiles. Every detail on this page is a region of this same frame.
             </p>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================== WORKFLOW -->
-    <section class="band energize" id="workflow">
+    <!-- ================================================ 02 — IN THE BUILD -->
+    <section class="movement energize" id="scenes">
       <div class="shell">
-        <p class="band-label">The safe loop</p>
-        <h2 class="band-title">Define outputs, build the wall, <strong>export the show pack</strong></h2>
-        <p class="band-intro">CuePatch keeps the processor truth and the physical truth in one document, so the map handed to the video engineer matches the cases that go on the truck.</p>
+        <header class="movement-head">
+          <p class="movement-num">02</p>
+          <div>
+            <p class="movement-kicker">In the build</p>
+            <h2 class="movement-title">The wall and the processor <em>argue in one document</em></h2>
+            <p class="movement-lede">A pixel map is only useful if it survives contact with the panel database, the processor budget and the truck. CuePatch keeps all three in the same file, so the map handed to the video engineer matches the cases that ship.</p>
+          </div>
+        </header>
 
-        <ol class="workflow-strip">
-          <li class="stage">
-            <p class="stage-index">01</p>
-            <h3>Define outputs</h3>
-            <p>Set processor output resolution and add only the outputs the design actually needs.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">02</p>
-            <h3>Build screens</h3>
-            <p>Place real tiles from the panel database, size the grid, and align multiple surfaces on one canvas.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">03</p>
-            <h3>Map and slice</h3>
-            <p>Assign screens to processor outputs and split surfaces across outputs with visual slice tools.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">04</p>
-            <h3>Cable and pack</h3>
-            <p>Work out data runs and signal flow, then turn panel count into road-case and truck figures.</p>
-          </li>
-          <li class="stage">
-            <p class="stage-index">05</p>
-            <h3>Export</h3>
-            <p>Emit the images, mesh, media-server and lighting files the rest of the departments need.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+        <div class="scenes">
+          <article class="scene">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; get the wall right</p>
+              <h3>Panel-accurate surfaces, not nominal rectangles</h3>
+              <p>Screens are built from real product specs, so pixel pitch, panel count and physical size stay honest from the first sketch. Multiple surfaces sit on one canvas with per-tile addressing you can read at a glance.</p>
+              <ul class="scene-points">
+                <li>48+ LED tile types covering ROE Visual, Absen, Unilumin, INFiLED, Gloshine and CHAUVET</li>
+                <li>Several screens positioned and aligned on a single output canvas</li>
+                <li>Curved wall builder with configurable radius and panel count</li>
+                <li>Half-tile increments where the product supports them</li>
+                <li>Reference image overlays for design alignment</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CuePatch plans the surface. It does not replace a site survey, a rigging plot or structural engineering.</p>
+            </div>
 
-    <!-- ==================================================== CAPABILITIES -->
-    <section class="band energize" id="capabilities">
-      <div class="shell">
-        <p class="band-label">Capabilities</p>
-        <h2 class="band-title">What it does <strong>on a real show build</strong></h2>
-
-        <div class="chapters">
-          <article class="chapter">
-            <p class="chapter-job">Get the wall right</p>
-            <h3>Panel-accurate surfaces</h3>
-            <p>Build from real product specs instead of nominal rectangles, so pixel pitch, panel count and physical size stay honest from the first sketch.</p>
-            <ul>
-              <li>48+ LED tile types covering ROE Visual, Absen, Unilumin, INFiLED, Gloshine and CHAUVET</li>
-              <li>Multiple screens positioned and aligned on a single canvas</li>
-              <li>Curved wall builder with configurable radius and panel count</li>
-              <li>Half-tile grid increments where the product supports them</li>
-              <li>Reference image overlays for design alignment</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; output canvas</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 1.9; --dw-x: -1%; --dw-y: 1%;">
+                <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="The CuePatch output canvas showing three LED surfaces side by side, each tile carrying its own grid address from A1 through H10, with per-screen resolution badges reading 1040 by 1664 pixels." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; three surfaces on one canvas, every tile addressed, each screen carrying its own resolution badge.</p>
+            </figure>
           </article>
 
-          <article class="chapter">
-            <p class="chapter-job">Answer the engineer</p>
-            <h3>Processor outputs and slicing</h3>
-            <p>Map surfaces onto processor outputs and see the split before anyone patches a fibre.</p>
-            <ul>
-              <li>Multi-output mapping with visual screen slicing</li>
-              <li>Cable manager for data runs and signal flow</li>
-              <li>Built around Brompton, Novastar and Megapixel Helios processor workflows</li>
-              <li>Per-screen names, resolution readouts and master offsets</li>
-            </ul>
-          </article>
+          <article class="scene is-flipped">
+            <div class="scene-copy">
+              <p class="scene-job">Job &mdash; answer the engineer</p>
+              <h3>Outputs and screens stay countable</h3>
+              <p>Outputs are declared with their real processor resolution, and every screen is listed against the output that carries it. The split is visible before anyone patches a fibre, and the numbers under each screen name are the ones the engineer will read back to you.</p>
+              <ul class="scene-points">
+                <li>Multi-output mapping with visual screen slicing</li>
+                <li>Cable manager for data runs and signal flow</li>
+                <li>Built around Brompton, Novastar and Megapixel Helios workflows</li>
+                <li>Per-screen names, resolution readouts and master offsets</li>
+              </ul>
+              <p class="scene-bound"><span>Boundary</span> CuePatch does not drive processors, send content or control anything live. It produces the document the live systems are configured from.</p>
+            </div>
 
-          <article class="chapter">
-            <p class="chapter-job">Answer the production manager</p>
-            <h3>Weight, power and pack</h3>
-            <p>The same document carries the numbers that decide rigging, power distribution and freight.</p>
-            <ul>
-              <li>Live stats for resolution, pixel count, power draw and weight</li>
-              <li>Viewing-distance calculation that updates as the grid changes</li>
-              <li>Pack planner for road-case counts and truck layout</li>
-              <li>3D preview with arena, stadium, festival, theatre, club and corporate presets</li>
-            </ul>
-          </article>
-
-          <article class="chapter">
-            <p class="chapter-job">Hand it off</p>
-            <h3>Export into the departments</h3>
-            <p>Every downstream department gets a file of its own rather than a screenshot of yours.</p>
-            <ul>
-              <li>Images at exact pixel resolution &mdash; PNG, JPG, WebP</li>
-              <li>OBJ mesh for 3D workflows</li>
-              <li>disguise CSV and 3D position data</li>
-              <li>grandMA3 XML and MVR for lighting</li>
-              <li>Slice summaries and pack-planner reports</li>
-            </ul>
+            <figure class="plate">
+              <figcaption class="plate-bar"><span class="dot" aria-hidden="true"></span> Detail &mdash; outputs and screens</figcaption>
+              <div class="lens-frame" style="--dw-ar: 16 / 10; --dw-zoom: 2.6; --dw-x: 30%; --dw-y: 5%;">
+                <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="The CuePatch left rail: Output 1 configured at 3840 by 2160 carrying three screens, with HD, 4K and 2K presets, and a screens list naming Stage Right Imag, Stage Left Imag and US Wall with their pixel dimensions." loading="lazy" decoding="async">
+              </div>
+              <p class="plate-note">Interface detail from the accepted view &mdash; one declared output at 3840&times;2160, the three screens assigned to it, and each screen's own pixel dimensions.</p>
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================= FIELD FIT -->
-    <section class="band energize" id="field-fit">
+    <!-- ==================================================== 03 — WORKFLOW -->
+    <section class="movement energize" id="workflow">
       <div class="shell">
-        <p class="band-label">Field fit</p>
-        <h2 class="band-title">Who it is for &mdash; and <strong>where it stops</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">03</p>
+          <div>
+            <p class="movement-kicker">The safe loop</p>
+            <h2 class="movement-title">Define outputs, build the wall, <em>export the show pack</em></h2>
+            <p class="movement-lede">The same document carries the processor truth and the physical truth, so the pixel map, the power figure and the case count never drift apart between departments.</p>
+          </div>
+        </header>
+
+        <ol class="rail">
+          <li class="rail-step">
+            <p class="rail-n">01</p>
+            <div>
+              <h3>Define outputs</h3>
+              <p>Set processor output resolution and add only the outputs the design actually needs. Everything downstream is measured against that budget.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">02</p>
+            <div>
+              <h3>Build screens</h3>
+              <p>Place real tiles from the panel database, size the grid in whole or half tiles, and align multiple surfaces on one canvas.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">03</p>
+            <div>
+              <h3>Map and slice</h3>
+              <p>Assign screens to processor outputs and split surfaces across outputs with visual slice tools, so the engineer inherits a decision rather than a puzzle.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">04</p>
+            <div>
+              <h3>Cable and pack</h3>
+              <p>Work out data runs and signal flow, then turn panel count into road-case and truck figures for the production manager.</p>
+            </div>
+          </li>
+          <li class="rail-step">
+            <p class="rail-n">05</p>
+            <div>
+              <h3>Export</h3>
+              <p>Emit the images, mesh, media-server and lighting files the rest of the departments need &mdash; each as a file of its own, not a screenshot of yours.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="split">
           <div class="panel">
@@ -211,14 +226,59 @@
       </div>
     </section>
 
-    <!-- ==================================================== AVAILABILITY -->
-    <section class="band energize" id="availability">
+    <!-- =================================================== 04 — INTERFACE -->
+    <section class="movement energize" id="details">
       <div class="shell">
-        <p class="band-label">Availability</p>
-        <h2 class="band-title">Commercial truth, <strong>stated plainly</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">04</p>
+          <div>
+            <p class="movement-kicker">Interface detail bench</p>
+            <h2 class="movement-title">The controls that make the numbers <em>trustworthy</em></h2>
+            <p class="movement-lede">Both benches below are regions of the same accepted Builder capture shown at the top of this page. Use <b>Full frame</b> on either one to see where the region sits in the window.</p>
+          </div>
+        </header>
 
-        <div class="availability">
-          <p class="availability-status">Private Validation &mdash; Beta Interest</p>
+        <div class="bench">
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 4 / 3; --dw-zoom: 3.4; --dw-x: -35%; --dw-y: 25.2%;">
+              <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="The CuePatch right-hand inspector showing a surface colour palette with a hex readout, and a screen name panel with weight, size and opacity controls." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">A</span> Surface colour and screen labels</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Surfaces are colour-coded and named on the canvas</b>, with label weight, size and opacity under your control &mdash; so a printed map stays readable in a dim shop.</figcaption>
+          </figure>
+
+          <figure class="lens">
+            <div class="lens-frame" data-lens style="--dw-ar: 4 / 3; --dw-zoom: 3.4; --dw-x: 35.3%; --dw-y: -29.3%;">
+              <img src="images/mockups/cuepatch-screenshot.jpg" width="1280" height="767" alt="The CuePatch screen configuration panel: a screen named US Wall using ROE Visual Carbon CB5 tiles, a note that half tiles are available horizontally and vertically, an optimal viewing range of 11.5 to 34.6 metres, and a grid size of 16 by 6 tiles resolving to 1664 by 1248 pixels." loading="lazy" decoding="async">
+            </div>
+            <div class="lens-bar">
+              <p class="lens-name"><span class="lens-n">B</span> Tile type drives the arithmetic</p>
+              <button class="lens-toggle" type="button" data-lens-toggle data-label-detail="Full frame" data-label-full="Show detail" hidden>Full frame</button>
+            </div>
+            <figcaption>Interface detail from the accepted view. <b>Choosing the tile fixes the maths.</b> A 16&times;6 grid of Carbon CB5 resolves to 1664&times;1248&nbsp;px, with the optimal viewing range calculated from the same product data.</figcaption>
+          </figure>
+        </div>
+
+        <p class="bench-note">These are crops of one real capture, not separate sessions. CuePatch is in private validation, so the site publishes the single screenshot Steve selected rather than manufacturing extra states for marketing.</p>
+      </div>
+    </section>
+
+    <!-- =================================================== 05 — AVAILABILITY -->
+    <section class="movement energize" id="readiness">
+      <div class="shell">
+        <header class="movement-head">
+          <p class="movement-num">05</p>
+          <div>
+            <p class="movement-kicker">Availability</p>
+            <h2 class="movement-title">Commercial truth, <em>stated plainly</em></h2>
+          </div>
+        </header>
+
+        <div class="readiness-panel">
+          <p class="readiness-status">Private Validation &mdash; Beta Interest</p>
           <h3>CuePatch is not on public sale.</h3>
           <p>The application is in private validation with working professionals. There is no public download, no self-service activation, and no published price. Tier structures that previously appeared on this page are retired and are not CueForge's commercial position.</p>
           <p>The intended shape is one complete professional edition licensed to one active computer, with a humane self-service transfer when a machine dies. Exact price and terms remain an open commercial decision and will not be quoted until they are settled.</p>
@@ -249,10 +309,15 @@
     </section>
 
     <!-- ========================================================= RELATED -->
-    <section class="band energize" id="related">
+    <section class="movement energize" id="related">
       <div class="shell">
-        <p class="band-label">Related instruments</p>
-        <h2 class="band-title">What CuePatch <strong>hands off to</strong></h2>
+        <header class="movement-head">
+          <p class="movement-num">&mdash;</p>
+          <div>
+            <p class="movement-kicker">Related instruments</p>
+            <h2 class="movement-title">What CuePatch <em>hands off to</em></h2>
+          </div>
+        </header>
         <div class="related-grid">
           <a class="related-card" href="cuepack.html">
             <p class="rel-link">Next &rarr;</p>
