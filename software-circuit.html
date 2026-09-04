@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="CueForge Labs production software tools: CuePatch, CuePack, CueRoll, CueMaker, CueScale, CueSwitcher, CueCheck, and CueNotch — built from real live-production workflows.">
+  <meta name="description" content="CueForge Labs production software tools: CuePatch, CueRoll, CueMaker, CueScale, CueSwitcher, CueCheck, and CueNotch — built from real live-production workflows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -947,14 +947,7 @@
         status: 'Private Validation',
         url: 'cuepatch.html'
       },
-      {
-        name: 'CuePack',
-        image: 'images/products/cuepack.png',
-        tagline: 'Production Logistics, Packs & Freight',
-        description: 'Carry a production’s gear from inventory to cases to trucks, aircraft and containers — and keep the history the next show needs.',
-        status: 'In Development',
-        url: 'cuepack.html'
-      },
+
       {
         name: 'CueRoll',
         image: 'images/products/cueroll.png',
@@ -1034,7 +1027,7 @@
       });
       
       let imgClass = '';
-      if (item.name === 'CuePack') imgClass = 'cover-fit move-up';
+
       if (item.name === 'CueNotch') imgClass = 'cover-fit';
       entry.innerHTML = `
         <div class="circuit-node">
