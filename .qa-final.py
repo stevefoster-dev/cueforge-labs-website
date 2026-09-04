@@ -8,7 +8,7 @@ import urllib.request
 from urllib.parse import urlparse, unquote
 
 BASE = 'http://127.0.0.1:8141/'
-ROUTES = ['software-circuit.html', 'cuepatch.html', 'cuepack.html', 'cueroll.html',
+ROUTES = ['software-circuit.html', 'cuepatch.html', 'cueroll.html',
           'cuemaker.html', 'cuescale.html', 'cueswitcher.html', 'cuecheck.html',
           'cuenotch.html', 'business-solutions.html', 'front-desk-ai.html',
           'invoicepack.html']
@@ -34,16 +34,12 @@ PUBLISHED_SHA = {
     IP + 'work-packet-exported.webp': '354dfc36071908032363e5040ca57eaaab9e5eba043aa0ada80b3b9237d29f5b',
     IP + 'local-vault-mobile.webp': '6f03deada707a56b5753732f70cc64bb25a993327e1541c1226585fd3e0e27e3',
 }
-CPK = 'images/app-screenshots/cuepack/'
 CSW = 'images/app-screenshots/cueswitcher/'
 CNO = 'images/app-screenshots/cuenotch/'
-# The fourteen governed workflow captures introduced across the two 2026-07-30
-# evidence passes. Hashes are local release authority; two older accepted frames
-# (CuePack Build and CueNotch Live Sheet) remain separately provenance-pinned.
+# The eight currently published governed workflow captures. Hashes are local
+# release authority; the older accepted CueNotch Live Sheet remains separately
+# provenance-pinned.
 NEW_CAPTURES = [
-    CPK + 'schedule-venue-match.webp', CPK + 'quote-budget-decision.webp',
-    CPK + 'multimodal-pack-planner.webp', CPK + 'truck-pack-3d-populated.webp',
-    CPK + 'pa-operations.webp', CPK + 'crew-day-interface.webp',
     CSW + 'recorded-cue-timeline.webp', CSW + 'signal-path-reference.webp',
     CSW + 'lens-calculator.webp', CSW + 'shot-types-reference.webp',
     CSW + 'camera-plot-builder.webp',
@@ -55,22 +51,6 @@ CUESWITCHER_WITHDRAWN = ['pip-layout-designer.webp', 'safe-area-guides.webp']
 # Accepted evidence-surface position maps. Order is document order and every
 # path/hash pair is enforced below.
 REELS = {
-    'cuepack.html': [
-        (CPK + 'schedule-venue-match.webp',
-         '5951fbf4416e6c565c41e99d41aa52b4ba9406fe02bf7197494645f5a2049a54'),
-        (CPK + 'quote-budget-decision.webp',
-         '2a681d4272a875a0cf4ff80be551e37fe47a902f331292bc32a682d7bcf183e5'),
-        (CPK + 'build-workspace.webp',
-         'ea017e8980a8eba13ec35c9844f06ec6f515d0eebd03cd2052bd3854bffdbbe2'),
-        (CPK + 'multimodal-pack-planner.webp',
-         'e50eb5784be57ac9722a747b4a30bae0ce3c5a1e8d8dd76d44aef0ccd944143a'),
-        (CPK + 'truck-pack-3d-populated.webp',
-         'ac68be24ff4f65ceb55cb5006f438ff210b1dea6b8c95236a7d48fa21c891351'),
-        (CPK + 'pa-operations.webp',
-         '0fd952137d9f7c964b61a692218b237f97c1e1caabb451c052061138b61970a4'),
-        (CPK + 'crew-day-interface.webp',
-         'cc778550ad9f926ba060d69f725c54ad5485c4e0fec4ac387b8584b0fba72d0f'),
-    ],
     'cueswitcher.html': [
         (CSW + 'recorded-cue-timeline.webp',
          'fad62b8ec9f73d88ca19a3342fd2fed6a08adddbfda0f0769fc6a567653b0c43'),
@@ -137,8 +117,8 @@ for path in ROUTES + ASSETS:
         code = getattr(e, 'code', 'ERR')
     check('HTTP 200  ' + path, code == 200, 'got ' + str(code))
 
-# 2 -- CueGrade and the internal Sales Portal must not be reachable
-for gone in ('cuegrade.html', 'sales-portal.html'):
+# 2 -- withdrawn and internal routes must not be reachable
+for gone in ('cuepack.html', 'cuegrade.html', 'sales-portal.html'):
     try:
         urllib.request.urlopen(BASE + gone, timeout=10)
         check('route absent  ' + gone, False, 'returned 200')
@@ -187,7 +167,7 @@ for path, want in sorted(PUBLISHED_SHA.items()):
 for path in NEW_CAPTURES:
     check('new workflow capture present  ' + path,
           os.path.exists(path) and path in REEL_SHA)
-check('exactly fourteen governed workflow captures required', len(NEW_CAPTURES) == 14,
+check('exactly eight governed workflow captures required', len(NEW_CAPTURES) == 8,
       '%d listed' % len(NEW_CAPTURES))
 
 # 3d2 -- every published capture is the exact accepted frame
@@ -330,11 +310,14 @@ for r in DOSSIERS:
 for r in DOSSIERS:
     check('return-to-Circuit link  ' + r, 'href="software-circuit.html"' in read(r))
 
-# 11 -- circuit index carries the eight approved products in order
+# 11 -- circuit index carries the seven currently published products in order
 order = re.findall(r"name:\s*'(Cue[A-Za-z]+)'", sc)
-expected = ['CuePatch', 'CuePack', 'CueRoll', 'CueMaker', 'CueScale',
+expected = ['CuePatch', 'CueRoll', 'CueMaker', 'CueScale',
             'CueSwitcher', 'CueCheck', 'CueNotch']
-check('circuit lists the 8 approved products in order', order == expected, str(order))
+check('circuit lists the 7 published products in order', order == expected, str(order))
+public_copy = '\n'.join(read(r) for r in ROUTES) + '\n' + read('products.html') + '\n' + read('sitemap.xml')
+check('CuePack absent from public pages and sitemap',
+      'CuePack' not in public_copy and 'cuepack' not in public_copy)
 check('business solutions card routes to its page',
       'href="business-solutions.html"' in sc)
 
